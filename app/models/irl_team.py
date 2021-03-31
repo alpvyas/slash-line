@@ -1,6 +1,7 @@
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import backref
 from .db import db
+from .player import Player
 
 
 class IRL_Team(db.Model):

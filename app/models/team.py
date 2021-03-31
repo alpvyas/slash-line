@@ -2,6 +2,7 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import backref
 import datetime
 from .db import db
+from .player import Player
 
 
 class Team(db.Model):
@@ -17,7 +18,8 @@ class Team(db.Model):
                            default=datetime.datetime.now())
     updated_at = db.Column(db.DateTime, nullable=False,
                            default=datetime.datetime.now())
-    players = db.relationship("Player", backref="Team", cascade="all, delete-orphan")
+    players = db.relationship("Player", backref="Team",
+                              cascade="all, delete-orphan")
 
     def to_dict(self):
         return {
