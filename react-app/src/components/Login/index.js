@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import Modal from "react-modal";
-import { Redirect } from 'react-router';
-import SignUpForm from '../auth/SignUpForm';
+import { Redirect } from "react-router";
+import SignUpForm from "../auth/SignUpForm";
+import LoginForm from "../auth/LoginForm";
+import * as sessionActions from "../../store/session";
 
 const LoginModal = () => {
   const dispatch = useDispatch();
