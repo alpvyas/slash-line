@@ -20,11 +20,11 @@ const LoginForm = ({
   const onLogin = async (e) => {
     e.preventDefault();
     const userAuth = await dispatch(sessionActions.login(email, password));
-    if (!userAuth.errors) {
-      setAuthenticated(true);
-    } else {
-      setErrors(userAuth.errors);
-    }
+    // if (!userAuth.errors) {
+    //   setAuthenticated(true);
+    // } else {
+    //   setErrors(userAuth.errors);
+    // }
   };
 
   const signupButton = () => {
@@ -40,13 +40,13 @@ const LoginForm = ({
     setPassword(e.target.value);
   };
 
-  const checkError = {};
-  if (errors) {
-    errors.forEach(error => {
-      error = error.split(':');
-      checkError[error[0].trim()] = error[1]
-    });
-  };
+  // const checkError = {};
+  // if (errors) {
+  //   errors.forEach(error => {
+  //     error = error.split(':');
+  //     checkError[error[0].trim()] = error[1]
+  //   });
+  // };
 
   // if (authenticated) {
   //   return <Redirect to="/" />;
@@ -69,8 +69,8 @@ const LoginForm = ({
             value={email}
             onChange={updateEmail}
           />
-          {"email" in checkError ? <div className="form-error-container">
-            <p className="error-text">{checkError.email}</p></div> : null}
+          {/* {"email" in checkError ? <div className="form-error-container">
+            <p className="error-text">{checkError.email}</p></div> : null} */}
         </div>
         <div>
           {/* <label htmlFor="password">Password</label> */}
@@ -81,8 +81,8 @@ const LoginForm = ({
             value={password}
             onChange={updatePassword}
           />
-          {"password" in checkError ? <div className="form-error-container">
-            <p className="error-text">{checkError.password}</p></div> : null}
+          {/* {"password" in checkError ? <div className="form-error-container">
+            <p className="error-text">{checkError.password}</p></div> : null} */}
         </div>
         <button type="submit">Login</button>
       </form>

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Modal from "react-modal";
+import onClickOutside from 'react-onclickoutside';
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router";
 import SignUpForm from "../auth/SignUpForm";
@@ -125,7 +126,6 @@ const Landing = () => {
           <div className="container" id="mid-section">
             <img id="landing-image" alt="baseball-grass" src={baseball_grass} />
           </div>
-          
         </div>
       <Footer />
     </div>
