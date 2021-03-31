@@ -107,15 +107,15 @@ const Landing = () => {
             </div>
             <div className="container tab-container link-container">
               <div className="nav-link-tab" id="stats-tab">
-                <button>.stats</button>
+                <button>stats</button>
               </div>
               <div className="slash-icon">/</div>
               <div className="nav-link-tab" id="login-tab">
-                <button onClick={openSignup}>.sign up</button>
+                <button onClick={openSignup}>sign up</button>
               </div>
               <div className="slash-icon">/</div>
               <div className="nav-link-tab" id="about-tab">
-                <button onClick={openLogin}>.login</button>
+                <button onClick={openLogin}>login</button>
               </div>
             </div>
             <div className="dropdown-container">

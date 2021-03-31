@@ -1,0 +1,82 @@
+.nav-bar {
+  background-color: #FFF;
+  position: fixed;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 12%;
+  top: 0px;
+  left: 0px;
+  box-shadow: 1px 1px 8px rgba(112, 111, 111, 0.356);
+  justify-content: center;
+  align-items: center;
+}
+
+.nav-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  color: #716C6D;
+}
+
+.tab-container,
+.name-container,
+.dropdown-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  margin: 5px;
+}
+
+.name-container {
+  font-size: 30px;
+}
+
+.nav-link-tab {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 19px;
+  font-weight: 1000px;
+  box-sizing: border-box;
+  height: 50px;
+  width: 95px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav-link-tab:hover {
+  cursor: pointer;
+  border: 1px solid #716C6D;
+  text-decoration: underline;
+}
+
+.inactive,
+.active,
+button {
+  border: none;
+  background-color: transparent;
+  font-size: inherit;
+  font-family: inherit;
+  font-weight: inherit;
+  color: inherit;
+  text-decoration: none;
+}
+
+.logo-container {
+  height: 100px;
+  width: 100px;
+  border: none;
+  margin: 5px;
+}
+
+.slash-icon {
+  font-size: 30px;
+}
+
+#landing-image,
+#logo-image {
+  width: 100%;
+  height: 100%;
+}
