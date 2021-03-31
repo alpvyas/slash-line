@@ -8,6 +8,7 @@ import UsersList from "./components/UsersList";
 import User from "./components/User";
 import { authenticate } from "./services/auth";
 import Landing from "./components/Landing";
+import Homepage from "./components/Homepage";
 
 function App() {
   const [authenticated, setAuthenticated] = useState(false);
@@ -45,9 +46,12 @@ function App() {
         <Route path="/" exact={true}>
           <Landing />
         </Route>
-        <ProtectedRoute path="/users" exact={true} authenticated={authenticated}>
-          <UsersList/>
-        </ProtectedRoute>
+        <Route path="/home" exact={true}>
+          <Homepage />
+        </Route>
+        {/* <ProtectedRoute path="/home" exact={true} authenticated={authenticated}>
+          <Homepage />
+        </ProtectedRoute> */}
         <ProtectedRoute path="/users/:userId" exact={true} authenticated={authenticated}>
           <User />
         </ProtectedRoute>

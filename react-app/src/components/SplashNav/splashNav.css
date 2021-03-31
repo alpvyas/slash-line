@@ -27,10 +27,11 @@
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
+  margin: 5px;
 }
 
 .name-container {
-  font-size: 30px
+  font-size: 30px;
 }
 
 .nav-link-tab {
@@ -51,6 +52,8 @@
   text-decoration: underline;
 }
 
+.inactive,
+.active,
 button {
   border: none;
   background-color: transparent;
@@ -58,6 +61,7 @@ button {
   font-family: inherit;
   font-weight: inherit;
   color: inherit;
+  text-decoration: none;
 }
 
 .logo-container {
