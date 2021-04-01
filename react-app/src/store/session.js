@@ -1,4 +1,3 @@
-import * as deepcopy from "deepcopy";
 import User from "../components/User";
 
 const GET_USER = "session/GET_USER";
@@ -11,7 +10,7 @@ const setUser = user => {
   };
 };
 
-const removeUser = (user) => {
+const removeUser = () => {
   return {
     type: REMOVE_USER
   };
@@ -86,12 +85,12 @@ export const signup = (username, firstName, lastName, email, password) =>
   const sessionReducer = (state = initialState, action) => {
     switch (action.type) {
       case GET_USER:
-        newState = deepcopy(state);
+        newState = {...state};
         newState.user = action.payload;
         return newState;
       case REMOVE_USER:
-        newState = deepcopy(state);
-        newState.user = action.payload;
+        newState = {...state};
+        newState.user = null;
         return newState;
       default:
         return state;

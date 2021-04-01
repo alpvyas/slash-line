@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Modal from "react-modal";
 import onClickOutside from 'react-onclickoutside';
 import { useDispatch, useSelector } from "react-redux";
@@ -99,36 +99,7 @@ const Landing = () => {
           />
         </Modal>
         <div id="splash-container">
-          {(showSidebar)?<Sidebar setShowSidebar={setShowSidebar}/>:null}
-          <nav className="nav-bar" id="splash-nav">
-          <div className="container nav-container">
-            <div className="container logo-container">
-              <img id="logo-image" alt="logo" src={logo} />
-            </div>
-            <div className="name-container">
-              <div id="title">Slash Line</div>
-            </div>
-            <div className="container tab-container link-container">
-              <div className="nav-link-tab" id="stats-tab">
-                <button>stats</button>
-              </div>
-              <div className="slash-icon">/</div>
-              <div className="nav-link-tab" id="login-tab">
-                <button onClick={openSignup}>sign up</button>
-              </div>
-              <div className="slash-icon">/</div>
-              <div className="nav-link-tab" id="about-tab">
-                <button onClick={openLogin}>login</button>
-              </div>
-            </div>
-            <div className="dropdown-container">
-              <img src="https://img.icons8.com/windows/32/000000/menu--v2.png"/>
-            </div>
-          </div>
-        </nav>
-          <div className="container" id="mid-section">
-            <img id="landing-image" alt="baseball-grass" src={baseball_grass} />
-          </div>
+          <SplashNav openLogin={openLogin} openSignup={openSignup}/>
         </div>
       <Footer />
     </div>
