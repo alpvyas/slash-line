@@ -21,7 +21,7 @@ const LoginForm = ({
     e.preventDefault();
     const userAuth = await dispatch(sessionActions.login(email, password));
     // if (!userAuth.errors) {
-    //   setAuthenticated(true);
+    setAuthenticated(true);
     // } else {
     //   setErrors(userAuth.errors);
     // }

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector,useDispatch } from 'react-redux';
 import { NavLink, Redirect, useLocation } from "react-router-dom";
 import { useHistory, useParams } from 'react-router';
+import NavBar from "../NavBar";
 
 const Profile = () => {
    const history = useHistory()
@@ -14,6 +15,7 @@ const Profile = () => {
 
   return (
     <div className="container page-container">
+      <NavBar />
       <hi>Hello {user.first_name}</hi>
     </div>
   )

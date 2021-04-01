@@ -2,9 +2,12 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { NavLink, Redirect } from "react-router-dom";
 import logo from "../../images/logo.png"
+import Dropdown from "../Dropdown";
+import LogoutButton from "../auth/LogoutButton";
+import Sidebar from "../Sidebar";
 import "./NavBar.css";
 
-const NavBar = () => {
+const NavBar = ({showSidebar, setShowSidebar}) => {
   const [user, setUser] = useState({});
   const { user_id }  = useParams();
 
@@ -27,7 +30,9 @@ const NavBar = () => {
       <nav className="nav-bar" id="main-nav">
           <div className="container nav-container">
             <div className="container logo-container">
-              <img id="logo-image" alt="logo" src={logo} />
+              <NavLink to="/" exact={true} className="inactive" activeClassName="active">
+                  <img id="logo-image" alt="logo" src={logo} />
+              </NavLink>
             </div>
             <div className="name-container">
               <div id="title">Slash Line</div>
@@ -58,7 +63,10 @@ const NavBar = () => {
               </div>
             </div>
             <div className="dropdown-container">
-              <img src="https://img.icons8.com/windows/32/000000/menu--v2.png"/>
+              {/* <Dropdown items={["About", "Coming Soon", "Feedback", <LogoutButton />]}/> */}
+              <div className="hamburgerBtn" onClick={()=>setShowSidebar(true)}>
+                <i className="fas fa-bars" ></i>
+            </div>
             </div>
           </div>
         </nav>

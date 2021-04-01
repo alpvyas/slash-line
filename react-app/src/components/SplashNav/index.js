@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import logo from "../../images/logo.png"
 import LoginModal from "../Login";
+import Dropdown from "../Dropdown";
 import "./splashNav.css"
 
 const SplashNav = () => {
@@ -41,7 +42,7 @@ const SplashNav = () => {
               </div>
             </div>
             <div className="dropdown-container">
-              <img src="https://img.icons8.com/windows/32/000000/menu--v2.png"/>
+              <Dropdown items={["About", "Coming Soon", "Feedback", "Logout"]}/>
             </div>
           </div>
         </nav>

@@ -8,6 +8,7 @@ import LoginForm from "../auth/LoginForm";
 import * as sessionActions from "../../store/session";
 import SplashNav from "../SplashNav";
 import Footer from "../Footer";
+import Sidebar from "../Sidebar";
 
 import logo from "../../images/logo.png"
 import baseball_grass from "../../images/baseball-grass.png";
@@ -18,7 +19,8 @@ const Landing = () => {
   const user = useSelector(state => state.session.user);
   const [login, setLogin] = useState(false);
   const [signup, setSignup] = useState(false);
-  const [authenticated, setAuthenticated] = useState(false);  
+  const [authenticated, setAuthenticated] = useState(false);
+  const [showSidebar, setShowSidebar] = useState(false); 
 
   Modal.setAppElement("#root");
   const closeSignup = () => {
@@ -97,6 +99,7 @@ const Landing = () => {
           />
         </Modal>
         <div id="splash-container">
+          {(showSidebar)?<Sidebar setShowSidebar={setShowSidebar}/>:null}
           <nav className="nav-bar" id="splash-nav">
           <div className="container nav-container">
             <div className="container logo-container">
