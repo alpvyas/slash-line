@@ -7,9 +7,10 @@ import LogoutButton from "../auth/LogoutButton";
 import Sidebar from "../Sidebar";
 import "./NavBar.css";
 
-const NavBar = ({showSidebar, setShowSidebar}) => {
+const NavBar = () => {
   const [user, setUser] = useState({});
   const { user_id }  = useParams();
+  const [showSidebar, setShowSidebar] = useState(false)
 
   useEffect(() => {
     if (!user.id) {
@@ -57,16 +58,17 @@ const NavBar = ({showSidebar, setShowSidebar}) => {
               </div>
               <div className="slash-icon">/</div>
               <div className="nav-link-tab" id="profile-tab">
-                <NavLink to={`/users/${user.id}`} exact={true} className="inactive" activeClassName="active">
+                <NavLink to={`/users/${user_id}`} exact={true} className="inactive" activeClassName="active">
                   profile
                 </NavLink>
               </div>
             </div>
             <div className="dropdown-container">
               {/* <Dropdown items={["About", "Coming Soon", "Feedback", <LogoutButton />]}/> */}
-              <div className="hamburgerBtn" onClick={()=>setShowSidebar(true)}>
-                <i className="fas fa-bars" ></i>
-            </div>
+              {(showSidebar)?<Sidebar setShowSidebar={setShowSidebar}/>:null}
+                <div className="hamburgerBtn" onClick={()=>setShowSidebar(true)}>
+                  <i className="fas fa-bars" ></i>
+              </div>
             </div>
           </div>
         </nav>

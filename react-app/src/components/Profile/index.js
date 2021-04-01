@@ -16,7 +16,7 @@ const Profile = () => {
   return (
     <div className="container page-container">
       <NavBar />
-      <hi>Hello {user.first_name}</hi>
+      <div></div>
     </div>
   )
 }

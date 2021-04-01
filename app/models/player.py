@@ -1,5 +1,3 @@
-from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy.orm import backref
 import datetime
 from .db import db
 
@@ -12,6 +10,9 @@ class Player(db.Model):
     first_name = db.Column(db.String(30), nullable=False)
     last_name = db.Column(db.String(30), nullable=False)
     number = db.Column(db.Integer, nullable=False, unique=False)
+    team_id = db.Column(db.Integer, db.ForeignKey("teams.id"), nullable=False)
+    irl_team_id = db.Column(
+        db.Integer, db.ForeignKey("irl_teams.id"), nullable=False)
     created_at = db.Column(db.DateTime, nullable=False,
                            default=datetime.datetime.now())
     updated_at = db.Column(db.DateTime, nullable=False,

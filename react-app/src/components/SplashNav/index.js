@@ -1,26 +1,17 @@
 import React, { useState } from "react"
-import logo from "../../images/logo.png"
 import LoginModal from "../Login";
 import Dropdown from "../Dropdown";
+import Sidebar from "../Sidebar";
+import logo from "../../images/logo.png"
+import baseball_grass from "../../images/baseball-grass.png";
 import "./splashNav.css"
 
-const SplashNav = () => {
-  const [login, setLogin] = useState(false);
-  const [signup, setSignup] = useState(false);
-
-  const openSignup = () => {
-    if (login) setLogin(false);
-    setSignup(true);
-  };
-
-  const openLogin = () => {
-    if (signup) setSignup(false);
-    setLogin(true);
-  };
+const SplashNav = ({showSidebar, setShowSidebar, openSignup, openLogin}) => {
 
   return (
     <>
-      <nav className="nav-bar" id="splash-nav">
+      {(showSidebar)?<Sidebar setShowSidebar={setShowSidebar}/>:null}
+          <nav className="nav-bar" id="splash-nav">
           <div className="container nav-container">
             <div className="container logo-container">
               <img id="logo-image" alt="logo" src={logo} />
@@ -42,10 +33,13 @@ const SplashNav = () => {
               </div>
             </div>
             <div className="dropdown-container">
-              <Dropdown items={["About", "Coming Soon", "Feedback", "Logout"]}/>
+              <img src="https://img.icons8.com/windows/32/000000/menu--v2.png"/>
             </div>
           </div>
         </nav>
+          <div className="container" id="mid-section">
+            <img id="landing-image" alt="baseball-grass" src={baseball_grass} />
+          </div>
     </>
   )
 }

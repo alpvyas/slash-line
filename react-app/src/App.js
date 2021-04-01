@@ -63,7 +63,7 @@ function App() {
           <Homepage />
         </ProtectedRoute> */}
         <ProtectedRoute path="/users/:id" exact={true} authenticated={authenticated}>
-          <Profile user={user}/>
+          <Profile />
         </ProtectedRoute>
       </Switch>
     </BrowserRouter>

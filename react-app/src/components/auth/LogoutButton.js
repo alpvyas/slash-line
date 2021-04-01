@@ -1,6 +1,6 @@
 import React from "react";
 import {logout} from "../../store/session"
-import { Redirect, useHistory} from "react-router-dom";
+import { NavLink, useHistory} from "react-router-dom";
 import {useDispatch} from 'react-redux'
 
 const LogoutButton = ({setAuthenticated}) => {
@@ -11,7 +11,11 @@ const LogoutButton = ({setAuthenticated}) => {
    history.replace("/")
   };
 
-  return <button id="Logout-Button" onClick={onLogout}>Logout</button>;
+  return (
+    <button id="Logout-Button" onClick={onLogout}>
+      <NavLink to="/">Logout</NavLink>
+    </button>
+  );
 };
 
 export default LogoutButton;
