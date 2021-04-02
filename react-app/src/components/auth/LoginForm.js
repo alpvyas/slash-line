@@ -3,6 +3,7 @@ import { NavLink, Redirect } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import * as sessionActions from "../../store/session";
 // import { login } from "../../services/auth";
+import logo from "../../images/logo.png";
 import "./index.css";
 
 const LoginForm = ({ 
@@ -55,7 +56,7 @@ const LoginForm = ({
   return (
     <div className="form-container">
       <div className="login-page-header">
-        <img alt="logo" src={"something"} />
+        <img alt="logo" src={logo} />
         <span className="login-slash">Slash Line</span>
       </div>
 
