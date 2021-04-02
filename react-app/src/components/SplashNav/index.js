@@ -1,6 +1,5 @@
 import React, { useState } from "react"
-import LoginModal from "../Login";
-import Dropdown from "../Dropdown";
+import { NavLink, Redirect } from "react-router-dom";
 import Sidebar from "../Sidebar";
 import logo from "../../images/logo.png"
 import baseball_grass from "../../images/baseball-grass.png";
@@ -21,7 +20,9 @@ const SplashNav = ({showSidebar, setShowSidebar, openSignup, openLogin}) => {
             </div>
             <div className="container tab-container link-container">
               <div className="nav-link-tab" id="stats-tab">
-                <button>stats</button>
+                <NavLink to="/stats" exact={true} className="inactive" activeClassName="active">
+                  stats
+                </NavLink>
               </div>
               <div className="slash-icon">/</div>
               <div className="nav-link-tab" id="login-tab">

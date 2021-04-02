@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Modal from "react-modal";
+import onClickOutside from 'react-onclickoutside';
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router";
 import SignUpForm from "../auth/SignUpForm";
@@ -9,11 +10,11 @@ import SplashNav from "../SplashNav";
 import Footer from "../Footer";
 import Sidebar from "../Sidebar";
 
-import logo from "../../images/logo.png";
+import logo from "../../images/logo.png"
 import baseball_grass from "../../images/baseball-grass.png";
-import "./landing.css";
-
-const Landing = () => {
+import "./LoginModal.css";
+  
+const LoginModal = () => {
   const dispatch = useDispatch();
   const user = useSelector(state => state.session.user);
   const [login, setLogin] = useState(false);
@@ -53,7 +54,7 @@ const Landing = () => {
   };
 
   return (
-    <div className="container page-container">
+    <>
       <Modal
         isOpen={signup}
         contentLabel="Sign up"
@@ -97,12 +98,8 @@ const Landing = () => {
           openLogin={openLogin}
           />
         </Modal>
-        <div id="splash-container">
-          <SplashNav openLogin={openLogin} openSignup={openSignup}/>
-        </div>
-      <Footer />
-    </div>
+    </>
   )
-}
+  };
 
-export default Landing;
+export default LoginModal;
