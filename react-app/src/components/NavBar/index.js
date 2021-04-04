@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { NavLink, Redirect } from "react-router-dom";
 import logo from "../../images/logo.png"
-import Dropdown from "../Dropdown";
 import LogoutButton from "../auth/LogoutButton";
 import Sidebar from "../Sidebar";
 import SettingsIcon from "@material-ui/icons/Settings";
