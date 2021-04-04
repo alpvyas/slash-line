@@ -14,9 +14,9 @@ export const closeCreateLeague = () => {
 };
 
 export const createLeague = 
-  (leagueName, leagueType, permissions, draft, draftDate, draftTime) => 
+  (user_id, leagueName, leagueType, permissions, draft, draftDate, draftTime) => 
   async dispatch => {
-    const response = await fetch("/api/auth/signup", {
+    const response = await fetch(`/api/user/${user_id}/leagues`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { createLeague } from "../../store/createLeague"
 
 function LeagueForm() {
   const dispatch = useDispatch()
@@ -11,17 +12,19 @@ function LeagueForm() {
   const [draftTime, setDraftTime] = useState("");
   const [errors, setErrors] = useState([]);
 
-  const user = useSelector(state => state.session.user);
+  const user_id = useSelector(state => state.session.user.id);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrors([]);
-    const createLeague = await dispatch(createLeague(name, type, permissions, draft, draftDate, draftTime)).catch(
-      async (res) => {
-        const data = await res.json();
-        if (data && data.errors) setErrors(data.errors);
-      }
-    );
+
+    await dispatch(createLeague(user_id, name, type, permissions, draft, draftDate, draftTime))
+      // .catch(async (res) => {
+      //   console.log("THIS IS RES", res)
+      //   const data = await res.json();
+      //   if (data && data.errors) setErrors(data.errors);
+      // }
+    // );
   };
 
   const updateName = (e) => {
@@ -72,36 +75,44 @@ function LeagueForm() {
         </label>
         <label>
           League Type
-          <input
-            type="text"
-            name="type"
-            value={type}
-            placeholder="Rotisserie"
-            onChange={updateType}
-            required
-          />
+          <select name="type" onChange={updateType}>
+            <option value="rotisserie">Rotisserie</option>
+            <option value="points-only">Points Only</option>
+            <option value="h2h">Head-to-Head</option>
+            <option value="h2h-points">Head-to-Head - Points</option>
+          </select>
         </label>
         <label>
           Permissions
-          <input
+          {/* <input
             type="text"
             name="permissions"
             value={permissions}
             placeholder="Comissioner Only"
             onChange={updatePermissions}
             required
-          />
+          /> */}
+          <select name="permissions" onChange={updatePermissions}>
+            <option value="Commissioner">Comissioner Only</option>
+            <option value="all-managers">All Managers Can Invite</option>
+          </select>
         </label>
         <label>
           Draft
-          <input
+          {/* <input
             type="text"
             name="draft"
             value={type}
             placeholder="Live Standard Draft"
             onChange={updateDraft}
             required
-          />
+          /> */}
+          <select name="draft" onChange={updateDraft}>
+            <option value="live-standard">Live Standard Draft</option>
+            <option value="live-salary">Live Salary Cap Draft</option>
+            <option value="auto">Auto-pick Draft</option>
+            <option value="offline">Offline Draft</option>
+          </select>
         </label>
         <label>
           Draft Date
