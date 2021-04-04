@@ -5,8 +5,11 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import Collapse from "@material-ui/core/Collapse";
 import { Drawer, Divider, IconButton } from "@material-ui/core";
+import {logout} from "../../store/session"
 import ReorderIcon from "@material-ui/icons/Reorder";
 import "./Sidebar.css";
+import { NavLink, useHistory} from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 const styles = {
   sideNav: {
@@ -87,8 +90,16 @@ const SidebarItem = ({ expanded, item, depthStep = 25, depth =0, ...rest }) => {
 };
 
 const Sidebar = ({ items, depthStep = 25, depth =0, expanded }) => {
- const [drawerOpen, setDrawerOpen] = useState(false);
-  
+  const [drawerOpen, setDrawerOpen] = useState(false);
+
+  const dispatch = useDispatch();
+  let history = useHistory();
+
+  const onLogout = (e) => {
+   dispatch(logout())
+   history.replace("/")
+  };
+
   const toggle = () => {
     setDrawerOpen(true);
   };
@@ -126,6 +137,21 @@ const Sidebar = ({ items, depthStep = 25, depth =0, expanded }) => {
                                 )}
                             </React.Fragment>
                         ))}
+                        <NavLink to="/">
+                            <ListItem
+                                button
+                                className="sidebar-item"
+                                dense
+                                onClick={onLogout}
+                            >
+                                <div
+                                    style={{ paddingLeft: depth * depthStep }}
+                                    className="item-content"
+                                >
+                                    <div className="item-text">Logout</div>
+                                </div>
+                            </ListItem>
+                        </NavLink>
                     </List>
                 </div>
             </Drawer>
