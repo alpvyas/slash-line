@@ -7,6 +7,7 @@ import { authenticate } from "./services/auth";
 import Landing from "./components/Landing";
 import Homepage from "./components/Homepage";
 import Profile from "./components/Profile";
+import Testing from "./components/Testing/";
 
 function App() {
   const dispatch = useDispatch();
@@ -37,13 +38,16 @@ function App() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/" exact={true}>
+        <Route path="/testing" exact={true}>
+          <Testing />
+        </Route>
+        <Route exact path="/">
           <Landing />
         </Route>
-        <Route path="/home" exact={true}>
+        <Route exact path="/home">
           <Homepage />
         </Route>
-        <ProtectedRoute path="/users/:id" exact={true} authenticated={authenticated}>
+        <ProtectedRoute exact path="/users/:id" authenticated={authenticated}>
           <Profile />
         </ProtectedRoute>
       </Switch>

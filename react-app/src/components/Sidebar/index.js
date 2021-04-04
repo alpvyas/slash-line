@@ -1,21 +1,49 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
-import LogoutButton from "../auth/LogoutButton";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
 import "./Sidebar.css";
 
-const Sidebar = ({setShowSidebar})=>{
-    
+const SidebarItem = ({ label, items, depthStep = 25, depth =0, ...rest }) => {
     return (
-        <div className="sidebar__container">
-                <div className="close_sidebar" onClick={()=>setShowSidebar(false)}><i className="fas fa-times"></i></div>
-                <ul>
-                    <li><NavLink to="/about" >ABOUT</NavLink></li>
-                    <li><NavLink to="/features">FEATURES</NavLink></li>
-                    <li><NavLink to="/features">COMING SOON</NavLink></li>
-                    <li> <LogoutButton /></li>
-                </ul>
-
-        </div>
+        <>
+            <ListItem button dense {...rest}>
+                <ListItemText style={{ paddingLeft: depth * depthStep }}>
+                    <span>{label}</span>
+                </ListItemText>
+            </ListItem>
+            {Array.isArray(items) ? (
+                <List disablePadding dense>
+                    {items.map(subItem => (
+                        <SidebarItem
+                            key={subItem.name}
+                            depth={depth + 1}
+                            depthStep={depthStep}
+                            {...subItem}
+                        />
+                    ))}
+                </List>
+            ) : null}
+        </>
     )
 }
-export default Sidebar
+
+const Sidebar = ({ items, depthStep, depth }) => {
+ 
+    return (
+        <div className="sidebar-container">
+            <List disablePadding dense>
+                {items.map((sidebarItem, index) => (
+                    <SidebarItem
+                        key={`${sidebarItem.name}${index}`}
+                        depthStep={depthStep}
+                        depth={depth}
+                        {...sidebarItem}
+                    />
+                ))}
+            </List>
+        </div>
+    )
+};
+
+export default Sidebar;
