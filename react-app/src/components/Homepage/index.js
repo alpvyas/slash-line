@@ -13,7 +13,6 @@ const Homepage = () => {
         <NavBar />
         <div className="create-league-container">
           <LeagueFormModal />
-          <button className="create-button">Create League</button>
         </div>
       </div>
     </>
