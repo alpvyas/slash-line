@@ -1,12 +1,25 @@
 import React, { useState } from "react";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
-import Divider from "@material-ui/core/Divider";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import Collapse from "@material-ui/core/Collapse";
+import { Drawer, Divider, IconButton } from "@material-ui/core";
+import ReorderIcon from "@material-ui/icons/Reorder";
 import "./Sidebar.css";
+
+const styles = {
+  sideNav: {
+    marginTop: '20px',
+    zIndex: 3,
+    marginLeft: '0px',
+    position: 'relative',
+  },
+  link: {
+    color: 'black',
+    textDecoration: 'none',
+  }
+};
 
 const SidebarItem = ({ expanded, item, depthStep = 25, depth =0, ...rest }) => {
     const [collapsed, setCollapsed] = useState(true);
@@ -73,26 +86,49 @@ const SidebarItem = ({ expanded, item, depthStep = 25, depth =0, ...rest }) => {
     )
 };
 
-const Sidebar = ({ items, depthStep, depth, expanded }) => {
- 
+const Sidebar = ({ items, depthStep = 25, depth =0, expanded }) => {
+ const [drawerOpen, setDrawerOpen] = useState(false);
+  
+  const toggle = () => {
+    setDrawerOpen(true);
+  };
+
+  const closeDrawer = () => {
+    setDrawerOpen(false);
+  };
     return (
-        <div className="sidebar-container">
-            <List disablePadding dense>
-                {items.map((sidebarItem, index) => (
-                    <React.Fragment key={`${sidebarItem.name}${index}`}>
-                        {sidebarItem === "divider" ? (
-                            <Divider style={{ margin: "6px 0" }} />
-                        ) : (
-                            <SidebarItem
-                                depthStep={depthStep}
-                                depth={depth}
-                                expanded={expanded}
-                                item={sidebarItem}
-                            />
-                        )}
-                    </React.Fragment>
-                ))}
-            </List>
+        <div>
+            <div style={styles.sideNav}>
+                <IconButton onClick={toggle}>
+                    { !drawerOpen ? <ReorderIcon /> : null }
+                </IconButton>
+            </div>
+            <Divider />
+            <Drawer
+                variant="temporary"
+                anchor="right"
+                open={drawerOpen}
+                onClose={closeDrawer}
+            >
+                <div className="sidebar-container">
+                    <List disablePadding dense>
+                        {items.map((sidebarItem, index) => (
+                            <React.Fragment key={`${sidebarItem.name}${index}`}>
+                                {sidebarItem === "divider" ? (
+                                    <Divider style={{ margin: "6px 0" }} />
+                                ) : (
+                                    <SidebarItem
+                                        depthStep={depthStep}
+                                        depth={depth}
+                                        expanded={expanded}
+                                        item={sidebarItem}
+                                    />
+                                )}
+                            </React.Fragment>
+                        ))}
+                    </List>
+                </div>
+            </Drawer>
         </div>
     )
 };
