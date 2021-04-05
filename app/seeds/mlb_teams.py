@@ -1,7 +1,7 @@
-from app.models import db, IRL_Team
+from app.models import db, MLB_Team
 
 
-def seed_irl_teams():
+def seed_mlb_teams():
 
     teams = [
         {
@@ -247,7 +247,7 @@ def seed_irl_teams():
     ]
 
     for team in teams:
-        t = IRL_Team(name=team["name"],
+        t = MLB_Team(name=team["name"],
                      stadium=team["stadium"],
                      city=team["city"],
                      state=team["state"],

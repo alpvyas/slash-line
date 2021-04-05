@@ -21,6 +21,9 @@ const styles = {
   link: {
     color: 'black',
     textDecoration: 'none',
+  },
+  container: {
+      width: '750px',
   }
 };
 
@@ -108,7 +111,7 @@ const Sidebar = ({ items, depthStep = 25, depth =0, expanded }) => {
     setDrawerOpen(false);
   };
     return (
-        <div>
+        <>
             <div style={styles.sideNav}>
                 <IconButton onClick={toggle}>
                     { !drawerOpen ? <ReorderIcon /> : null }
@@ -121,7 +124,7 @@ const Sidebar = ({ items, depthStep = 25, depth =0, expanded }) => {
                 open={drawerOpen}
                 onClose={closeDrawer}
             >
-                <div className="sidebar-container">
+                <div className="sidebar-container" style={styles.container}>
                     <List disablePadding dense>
                         {items.map((sidebarItem, index) => (
                             <React.Fragment key={`${sidebarItem.name}${index}`}>
@@ -155,7 +158,7 @@ const Sidebar = ({ items, depthStep = 25, depth =0, expanded }) => {
                     </List>
                 </div>
             </Drawer>
-        </div>
+        </>
     )
 };
 
