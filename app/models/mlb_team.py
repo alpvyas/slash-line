@@ -2,8 +2,8 @@ from sqlalchemy.orm import backref
 from .db import db
 
 
-class IRL_Team(db.Model):
-    __tablename__ = "irl_teams"
+class MLB_Team(db.Model):
+    __tablename__ = "mlb_teams"
 
     id = db.Column(db.Integer, primary_key=True)
 
@@ -11,10 +11,10 @@ class IRL_Team(db.Model):
     stadium = db.Column(db.String(30), nullable=False, unique=True)
     city = db.Column(db.String(30), nullable=False, unique=False)
     state = db.Column(db.String(30), nullable=False, unique=False)
-    league = db.Column(db.String(10), nullable=False, unique=False)
-    division = db.Column(db.String(10), nullable=False, unique=False)
+    league = db.Column(db.String(30), nullable=False, unique=False)
+    division = db.Column(db.String(30), nullable=False, unique=False)
     players = db.relationship(
-        "Player", backref="IRL_Team", cascade="all, delete-orphan")
+        "Player", backref="MLB_Team", cascade="all, delete-orphan")
 
     def to_dict(self):
         return {
