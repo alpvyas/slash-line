@@ -7,6 +7,8 @@ import { authenticate } from "./services/auth";
 import Landing from "./components/Landing";
 import Homepage from "./components/Homepage";
 import Profile from "./components/Profile";
+import MyTeam from "./components/MyTeam";
+import Players from "./components/Players";
 import Testing from "./components/Testing/";
 
 function App() {
@@ -50,6 +52,12 @@ function App() {
         <ProtectedRoute exact path="/users/:id" authenticated={authenticated}>
           <Profile />
         </ProtectedRoute>
+        <Route exact path="/myteam">
+          <MyTeam />
+        </Route>
+        <Route exact path="/LAD">
+          <Players />
+        </Route>
       </Switch>
     </BrowserRouter>
   );

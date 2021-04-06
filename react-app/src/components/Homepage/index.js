@@ -10,7 +10,8 @@ const Homepage = () => {
   const user = useSelector((state) => state.session.user);
   const [leagues, setLeagues] = useState([])
   const dispatch = useDispatch();
- useEffect(async () => {
+  
+  useEffect(async () => {
     
     dispatch(get_leagues(user.id))
     .then(data => setLeagues(data["leagues"]));
