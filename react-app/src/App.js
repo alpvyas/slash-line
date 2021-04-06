@@ -15,15 +15,15 @@ function App() {
   const [loaded, setLoaded] = useState(false);
   const user = useSelector(state => state.session.user);
 
-  useEffect(() => {
-    (async() => {
-      const user = await authenticate();
-      if (!user.errors) {
-        setAuthenticated(true);
-      }
-      setLoaded(true);
-    })();
-  }, []);
+  // useEffect(() => {
+  //   (async() => {
+  //     const user = await authenticate();
+  //     if (!user.errors) {
+  //       setAuthenticated(true);
+  //     }
+  //     setLoaded(true);
+  //   })();
+  // }, []);
 
   useEffect(()=>{
     dispatch(sessionActions.restoreUser())
