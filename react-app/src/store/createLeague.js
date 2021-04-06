@@ -16,7 +16,7 @@ export const closeCreateLeague = () => {
 export const createLeague = 
   (user_id, name, type, permissions, draft, draft_date, draft_time) => 
   async (dispatch) => {
-    const response = await fetch(`/api/league`, {
+    const response = await fetch(`/api/user/${user_id}/league`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -31,13 +31,24 @@ export const createLeague =
           draft_time
         }),
       });
-      const data = await response.text()
+      const data = await response.json()
       // if(response.ok && !data.errors){
       //   dispatch(setUser(data))
       // }
-      console.log("data:", (data))
       return data.errors;
   };
+
+  export const get_leagues = (user_id) => async (dispatch) => {
+    const response = await fetch(`/api/user/${user_id}/league`, {
+        method: "GET",
+        // headers: {
+        //   "Content-Type": "application/json",
+        // },
+      });
+
+      const data = await response.json()
+      return data
+    };
 
 const initialState = { status: false };
 const createLeagueReducer = (state = initialState, action) => {

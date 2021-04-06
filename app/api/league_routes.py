@@ -9,18 +9,19 @@ league_routes = Blueprint("league_routes",
 # ------------------------------------------------------------------------------
 
 
-# def get_one_notebook(notebook_id):
-#     notebook = Notebook.query.filter_by(id=notebook_id).first()
-#     return notebook
+def get_one_league(league_id):
+    league = League.query.filter_by(id=league_id).first()
+    return league
 
 
-# def get_all_notebooks(user_id):
-#     notebooks = Notebook.query.filter_by(user_id=user_id).all()
-#     return jsonify({"notebooks": [notebook.to_dict() for notebook in
-# notebooks]})
+def get_all_leagues(user_id):
+
+    leagues = League.query.filter_by(user_id=user_id).all()
+    return json.dumps({"leagues": [league.to_dict() for league in
+                                   leagues]}, default=str)
 
 
-def add_league():
+def add_league(user_id):
     league_data = json.loads(request.data.decode("utf-8"))
 
     league = League(name=league_data["name"],
@@ -36,30 +37,25 @@ def add_league():
     return json.dumps(league.to_dict(), default=str)
 
 
-# def delete_notebook(notebook_id):
-#     # notes = Note.query.filter_by(notebook_id = notebook_id).all()
-#     # for note in notes:
-#     #     db.delete(note)
-#     #     db.session.commit()
+def delete_league(league_id):
+    league = League.query.filter_by(id=league_id).first()
 
-#     notebook = Notebook.query.filter_by(id=notebook_id)
-
-#     db.session.delete(notebook)
-#     db.session.commit()
-#     return jsonify({"message": "Notebook successfully deleted"})
+    db.session.delete(league)
+    db.session.commit()
+    return jsonify({"message": "League successfully deleted"})
 
 
-# def edit_notebook(notebook_id):
-#     edit_notebook_data = json.loads(request.data.decode("utf-8"))
-#     notebook = get_one_notebook(notebook_id)
+# def edit_league(league_id):
+#     league_data = json.loads(request.data.decode("utf-8"))
+#     league = get_one_league(league_id)
 
-#     if notebook.name is not edit_notebook_data["name"]:
-#         notebook.name = edit_notebook_data["name"]
-#     if notebook.user_id is not edit_notebook_data["user_id"]:
-#         notebook.user_id = edit_notebook_data["user_id"]
+#     if league.name is not league_data["name"]:
+#         league.name = league_data["name"]
+#     if league.user_id is not league_data["user_id"]:
+#         league.user_id = league_data["user_id"]
 
 #     db.session.commit()
-#     return jsonify(notebook.to_dict())
+#     return jsonify(league.to_dict())
 
 # ------------------------------------------------------------------------------
 #                    RESTful Routes -- Leagues
@@ -67,25 +63,23 @@ def add_league():
 
 # get_all
 # add_league
-
-
-@league_routes.route("", methods=['GET', 'POST'])
-def get_or_add_leagues():
+@league_routes.route("/league", methods=['GET', 'POST'])
+def get_or_add_leagues(user_id):
     if request.method == 'GET':
-        return "hello"  # get_all_leagues(user_id)
+        return get_all_leagues(user_id)
     elif request.method == 'POST':
-        return add_league()
+        return add_league(user_id)
 
-# delete
+# delete_league
 
 
-# @notebook_routes.route("/notebooks/<int:notebook_id>", methods=['DELETE'])
-# def delete_user_note(user_id, notebook_id):
-#     return delete_notebook(notebook_id)
+@league_routes.route("/league/<int:league_id>", methods=['DELETE'])
+def delete_user_league(user_id, league_id):
+    return delete_league(league_id)
 
 # # edit
 
 
-# @notebook_routes.route("/notebooks/<int:notebook_id>", methods=['PUT'])
-# def edit_user_notebook(user_id, notebook_id):
-#     return edit_notebook(notebook_id)
+# @league_routes.route("/leagues/<int:league_id>", methods=['PUT'])
+# def edit_user_league(user_id, league_id):
+#     return edit_league(league_id)

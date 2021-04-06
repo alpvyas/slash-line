@@ -19,7 +19,7 @@ const Landing = () => {
   const [login, setLogin] = useState(false);
   const [signup, setSignup] = useState(false);
   const [authenticated, setAuthenticated] = useState(false);
-  const [showSidebar, setShowSidebar] = useState(false); 
+  // const [showSidebar, setShowSidebar] = useState(false); 
 
   Modal.setAppElement("#root");
   const closeSignup = () => {
@@ -41,10 +41,10 @@ const Landing = () => {
     setLogin(true);
   };
 
-  const demoLogin = () => {
-    const user = dispatch(sessionActions.login("demo@demo.com", "password"));
-    setAuthenticated(true);
-  };
+  // const demoLogin = () => {
+  //   const user = dispatch(sessionActions.login("demo@demo.com", "password"));
+  //   setAuthenticated(true);
+  // };
 
   if (user) {
     return (
