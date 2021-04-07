@@ -1,22 +1,66 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import * as sessionActions from "./store/session";
 import { authenticate } from "./services/auth";
+import { get_roster_40, teams } from "./store/players";
 import Landing from "./components/Landing";
 import Homepage from "./components/Homepage";
 import Profile from "./components/Profile";
 import MyTeam from "./components/MyTeam";
 import Players from "./components/Players";
 import Testing from "./components/Testing/";
+import ReactTable from "./components/ReactTable";
 
 function App() {
   const dispatch = useDispatch();
   const [authenticated, setAuthenticated] = useState(false);
   const [loaded, setLoaded] = useState(false);
   const user = useSelector(state => state.session.user);
+  const players = useSelector(state => state.players.players)
 
+  const columns = useMemo(() => [
+    {
+      Header: "Player",
+      accessor: "name_display_first_last",
+    },
+    {
+      Header: "Position",
+      accessor: "position_txt",
+    },
+    {
+      Header: "Team",
+      accessor: "team_name",
+    },
+    {
+      Header: "Bats",
+      accessor: "bats",
+    },
+    {
+      Header: "Throws",
+      accessor: "throws",
+    },
+    {
+      Header: "Height",
+      accessor: "height_feet",
+    },
+    {
+      Header: "Weight",
+      accessor: "weight",
+    },
+    {
+      Header: "DOB",
+      accessor: "birth_date",
+    },
+  ], []);
+  
+  useEffect(() => {
+    teams.forEach((team) => {
+      dispatch(get_roster_40(team.id))
+      })
+  
+    }, [])
   // useEffect(() => {
   //   (async() => {
   //     const user = await authenticate();
@@ -35,7 +79,8 @@ function App() {
 
   if (!loaded) {
     return null;
-  }
+  };
+
 
   return (
     <BrowserRouter>
@@ -56,7 +101,7 @@ function App() {
           <MyTeam />
         </Route>
         <Route exact path="/players">
-          <Players />
+          <ReactTable columns={columns} data={players} />
         </Route>
       </Switch>
     </BrowserRouter>

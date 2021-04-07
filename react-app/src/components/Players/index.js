@@ -20,6 +20,7 @@ const Players = () => {
   
     }, [])
 
+    
 
   return (
     <div className="container page-container">
