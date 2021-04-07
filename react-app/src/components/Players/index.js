@@ -1,22 +1,49 @@
-import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { team_ids, get_roster_40 } from "../../store/players";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { get_roster_40, teams } from "../../store/players";
+import Table from "../Table";
 
 const Players = () => {
   const dispatch = useDispatch();
-  const [LAD, setLAD] = useState({})
+  const players = useSelector(state => state.players.players)
 
-  useEffect(async () => {
-    const team_id = team_ids["LAD"].id;
-    
-    dispatch(get_roster_40(team_id))
-    .then(data => setLAD(data));
+  const get_players_by_pos = (players, positions) => {
+    const position_players = players.filter(player => positions.includes(player["position_txt"]))
 
+    return position_players;
+  };
+
+  useEffect(() => {
+    teams.forEach((team) => {
+      dispatch(get_roster_40(team.id))
+      })
+  
     }, [])
+
 
   return (
     <div className="container page-container">
-      {console.log("LAD 40 MAN ROSTER:", LAD)}
+      
+      <Table 
+      columns={["Pitchers",  "Position", "Team", "Bats", "Throws", "Height", "Weight", "DOB"]}
+      rows={get_players_by_pos(players, ["P"])}
+      row_keys={["name_display_first_last", "position_txt", "team_name", "bats", "throws", "height_feet", "weight", "birth_date"]}
+      />
+      <Table 
+      columns={["Catchers",  "POS", "TEAM", "B/T", "HT", "WT", "DOB"]}
+      rows={get_players_by_pos(players, ["C"])}
+      row_keys={["name_display_first_last", "position_txt", "team_name", "bats", "throws", "height_feet", "weight", "birth_date"]}
+      />
+      <Table 
+      columns={["Infielders",  "POS", "TEAM", "B/T", "HT", "WT", "DOB"]}
+      rows={get_players_by_pos(players, ["1B", "2B", "3B", "SS"])}
+      row_keys={["name_display_first_last", "position_txt", "team_name", "bats", "throws", "height_feet", "weight", "birth_date"]}
+      />
+      <Table 
+      columns={["Outfielders",  "POS", "TEAM", "B/T", "HT", "WT", "DOB"]}
+      rows={get_players_by_pos(players, ["LF", "RF", "CF", "OF"])}
+    row_keys={["name_display_first_last", "position_txt", "team_name", "bats", "throws", "height_feet", "weight", "birth_date"]}
+      />
     </div>
   )
 }

@@ -55,7 +55,7 @@ function App() {
         <Route exact path="/myteam">
           <MyTeam />
         </Route>
-        <Route exact path="/LAD">
+        <Route exact path="/players">
           <Players />
         </Route>
       </Switch>

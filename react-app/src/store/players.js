@@ -1,97 +1,113 @@
 
-export const team_ids = {
-                  ATL: {
+export const team_ids = [108, 109, 110, 111, 112, 113, 114, 115, 116, 117,
+             118, 119, 120, 121, 133, 134, 135, 136, 137, 138,
+             139, 140, 141, 142, 143, 144, 145, 146, 147, 158];
+
+export const teams = [
+                  {
+                    team: "ATL",
                     id: 144,
                   },
-                  MIA: {
+                  { team: "MIA", 
                     id: 146,
                   },
-                  NYM: {
+                  { team: "NYM",
                     id: 121,
                   },
-                  PHI: {
+                  { team: "PHI",
                     id: 143,
                   },
-                  WSH: {
+                  { team: "WSH",
                     id: 120,
                   },
-                  CHC: {
+                  { team: "CHC",
                     id: 112,
                   },
-                  CIN: {
+                  { team: "CIN",
                     id: 113,
                   },
-                  MIL: {
+                  { team: "MIL",
                     id: 158,
                   },
-                  PIT: {
+                  { team: "PIT",
                     id: 134,
                   },
-                  STL: {
+                  { team: "STL",
                     id: 138,
                   },
-                  ARI: {
+                  { team: "ARI",
                     id: 109,
                   },
-                  COL: {
+                  { team: "COL",
                     id: 115,
                   },
-                  LAD: {
+                  { team: "LAD",
                     id: 119,
                   },
-                  SD: {
+                  { team: "SD",
                     id: 135,
                   },
-                  SF: {
+                  { team: "SF",
                     id: 137,
                   },
-                  BAL: {
+                  { team: "BAL",
                     id: 110,
                   },
-                  BOS: {
+                  { team: "BOS",
                     id: 111,
                   },
-                  NYY: {
+                  { team: "NYY",
                     id: 147,
                   },
-                  TB: {
+                  { team: "TB",
                     id: 139,
                   },
-                  TOR: {
+                  { team: "TOR",
                     id: 141,
                   },
-                  CWS: {
+                  { team: "CWS",
                     id: 145,
                   },
-                  CLE: {
+                  { team: "CLE",
                     id: 114,
                   },
-                  DET: {
+                  { team: "DET",
                     id: 116,
                   },
-                  KC: {
+                  { team: "KC",
                     id: 118,
                   },
-                  MIN: {
+                  { team: "MIN",
                     id: 142,
                   },
-                  HOU: {
+                  { team: "HOU",
                     id: 117,
                   },
-                  LAA: {
+                  { team: "LAA",
                     id: 108,
                   },
-                  OAK: {
+                  { team: "OAK",
                     id: 133,
                   },
-                  SEA: {
+                  { team: "SEA",
                     id: 136,
                   },
-                  TEX: {
+                  { team: "TEX",
                     id: 140,
                   },
                   
-                };
+];
+
+const ADD_PLAYERS = "players/ADD";
+
+const add = (roster) => ({
+    type: ADD_PLAYERS,
+    data: roster.roster_40.queryResults.row,
+});
+
+export const add_players = (data) => async (dispatch) => {
+  dispatch(add(data))
+}
 
 export const get_roster_40 = (team_id) => async (dispatch) => { const response = 
   await fetch(
@@ -104,8 +120,23 @@ export const get_roster_40 = (team_id) => async (dispatch) => { const response =
 
   const roster = await response.json();
 
-  // if (response.ok && !roster.errors) {
-  //   dispatch(setSomething(roster));
-  // }
+  if (response.ok && !roster.errors) {
+    dispatch(add(roster));
+  }
   return roster.roster_40.queryResults.row;
 };
+
+const initialState = { players: [] };
+
+const playersReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case ADD_PLAYERS:
+      let newState = {...state, };
+      newState.players = [...newState.players, ...action.data]
+      return newState;
+    default:
+      return state;
+  }
+};
+
+export default playersReducer;
