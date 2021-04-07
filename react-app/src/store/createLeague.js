@@ -47,7 +47,7 @@ export const createLeague =
       });
 
       const data = await response.json()
-      return data
+      return data;
     };
 
 const initialState = { status: false };

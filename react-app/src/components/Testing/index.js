@@ -1,6 +1,5 @@
 import React from "react";
 import Sidebar from "../Sidebar";
-import SidebarDrawer from "../SidebarDrawer";
 import SettingsIcon from "@material-ui/icons/Settings";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 
@@ -51,7 +50,6 @@ const Testing = () => {
   return (
     <>
       <h1>Testing Page</h1>
-      {/* <SidebarDrawer /> */}
       <Sidebar items={items} />
     </>
   )

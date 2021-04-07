@@ -1,31 +1,28 @@
-import React, { useState }from "react";
-import { useSelector } from "react-redux";
+import React, { useState, useEffect }from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { get_leagues } from "../../store/createLeague";
 import LeagueFormModal from "../LeagueFormModal";
 import NavBar from "../NavBar/index";
 import Table from "../Table";
 import "./Homepage.css";
 
 const Homepage = () => {
-  let user = useSelector((state) => state.session.user);
+  const user = useSelector((state) => state.session.user);
+  const [leagues, setLeagues] = useState([])
+  const dispatch = useDispatch();
+  
+  useEffect(async () => {
+    
+    dispatch(get_leagues(user.id))
+    .then(data => setLeagues(data["leagues"]));
 
-  const leagues = [
-    {
-      name: "Catcus League",
-      type: "Rotisserie",
-      permissions: "Commissioner Only",
-      draft: "Live Standard Draft",
-      draft_date: "2021-04-21",
-      draft_time: "12:00",
-    },
-    {
-      name: "Mountain League",
-      type: "Rotisserie",
-      permissions: "Commissioner Only",
-      draft: "Live Standard Draft",
-      draft_date: "2021-04-21",
-      draft_time: "12:00",
-    },
-  ];
+    }, [user])
+
+  const columns = ["League Name", "League Type", "Permissions",
+                   "Draft", "Draft Date", "Draft Time"];
+
+  const row_keys = ["name", "type", "permissions", "draft",
+                "draft_date", "draft_time"];
 
   return (
     <>
@@ -35,7 +32,7 @@ const Homepage = () => {
           <LeagueFormModal />
         </div>
         <div>
-          <Table />
+          <Table columns={columns} rows={leagues} row_keys={row_keys}/>
         </div>
       </div>
     </>
