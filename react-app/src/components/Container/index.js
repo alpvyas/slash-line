@@ -1,5 +1,6 @@
 import { Table } from "@material-ui/core";
 import React from "react";
+import gameDetailsReducer from "../../store/gameDetails";
 import "./Container.css";
 
 const Alert = (data) => {
@@ -57,5 +58,52 @@ export const Notices = () => {
   )
 };
 
+const Scorecard = ({ game }) => {
 
-export default Alert;
+  const inning_half = game.InningHalf === "T" ? "Top " : "Bottom ";
+
+  const datetime = game.DateTime;
+
+  const datetime_array = datetime.split("T");
+  const time = datetime_array[1].split(":");
+  const hour = parseInt(time[0], 10);
+  const minutes = parseInt(time[1], 10);
+
+  const AMPM = hour < 12 ? "AM" : "PM"
+
+  const game_time = " " + hour.toString(10) + ":" + minutes.toString(10) + AMPM;
+
+  return (
+    <>
+      <div className="card-container">
+        <div className="card-row">
+          <span>
+            <b>{game.AwayTeam}</b>
+            <mark>
+              <b>{game.AwayTeamHits}</b>
+            </mark>
+          </span>
+        </div>
+        <div className="card-row">
+          <span>
+            <b>{game.HomeTeam}</b>
+            <mark>
+              <b>{game.HomeTeamHits}</b>
+            </mark>
+          </span>
+        </div>
+        <div className="card-row">
+          {game.status === "InProgress" && (
+            <span> {inning_half}{game.Inning} </span>
+          )}
+          {game.status === "Scheduled" && (
+            <span> Today{game_time} </span>
+          )}
+        </div>
+      </div>
+    </>
+  )
+}
+
+
+export default Scorecard;
