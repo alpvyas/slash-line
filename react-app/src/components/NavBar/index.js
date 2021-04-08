@@ -13,21 +13,12 @@ const onClick = (e, item) => {
   };
 
   const items = [
-    {name: "about", label: "About", onClick},
-    {
-      name: "coming-soon", 
-      label: "Coming Soon",
-      items: [
-        { name: "baseline", label: "Down the Baseline", onClick },
-        { name: "feedback", label: "Feedback", onClick },
-      ],
-    },
+    { name: "profile", label: "Profile", onClick },
     {
       name: "settings",
       label: "Settings",
       Icon: SettingsIcon,
       items: [
-        { name: "profile", label: "Profile", onClick },
         { 
           name: "display",
           label: "Display",
@@ -46,7 +37,23 @@ const onClick = (e, item) => {
         },
       ]
     },
-    {name: "thanks", label: "Thanks", onClick},
+    {
+      name: "about",
+      label: "About",
+      items: [
+        {name: "what-is", label: "What is Slash Line?", onClick},
+        {name: "how-to", label: "How to play", onClick},
+        {name: "thanks", label: "Thanks", onClick},
+      ],
+    },
+    {
+      name: "coming-soon", 
+      label: "Coming Soon",
+      items: [
+        { name: "baseline", label: "Down the Baseline", onClick },
+        { name: "feedback", label: "Feedback", onClick },
+      ],
+    },
   ]
 
 const NavBar = () => {
@@ -88,20 +95,14 @@ const NavBar = () => {
               </div>
               <div className="slash-icon">/</div>
               <div className="nav-link-tab" id="leagues-tab">
-                <NavLink to="/leagues" exact={true} className="inactive" activeClassName="active">
-                  leagues
+                <NavLink to="/team" exact={true} className="inactive" activeClassName="active">
+                  team
                 </NavLink>
               </div>
               <div className="slash-icon">/</div>
               <div className="nav-link-tab" id="players-tab">
                 <NavLink to="/players" exact={true} className="inactive" activeClassName="active">
                   players
-                </NavLink>
-              </div>
-              <div className="slash-icon">/</div>
-              <div className="nav-link-tab" id="profile-tab">
-                <NavLink to={`/users/${user_id}`} exact={true} className="inactive" activeClassName="active">
-                  profile
                 </NavLink>
               </div>
             </div>

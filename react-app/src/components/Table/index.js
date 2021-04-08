@@ -8,7 +8,7 @@ const Table = ({columns, rows, row_keys}) => {
   
   return (
     <>
-      <table className="pagination" data-pagecount="25">
+      <table>
         <thead>
           <tr>
             {columns.map((title) => (

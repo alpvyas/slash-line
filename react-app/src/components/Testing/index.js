@@ -1,56 +1,59 @@
 import React from "react";
-import Sidebar from "../Sidebar";
-import SettingsIcon from "@material-ui/icons/Settings";
-import NotificationsIcon from "@material-ui/icons/Notifications";
+import Carousel from "../Carousel";
+
 
 
 const Testing = () => {
 
-  const onClick = (e, item) => {
-  window.alert(JSON.stringify(item, null, 2));
-  };
-
   const items = [
-    {name: "about", label: "About", onClick},
-    {
-      name: "coming-soon", 
-      label: "Coming Soon",
-      items: [
-        { name: "baseline", label: "Down the Baseline", onClick },
-        { name: "feedback", label: "Feedback", onClick },
-      ],
-    },
-    {
-      name: "settings",
-      label: "Settings",
-      Icon: SettingsIcon,
-      items: [
-        { name: "profile", label: "Profile", onClick },
-        { 
-          name: "display",
-          label: "Display",
-          items: [
-            {name: "dark-mode", label: "Dark Mode", onClick}
-          ],
-        },
-        {
-          name: "notifications",
-          label: "Notifications",
-          Icon: NotificationsIcon,
-          items: [
-            {name: "email", label: "Email", onClick},
-            {name: "mobile", label: "Text message", onClick}
-          ],
-        },
-      ]
-    },
-    {name: "thanks", label: "Thanks", onClick},
-  ]
-
+                <div>
+                    <div style={{padding: 8}}>
+                        <img src="https://via.placeholder.com/300x300" alt="placeholder" style={{width: '100%'}} />
+                    </div>
+                </div>,
+                <div>
+                    <div style={{padding: 8}}>
+                        <img src="https://via.placeholder.com/300x300" alt="placeholder" style={{width: '100%'}} />
+                    </div>
+                </div>,
+                <div>
+                    <div style={{padding: 8}}>
+                        <img src="https://via.placeholder.com/300x300" alt="placeholder" style={{width: '100%'}} />
+                    </div>
+                </div>,
+                <div>
+                    <div style={{padding: 8}}>
+                        <img src="https://via.placeholder.com/300x300" alt="placeholder" style={{width: '100%'}} />
+                    </div>
+                </div>,
+                <div>
+                    <div style={{padding: 8}}>
+                        <img src="https://via.placeholder.com/300x300" alt="placeholder" style={{width: '100%'}} />
+                    </div>
+                </div>,
+                <div>
+                    <div style={{padding: 8}}>
+                        <img src="https://via.placeholder.com/300x300" alt="placeholder" style={{width: '100%'}} />
+                    </div>
+                </div>,
+                <div>
+                    <div style={{padding: 8}}>
+                        <img src="https://via.placeholder.com/300x300" alt="placeholder" style={{width: '100%'}} />
+                    </div>
+                </div>,
+                <div>
+                    <div style={{padding: 8}}>
+                        <img src="https://via.placeholder.com/300x300" alt="placeholder" style={{width: '100%'}} />
+                    </div>
+                </div>,
+  ];
   return (
     <>
       <h1>Testing Page</h1>
-      <Sidebar items={items} />
+      <div>
+        <Carousel items={items} show={3} infiniteLoop={true}/>
+  
+      </div>
     </>
   )
 };

@@ -105,9 +105,9 @@ const add = (roster) => ({
     data: roster.roster_40.queryResults.row,
 });
 
-export const add_players = (data) => async (dispatch) => {
-  dispatch(add(data))
-}
+// export const add_players = (data) => async (dispatch) => {
+//   dispatch(add(data))
+// }
 
 export const get_roster_40 = (team_id) => async (dispatch) => { const response = 
   await fetch(
@@ -132,7 +132,9 @@ const playersReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_PLAYERS:
       let newState = {...state, };
+      console.log("NEW STATE:", newState)
       newState.players = [...newState.players, ...action.data]
+      console.log("ACTION.DATA:", action.data)
       return newState;
     default:
       return state;

@@ -1,29 +1,67 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { useSelector } from "react-redux";
-import Table from "../Table";
+import NavBar from "../NavBar";
+import ReactTable from "../ReactTable";
 import "./MyTeam.css";
 
 const MyTeam = () => {
   const user = useSelector((state) => state.session.user);
 
-  const columns = ["B/T", "HT", "WT", "DOB", "POS"];
+ const columns = useMemo(() => [
+    {
+      Header: "Player",
+      accessor: "name_display_first_last",
+    },
+    {
+      Header: "Position",
+      accessor: "position_txt",
+    },
+    {
+      Header: "Team",
+      accessor: "team_name",
+    },
+    {
+      Header: "Bats",
+      accessor: "bats",
+    },
+    {
+      Header: "Throws",
+      accessor: "throws",
+    },
+    {
+      Header: "Height",
+      accessor: "height_feet",
+    },
+    {
+      Header: "Weight",
+      accessor: "weight",
+    },
+    {
+      Header: "DOB",
+      accessor: "birth_date",
+    },
+  ], []);
+
   const players = [
                     {
-                      name:"Cody Bellinger",
-                      bt: "L/L",
-                      ht: "6'4",
-                      wt: "203",
-                      dob: "07/13/1995",
-                      pos: "RF",
+                      name_display_first_last:"Cody Bellinger",
+                      team_name: "Los Angeles Dodgers",
+                      bats: "L",
+                      throws: "L",
+                      height_feet: "6'4",
+                      weight: "203",
+                      birth_date: "07/13/1995",
+                      position_txt: "RF",
                     },
   ];
-  const keys = ["name", "bt", "ht", "wt", "dob", "pos", ];
+
   return (
     <>
       {/* <Table columns={["Pitchers", ...columns]}/>
       <Table columns={["Catchers", ...columns]}/>
       <Table columns={["Infielders", ...columns]}/> */}
-      <Table columns={["Outfielders", ...columns]} rows={players} row_keys={keys}/>
+      <NavBar />
+      <ReactTable columns={columns} data={players} />
     </>
   )
 

@@ -52,17 +52,17 @@ const Players = () => {
   };
 
   useEffect(() => {
-    teams.forEach((team) => {
-      dispatch(get_roster_40(team.id))
+    teams.forEach(async (team) => {
+     await dispatch(get_roster_40(team.id))
       })
   
-    }, [])
+    }, [dispatch])
 
     
 
   return (
     <>
-      <NavBar />
+      {/* <NavBar /> */}
       <div className="container page-container">
         <ReactTable columns={columns} data={players}/>
         {/* <Table 
