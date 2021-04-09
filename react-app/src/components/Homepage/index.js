@@ -11,6 +11,7 @@ import Table from "../Table";
 import bauer_practice from "../../images/bauer-practice.png";
 import "./Homepage.css";
 import Standings from "../Container/Standings";
+import Footer from "../Footer";
 
 const Homepage = () => {
   const dispatch = useDispatch();
@@ -57,7 +58,7 @@ const Homepage = () => {
   const columns = ["League Name", "League Type", "Permissions",
                    "Draft", "Draft Date", "Draft Time"];
 
-  const row_keys = ["name", "type", "permissions", "draft",
+  const row_keys = ["name", "league_type", "permissions", "draft",
                     "draft_date", "draft_time"];
 
   return (
@@ -77,6 +78,13 @@ const Homepage = () => {
            <LeagueFormModal />
            <Table columns={columns} rows={leagues} row_keys={row_keys}/>
           </div>
+         </div>
+         <div className="bottom-container">
+           <div className="misc-container"></div>
+           <div className="misc-container"></div>
+         </div>
+         <div className="footer-container">
+          <Footer />
          </div>
       </div>
     </>

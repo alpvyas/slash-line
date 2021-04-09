@@ -25,20 +25,34 @@
 }
 
 .standings-list-container,
-.create-league-container {
+.create-league-container,
+.misc-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   width: 650px;
   height: 500px;
   margin: 20px 20px 20px 55px;
+  background-color: whitesmoke;
 }
 
-.create-league-container {
+.create-league-container,
+.misc-container {
   border: 2px solid red;
 }
 
-.middle-container {
+.middle-container,
+.bottom-container {
   display: flex;
   flex-direction: row;
+}
+
+.footer-container {
+  position: relative;
+  width: 100%;
+  height: 150px;
+  border: 2px solid red;
+  display: flex;
+  flex-direction: row;
+  background-color: whitesmoke;
 }

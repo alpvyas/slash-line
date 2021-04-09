@@ -45,6 +45,7 @@
   width: 100%;
   flex-shrink: 0;
   flex-grow: 1;
+  border: 2px solid red;
 }
 
 .left-arrow,
@@ -57,7 +58,7 @@
   height: 48px;
   border-radius: 24px;
   background-color: white;
-  border: 1px solid #ddd;
+  border: 1px solid rgba(11, 44, 206, 0.784);
 }
 
 .left-arrow {
