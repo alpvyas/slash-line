@@ -5,6 +5,9 @@ import NavBar from "../NavBar";
 import ReactTable from "../ReactTable";
 // import Table from "../Table";
 import "./Players.css";
+import kershaw_warmup from "../../images/kershaw-warmup-stretch.png";
+import player_holding_balls from "../../images/player-holding-balls.png";
+import glove_closeup from "../../images/close-up-baseball-held-glove.png";
 
 
 const Players = () => {
@@ -62,13 +65,15 @@ const Players = () => {
     
 
   return (
-    <>
-      <div className="container page-container">
+    
+      <div className="page-container" style={{backgroundImage: `url(${glove_closeup})`}}>
         <div className="nav-bar-container">
           <NavBar />
         </div>
-        <div className="table-container">
-          <ReactTable columns={columns} data={players}/>
+        <div className="middle-container">
+          <div className="table-container">
+            <ReactTable columns={columns} data={players}/>
+          </div>
         </div>
         {/* <Table 
         columns={["Pitchers",  "Position", "Team", "Bats", "Throws", "Height", "Weight", "DOB"]}
@@ -91,7 +96,6 @@ const Players = () => {
       row_keys={["name_display_first_last", "position_txt", "team_name", "bats", "throws", "height_feet", "weight", "birth_date"]}
         /> */}
       </div>
-    </>
   )
 }
 

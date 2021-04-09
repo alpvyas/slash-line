@@ -10,6 +10,7 @@ import NavBar from "../NavBar/index";
 import Table from "../Table";
 import bauer_practice from "../../images/bauer-practice.png";
 import "./Homepage.css";
+import Standings from "../Container/Standings";
 
 const Homepage = () => {
   const dispatch = useDispatch();
@@ -65,16 +66,18 @@ const Homepage = () => {
         <div className="nav-bar-container">
           <NavBar />
         </div>
-            {/* <img id="homepage-image" alt="bauer_practice" src={bauer_practice} /> */}
         <div className="score-carousel-container">
           <Carousel items={games} show={5} infiniteLoop={true}/>
         </div>
-        <div className="create-league-container">
-          <LeagueFormModal />
-        </div>
-        <div>
-          <Table columns={columns} rows={leagues} row_keys={row_keys}/>
-        </div>
+        <div className="middle-container">
+          <div className="standings-list-container">
+            <Standings />
+          </div>
+          <div className="create-league-container">
+           <LeagueFormModal />
+           <Table columns={columns} rows={leagues} row_keys={row_keys}/>
+          </div>
+         </div>
       </div>
     </>
   )
