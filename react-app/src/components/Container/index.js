@@ -25,7 +25,7 @@ const Alert = (data) => {
   )
 };
 
-export const Standings = (data) => {
+const Standings = (data) => {
   
   const headers = ["Rank", "Team", "Points"]
   //need to get teams that belong to league
@@ -40,7 +40,7 @@ export const Standings = (data) => {
   )
 };
 
-export const Notices = () => {
+const Notices = () => {
   
   return (
     <>
@@ -66,15 +66,29 @@ const Scorecard = ({ game }) => {
 
   const datetime_array = datetime.split("T");
   const time = datetime_array[1].split(":");
-  const hour = parseInt(time[0], 10);
+  const hour_24_clock = parseInt(time[0], 10);
+  const hour = hour_24_clock - 15;
   const minutes = parseInt(time[1], 10);
+  const formatted_minutes = minutes < 10 ? `0${minutes}` : minutes;
 
-  const AMPM = hour < 12 ? "AM" : "PM"
+  const AMPM = hour_24_clock < 12 ? "AM" : "PM"
 
-  const game_time = " " + hour.toString(10) + ":" + minutes.toString(10) + AMPM;
+  const game_time = " " + hour.toString(10) + ":" + formatted_minutes.toString(10) + AMPM;
+
+  let content;
+
+  if (game.Status === "InProgress"){
+      content = <span> {inning_half}{game.Inning} </span>;
+  }else if (game.Status === "Scheduled"){
+      content = <span> Today {game_time} </span>;
+  }else if (game.Status === "Final"){
+      content = <span> Final </span>;
+  }else{
+    content = <span> TBD </span>
+  }
+
 
   return (
-    <>
       <div className="card-container">
         <div className="card-row">
           <span>
@@ -93,17 +107,11 @@ const Scorecard = ({ game }) => {
           </span>
         </div>
         <div className="card-row">
-          {game.status === "InProgress" && (
-            <span> {inning_half}{game.Inning} </span>
-          )}
-          {game.status === "Scheduled" && (
-            <span> Today{game_time} </span>
-          )}
+          {content}
         </div>
       </div>
-    </>
   )
-}
+};
 
 
 export default Scorecard;

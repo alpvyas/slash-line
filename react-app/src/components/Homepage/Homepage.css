@@ -8,8 +8,17 @@
   position: relative;
   margin-top: 300px;
 }
-.create-button {
-  width: 100px;
-  height: 100px;
-  border: 2px solid red;
+
+.page-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.nav-bar-container {
+  margin: 5px 0px 10px 0px;
+}
+
+.score-carousel-container {
+  margin: 165px 0px 10px 0px;
 }

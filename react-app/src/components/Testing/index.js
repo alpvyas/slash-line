@@ -42,9 +42,11 @@ const Testing = () => {
       <h1>Testing Page</h1>
       <h2>Today's Date: {today}</h2>
       <div>
-        <Carousel items={games} show={6} infiniteLoop={true}/>
-  
+        <Carousel items={games} show={5} infiniteLoop={true}/>
       </div>
+      {/* <div>
+        <Scorecard game={games[0]}/>
+      </div> */}
     </>
   )
 };
