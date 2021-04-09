@@ -67,7 +67,7 @@ const SplashNav = ({showSidebar, setShowSidebar, openSignup, openLogin}) => {
             <div className="name-container">
               <div id="title">Slash Line</div>
             </div>
-            <div className="container tab-container link-container">
+            <div className="tab-container link-container">
               <div className="nav-link-tab" id="stats-tab">
                 <NavLink to="/stats" exact={true} className="inactive" activeClassName="active">
                   stats

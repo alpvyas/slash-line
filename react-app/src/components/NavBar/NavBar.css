@@ -36,8 +36,8 @@
 
 .nav-link-tab {
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 19px;
-  font-weight: 1000px;
+  font-size: 26px;
+  font-weight: 500px;
   box-sizing: border-box;
   height: 50px;
   width: 95px;
@@ -48,7 +48,7 @@
 
 .nav-link-tab:hover {
   cursor: pointer;
-  border: 1px solid #716C6D;
+  /* border: 1px solid #716C6D; */
   text-decoration: underline;
 }
 

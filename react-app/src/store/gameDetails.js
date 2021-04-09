@@ -9,7 +9,7 @@ const add = (gameDetails) => ({
 
 export const get_game_details = (date) => async (dispatch) => { const response = 
   await fetch(
-  `https://fly.sportsdata.io/v3/mlb/scores/json/GamesByDate/2021-APR-08`, {
+  `https://fly.sportsdata.io/v3/mlb/scores/json/GamesByDate/${date}`, {
   method: "GET",
   headers: {
     "Content-Type": "application/json",

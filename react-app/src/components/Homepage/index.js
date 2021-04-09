@@ -2,9 +2,9 @@ import React, { useState, useEffect }from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { get_leagues } from "../../store/createLeague";
 // import { get_game_details } from "../../store/gameDetails";
-import { games } from "../../mock_game_data";
+import { game_details } from "../../mock_game_data";
 import Carousel from "../Carousel";
-// import Scorecard from "../Containers/Scorecard";
+import Scorecard from "../Containers/Scorecard";
 import LeagueFormModal from "../LeagueFormModal";
 import NavBar from "../NavBar/index";
 import Table from "../Table";
@@ -44,9 +44,9 @@ const Homepage = () => {
 
   // const game_details = useSelector((state) => state.gameDetails);
 
-  // const games = game_details.map((game_detail) => (
-  //   <Scorecard game={game_detail}/>
-  // ));
+  const games = game_details&&game_details.map((game_detail) => (
+    <Scorecard game={game_detail}/>
+  ));
 
   useEffect(() => {
     
@@ -68,7 +68,7 @@ const Homepage = () => {
           <NavBar />
         </div>
         <div className="score-carousel-container">
-          <Carousel items={games} show={5} infiniteLoop={true}/>
+          {games && <Carousel items={games} show={5} infiniteLoop={true}/>}
         </div>
         <div className="middle-container">
           <div className="standings-list-container">

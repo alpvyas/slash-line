@@ -56,17 +56,15 @@ const Players = () => {
   // };
 
   useEffect(() => {
-    teams.forEach(async (team) => {
-     await dispatch(get_roster_40(team.id))
-      })
+    dispatch(get_roster_40())
   
     }, [dispatch])
 
-    
+    // style={{backgroundImage: `url(${glove_closeup})`}}
 
   return (
     
-      <div className="page-container" style={{backgroundImage: `url(${glove_closeup})`}}>
+      <div className="page-container">
         <div className="nav-bar-container">
           <NavBar />
         </div>

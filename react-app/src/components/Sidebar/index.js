@@ -113,7 +113,7 @@ const Sidebar = ({ items, depthStep = 25, depth =0, expanded }) => {
     return (
         <>
             <div style={styles.sideNav}>
-                <IconButton onClick={toggle}>
+                <IconButton className="hamburger-icon" onClick={toggle}>
                     { !drawerOpen ? <ReorderIcon /> : null }
                 </IconButton>
             </div>
