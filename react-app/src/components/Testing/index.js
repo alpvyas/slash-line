@@ -1,56 +1,52 @@
-import React from "react";
-import Sidebar from "../Sidebar";
-import SettingsIcon from "@material-ui/icons/Settings";
-import NotificationsIcon from "@material-ui/icons/Notifications";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { get_game_details } from "../../store/gameDetails";
+import { game_details } from "../../mock_game_data";
+import Scorecard from "../Container";
+import Carousel from "../Carousel";
+
 
 
 const Testing = () => {
+  const dispatch = useDispatch();
+  // const game_details = useSelector(state => state.gameDetails);
 
-  const onClick = (e, item) => {
-  window.alert(JSON.stringify(item, null, 2));
+  const date = new Date();
+
+  let year = date.getFullYear();
+  let month = date.getMonth();
+  let day = date.getDate();
+
+  const months = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+  
+  for (let index = 0; index < months.length; index++) {
+    if (month === index) month = months[index]
   };
 
-  const items = [
-    {name: "about", label: "About", onClick},
-    {
-      name: "coming-soon", 
-      label: "Coming Soon",
-      items: [
-        { name: "baseline", label: "Down the Baseline", onClick },
-        { name: "feedback", label: "Feedback", onClick },
-      ],
-    },
-    {
-      name: "settings",
-      label: "Settings",
-      Icon: SettingsIcon,
-      items: [
-        { name: "profile", label: "Profile", onClick },
-        { 
-          name: "display",
-          label: "Display",
-          items: [
-            {name: "dark-mode", label: "Dark Mode", onClick}
-          ],
-        },
-        {
-          name: "notifications",
-          label: "Notifications",
-          Icon: NotificationsIcon,
-          items: [
-            {name: "email", label: "Email", onClick},
-            {name: "mobile", label: "Text message", onClick}
-          ],
-        },
-      ]
-    },
-    {name: "thanks", label: "Thanks", onClick},
-  ]
+  if (day < 10) day = `0${day}`;
 
+  const today = year + '-' + month + '-' + day;
+
+  // useEffect(() => {
+  //   dispatch(get_game_details())
+  // })
+
+
+  const games = game_details.map((game_detail) => (
+    <Scorecard game={game_detail}/>
+  ));
+                
   return (
     <>
+      {console.log("GAME DETAILS:", game_details)}
       <h1>Testing Page</h1>
-      <Sidebar items={items} />
+      <h2>Today's Date: {today}</h2>
+      <div>
+        <Carousel items={games} show={5} infiniteLoop={true}/>
+      </div>
+      {/* <div>
+        <Scorecard game={games[0]}/>
+      </div> */}
     </>
   )
 };

@@ -11,6 +11,7 @@ import Profile from "./components/Profile";
 import MyTeam from "./components/MyTeam";
 import Players from "./components/Players";
 import Testing from "./components/Testing/";
+import Stats from "./components/Stats";
 
 function App() {
   const dispatch = useDispatch();
@@ -66,6 +67,12 @@ function App() {
         </Route>
         <Route exact path="/players">
           <Players />
+        </Route>
+        <Route exact path="/team">
+          <MyTeam />
+        </Route>
+        <Route exact path="/stats">
+          <Stats />
         </Route>
       </Switch>
     </BrowserRouter>
