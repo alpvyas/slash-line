@@ -15,6 +15,23 @@ const onClick = (e, item) => {
   const items = [
     { name: "profile", label: "Profile", onClick },
     {
+      name: "about",
+      label: "About",
+      items: [
+        {name: "what-is", label: "What is Slash Line?", onClick},
+        {name: "how-to", label: "How to play", onClick},
+        {name: "thanks", label: "Thanks", onClick},
+      ],
+    },
+    {
+      name: "coming-soon", 
+      label: "Coming Soon",
+      items: [
+        { name: "baseline", label: "Down the Baseline", onClick },
+        { name: "feedback", label: "Feedback", onClick },
+      ],
+    },
+    {
       name: "settings",
       label: "Settings",
       Icon: SettingsIcon,
@@ -36,23 +53,6 @@ const onClick = (e, item) => {
           ],
         },
       ]
-    },
-    {
-      name: "about",
-      label: "About",
-      items: [
-        {name: "what-is", label: "What is Slash Line?", onClick},
-        {name: "how-to", label: "How to play", onClick},
-        {name: "thanks", label: "Thanks", onClick},
-      ],
-    },
-    {
-      name: "coming-soon", 
-      label: "Coming Soon",
-      items: [
-        { name: "baseline", label: "Down the Baseline", onClick },
-        { name: "feedback", label: "Feedback", onClick },
-      ],
     },
   ]
 

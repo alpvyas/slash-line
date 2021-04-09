@@ -79,7 +79,7 @@ const ReactTable = ({ columns, data }) => {
       <input
       value={filterInput}
       onChange={handleFilterChange}
-      placerholder="Search..."
+      placeholder="Search..."
       />
       <table {...getTableProps()}>
         <thead>

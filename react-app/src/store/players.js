@@ -132,9 +132,9 @@ const playersReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_PLAYERS:
       let newState = {...state, };
-      console.log("NEW STATE:", newState)
+      // console.log("NEW STATE:", newState)
       newState.players = [...newState.players, ...action.data]
-      console.log("ACTION.DATA:", action.data)
+      // console.log("ACTION.DATA:", action.data)
       return newState;
     default:
       return state;

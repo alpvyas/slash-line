@@ -10,7 +10,7 @@ class League(db.Model):
     id = db.Column(db.Integer, primary_key=True)
 
     name = db.Column(db.String(30), nullable=False, unique=True)
-    type = db.Column(db.String(30), nullable=False)
+    league_type = db.Column(db.String(30), nullable=False)
     permissions = db.Column(db.String(30), nullable=False,
                             default="Commissioner Only")
     draft = db.Column(db.String(30), nullable=False,
@@ -27,7 +27,7 @@ class League(db.Model):
         return {
             "id": self.id,
             "name": self.name,
-            "type": self.type,
+            "league_type": self.league_type,
             "permissions": self.permissions,
             "draft": self.draft,
             "draft_date": self.draft_date,

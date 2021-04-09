@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { get_roster_40, teams } from "../../store/players";
 import NavBar from "../NavBar";
 import ReactTable from "../ReactTable";
-import Table from "../Table";
+// import Table from "../Table";
+import "./Players.css";
 
 
 const Players = () => {
@@ -45,11 +46,11 @@ const Players = () => {
     },
   ], []);
 
-  const get_players_by_pos = (players, positions) => {
-    const position_players = players.filter(player => positions.includes(player["position_txt"]))
+  // const get_players_by_pos = (players, positions) => {
+  //   const position_players = players.filter(player => positions.includes(player["position_txt"]))
 
-    return position_players;
-  };
+  //   return position_players;
+  // };
 
   useEffect(() => {
     teams.forEach(async (team) => {
@@ -62,9 +63,13 @@ const Players = () => {
 
   return (
     <>
-      {/* <NavBar /> */}
       <div className="container page-container">
-        <ReactTable columns={columns} data={players}/>
+        <div className="nav-bar-container">
+          <NavBar />
+        </div>
+        <div className="table-container">
+          <ReactTable columns={columns} data={players}/>
+        </div>
         {/* <Table 
         columns={["Pitchers",  "Position", "Team", "Bats", "Throws", "Height", "Weight", "DOB"]}
         rows={get_players_by_pos(players, ["P"])}

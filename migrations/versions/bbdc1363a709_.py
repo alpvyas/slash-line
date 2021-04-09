@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 6f78df9bfb7b
+Revision ID: bbdc1363a709
 Revises: 
-Create Date: 2021-04-05 10:41:16.938412
+Create Date: 2021-04-08 22:51:51.595429
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '6f78df9bfb7b'
+revision = 'bbdc1363a709'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -46,11 +46,11 @@ def upgrade():
     op.create_table('leagues',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=30), nullable=False),
-    sa.Column('type', sa.String(length=30), nullable=False),
+    sa.Column('league_type', sa.String(length=30), nullable=False),
     sa.Column('permissions', sa.String(length=30), nullable=False),
     sa.Column('draft', sa.String(length=30), nullable=False),
-    sa.Column('draft_date', sa.Date(), nullable=False),
-    sa.Column('draft_time', sa.Time(), nullable=False),
+    sa.Column('draft_date', sa.String(length=30), nullable=False),
+    sa.Column('draft_time', sa.String(length=30), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('created_at', sa.DateTime(), nullable=False),
     sa.Column('updated_at', sa.DateTime(), nullable=False),
@@ -62,7 +62,7 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=30), nullable=False),
     sa.Column('wins', sa.Integer(), nullable=False),
-    sa.Column('loses', sa.Integer(), nullable=False),
+    sa.Column('losses', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('league_id', sa.Integer(), nullable=False),
     sa.Column('created_at', sa.DateTime(), nullable=False),

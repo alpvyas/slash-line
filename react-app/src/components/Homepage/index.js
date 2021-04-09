@@ -1,13 +1,14 @@
 import React, { useState, useEffect }from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { get_leagues } from "../../store/createLeague";
-import { get_game_details } from "../../store/gameDetails";
-import { game_details } from "../../mock_game_data";
+// import { get_game_details } from "../../store/gameDetails";
+import { games } from "../../mock_game_data";
 import Carousel from "../Carousel";
-import Scorecard from "../Container";
+// import Scorecard from "../Containers/Scorecard";
 import LeagueFormModal from "../LeagueFormModal";
 import NavBar from "../NavBar/index";
 import Table from "../Table";
+import bauer_practice from "../../images/bauer-practice.png";
 import "./Homepage.css";
 
 const Homepage = () => {
@@ -33,13 +34,17 @@ const Homepage = () => {
   
   // useEffect(() => {
   //   const game_data_interval = setInterval(() => {
-  //     dispatch(get_game_details())
+  //     dispatch(get_game_details(today))
   //   }, 60000);
 
   //   return () => clearInterval(game_data_interval)
   //   }, [dispatch])
 
   // const game_details = useSelector((state) => state.gameDetails);
+
+  // const games = game_details.map((game_detail) => (
+  //   <Scorecard game={game_detail}/>
+  // ));
 
   useEffect(() => {
     
@@ -54,16 +59,13 @@ const Homepage = () => {
   const row_keys = ["name", "type", "permissions", "draft",
                     "draft_date", "draft_time"];
 
-  const games = game_details.map((game_detail) => (
-    <Scorecard game={game_detail}/>
-  ));
-
   return (
     <>
-      <div className="container page-container">
+      <div className="container page-container" style={{backgroundImage: `url(${bauer_practice})`}}>
         <div className="nav-bar-container">
           <NavBar />
         </div>
+            {/* <img id="homepage-image" alt="bauer_practice" src={bauer_practice} /> */}
         <div className="score-carousel-container">
           <Carousel items={games} show={5} infiniteLoop={true}/>
         </div>

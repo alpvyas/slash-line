@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Scorecard from "../Container";
+import Scorecard from "../Containers"; //when I get rid of this it messes up the stying of the scorecards. why?
 import "./Carousel.css";
 
 
