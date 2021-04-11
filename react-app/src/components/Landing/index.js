@@ -100,7 +100,7 @@ const Landing = () => {
         <div id="splash-container">
           <SplashNav openLogin={openLogin} openSignup={openSignup}/>
         </div>
-      {/* <Footer /> */}
+      <Footer />
     </div>
   )
 }

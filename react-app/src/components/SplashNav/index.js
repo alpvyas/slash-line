@@ -5,6 +5,7 @@ import logo from "../../images/logo.png"
 import baseball_grass from "../../images/baseball-grass.png";
 import SettingsIcon from "@material-ui/icons/Settings";
 import NotificationsIcon from "@material-ui/icons/Notifications";
+import slash_line from "../../images/slash_line.png";
 import "./splashNav.css"
 
 const SplashNav = ({showSidebar, setShowSidebar, openSignup, openLogin}) => {
@@ -66,20 +67,21 @@ const SplashNav = ({showSidebar, setShowSidebar, openSignup, openLogin}) => {
             </div>
             <div className="name-container">
               <div id="title">Slash Line</div>
+              {/* <img id="logo-image" alt="logo" src={slash_line} /> */}
             </div>
-            <div className="tab-container link-container">
+            <div className="tab-container">
               <div className="nav-link-tab" id="stats-tab">
                 <NavLink to="/stats" exact={true} className="inactive" activeClassName="active">
                   stats
                 </NavLink>
               </div>
               <div className="slash-icon">/</div>
-              <div className="nav-link-tab" id="login-tab">
-                <button onClick={openSignup}>sign up</button>
+              <div className="nav-link-tab" id="signup-tab">
+                <button className="inactive" onClick={openSignup}>sign up</button>
               </div>
               <div className="slash-icon">/</div>
-              <div className="nav-link-tab" id="about-tab">
-                <button onClick={openLogin}>login</button>
+              <div className="nav-link-tab" id="login-tab">
+                <button className="inactive" onClick={openLogin}>login</button>
               </div>
             </div>
             <div className="dropdown-container">
