@@ -22,7 +22,8 @@
 }
 
 .score-carousel-container {
-  margin: 165px 0px 10px 0px;
+  margin: 165px 0px 10px 500px;
+  position: relative;
 }
 
 .standings-list-container,

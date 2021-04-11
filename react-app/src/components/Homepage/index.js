@@ -74,7 +74,7 @@ const Homepage = () => {
           <div className="standings-list-container">
             <div className="header">
               <h3>Standings</h3>
-            </div>
+          </div>
             <Standings />
           </div>
           <div className="create-league-container">

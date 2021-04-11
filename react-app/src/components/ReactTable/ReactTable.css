@@ -1,0 +1,133 @@
+.dodgers-table {
+  font-family: Georgia, serif;
+  background-color: #F9F9F9;
+  width: 100%;
+  height: 200px;
+  text-align: center;
+  border-collapse: collapse;
+}
+
+td,
+th {
+  border-bottom: 1px solid #EF3E42;
+  padding: 9px 2px;
+}
+
+td,
+tbody {
+  font-size: 13px;
+  color: #454545;
+}
+
+tr:nth-child(even) {
+  background: #A5ACAF;
+}
+
+thead {
+  background: #005A9C;
+  border-bottom: 3px solid #EF3E42;
+}
+
+th {
+  font-size: 17px;
+  font-weight: bold;
+  color: #E6E6E6;
+  text-align: center;
+}
+
+th:first-child {
+  border-left: none;
+}
+
+.search-bar {
+  border: none;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.search-bar:focus{
+  outline: none;
+}
+
+/* .search-bar {
+  background-color: #fff;
+  border-radius: 2px;
+  box-shadow: 0px 2px 1px 0px #ddd;
+  box-sizing: border-box;
+  height: 300px;
+  left: 50%;
+  margin: -150px 0 0 -150px;
+  position: absolute;
+  top: 50%;
+  width: 300px;
+} */
+
+.search-bar {
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  color: #555;
+  box-sizing: border-box;
+  font-family: 'Arvo';
+  font-size: 22px;
+  height: 38px;
+  left: 37%;
+  margin: -10px 0 0 -100px;
+  padding: 10px 0px;
+  position: relative;
+  top: 50%;
+  width: 200px;
+}
+
+.search-bar:focus {
+  outline: none;
+}
+
+search-bar::-webkit-search-bar-placeholder {
+  color: #aaa;
+}
+
+search-bar:focus::-webkit-search-bar-placeholder {
+  color: #005A9C;
+}
+
+.search-bar:focus+.underline {
+  transform: scale(2);
+}
+
+.underline {
+  background-color: #005A9C;
+  /* display: inline-block; */
+  height: 1px;
+  left: 5px;
+  /* margin-top: -4px; */
+  position: relative;
+  top: 3px;
+  left: 55px;
+  -webkit-transform: scale(0, 2);
+  transform: scale(0, 3);
+  -webkit-transition: all 0.5s linear;
+  transition: all 0.5s linear;
+  width: 105px;
+}
+
+.search-container {
+    background-color: transparent;
+    border-radius: 2px;
+    /* box-shadow: 0px 2px 1px 0px #ddd; */
+    box-sizing: border-box;
+    height: 50px;
+    /* left: 50%; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: absolute;
+    /* top: 50%; */
+    width: 300px;
+}
+
+.divider-container {
+  height: 75px;
+  background-color: white;
+  border: 1px solid #EF3E42;
+}

@@ -57,7 +57,7 @@ const Carousel = ({ items, show, infiniteLoop}) => {
     }
     return output;
   };
-
+// {`carousel-content show-${4}`} 
   return (
     <>
       <div className="carousel-container">
@@ -68,8 +68,8 @@ const Carousel = ({ items, show, infiniteLoop}) => {
           </button>
           )}
           <div className="carousel-content-wrapper">
-            <div className={`carousel-content show-${show}`} 
-             style={{ transform: `translateX(-${currentIndex * (100 / show)}%)`,
+            <div className="carousel-content"
+             style={{ transform: `translateX(-${currentIndex * (120)}%)`,
                       transition: !transitionEnabled ? "none" : undefined,
             }}
             onTransitionEnd={() => handleTransitionEnd()}

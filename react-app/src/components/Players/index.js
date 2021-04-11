@@ -1,12 +1,16 @@
 import React, { useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { get_roster_40, teams } from "../../store/players";
+import { game_details } from "../../mock_game_data";
 import NavBar from "../NavBar";
+import Carousel from "../Carousel";
+import Scorecard from "../Containers/Scorecard";
 import ReactTable from "../ReactTable";
+import Footer from "../Footer";
 // import Table from "../Table";
 import "./Players.css";
 import kershaw_warmup from "../../images/kershaw-warmup-stretch.png";
-import player_holding_balls from "../../images/player-holding-balls.png";
+import houser_bunt from "../../images/houser-bunt.png";
 import glove_closeup from "../../images/close-up-baseball-held-glove.png";
 
 
@@ -62,17 +66,34 @@ const Players = () => {
 
     // style={{backgroundImage: `url(${glove_closeup})`}}
 
+    const games = game_details&&game_details.map((game_detail) => (
+    <Scorecard game={game_detail}/>
+  ));
+
   return (
     
-      <div className="page-container">
+      <div className="page-container" style={{backgroundImage: `url(${houser_bunt})`}}>
         <div className="nav-bar-container">
           <NavBar />
         </div>
+        <div className="score-carousel-container-players">
+          {games && <Carousel items={games} show={5} infiniteLoop={true}/>}
+        </div>
         <div className="middle-container">
           <div className="table-container">
+            <div className="header">
+              <h3>Players</h3>
+            </div>
             <ReactTable columns={columns} data={players}/>
           </div>
         </div>
+        <div className="bottom-container">
+           <div className="misc-container"></div>
+           <div className="misc-container"></div>
+         </div>
+        <div className="footer-container">
+          <Footer />
+         </div>
         {/* <Table 
         columns={["Pitchers",  "Position", "Team", "Bats", "Throws", "Height", "Weight", "DOB"]}
         rows={get_players_by_pos(players, ["P"])}
