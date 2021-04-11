@@ -30,16 +30,14 @@
 .misc-container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   width: 650px;
   height: 500px;
   margin: 20px 20px 20px 55px;
-  background-color: whitesmoke;
+  background-color: transparent;
 }
 
-.create-league-container,
 .misc-container {
-  border: 2px solid red;
+  border: 2px solid #EF3E42;
 }
 
 .middle-container,
@@ -52,8 +50,30 @@
   position: relative;
   width: 100%;
   height: 150px;
-  border: 2px solid red;
+  border-top: 4px solid #EF3E42;
   display: flex;
   flex-direction: row;
   background-color: whitesmoke;
+}
+
+h3 {
+  font: Georgia;
+  font-size: 40px;
+  color: whitesmoke;
+  /* text-shadow: -1px -1px 0 #EF3E42,
+  1px -1px 0 #EF3E42,
+  -1px 1px 0 #EF3E42,
+  1px 1px 0 #EF3E42; */
+  /* text-shadow: -1px -1px 0 #005A9C,
+  1px -1px 0 #005A9C,
+  -1px 1px 0 #005A9C,
+  1px 1px 0 #005A9C; */
+  text-shadow: -1px -1px 0 #A5ACAF,
+  1px -1px 0 #A5ACAF,
+  -1px 1px 0 #A5ACAF,
+  1px 1px 0 #A5ACAF;
+  /* -webkit-text-fill-color: whitesmoke; */
+  /* Will override color (regardless of order) */
+  /* -webkit-text-stroke-width: 1px; */
+  /* -webkit-text-stroke-color: #EF3E42; */
 }

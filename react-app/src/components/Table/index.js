@@ -8,7 +8,7 @@ const Table = ({columns, rows, row_keys}) => {
   
   return (
     <>
-      <table>
+      <table className="dodgers-table">
         <thead>
           <tr>
             {columns.map((title) => (

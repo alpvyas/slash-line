@@ -18,17 +18,12 @@ const Standings = () => {
   const headers = ["Rank", "Team", "Points"];
   const row_keys = ["id", "name", "wins"];
   return (
-    <>
-      <div className="standings-container">
-        <div className="header">
-          <h3>Standings</h3>
-        </div>
+      // <div className="standings-container">
+      <>
         <div className="table">
           <Table columns={headers} rows={teams} row_keys={row_keys}/>
         </div>
-
-      </div>
-    </>
+      </>
   )
 };
 

@@ -10,7 +10,7 @@ import NavBar from "../NavBar/index";
 import Table from "../Table";
 import bauer_practice from "../../images/bauer-practice.png";
 import "./Homepage.css";
-import Standings from "../Container/Standings";
+import Standings from "../Containers/Standings";
 import Footer from "../Footer";
 
 const Homepage = () => {
@@ -72,11 +72,17 @@ const Homepage = () => {
         </div>
         <div className="middle-container">
           <div className="standings-list-container">
+            <div className="header">
+              <h3>Standings</h3>
+            </div>
             <Standings />
           </div>
           <div className="create-league-container">
-           <LeagueFormModal />
+            <div className="header">
+              <h3>Leagues</h3>
+            </div>
            <Table columns={columns} rows={leagues} row_keys={row_keys}/>
+           <LeagueFormModal />
           </div>
          </div>
          <div className="bottom-container">

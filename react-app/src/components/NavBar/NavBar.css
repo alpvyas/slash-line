@@ -10,6 +10,7 @@
   box-shadow: 1px 1px 8px rgba(112, 111, 111, 0.356);
   justify-content: center;
   align-items: center;
+  border-bottom: 4px solid #EF3E42;
 }
 
 .nav-container {

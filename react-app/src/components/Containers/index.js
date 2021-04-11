@@ -1,7 +1,7 @@
 import { Table } from "@material-ui/core";
 import React from "react";
 import gameDetailsReducer from "../../store/gameDetails";
-import "./Container.css";
+// import "./Container.css";
 
 const Alert = (data) => {
   
