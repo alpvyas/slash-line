@@ -3,13 +3,62 @@ import { NavLink, Redirect } from "react-router-dom";
 import Sidebar from "../Sidebar";
 import logo from "../../images/logo.png"
 import baseball_grass from "../../images/baseball-grass.png";
+import SettingsIcon from "@material-ui/icons/Settings";
+import NotificationsIcon from "@material-ui/icons/Notifications";
 import "./splashNav.css"
 
 const SplashNav = ({showSidebar, setShowSidebar, openSignup, openLogin}) => {
 
+  const onClick = (e, item) => {
+  window.alert(JSON.stringify(item, null, 2));
+  };
+
+  const items = [
+    {
+      name: "about",
+      label: "About",
+      items: [
+        {name: "what-is", label: "What is Slash Line?", onClick},
+        {name: "how-to", label: "How to play", onClick},
+        {name: "thanks", label: "Thanks", onClick},
+      ],
+    },
+    {
+      name: "coming-soon", 
+      label: "Coming Soon",
+      items: [
+        { name: "baseline", label: "Down the Baseline", onClick },
+        { name: "feedback", label: "Feedback", onClick },
+      ],
+    },
+    {
+      name: "settings",
+      label: "Settings",
+      Icon: SettingsIcon,
+      items: [
+        { 
+          name: "display",
+          label: "Display",
+          items: [
+            {name: "dark-mode", label: "Dark Mode", onClick}
+          ],
+        },
+        {
+          name: "notifications",
+          label: "Notifications",
+          Icon: NotificationsIcon,
+          items: [
+            {name: "email", label: "Email", onClick},
+            {name: "mobile", label: "Text message", onClick}
+          ],
+        },
+      ]
+    },
+  ]
+
   return (
     <>
-      {(showSidebar)?<Sidebar setShowSidebar={setShowSidebar}/>:null}
+      {/* {(showSidebar)?<Sidebar setShowSidebar={setShowSidebar}/>:null} */}
           <nav className="nav-bar" id="splash-nav">
           <div className="container nav-container">
             <div className="container logo-container">
@@ -18,7 +67,7 @@ const SplashNav = ({showSidebar, setShowSidebar, openSignup, openLogin}) => {
             <div className="name-container">
               <div id="title">Slash Line</div>
             </div>
-            <div className="container tab-container link-container">
+            <div className="tab-container link-container">
               <div className="nav-link-tab" id="stats-tab">
                 <NavLink to="/stats" exact={true} className="inactive" activeClassName="active">
                   stats
@@ -34,7 +83,7 @@ const SplashNav = ({showSidebar, setShowSidebar, openSignup, openLogin}) => {
               </div>
             </div>
             <div className="dropdown-container">
-              <img src="https://img.icons8.com/windows/32/000000/menu--v2.png"/>
+              <Sidebar items={items}/>
             </div>
           </div>
         </nav>

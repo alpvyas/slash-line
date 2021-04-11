@@ -64,7 +64,7 @@ const SidebarItem = ({ expanded, item, depthStep = 25, depth =0, ...rest }) => {
                     style={{ paddingLeft: depth * depthStep }}
                     className="item-content"
                 >
-                    {Icon && <Icon className="item-icon" fontSize="small" />}
+                    {/* {Icon && <Icon className="item-icon" fontSize="small" />} */}
                     <div className="item-text">{label}</div>
                 </div>
                 {expandIcon}
@@ -113,7 +113,7 @@ const Sidebar = ({ items, depthStep = 25, depth =0, expanded }) => {
     return (
         <>
             <div style={styles.sideNav}>
-                <IconButton onClick={toggle}>
+                <IconButton className="hamburger-icon" onClick={toggle}>
                     { !drawerOpen ? <ReorderIcon /> : null }
                 </IconButton>
             </div>

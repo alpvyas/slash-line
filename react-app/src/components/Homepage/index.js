@@ -1,14 +1,17 @@
 import React, { useState, useEffect }from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { get_leagues } from "../../store/createLeague";
-import { get_game_details } from "../../store/gameDetails";
+// import { get_game_details } from "../../store/gameDetails";
 import { game_details } from "../../mock_game_data";
 import Carousel from "../Carousel";
-import Scorecard from "../Container";
+import Scorecard from "../Containers/Scorecard";
 import LeagueFormModal from "../LeagueFormModal";
 import NavBar from "../NavBar/index";
 import Table from "../Table";
+import bauer_practice from "../../images/bauer-practice.png";
 import "./Homepage.css";
+import Standings from "../Containers/Standings";
+import Footer from "../Footer";
 
 const Homepage = () => {
   const dispatch = useDispatch();
@@ -33,13 +36,17 @@ const Homepage = () => {
   
   // useEffect(() => {
   //   const game_data_interval = setInterval(() => {
-  //     dispatch(get_game_details())
+  //     dispatch(get_game_details(today))
   //   }, 60000);
 
   //   return () => clearInterval(game_data_interval)
   //   }, [dispatch])
 
   // const game_details = useSelector((state) => state.gameDetails);
+
+  const games = game_details&&game_details.map((game_detail) => (
+    <Scorecard game={game_detail}/>
+  ));
 
   useEffect(() => {
     
@@ -51,28 +58,40 @@ const Homepage = () => {
   const columns = ["League Name", "League Type", "Permissions",
                    "Draft", "Draft Date", "Draft Time"];
 
-  const row_keys = ["name", "type", "permissions", "draft",
+  const row_keys = ["name", "league_type", "permissions", "draft",
                     "draft_date", "draft_time"];
-
-  const games = game_details.map((game_detail) => (
-    <Scorecard game={game_detail}/>
-  ));
 
   return (
     <>
-      <div className="container page-container">
+      <div className="container page-container" style={{backgroundImage: `url(${bauer_practice})`}}>
         <div className="nav-bar-container">
           <NavBar />
         </div>
         <div className="score-carousel-container">
-          <Carousel items={games} show={5} infiniteLoop={true}/>
+          {games && <Carousel items={games} show={5} infiniteLoop={true}/>}
         </div>
-        <div className="create-league-container">
-          <LeagueFormModal />
-        </div>
-        <div>
-          <Table columns={columns} rows={leagues} row_keys={row_keys}/>
-        </div>
+        <div className="middle-container">
+          <div className="standings-list-container">
+            <div className="header">
+              <h3>Standings</h3>
+          </div>
+            <Standings />
+          </div>
+          <div className="create-league-container">
+            <div className="header">
+              <h3>Leagues</h3>
+            </div>
+           <Table columns={columns} rows={leagues} row_keys={row_keys}/>
+           <LeagueFormModal />
+          </div>
+         </div>
+         <div className="bottom-container">
+           <div className="misc-container"></div>
+           <div className="misc-container"></div>
+         </div>
+         <div className="footer-container">
+          <Footer />
+         </div>
       </div>
     </>
   )

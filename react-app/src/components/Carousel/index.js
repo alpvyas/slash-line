@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Scorecard from "../Container";
+import Scorecard from "../Containers/Scorecard"; //when I get rid of this it messes up the styling of the scorecards. why?
 import "./Carousel.css";
 
 
@@ -57,7 +57,7 @@ const Carousel = ({ items, show, infiniteLoop}) => {
     }
     return output;
   };
-
+// {`carousel-content show-${4}`} 
   return (
     <>
       <div className="carousel-container">
@@ -68,8 +68,8 @@ const Carousel = ({ items, show, infiniteLoop}) => {
           </button>
           )}
           <div className="carousel-content-wrapper">
-            <div className={`carousel-content show-${show}`} 
-             style={{ transform: `translateX(-${currentIndex * (100 / show)}%)`,
+            <div className="carousel-content"
+             style={{ transform: `translateX(-${currentIndex * (120)}%)`,
                       transition: !transitionEnabled ? "none" : undefined,
             }}
             onTransitionEnd={() => handleTransitionEnd()}

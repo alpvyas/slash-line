@@ -9,11 +9,11 @@ const add = (gameDetails) => ({
 
 export const get_game_details = (date) => async (dispatch) => { const response = 
   await fetch(
-  `https://fly.sportsdata.io/v3/mlb/scores/json/GamesByDate/${date}'`, {
+  `https://fly.sportsdata.io/v3/mlb/scores/json/GamesByDate/${date}`, {
   method: "GET",
   headers: {
     "Content-Type": "application/json",
-    "Ocp-Apim-Subscription-Key": process.env.REACT_APP_API_KEY,
+    "Ocp-Apim-Subscription-Key": "10502986f1944b58a416ba0d87ce4b5f",
   },
   })
 

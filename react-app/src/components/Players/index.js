@@ -1,9 +1,17 @@
 import React, { useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { get_roster_40, teams } from "../../store/players";
+import { game_details } from "../../mock_game_data";
 import NavBar from "../NavBar";
+import Carousel from "../Carousel";
+import Scorecard from "../Containers/Scorecard";
 import ReactTable from "../ReactTable";
-import Table from "../Table";
+import Footer from "../Footer";
+// import Table from "../Table";
+import "./Players.css";
+import kershaw_warmup from "../../images/kershaw-warmup-stretch.png";
+import houser_bunt from "../../images/houser-bunt.png";
+import glove_closeup from "../../images/close-up-baseball-held-glove.png";
 
 
 const Players = () => {
@@ -45,26 +53,47 @@ const Players = () => {
     },
   ], []);
 
-  const get_players_by_pos = (players, positions) => {
-    const position_players = players.filter(player => positions.includes(player["position_txt"]))
+  // const get_players_by_pos = (players, positions) => {
+  //   const position_players = players.filter(player => positions.includes(player["position_txt"]))
 
-    return position_players;
-  };
+  //   return position_players;
+  // };
 
   useEffect(() => {
-    teams.forEach(async (team) => {
-     await dispatch(get_roster_40(team.id))
-      })
+    dispatch(get_roster_40())
   
     }, [dispatch])
 
-    
+    // style={{backgroundImage: `url(${glove_closeup})`}}
+
+    const games = game_details&&game_details.map((game_detail) => (
+    <Scorecard game={game_detail}/>
+  ));
 
   return (
-    <>
-      {/* <NavBar /> */}
-      <div className="container page-container">
-        <ReactTable columns={columns} data={players}/>
+    
+      <div className="page-container" style={{backgroundImage: `url(${houser_bunt})`}}>
+        <div className="nav-bar-container">
+          <NavBar />
+        </div>
+        <div className="score-carousel-container-players">
+          {games && <Carousel items={games} show={5} infiniteLoop={true}/>}
+        </div>
+        <div className="middle-container">
+          <div className="table-container">
+            <div className="header">
+              <h3>Players</h3>
+            </div>
+            <ReactTable columns={columns} data={players}/>
+          </div>
+        </div>
+        <div className="bottom-container">
+           <div className="misc-container"></div>
+           <div className="misc-container"></div>
+         </div>
+        <div className="footer-container">
+          <Footer />
+         </div>
         {/* <Table 
         columns={["Pitchers",  "Position", "Team", "Bats", "Throws", "Height", "Weight", "DOB"]}
         rows={get_players_by_pos(players, ["P"])}
@@ -86,7 +115,6 @@ const Players = () => {
       row_keys={["name_display_first_last", "position_txt", "team_name", "bats", "throws", "height_feet", "weight", "birth_date"]}
         /> */}
       </div>
-    </>
   )
 }
 

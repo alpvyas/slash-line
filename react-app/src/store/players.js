@@ -100,30 +100,38 @@ export const teams = [
 
 const ADD_PLAYERS = "players/ADD";
 
-const add = (roster) => ({
+const add = (allPlayers) => ({
     type: ADD_PLAYERS,
-    data: roster.roster_40.queryResults.row,
+    roster: allPlayers
 });
 
 // export const add_players = (data) => async (dispatch) => {
 //   dispatch(add(data))
 // }
 
-export const get_roster_40 = (team_id) => async (dispatch) => { const response = 
-  await fetch(
-  `http://lookup-service-prod.mlb.com/json/named.roster_40.bam?team_id='${team_id}'`, {
+export const get_roster_40 = () => async (dispatch) => {
+  const responses = teams.map(team => fetch(
+  `http://lookup-service-prod.mlb.com/json/named.roster_40.bam?team_id='${team.id}'`, {
   method: "GET",
   headers: {
     "Content-Type": "application/json",
   },
-  })
+  }))
 
-  const roster = await response.json();
+  const resolvedResponses = await Promise.all(responses);
+  console.log("RESOLVED RESPONSES:", resolvedResponses) 
+  const rosterObjects = resolvedResponses.map(response => response.json());
 
-  if (response.ok && !roster.errors) {
-    dispatch(add(roster));
-  }
-  return roster.roster_40.queryResults.row;
+  const resolvedRosterObjects = await Promise.all(rosterObjects);
+
+  const allPlayers =[];
+  
+  resolvedRosterObjects.forEach(roster => allPlayers.push(...roster.roster_40.queryResults.row))
+
+    dispatch(add(allPlayers));
+ 
+
+  return allPlayers;
 };
 
 const initialState = { players: [] };
@@ -132,9 +140,9 @@ const playersReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_PLAYERS:
       let newState = {...state, };
-      console.log("NEW STATE:", newState)
-      newState.players = [...newState.players, ...action.data]
-      console.log("ACTION.DATA:", action.data)
+      // console.log("NEW STATE:", newState)
+      newState.players = action.roster
+      // console.log("ACTION.DATA:", action.data)
       return newState;
     default:
       return state;

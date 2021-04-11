@@ -1,7 +1,8 @@
 .card-container {
+  background-color: whitesmoke;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-between;
   /* align-items: stretch; */
   flex-shrink: 0;
   padding: .4rem 1.2rem;
@@ -15,18 +16,23 @@
 
 .card-row {
   display: flex;
-  justify-content: flex-start;
+  flex-direction: row;
+  justify-content: space-around;
   align-items: center;
   font-size: calc(var(--content) * 1.28rem);
   width: 100px;
   height: 100px;
 }
 
-span {
-      margin-right: .6rem;
-      font-weight: 400;
-      color: #55595c;
-      /* color: var(--color-gray-50); */
+ .row-item {
+  width: 100%;
+  margin-left: 50px;
+  font-weight: 400;
+  color: #55595c;
+  /* display: flex; */
+  /* flex-direction: row;
+  justify-content: flex-end; */
+  /* color: var(--color-gray-50); */
 }
 
 b {

@@ -14,22 +14,22 @@ def seed_users():
         db.session.add(demo)
         db.session.commit()
 
-    x = 10
+    # x = 10
 
-    while x >= 0:
-        name = fake.first_name()
-        email = fake.email()
-        email = email.split("@")
-        email[0] = email[0] + f'{random.randint(0, 9999)}@'
-        email = ''.join(email)
-        u = User(first_name=name,
-                 last_name=fake.last_name(),
-                 username=f'{name}{random.randint(0,9999)}',
-                 email=email,
-                 password='password')
-        db.session.add(u)
-        db.session.commit()
-        x -= 1
+    # while x >= 0:
+    #     name = fake.first_name()
+    #     email = fake.email()
+    #     email = email.split("@")
+    #     email[0] = email[0] + f'{random.randint(0, 9999)}@'
+    #     email = ''.join(email)
+    #     u = User(first_name=name,
+    #              last_name=fake.last_name(),
+    #              username=f'{name}{random.randint(0,9999)}',
+    #              email=email,
+    #              password='password')
+    #     db.session.add(u)
+    #     db.session.commit()
+    #     x -= 1
 
 
 # Adds a demo user, you can add other users here if you want

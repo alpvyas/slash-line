@@ -1,0 +1,52 @@
+.table-container {
+  margin: 50px 0px 0px 50px;
+}
+
+.page-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  object-fit: fill;
+}
+
+.nav-bar-container{
+  position: fixed;
+  z-index: 1;
+}
+
+.score-carousel-container-players {
+  margin: 165px 0px 10px 0px;
+  position: relative;
+  z-index: 0;
+}
+
+.misc-container {
+  border: 2px solid #EF3E42;
+}
+
+.middle-container,
+.bottom-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.footer-container {
+  position: relative;
+  width: 100%;
+  height: 150px;
+  border-top: 4px solid #EF3E42;
+  display: flex;
+  flex-direction: row;
+  background-color: whitesmoke;
+}
+
+.misc-container {
+  display: flex;
+  flex-direction: column;
+  width: 650px;
+  height: 500px;
+  margin: 20px 20px 20px 100px;
+  background-color: transparent;
+}

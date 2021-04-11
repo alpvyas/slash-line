@@ -12,6 +12,7 @@ import MyTeam from "./components/MyTeam";
 import Players from "./components/Players";
 import Testing from "./components/Testing/";
 import Stats from "./components/Stats";
+import Footer from "./components/Footer";
 
 function App() {
   const dispatch = useDispatch();
