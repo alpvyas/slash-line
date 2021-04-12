@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { get_roster_40, teams } from "../../store/players";
 import { game_details } from "../../mock_game_data";
@@ -12,24 +12,39 @@ import "./Players.css";
 import kershaw_warmup from "../../images/kershaw-warmup-stretch.png";
 import houser_bunt from "../../images/houser-bunt.png";
 import glove_closeup from "../../images/close-up-baseball-held-glove.png";
+import { add_player } from "../../store/myTeam";
 
 
 const Players = () => {
   const dispatch = useDispatch();
   const players = useSelector(state => state.players.players)
 
-  const columns = useMemo(() => [
+  // const [userTeam, setUserTeam] = useState([]);
+
+  // const addPlayer = (player) => {
+  //   // setUserTeam([...userTeam, player])
+  //   add_player(player)
+  // }
+
+  // const onRowClick = (player_id) => {
+  //   return (
+  //           console.log('Added this player: ', player_id))
+        
+  //   }
+
+
+  const columns = useMemo((height) => [
     {
       Header: "Player",
       accessor: "name_display_first_last",
     },
     {
-      Header: "Position",
-      accessor: "position_txt",
-    },
-    {
       Header: "Team",
       accessor: "team_name",
+    },
+    {
+      Header: "Position",
+      accessor: "position_txt",
     },
     {
       Header: "Bats",
@@ -42,6 +57,9 @@ const Players = () => {
     {
       Header: "Height",
       accessor: "height_feet",
+      Cell: props => (
+        height = `${props.row.original.height_feet}${"'"}${props.row.original.height_inches}`
+      ),
     },
     {
       Header: "Weight",
@@ -51,6 +69,20 @@ const Players = () => {
       Header: "DOB",
       accessor: "birth_date",
     },
+    // {
+    //   Header: "Player ID",
+    //   accessor: "player_id",
+    // },
+    {
+      Header: "",
+      accessor: "player_id",
+      Cell: props => (
+        <button onClick={() => dispatch(add_player(props.row.original))}>
+          Add Player
+        </button>
+      ),
+    },
+
   ], []);
 
   // const get_players_by_pos = (players, positions) => {
@@ -61,10 +93,7 @@ const Players = () => {
 
   useEffect(() => {
     dispatch(get_roster_40())
-  
     }, [dispatch])
-
-    // style={{backgroundImage: `url(${glove_closeup})`}}
 
     const games = game_details&&game_details.map((game_detail) => (
     <Scorecard game={game_detail}/>

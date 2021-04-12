@@ -10,7 +10,7 @@ import Footer from "../Footer";
 import Sidebar from "../Sidebar";
 
 import logo from "../../images/logo.png";
-import baseball_grass from "../../images/baseball-grass.png";
+import baseball_grass from "../../images/baseball-grass-full.png";
 import "./landing.css";
 
 const Landing = () => {
@@ -41,10 +41,10 @@ const Landing = () => {
     setLogin(true);
   };
 
-  // const demoLogin = () => {
-  //   const user = dispatch(sessionActions.login("demo@demo.com", "password"));
-  //   setAuthenticated(true);
-  // };
+  const demoLogin = () => {
+    const user = dispatch(sessionActions.login("demo@demo.com", "password"));
+    setAuthenticated(true);
+  };
 
   if (user) {
     return (
@@ -53,7 +53,7 @@ const Landing = () => {
   };
 
   return (
-    <div className="container page-container">
+    <div className="container page-container" style={{backgroundImage: `url(${baseball_grass})`}}>
       <Modal
         isOpen={signup}
         contentLabel="Sign up"
@@ -95,6 +95,7 @@ const Landing = () => {
           login={login}
           setLogin={setLogin}
           openLogin={openLogin}
+          demoLogin={demoLogin}
           />
         </Modal>
         <div id="splash-container">

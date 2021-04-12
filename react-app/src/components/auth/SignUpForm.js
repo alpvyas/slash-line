@@ -3,6 +3,7 @@ import { Redirect, NavLink } from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import logo from "../../images/logo.png";
 import * as sessionActions from "../../store/session";
+import "./index.css";
 
 const SignUpForm = ({
   authenticated,
@@ -88,11 +89,11 @@ const SignUpForm = ({
   // }
 
   return (
-    <div className="form_container">
-      <div className="login-page_header__container">
+    <div className="form-container">
+      <div className="login-page-header">
         <img alt="logo" src={logo} />
-        <span className="login_whatever">WhatEverNote</span>
-        <span>Remember whatever's important.</span>
+        <span className="login-slash">Slash Line</span>
+        <span></span>
       </div>
 
       <form onSubmit={onSignUp} className="signup_form">
@@ -163,20 +164,14 @@ const SignUpForm = ({
             required={true}
           ></input>
         </div>
-        <button className="form__button" type="submit">
+        <button className="text" type="submit">
           Continue
         </button>
       </form>
-      <div className="login_footer__container">
-        <div className="terms_of_service">
-          <p>
-            By creating an account, you are agreeing to our{" "}
-            <span>Terms of Service</span> and <span>Privacy Policy</span>
-          </p>
-        </div>
-        <div className="donthaveaccount__holder">
+      <div className="login-footer-container">
+        <div className="no-account">
           <span>Already have an account?</span>
-          <button className="Login__button" onClick={loginButton}>
+          <button className="login-button" onClick={loginButton}>
             Login
           </button>
         </div>

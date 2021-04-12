@@ -9,8 +9,9 @@ import "./index.css";
 const LoginForm = ({ 
   authenticated,
   setAuthenticated,
-  setSignUp,
+  setSignup,
   setLogin,
+  demoLogin,
  }) => {
   const dispatch = useDispatch();
   const [errors, setErrors] = useState([]);
@@ -30,7 +31,7 @@ const LoginForm = ({
 
   const signupButton = () => {
     setLogin(false);
-    setSignUp(true);
+    setSignup(true);
   };
 
   const updateEmail = (e) => {
@@ -85,12 +86,13 @@ const LoginForm = ({
           {/* {"password" in checkError ? <div className="form-error-container">
             <p className="error-text">{checkError.password}</p></div> : null} */}
         </div>
-        <button type="submit">Login</button>
+        <button className="text" type="submit">Login</button>
+        <button className="text" onClick={demoLogin}>Demo User</button>
       </form>
       <div className="login-footer-container">
         <div className="no-account">
           <span>Don't have an account?</span>
-          <button className="login-button" onClick={signupButton}>
+          <button className="create-button" onClick={signupButton}>
             Create an account
           </button>
         </div>
