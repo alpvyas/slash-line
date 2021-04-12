@@ -12,18 +12,18 @@ body {
   padding-right: 90px;
   padding-top: 50px;
   box-shadow: 0px 0px 7px 9px#33333318;
-  border-radius: 1px;
   max-width: 512px;
   margin: 0px auto 18px auto;
   padding: 62.12px 99px 48px;
   width: 314px;
-  box-shadow: 0px 4px 24px rgb(0 0 0 / 10%);
+  /* box-shadow: 0px 4px 24px rgb(0 0 0 / 10%); */
   -webkit-border-radius: 2px;
   -moz-border-radius: 2px;
   border-radius: 2px;
+  border: 2px solid #EF3E42;
   text-align: left;
   z-index: 50;
-  height: 500px;
+  height: 600px;
 }
 
 .login-page-header {
@@ -32,21 +32,23 @@ body {
   justify-content: center;
   align-content: center;
   align-items: center;
-  font-family: "Open Sans", sans-serif;
+  font-family: "Poppins",
+  sans-serif;
   margin-bottom: 30px;
 }
 
 .login-slash {
-  font-family: "Frank Ruhl Libre", serif;
+  font-family: "Poppins",
+  sans-serif;
   font-size: 35px;
 
   margin-bottom: 8px;
 }
 
-.login-page_header-container img {
-  width: 75px;
+/* .login-page-header img {
+  width: 50px;
   padding: 10px;
-}
+} */
 
 .form-container form {
   display: flex;
@@ -66,15 +68,41 @@ body {
   border: 1px solid #e6e6e6;
   padding: 12px 16px;
   line-height: 1.1875;
-  font-family: "Open sans", sans-serif;
-  font-size: 15px;
+  font-family: "Poppins", sans-serif;
+font-size: 15px;
   font-weight: bolder;
   line-height: 1.1875;
   box-sizing: border-box;
 }
 
+.text {
+  background: linear-gradient(to right, #005A9C 50%, white 50%);
+  background-size: 200% 100%;
+  background-position: right bottom;
+  transition: all .5s ease-out;
+}
+
+.text:hover {
+  background-position: left bottom;
+}
+
+.text {
+  text-align: center;
+  font-size: 16px;
+  line-height: 30px;
+  color: black;
+  transition: all .6s ease-out;
+  display: block;
+}
+
+.text:hover {
+  color: white;
+  border-color: white;
+}
+
 .form-container form button {
-  background-color: #00a82d;
+  /* background-color: white; */
+  border: 2px solid #EF3E42;
   border-radius: 7px;
   margin-top: 9px;
   font-family: "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
@@ -82,7 +110,7 @@ body {
     BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
     "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   font-style: normal;
-  color: white;
+  color: #EF3E42;
   font-weight: 400;
   text-align: center;
   white-space: normal;
@@ -95,32 +123,29 @@ body {
   width: 100%;
   padding: 0 1.14285714em;
   padding: 0 1.33333333rem;
-  border-width: 1px;
-  border-style: solid;
-  border-color: #00a82d;
 
   border-radius: 9px;
   float: none;
   cursor: pointer;
-  -webkit-transition: all 0.2s ease;
+  /* -webkit-transition: all 0.2s ease;
   -moz-transition: all 0.2s ease;
   -ms-transition: all 0.2s ease;
   -o-transition: all 0.2s ease;
   transition: all 0.2s ease;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  -moz-osx-font-smoothing: grayscale; */
 }
 
 input {
   line-height: normal;
 }
 
-button,
+/* button, */
 input {
   line-height: normal;
 }
 
-button,
+/* button, */
 input,
 optgroup,
 select,
@@ -147,7 +172,7 @@ input[type="submit"i] {
 }
 
 .login-footer-container {
-  font-family: "Open Sans", sans-serif;
+  font-family: "Poppins", sans-serif;
   color: #737373;
   display: flex;
   flex-direction: column;
@@ -171,22 +196,16 @@ input[type="submit"i] {
   line-height: 1.8;
 }
 
-.no-account a {
-  color: #00a82d;
+.no-account {
+  color: #A5ACAF;
   text-decoration: none;
   font-weight: bolder;
 }
 
-.terms_of_service {
-  display: flex;
-  justify-content: center;
-  text-align: center;
-  font-size: 12px;
-}
-
-.terms_of_service span {
-  color: #00a82d;
-  margin-bottom: -22px;
+.create-button:hover,
+.login-button:hover {
+  color: #005A9C;
+  transition: all .6s ease-out;
 }
 
 .signup_form button {
@@ -195,10 +214,6 @@ input[type="submit"i] {
   outline: 0;
   border: none;
   text-decoration: none;
-}
-
-.form__button:hover {
-  background-color: rgba(34, 217, 0);
 }
 
 #Logout-Button {

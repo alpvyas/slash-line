@@ -5,7 +5,7 @@ import logo from "../../images/logo.png"
 import baseball_grass from "../../images/baseball-grass.png";
 import SettingsIcon from "@material-ui/icons/Settings";
 import NotificationsIcon from "@material-ui/icons/Notifications";
-import slash_line from "../../images/slash_line.png";
+import slash_line from "../../images/slash-line.png";
 import "./splashNav.css"
 
 const SplashNav = ({showSidebar, setShowSidebar, openSignup, openLogin}) => {
@@ -66,7 +66,7 @@ const SplashNav = ({showSidebar, setShowSidebar, openSignup, openLogin}) => {
               <img id="logo-image" alt="logo" src={logo} />
             </div>
             <div className="name-container">
-              <div id="title">Slash Line</div>
+              <div id="title" alt="slash-line">Slash Line</div>
               {/* <img id="logo-image" alt="logo" src={slash_line} /> */}
             </div>
             <div className="tab-container">

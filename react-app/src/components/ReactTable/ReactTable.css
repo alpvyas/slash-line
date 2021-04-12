@@ -1,5 +1,6 @@
 .dodgers-table {
-  font-family: Georgia, serif;
+  font-family: "Poppins",
+  sans-serif;
   background-color: #F9F9F9;
   width: 100%;
   height: 200px;
@@ -29,6 +30,8 @@ thead {
 }
 
 th {
+  font-family: "Poppins",
+  sans-serif;
   font-size: 17px;
   font-weight: bold;
   color: #E6E6E6;
@@ -68,7 +71,8 @@ th:first-child {
   border-bottom: 1px solid #ccc;
   color: #555;
   box-sizing: border-box;
-  font-family: 'Arvo';
+  font-family: "Poppins",
+  sans-serif;
   font-size: 22px;
   height: 38px;
   left: 37%;
