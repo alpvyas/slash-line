@@ -119,12 +119,12 @@ export const get_roster_40 = () => async (dispatch) => {
   }))
 
   const resolvedResponses = await Promise.all(responses);
-  console.log("RESOLVED RESPONSES:", resolvedResponses) 
+  // console.log("RESOLVED RESPONSES:", resolvedResponses) 
   const rosterObjects = resolvedResponses.map(response => response.json());
 
   const resolvedRosterObjects = await Promise.all(rosterObjects);
 
-  const allPlayers =[];
+  const allPlayers = [];
   
   resolvedRosterObjects.forEach(roster => allPlayers.push(...roster.roster_40.queryResults.row))
 
