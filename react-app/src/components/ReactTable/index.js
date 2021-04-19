@@ -49,7 +49,7 @@ const ReactTable = ({ columns, data }) => {
   } = useTable(
     { 
       columns,
-      data 
+      data,
     },
     useFilters,
     useSortBy,

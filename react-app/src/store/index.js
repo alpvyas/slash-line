@@ -3,11 +3,13 @@ import thunk from "redux-thunk";
 import myTeamReducer from "./myTeam";
 import playersReducer from "./players";
 import sessionReducer from "./session";
+import statsReducer from "./stats";
 
 const rootReducer = combineReducers({
   session: sessionReducer,
   players: playersReducer,
   userTeam: myTeamReducer,
+  stats: statsReducer,
 });
 
 let enhancer;
