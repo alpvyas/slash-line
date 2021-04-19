@@ -4,8 +4,10 @@ import { games } from "../../mock_game_data";
 import NavBar from "../NavBar";
 import Carousel from "../Carousel";
 import baseball_glove_dirt from "../../images/baseball-glove-dirt.png";
+import houser_bunt from "../../images/houser-bunt.png";
 import { get_season_hitting_stats, get_stats_from_backend } from "../../store/stats";
 import ReactTable from "../ReactTable";
+import Footer from "../Footer";
 
 const Stats = () => {
   const dispatch = useDispatch();
@@ -102,7 +104,7 @@ const Stats = () => {
 
   return (
     <>
-      <div className="container page-container" style={{backgroundImage: `url(${baseball_glove_dirt})`}}>
+      <div className="container page-container" style={{backgroundImage: `url(${houser_bunt})`}}>
           <div className="nav-bar-container">
             <NavBar />
           </div>
@@ -117,6 +119,9 @@ const Stats = () => {
             <ReactTable columns={columns} data={stats}/>
           </div>
         </div>
+        <div className="footer-container">
+          <Footer />
+         </div>
       </div>
     </>
   )
