@@ -48,9 +48,9 @@ console.log("RESOLVED STATS LIST: ", resolvedStatsList)
       allPlayerStats.push(playerStat.sport_hitting_tm.queryResults.row)
     }
   })
-console.log("MARKER 5")
+  console.log("BEFORE DISPATCH")
   dispatch(add(allPlayerStats, season))
-  console.log("MARKER 6") 
+  console.log("AFTER DISPATCH / END OF STATS THUNK") 
 
 };
 
@@ -83,11 +83,9 @@ const initialState = { stats: [] };
 const statsReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_PLAYERS_SEASON_STATS:
-      console.log("MARKER 7")
       let newState = {...state};
-      console.log("MARKER 8")
       newState.stats = action.data;
-      console.log("MARKER 9")
+      console.log("newState.stats UPDATED")
       return newState;
     default:
       return state;

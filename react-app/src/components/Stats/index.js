@@ -11,7 +11,7 @@ const Stats = () => {
   const dispatch = useDispatch();
   const players = useSelector(state => state.players.players);
   
-  const playersLAD = players.filter(player => player.team_abbrev === "LAD" )
+  const playersLAD = players.filter(player => player.team_abbrev === "LAD")
   const stats = useSelector(state => state.stats.stats);
 
   const columns = useMemo(() => [
@@ -106,9 +106,9 @@ const Stats = () => {
           <div className="nav-bar-container">
             <NavBar />
           </div>
-          {/* <div className="score-carousel-container">
+          <div className="score-carousel-container">
             <Carousel items={games} show={5} infiniteLoop={true}/>
-          </div> */}
+          </div>
           <div className="middle-container">
           <div className="table-container">
             <div className="header">
