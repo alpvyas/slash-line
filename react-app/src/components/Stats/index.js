@@ -4,14 +4,16 @@ import { games } from "../../mock_game_data";
 import NavBar from "../NavBar";
 import Carousel from "../Carousel";
 import baseball_glove_dirt from "../../images/baseball-glove-dirt.png";
+import houser_bunt from "../../images/houser-bunt.png";
 import { get_season_hitting_stats, get_stats_from_backend } from "../../store/stats";
 import ReactTable from "../ReactTable";
+import Footer from "../Footer";
 
 const Stats = () => {
   const dispatch = useDispatch();
   const players = useSelector(state => state.players.players);
   
-  const playersLAD = players.filter(player => player.team_abbrev === "LAD" )
+  const playersLAD = players.filter(player => player.team_abbrev === "LAD")
   const stats = useSelector(state => state.stats.stats);
 
   const columns = useMemo(() => [
@@ -102,13 +104,13 @@ const Stats = () => {
 
   return (
     <>
-      <div className="container page-container" style={{backgroundImage: `url(${baseball_glove_dirt})`}}>
+      <div className="container page-container" style={{backgroundImage: `url(${houser_bunt})`}}>
           <div className="nav-bar-container">
             <NavBar />
           </div>
-          {/* <div className="score-carousel-container">
+          <div className="score-carousel-container">
             <Carousel items={games} show={5} infiniteLoop={true}/>
-          </div> */}
+          </div>
           <div className="middle-container">
           <div className="table-container">
             <div className="header">
@@ -117,6 +119,9 @@ const Stats = () => {
             <ReactTable columns={columns} data={stats}/>
           </div>
         </div>
+        <div className="footer-container">
+          <Footer />
+         </div>
       </div>
     </>
   )
