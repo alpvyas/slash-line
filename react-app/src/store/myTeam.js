@@ -22,7 +22,10 @@ export const get_league_teams = (leagueId) => async (dispatch) => {
 };
 
 export const add_player = (player) => dispatch => {
+  console.log("INSIDE THUNK")
   dispatch(add(player))
+  // console.log("INSIDE THUNK")
+  return player
 }
 
 const initialState = { userTeam: [] };
@@ -30,8 +33,11 @@ const initialState = { userTeam: [] };
 const myTeamReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_PLAYER:
+      console.log("INSIDE REDUCER")
       let newState = {...state};
+      console.log("AFTER SET NEW STATE")
       newState.userTeam = [...state.userTeam, action.data];
+      console.log("AFTER UPDATE USERTEAM")
       return newState;
     default:
       return state;

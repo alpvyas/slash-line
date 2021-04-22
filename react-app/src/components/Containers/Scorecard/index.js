@@ -35,22 +35,22 @@ const Scorecard = ({ game }) => {
   return (
       <div className="card-container">
         <div className="card-row">
-          <div className="row-item">
+          <div className="row-item-team">
             <b>{game.AwayTeam}</b>
           </div>
-          <div className="row-item">
+          <div className="row-item-runs">
             <b>{game.AwayTeamHits}</b>
           </div>
         </div>
         <div className="card-row">
-          <div className="row-item">
+          <div className="row-item-team">
             <b>{game.HomeTeam}</b>
           </div>
-          <div className="row-item">
+          <div className="row-item-runs">
             <b>{game.HomeTeamHits}</b>
           </div>
         </div>
-        <div className="card-row">
+        <div className="card-row-status">
           {content}
         </div>
       </div>
