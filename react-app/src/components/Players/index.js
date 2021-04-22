@@ -19,22 +19,25 @@ import PlayerDetail from "../PlayerDetails";
 const Players = () => {
   const dispatch = useDispatch();
   const [playerSpotlight, setPlayerSpotlight] = useState({});
-
+  // const [userTeam, setUserTeam] = useState([])
   const players = useSelector(state => state.players.players);
+  const userTeam = useSelector(state => state.userTeam.userTeam);
 
-  // const [userTeam, setUserTeam] = useState([]);
-
-  const addPlayer = (player) => {
-    // setUserTeam([...userTeam, player])
-    // add_player(player)
-    console.log("PLAYER: ", player)
-  }
 
   // const onRowClick = (player_id) => {
   //   return (
   //           console.log('Added this player: ', player_id))
         
   //   }
+
+ const addPlayer = (player) => {
+    const response = dispatch(add_player(player))
+    // setUserTeam([player])
+    console.log("PLAYER: ", player)
+    console.log("USER TEAM: ", userTeam)
+    console.log("RESPONSE ", response)
+
+  }
 
   const show_player_stats = player => {
     setPlayerSpotlight(player)
@@ -106,7 +109,7 @@ const Players = () => {
       ),
     },
 
-  ], []);
+  ], [addPlayer]);
 
   // const get_players_by_pos = (players, positions) => {
   //   const position_players = players.filter(player => positions.includes(player["position_txt"]))
