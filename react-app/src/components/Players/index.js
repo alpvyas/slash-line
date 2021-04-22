@@ -13,18 +13,22 @@ import kershaw_warmup from "../../images/kershaw-warmup-stretch.png";
 import houser_bunt from "../../images/houser-bunt.png";
 import glove_closeup from "../../images/close-up-baseball-held-glove.png";
 import { add_player } from "../../store/myTeam";
+import PlayerDetail from "../PlayerDetails";
 
 
 const Players = () => {
   const dispatch = useDispatch();
-  const players = useSelector(state => state.players.players)
+  const [playerSpotlight, setPlayerSpotlight] = useState({});
+
+  const players = useSelector(state => state.players.players);
 
   // const [userTeam, setUserTeam] = useState([]);
 
-  // const addPlayer = (player) => {
-  //   // setUserTeam([...userTeam, player])
-  //   add_player(player)
-  // }
+  const addPlayer = (player) => {
+    // setUserTeam([...userTeam, player])
+    // add_player(player)
+    console.log("PLAYER: ", player)
+  }
 
   // const onRowClick = (player_id) => {
   //   return (
@@ -32,11 +36,20 @@ const Players = () => {
         
   //   }
 
+  const show_player_stats = player => {
+    setPlayerSpotlight(player)
+  };
 
-  const columns = useMemo((height) => [
+
+  const columns = useMemo((height, date, bday, day, month, year) => [
     {
       Header: "Player",
       accessor: "name_display_first_last",
+      Cell: props => (
+        <button onClick={() => show_player_stats(props.row.original)}>
+          {props.row.original.name_display_first_last}
+        </button>
+      ),
     },
     {
       Header: "Team",
@@ -68,6 +81,16 @@ const Players = () => {
     {
       Header: "DOB",
       accessor: "birth_date",
+      Cell: props => {
+        date = props.row.original.birth_date.split("T")
+        bday = date[0].split("-")
+        // [year, month, day] = bday
+        year = bday[0]
+        month = bday[1]
+        day = bday[2]
+
+        return month + " / " + day + " / " + year
+      },
     },
     // {
     //   Header: "Player ID",
@@ -77,7 +100,7 @@ const Players = () => {
       Header: "",
       accessor: "player_id",
       Cell: props => (
-        <button onClick={() => dispatch(add_player(props.row.original))}>
+        <button onClick={() => addPlayer(props.row.original)}>
           Add Player
         </button>
       ),
@@ -117,7 +140,9 @@ const Players = () => {
           </div>
         </div>
         <div className="bottom-container">
-           <div className="misc-container"></div>
+           <div className="misc-container">
+             <PlayerDetail player={playerSpotlight}/>
+           </div>
            <div className="misc-container"></div>
          </div>
         <div className="footer-container">

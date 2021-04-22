@@ -8,6 +8,7 @@ import sunset_field from "../../images/sunset-field.png";
 import holding_balls from "../../images/player-holding-balls.png";
 import glove_ball from "../../images/close-up-baseball-held-glove.png";
 import "./MyTeam.css";
+import InjuredList from "../Containers/InjuredList";
 
 const MyTeam = () => {
   const user = useSelector((state) => state.session.user);
@@ -170,7 +171,12 @@ const MyTeam = () => {
         </div>
         <div className="bottom-container">
            <div className="misc-container"></div>
-           <div className="misc-container"></div>
+           <div className="misc-container">
+             <div className="section-header">
+               <h3>Injured List</h3>
+             </div>
+             <InjuredList />
+           </div>
          </div>
         <div className="footer-container">
           <Footer />

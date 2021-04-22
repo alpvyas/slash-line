@@ -18,7 +18,7 @@ const Table = ({columns, rows, row_keys}) => {
         </thead>
         <tbody>
           {rows.map((row) => (
-            <tr>
+            <tr key={row.player_id}>
               {row_keys.map((key) => (
                 <td>{row[key]}</td>
               ))}
