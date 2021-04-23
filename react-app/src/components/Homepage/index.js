@@ -13,12 +13,23 @@ import bauer_practice from "../../images/bauer-practice.png";
 import "./Homepage.css";
 import Standings from "../Containers/Standings";
 import Footer from "../Footer";
+import { get_roster_40 } from "../../store/players";
+import { get_stats_from_backend } from "../../store/stats";
 
 const Homepage = () => {
   const dispatch = useDispatch();
   const [leagues, setLeagues] = useState([])
   const user = useSelector((state) => state.session.user);
   const userPlayers = useSelector(state => state.userTeam.userTeam);
+
+  // useEffect(() => {
+  //   dispatch(get_roster_40())
+  //   }, [dispatch])
+
+    
+  //   useEffect(() => {
+  //     dispatch(get_stats_from_backend())
+  //   }, [dispatch]);
 
   const date = new Date();
 
