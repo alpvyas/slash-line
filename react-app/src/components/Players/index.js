@@ -36,7 +36,6 @@ const Players = () => {
     console.log("PLAYER: ", player)
     console.log("USER TEAM: ", userTeam)
     console.log("RESPONSE ", response)
-
   }
 
   const show_player_stats = player => {

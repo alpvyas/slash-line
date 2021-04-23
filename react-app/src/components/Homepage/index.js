@@ -1,4 +1,4 @@
-import React, { useState, useEffect }from "react";
+import React, { useState, useEffect, useMemo }from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { get_leagues } from "../../store/createLeague";
 // import { get_game_details } from "../../store/gameDetails";
@@ -8,6 +8,7 @@ import Scorecard from "../Containers/Scorecard";
 import LeagueFormModal from "../LeagueFormModal";
 import NavBar from "../NavBar/index";
 import Table from "../Table";
+import ReactTable from "../ReactTable";
 import bauer_practice from "../../images/bauer-practice.png";
 import "./Homepage.css";
 import Standings from "../Containers/Standings";
@@ -17,6 +18,7 @@ const Homepage = () => {
   const dispatch = useDispatch();
   const [leagues, setLeagues] = useState([])
   const user = useSelector((state) => state.session.user);
+  const userPlayers = useSelector(state => state.userTeam.userTeam);
 
   const date = new Date();
 
@@ -55,11 +57,93 @@ const Homepage = () => {
 
     }, [dispatch, user])
 
+    leagues.forEach(league => {
+      let draftDateTime = league["draft_date"];
+      let dateTimeArray = draftDateTime.split(" ");
+      let date = dateTimeArray[0];
+      let time = dateTimeArray[1];
+
+      let dateArray = date.split("-");
+      console.log("DATE: ", dateArray)
+      let timeArray = time.split(":");
+      console.log("TIME: ", timeArray)
+
+      let year = dateArray[0];
+      let month = dateArray[1];
+      let day = dateArray[2];
+
+      const hour_24_clock = parseInt(timeArray[0], 10);
+      const hour = hour_24_clock - 15;
+      const minutes = parseInt(timeArray[1], 10);
+      const formatted_minutes = minutes < 10 ? `0${minutes}` : minutes;
+      const AMPM = hour_24_clock < 12 ? "AM" : "PM"
+
+      league.date = `${month} / ${day} / ${year}`
+      league.time = `${hour}:${formatted_minutes} ${AMPM}`
+    });
+
   const columns = ["League Name", "League Type", "Permissions",
                    "Draft", "Draft Date", "Draft Time"];
 
   const row_keys = ["name", "league_type", "permissions", "draft",
-                    "draft_date", "draft_time"];
+                    "date", "time"];
+
+  const myPlayerColumns = useMemo((height, date, bday, day, month, year) => [
+    {
+      Header: "Player",
+      accessor: "name_display_first_last",
+    },
+    {
+      Header: "Position",
+      accessor: "position_txt",
+    },
+    {
+      Header: "Team",
+      accessor: "team_name",
+    },
+    {
+      Header: "Bats",
+      accessor: "bats",
+    },
+    {
+      Header: "Throws",
+      accessor: "throws",
+    },
+    {
+      Header: "Height",
+      accessor: "height_feet",
+      Cell: props => (
+        height = `${props.row.original.height_feet}${"'"}${props.row.original.height_inches}`
+      ),
+    },
+    {
+      Header: "Weight",
+      accessor: "weight",
+    },
+    {
+      Header: "DOB",
+      accessor: "birth_date",
+      Cell: props => {
+        date = props.row.original.birth_date.split("T")
+        bday = date[0].split("-")
+        // [year, month, day] = bday
+        year = bday[0]
+        month = bday[1]
+        day = bday[2]
+
+        return month + " / " + day + " / " + year
+      },
+    },
+    {
+      Header: "",
+      accessor: "player_id",
+      Cell: props => (
+        <button>
+          Place on IL
+        </button>
+      ),
+    },
+  ], []);
 
   return (
     <>
@@ -86,8 +170,16 @@ const Homepage = () => {
           </div>
          </div>
          <div className="bottom-container">
-           <div className="misc-container"></div>
-           <div className="misc-container"></div>
+           <div className="user-players-container">
+             <div className="header">
+               <h3>My Players</h3>
+             </div>
+             <div className="table-container">
+              <ReactTable columns={myPlayerColumns} data={userPlayers}/>
+             </div>
+           </div>
+
+           {/* <div className="misc-container"></div> */}
          </div>
          <div className="footer-container">
           <Footer />

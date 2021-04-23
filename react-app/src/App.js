@@ -5,6 +5,7 @@ import ProtectedRoute from "./components/auth/ProtectedRoute";
 import * as sessionActions from "./store/session";
 import { authenticate } from "./services/auth";
 import { get_roster_40, teams } from "./store/players";
+import { get_stats_from_backend } from "./store/stats";
 import Landing from "./components/Landing";
 import Homepage from "./components/Homepage";
 import Profile from "./components/Profile";
@@ -19,14 +20,18 @@ function App() {
   const [authenticated, setAuthenticated] = useState(false);
   const [loaded, setLoaded] = useState(false);
   const user = useSelector(state => state.session.user);
-  const players = useSelector(state => state.players.players)
   
-  useEffect(() => {
-    teams.forEach((team) => {
-      dispatch(get_roster_40(team.id))
-      })
+  const players = useSelector(state => state.players.players);
   
-    }, [])
+  // const userTeam = useSelector(state => state.userTeam.userTeam);
+  // const injuredPlayers = useSelector(state => state.injuredList.injuredList);
+  
+  // useEffect(() => {
+  //   teams.forEach((team) => {
+  //     dispatch(get_roster_40(team.id))
+  //     })
+  
+  //   }, [])
   // useEffect(() => {
   //   (async() => {
   //     const user = await authenticate();

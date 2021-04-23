@@ -13,13 +13,13 @@ const Stats = () => {
   const dispatch = useDispatch();
   const players = useSelector(state => state.players.players);
   
-  const playersLAD = players.filter(player => player.team_abbrev === "LAD")
+  // const playersLAD = players.filter(player => player.team_abbrev === "LAD")
   const stats = useSelector(state => state.stats.stats);
 
   const columns = useMemo(() => [
     {
       Header: "Player",
-      accessor: "name_display_first_last",
+      accessor: "name",
     },
     {
       Header: "Team",
@@ -98,8 +98,8 @@ const Stats = () => {
 
 
   useEffect(() => {
-    dispatch(get_stats_from_backend(playersLAD, season, gameType))
-  }, [dispatch, playersLAD]);
+    dispatch(get_stats_from_backend())
+  }, [dispatch]);
 
 
   return (

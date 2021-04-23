@@ -1,5 +1,5 @@
-import React, { useMemo } from "react";
-import { useSelector } from "react-redux";
+import React, { useState, useMemo } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import NavBar from "../NavBar";
 import ReactTable from "../ReactTable";
 import Footer from "../Footer";
@@ -9,15 +9,39 @@ import holding_balls from "../../images/player-holding-balls.png";
 import glove_ball from "../../images/close-up-baseball-held-glove.png";
 import "./MyTeam.css";
 import InjuredList from "../Containers/InjuredList";
+import { add_to_IL } from "../../store/myTeam";
+import { Table } from "@material-ui/core";
+import PlayerDetail from "../PlayerDetails";
+import { get_single_player_stats, get_stats_from_backend } from "../../store/stats";
 
 const MyTeam = () => {
+  const dispatch = useDispatch();
   const user = useSelector((state) => state.session.user);
   const players = useSelector(state => state.userTeam.userTeam);
+  const [spotlightPlayer, setSpotlightPlayer] = useState({});
+  const [spotlightName, setSpotlightName] = useState("");
 
- const columns = useMemo(() => [
+  const addToIL = (player) => {
+    const response = dispatch(add_to_IL(player))
+    console.log("RESPONSE ", response)
+  }
+
+  const getStats = async (player) => {
+    const response = await dispatch(get_single_player_stats(player))
+    setSpotlightPlayer(response);
+    setSpotlightName(player.name_display_first_last)
+    console.log("Player Stats: ", response)
+  }
+
+ const columns = useMemo((height, date, bday, day, month, year) => [
     {
       Header: "Player",
       accessor: "name_display_first_last",
+      Cell: props => (
+        <button onClick={() => getStats(props.row.original)}>
+          {props.row.original.name_display_first_last}
+        </button>
+      ),
     },
     {
       Header: "Position",
@@ -38,6 +62,9 @@ const MyTeam = () => {
     {
       Header: "Height",
       accessor: "height_feet",
+      Cell: props => (
+        height = `${props.row.original.height_feet}${"'"}${props.row.original.height_inches}`
+      ),
     },
     {
       Header: "Weight",
@@ -46,12 +73,22 @@ const MyTeam = () => {
     {
       Header: "DOB",
       accessor: "birth_date",
+      Cell: props => {
+        date = props.row.original.birth_date.split("T")
+        bday = date[0].split("-")
+        // [year, month, day] = bday
+        year = bday[0]
+        month = bday[1]
+        day = bday[2]
+
+        return month + " / " + day + " / " + year
+      },
     },
     {
       Header: "",
       accessor: "player_id",
       Cell: props => (
-        <button>
+        <button onClick={() => addToIL(props.row.original)}>
           Place on IL
         </button>
       ),
@@ -153,7 +190,7 @@ const MyTeam = () => {
 
   return (
     <>
-    {console.log("PLAYERS: ")}
+    {console.log("SPOTLIGHT PLAYER IN STATE: ", spotlightPlayer)}
       <div className="page-container" style={{backgroundImage: `url(${glove_ball})`}}>
         <div className="nav-bar-container">
           <NavBar />
@@ -170,7 +207,12 @@ const MyTeam = () => {
           </div>
         </div>
         <div className="bottom-container">
-           <div className="misc-container"></div>
+           <div className="misc-container">
+             <div className="section-header">
+               <h3>Player Spotlight</h3>
+             </div>
+             <PlayerDetail player={spotlightPlayer} name={spotlightName}/>
+           </div>
            <div className="misc-container">
              <div className="section-header">
                <h3>Injured List</h3>

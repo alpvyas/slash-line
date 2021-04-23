@@ -3,9 +3,7 @@ import Table from "../Table";
 
 import "./PlayerDetail.css";
 
-const PlayerDetail = (player) => {
-
-
+const PlayerDetail = (player, name) => {
 
   const columnsA = ["Team", "Position", "Bats",
                    "Throws", "Height", "Weight", "DOB"];
@@ -16,16 +14,19 @@ const PlayerDetail = (player) => {
 
   const row_keys_B = ["g", "ab", "r", "h", "d", "t", "hr", "rbi", "bb", "so", "sb", "cs", "avg", "obp", "slg", "ops"]
 
+  
+
   return (
     <>
+      {console.log("PLAYER IN PLAYERDETAILS: ", player)}
       <div className="player-detail-container">
         <div className="header-container">
-          <h3>{player.name_display_first_last}</h3>
+          <h4>{player.name}</h4>
         </div>
         <div className="content-container">
           <div className="player-headshot"></div>
           <div className="player-stats-container">
-            <Table columns={columnsA} rows={[player]} row_keys={row_keys_A}/>
+            <Table columns={columnsB} rows={[player.player]} row_keys={row_keys_B}/>
           </div>
         </div>
       </div>

@@ -8,6 +8,7 @@ const Table = ({columns, rows, row_keys}) => {
   
   return (
     <>
+    {console.log("INSIDE TABLE: ", rows)}
       <table className="dodgers-table">
         <thead>
           <tr>
@@ -17,9 +18,10 @@ const Table = ({columns, rows, row_keys}) => {
           </tr>
         </thead>
         <tbody>
-          {rows.map((row) => (
-            <tr key={row.player_id}>
+          {rows.map((row, index) => (
+            <tr key={index}>
               {row_keys.map((key) => (
+                // console.log("KEY: ", row.key)
                 <td>{row[key]}</td>
               ))}
             </tr>
