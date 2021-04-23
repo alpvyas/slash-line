@@ -54,29 +54,29 @@ export const make_active = (player) => dispatch => {
 }
 
 const initialState = { userTeam: [], injuredList: [] };
-
+let newState;
 const myTeamReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_PLAYER:
-      let newState = {...state};
+      newState = {...state};
       newState.userTeam = [...state.userTeam, action.data];
       return newState;
     case ADD_IL:
-      let newerState = {...state};
-      newerState.injuredList = [...state.injuredList, action.data]
-      const updatedTeamList = newerState.userTeam.filter(player => 
+      newState = {...state};
+      newState.injuredList = [...state.injuredList, action.data]
+      const updatedTeamList = newState.userTeam.filter(player => 
         player.player_id !== action.data.player_id
       );
-      newerState.userTeam = [...updatedTeamList];
-      return newerState;
+      newState.userTeam = [...updatedTeamList];
+      return newState;
     case REMOVE_IL:
-      let newestState = {...state};
-      const updatedIL = newestState.injuredList.filter(player => 
+      newState = {...state};
+      const updatedIL = newState.injuredList.filter(player => 
         player.player_id !== action.data.player_id
       );
-      newestState.injuredList = [...updatedIL];
-      newestState.userTeam = [...state.userTeam, action.data];
-      return newestState;
+      newState.injuredList = [...updatedIL];
+      newState.userTeam = [...state.userTeam, action.data];
+      return newState;
     default:
       return state;
   }

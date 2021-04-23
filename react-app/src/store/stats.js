@@ -42,12 +42,30 @@ const add = (playerStats, season) => ({
 const season = 2021;
 const gameType = "R";
 
+export const get_single_player_stats = (player) => async (dispatch) => {
+  const response = await fetch(`/api/stats/game_type/${gameType}/season/${season}/players/${player.player_id}`, {
+    method: "GET",
+  });
+
+  const resolvedResponse = await Promise.resolve(response);
+
+  // const result = await response.json();
+
+  const playerStats = await resolvedResponse.json();
+
+  const resolvedPlayerStats = await Promise.resolve(playerStats);
+
+  // return result
+
+  return resolvedPlayerStats.sport_hitting_tm.queryResults.row;
+};
+
 export const get_stats_from_backend = () => async (dispatch, getState) => {
 
   const state = getState();
   const players = state.players.players;
   
-  const responses = players.map(player => fetch (`/api/stats/game_type/${gameType}/season/${season}/players/${player.player_id}`, {
+  const responses = players.map(player => fetch(`/api/stats/game_type/${gameType}/season/${season}/players/${player.player_id}`, {
     method: "GET",
   }));
 
