@@ -7,7 +7,7 @@ import configureStore from "./store";
 import "./index.css";
 import { ModalProvider } from "./context/Modal";
 
-const store = configureStore();
+export const store = configureStore();
 
 ReactDOM.render(
   <React.StrictMode>

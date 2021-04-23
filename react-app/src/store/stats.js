@@ -1,3 +1,5 @@
+import { store } from "../index";
+
 const GET_TEAM_SEASON_STATS = "stats/team/seasons/GET";
 const GET_TEAM_GAME_STATS = "stats/teams/games/GET";
 const GET_PLAYER_SEASON_STATS = "stats/players/seasons/GET";
@@ -18,13 +20,33 @@ const add = (playerStats, season) => ({
   season: season,
 });
 
-// const players = [641355, 572041, 608369, 621035, 457759, 605131]
+// const players = [
+//                   {
+//                     player_id: 641355
+//                   }, 
+//                   {
+//                     player_id: 608369
+//                   }, 
+//                   {
+//                     player_id: 621035
+//                   }, 
+//                   {
+//                     player_id: 457759
+//                   }, 
+//                   {
+//                     player_id: 605131
+//                   }, 
+//                  ];
 
 // const player = 641355;
-// const season = 2017;
-// const gameType = "R";
+const season = 2021;
+const gameType = "R";
 
-export const get_stats_from_backend = (players, season, gameType) => async dispatch => {
+export const get_stats_from_backend = () => async (dispatch, getState) => {
+
+  const state = getState();
+  const players = state.players.players;
+  
   const responses = players.map(player => fetch (`/api/stats/game_type/${gameType}/season/${season}/players/${player.player_id}`, {
     method: "GET",
   }));
