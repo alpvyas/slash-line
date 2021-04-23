@@ -38,6 +38,10 @@
   background-color: transparent;
 }
 
+.user-players-container {
+  height: 650px;
+}
+
 .misc-container {
   border: 2px solid #EF3E42;
 }

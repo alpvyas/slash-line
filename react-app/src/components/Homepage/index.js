@@ -57,11 +57,36 @@ const Homepage = () => {
 
     }, [dispatch, user])
 
+    leagues.forEach(league => {
+      let draftDateTime = league["draft_date"];
+      let dateTimeArray = draftDateTime.split(" ");
+      let date = dateTimeArray[0];
+      let time = dateTimeArray[1];
+
+      let dateArray = date.split("-");
+      console.log("DATE: ", dateArray)
+      let timeArray = time.split(":");
+      console.log("TIME: ", timeArray)
+
+      let year = dateArray[0];
+      let month = dateArray[1];
+      let day = dateArray[2];
+
+      const hour_24_clock = parseInt(timeArray[0], 10);
+      const hour = hour_24_clock - 15;
+      const minutes = parseInt(timeArray[1], 10);
+      const formatted_minutes = minutes < 10 ? `0${minutes}` : minutes;
+      const AMPM = hour_24_clock < 12 ? "AM" : "PM"
+
+      league.date = `${month} / ${day} / ${year}`
+      league.time = `${hour}:${formatted_minutes} ${AMPM}`
+    });
+
   const columns = ["League Name", "League Type", "Permissions",
                    "Draft", "Draft Date", "Draft Time"];
 
   const row_keys = ["name", "league_type", "permissions", "draft",
-                    "draft_date", "draft_time"];
+                    "date", "time"];
 
   const myPlayerColumns = useMemo((height, date, bday, day, month, year) => [
     {
@@ -149,10 +174,12 @@ const Homepage = () => {
              <div className="header">
                <h3>My Players</h3>
              </div>
-             <ReactTable columns={myPlayerColumns} data={userPlayers}/>
+             <div className="table-container">
+              <ReactTable columns={myPlayerColumns} data={userPlayers}/>
+             </div>
            </div>
 
-           <div className="misc-container"></div>
+           {/* <div className="misc-container"></div> */}
          </div>
          <div className="footer-container">
           <Footer />
