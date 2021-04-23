@@ -1,4 +1,4 @@
-import React, { useState, useEffect }from "react";
+import React, { useState, useEffect, useMemo }from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { get_leagues } from "../../store/createLeague";
 // import { get_game_details } from "../../store/gameDetails";
@@ -8,6 +8,7 @@ import Scorecard from "../Containers/Scorecard";
 import LeagueFormModal from "../LeagueFormModal";
 import NavBar from "../NavBar/index";
 import Table from "../Table";
+import ReactTable from "../ReactTable";
 import bauer_practice from "../../images/bauer-practice.png";
 import "./Homepage.css";
 import Standings from "../Containers/Standings";
@@ -17,6 +18,7 @@ const Homepage = () => {
   const dispatch = useDispatch();
   const [leagues, setLeagues] = useState([])
   const user = useSelector((state) => state.session.user);
+  const userPlayers = useSelector(state => state.userTeam.userTeam);
 
   const date = new Date();
 
@@ -61,6 +63,63 @@ const Homepage = () => {
   const row_keys = ["name", "league_type", "permissions", "draft",
                     "draft_date", "draft_time"];
 
+  const myPlayerColumns = useMemo((height, date, bday, day, month, year) => [
+    {
+      Header: "Player",
+      accessor: "name_display_first_last",
+    },
+    {
+      Header: "Position",
+      accessor: "position_txt",
+    },
+    {
+      Header: "Team",
+      accessor: "team_name",
+    },
+    {
+      Header: "Bats",
+      accessor: "bats",
+    },
+    {
+      Header: "Throws",
+      accessor: "throws",
+    },
+    {
+      Header: "Height",
+      accessor: "height_feet",
+      Cell: props => (
+        height = `${props.row.original.height_feet}${"'"}${props.row.original.height_inches}`
+      ),
+    },
+    {
+      Header: "Weight",
+      accessor: "weight",
+    },
+    {
+      Header: "DOB",
+      accessor: "birth_date",
+      Cell: props => {
+        date = props.row.original.birth_date.split("T")
+        bday = date[0].split("-")
+        // [year, month, day] = bday
+        year = bday[0]
+        month = bday[1]
+        day = bday[2]
+
+        return month + " / " + day + " / " + year
+      },
+    },
+    {
+      Header: "",
+      accessor: "player_id",
+      Cell: props => (
+        <button>
+          Place on IL
+        </button>
+      ),
+    },
+  ], []);
+
   return (
     <>
       <div className="container page-container" style={{backgroundImage: `url(${bauer_practice})`}}>
@@ -86,7 +145,13 @@ const Homepage = () => {
           </div>
          </div>
          <div className="bottom-container">
-           <div className="misc-container"></div>
+           <div className="user-players-container">
+             <div className="header">
+               <h3>My Players</h3>
+             </div>
+             <ReactTable columns={myPlayerColumns} data={userPlayers}/>
+           </div>
+
            <div className="misc-container"></div>
          </div>
          <div className="footer-container">

@@ -19,14 +19,16 @@ function App() {
   const [authenticated, setAuthenticated] = useState(false);
   const [loaded, setLoaded] = useState(false);
   const user = useSelector(state => state.session.user);
-  const players = useSelector(state => state.players.players)
+  const players = useSelector(state => state.players.players);
+  // const userTeam = useSelector(state => state.userTeam.userTeam);
+  // const injuredPlayers = useSelector(state => state.injuredList.injuredList);
   
-  useEffect(() => {
-    teams.forEach((team) => {
-      dispatch(get_roster_40(team.id))
-      })
+  // useEffect(() => {
+  //   teams.forEach((team) => {
+  //     dispatch(get_roster_40(team.id))
+  //     })
   
-    }, [])
+  //   }, [])
   // useEffect(() => {
   //   (async() => {
   //     const user = await authenticate();

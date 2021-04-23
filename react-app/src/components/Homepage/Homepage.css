@@ -28,7 +28,8 @@
 
 .standings-list-container,
 .create-league-container,
-.misc-container {
+.misc-container,
+.user-players-container {
   display: flex;
   flex-direction: column;
   width: 650px;

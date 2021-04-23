@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import NavBar from "../NavBar";
 import ReactTable from "../ReactTable";
 import Footer from "../Footer";
@@ -9,12 +9,19 @@ import holding_balls from "../../images/player-holding-balls.png";
 import glove_ball from "../../images/close-up-baseball-held-glove.png";
 import "./MyTeam.css";
 import InjuredList from "../Containers/InjuredList";
+import { add_to_IL } from "../../store/myTeam";
 
 const MyTeam = () => {
+  const dispatch = useDispatch();
   const user = useSelector((state) => state.session.user);
   const players = useSelector(state => state.userTeam.userTeam);
 
- const columns = useMemo(() => [
+  const addToIL = (player) => {
+    const response = dispatch(add_to_IL(player))
+    console.log("RESPONSE ", response)
+  }
+
+ const columns = useMemo((height, date, bday, day, month, year) => [
     {
       Header: "Player",
       accessor: "name_display_first_last",
@@ -38,6 +45,9 @@ const MyTeam = () => {
     {
       Header: "Height",
       accessor: "height_feet",
+      Cell: props => (
+        height = `${props.row.original.height_feet}${"'"}${props.row.original.height_inches}`
+      ),
     },
     {
       Header: "Weight",
@@ -46,12 +56,22 @@ const MyTeam = () => {
     {
       Header: "DOB",
       accessor: "birth_date",
+      Cell: props => {
+        date = props.row.original.birth_date.split("T")
+        bday = date[0].split("-")
+        // [year, month, day] = bday
+        year = bday[0]
+        month = bday[1]
+        day = bday[2]
+
+        return month + " / " + day + " / " + year
+      },
     },
     {
       Header: "",
       accessor: "player_id",
       Cell: props => (
-        <button>
+        <button onClick={() => addToIL(props.row.original)}>
           Place on IL
         </button>
       ),

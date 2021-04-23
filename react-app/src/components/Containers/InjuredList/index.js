@@ -1,56 +1,78 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { make_active } from "../../../store/myTeam";
+import ReactTable from "../../ReactTable";
 import Table from "../../Table";
 
 const InjuredList = () => {
 
-  const addToActive = () => {
+  const dispatch = useDispatch();
+  const injuredPlayers = useSelector(state => state.userTeam.injuredList);
 
+  const makeActive = (player) => {
+    const response = dispatch(make_active(player))
+    console.log("REMOVE FROM IL: ", response)
   }
 
-  const removeILButton = 
-    <button onClick={() => addToActive()}>
-          Remove from IL
-    </button>
+  // const players = [
+  //                   {
+  //                     name_display_first_last:"Cody Bellinger",
+  //                     position_txt: "RF",
+  //                     il_status: "IL-10",
+  //                     date_added: "04/10/2021",
+  //                     change_status: changeStatus,
+  //                     remove_button: removeILButton,
+  //                   },
+  //                   {
+  //                     name_display_first_last:"Cody Bellinger",
+  //                     position_txt: "RF",
+  //                     il_status: "IL-10",
+  //                     date_added: "04/10/2021",
+  //                     change_status: changeStatus,
+  //                     remove_button: removeILButton,
+  //                   },
+  //                   {
+  //                     name_display_first_last:"Cody Bellinger",
+  //                     position_txt: "RF",
+  //                     il_status: "IL-10",
+  //                     date_added: "04/10/2021",
+  //                     change_status: changeStatus,
+  //                     remove_button: removeILButton,
+  //                   },
+  //                 ]
 
-  const changeStatus = 
-    <button onClick={() => addToActive()}>
-          Change IL Status
-    </button>
+  const columns = useMemo(() => [
+    {
+      Header: "Player",
+      accessor: "name_display_first_last",
+    },
+    {
+      Header: "Position",
+      accessor: "position_txt",
+    },
+    {
+      Header: "Team",
+      accessor: "team_name",
+    },
+    {
+      Header: "",
+      accessor: "player_id",
+      Cell: props => (
+        <button onClick={() => makeActive(props.row.original)}>
+           Make Active
+        </button>
+      ),
+    },
+  ], []);
 
-  const players = [
-                    {
-                      name_display_first_last:"Cody Bellinger",
-                      position_txt: "RF",
-                      il_status: "IL-10",
-                      date_added: "04/10/2021",
-                      change_status: changeStatus,
-                      remove_button: removeILButton,
-                    },
-                    {
-                      name_display_first_last:"Cody Bellinger",
-                      position_txt: "RF",
-                      il_status: "IL-10",
-                      date_added: "04/10/2021",
-                      change_status: changeStatus,
-                      remove_button: removeILButton,
-                    },
-                    {
-                      name_display_first_last:"Cody Bellinger",
-                      position_txt: "RF",
-                      il_status: "IL-10",
-                      date_added: "04/10/2021",
-                      change_status: changeStatus,
-                      remove_button: removeILButton,
-                    },
-                  ]
 
-  const columns = ["Player", "Position", "IL Status", "Date Added", "", ""];
-  const row_keys = ["name_display_first_last", "position_txt", "il_status", "date_added", "change_status", "remove_button"]
+  // const columns = ["Player", "Position", "", ""];
+  // const row_keys = ["name_display_first_last", "position_txt", "change_status", "remove_button"]
 
   return (
     <>
       <div className="il-container">
-        <Table columns={columns} rows={players} row_keys={row_keys}/>
+        <ReactTable columns={columns} data={injuredPlayers}/>
       </div>
     </>
   )
