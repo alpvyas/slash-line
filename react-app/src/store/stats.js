@@ -69,28 +69,43 @@ export const get_stats_from_backend = () => async (dispatch, getState) => {
     method: "GET",
   }));
 
-  console.log("HELLO")
+  // console.log("HELLO")
   // const data = await response.json()
 
   console.log("BACKEND REPLY: ", responses)
 
   const resolvedResponses = await Promise.all(responses);
-  console.log("RESOLVED RESPONSES: ", resolvedResponses)
+  // console.log("RESOLVED RESPONSES: ", resolvedResponses)
   const playerSats = resolvedResponses.map(response => response.json());
   const resolvedPlayerStats = await Promise.all(playerSats);
 
   const resolvedStatsList = []
   resolvedPlayerStats.forEach(stats => resolvedStatsList.push(stats))
   const allPlayerStats = []
-console.log("RESOLVED STATS LIST: ", resolvedStatsList)
+// console.log("RESOLVED STATS LIST: ", resolvedStatsList)
   resolvedStatsList.forEach(playerStat =>{
     if (playerStat.sport_hitting_tm.queryResults.row) {
       allPlayerStats.push(playerStat.sport_hitting_tm.queryResults.row)
     }
   })
-  console.log("BEFORE DISPATCH")
+
+  allPlayerStats.forEach(playerStatObj => {
+    let id = playerStatObj.player_id;
+    let flag = true;
+    let i = 0;
+    while(true) {
+      if (players[i].player_id === id) {
+        playerStatObj.name = players[i].name_display_first_last;
+        flag = false;
+        break;
+      }else {
+        i++;
+      }
+    }
+  })
+  // console.log("BEFORE DISPATCH")
   dispatch(add(allPlayerStats, season))
-  console.log("AFTER DISPATCH / END OF STATS THUNK") 
+  // console.log("AFTER DISPATCH / END OF STATS THUNK") 
 
 };
 

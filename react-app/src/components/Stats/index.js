@@ -19,7 +19,7 @@ const Stats = () => {
   const columns = useMemo(() => [
     {
       Header: "Player",
-      accessor: "name_display_first_last",
+      accessor: "name",
     },
     {
       Header: "Team",
