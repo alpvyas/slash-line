@@ -7,9 +7,12 @@ const add = (gameDetails) => ({
   details: gameDetails
 })
 
-export const get_game_details = (date) => async (dispatch) => { const response = 
+export const get_game_details = (date) => async (dispatch) => { 
+  
+  console.log("INSIDE GAME DETAILS THUNK")
+  const response = 
   await fetch(
-  `https://fly.sportsdata.io/v3/mlb/scores/json/GamesByDate/${date}`, {
+  `https://fly.sportsdata.io/v3/mlb/scores/json/GamesByDate/"2021-APR-23"`, {
   method: "GET",
   headers: {
     "Content-Type": "application/json",
@@ -22,6 +25,8 @@ export const get_game_details = (date) => async (dispatch) => { const response =
   if (response.ok && !gameDetails.errors) {
     dispatch(add(gameDetails));
   }
+
+  return gameDetails;
 };
 
 const initialState = { gameDetails: [] };

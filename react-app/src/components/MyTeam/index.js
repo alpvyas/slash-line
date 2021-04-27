@@ -17,6 +17,8 @@ import { get_single_player_stats, get_stats_from_backend } from "../../store/sta
 import { game_details } from "../../mock_game_data";
 import Scorecard from "../Containers/Scorecard";
 import Carousel from "../Carousel";
+import mookie_betts from "../../images/mookie_betts.png";
+
 
 const MyTeam = () => {
   const dispatch = useDispatch();
@@ -128,11 +130,18 @@ const MyTeam = () => {
            </div>
          </div>
         <div className="bottom-container">
-           <div className="misc-container">
-             <div className="section-header">
+            <div className="spotlight-container">
+             <div className="header">
                <h3>Player Spotlight</h3>
              </div>
-             <PlayerDetail player={spotlightPlayer} name={spotlightName}/>
+             <div className="image-details-container">
+              <div className="player-image-container">
+                <img src={mookie_betts} alt="mookie-betts-img" className="player-image" />
+              </div>
+              <div className="player-details-container">
+                <PlayerDetail player={spotlightPlayer} name={spotlightName}/>
+              </div>
+             </div>
            </div>
            {/* <div className="misc-container">
              <div className="section-header">

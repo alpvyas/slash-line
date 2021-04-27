@@ -15,6 +15,7 @@ import Standings from "../Containers/Standings";
 import Footer from "../Footer";
 import { get_roster_40 } from "../../store/players";
 import { get_stats_from_backend } from "../../store/stats";
+// import { get_game_details } from "../../store/gameDetails";
 
 const Homepage = () => {
   const dispatch = useDispatch();
@@ -48,14 +49,17 @@ const Homepage = () => {
   const today = year + '-' + month + '-' + day;
   
   // useEffect(() => {
-  //   const game_data_interval = setInterval(() => {
-  //     dispatch(get_game_details(today))
-  //   }, 60000);
+  //   // const game_data_interval = setInterval(() => {
+  //   //   dispatch(get_game_details(today))
+  //   // }, 60000);
+  //     const response = dispatch(get_game_details());
 
-  //   return () => clearInterval(game_data_interval)
+  //     console.log("RESPONSE GAME DETAILS: ", response)
+
+  //   // return () => clearInterval(game_data_interval)
   //   }, [dispatch])
 
-  // const game_details = useSelector((state) => state.gameDetails);
+  // const game_details = useSelector(state => state.gameDetails);
 
   const games = game_details&&game_details.map((game_detail) => (
     <Scorecard game={game_detail}/>

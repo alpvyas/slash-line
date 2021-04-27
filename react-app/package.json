@@ -16,6 +16,7 @@
     "react-alice-carousel": "^2.4.0",
     "react-dom": "^17.0.0",
     "react-logger": "^1.1.0",
+    "react-material-ui-carousel": "^2.2.4",
     "react-modal": "^3.12.1",
     "react-onclickoutside": "^6.10.0",
     "react-redux": "^7.2.3",

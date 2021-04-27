@@ -1,5 +1,5 @@
 import React, { useState, useEffect, forwardRef, useRef } from "react";
-import { useFilters, usePagination, useRowSelect, useSortBy, useTable } from "react-table";
+import { useAsyncDebounce, useFilters, useGlobalFilter, usePagination, useRowSelect, useSortBy, useTable } from "react-table";
 import "./ReactTable.css";
 
 const IndeterminateCheckbox = forwardRef(
@@ -21,12 +21,7 @@ const IndeterminateCheckbox = forwardRef(
 
 const ReactTable = ({ columns, data }) => {
   const [filterInput, setFilterInput] = useState("");
-
-  const handleFilterChange = e => {
-    const value = e.target.value;
-    setFilter("name_display_first_last", value)
-    setFilterInput(value);
-  };
+  // const [globalFilter, setGlobalFilter] = useState("")
 
   const {
     getTableProps,
@@ -45,6 +40,8 @@ const ReactTable = ({ columns, data }) => {
     setPageSize,
     selectedFlatRows,
     setFilter,
+    globalFilter,
+    setGlobalFilter,
     state: { pageIndex, pageSize, selectedRowIds },
   } = useTable(
     { 
@@ -52,6 +49,7 @@ const ReactTable = ({ columns, data }) => {
       data,
     },
     useFilters,
+    useGlobalFilter,
     useSortBy,
     usePagination,
     useRowSelect,
@@ -74,6 +72,17 @@ const ReactTable = ({ columns, data }) => {
       ])
     });
 
+  // const [value, setValue] = useState(globalFilter)
+
+  const handleFilterChange = e => {
+    const value = e.target.value;
+    setFilter("name_display_first_last", value)
+    setFilterInput(value);
+  };
+
+  // const onChange = useAsyncDebounce(value => {
+  //   setGlobalFilter(value || undefined)
+  // }, 500)
 
   return (
     <>
@@ -82,6 +91,10 @@ const ReactTable = ({ columns, data }) => {
           className="search-bar"
           value={filterInput}
           onChange={handleFilterChange}
+        //   onChange={e => {
+        //   setValue(e.target.value);
+        //   onChange(e.target.value);
+        // }}
           placeholder=" Search..."
           />
           <span className="underline"></span>

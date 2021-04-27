@@ -1,0 +1,86 @@
+
+
+ .carousel-inner {
+   height: 40rem;
+   position: relative;
+   width: calc(90rem);
+ }
+
+ .carousel-container {
+   height: 100%;
+   overflow: hidden;
+   position: relative;
+   width: 100%;
+ }
+
+ .carousel-games-list {
+   height: 100%;
+   left: 50%;
+   list-style-type: none;
+   margin: 0;
+   padding: 0;
+   position: absolute;
+   transform: translateX(-50%);
+   width: calc(330rem);
+ }
+
+ .carousel-btn {
+   align-items: center;
+   background: 0;
+   border: 0;
+   cursor: pointer;
+   display: flex;
+   justify-content: center;
+   position: absolute;
+   top: 50%;
+   transform: translateY(-50%);
+ }
+
+ .carousel-btn-prev {
+   left: -10rem;
+ }
+
+ .carousel-btn-next {
+   right: -10rem;
+ }
+
+ .carousel-btn-arrow {
+   border: solid black;
+   border-width: 0 0.4rem 0.4rem 0;
+   height: 6rem;
+   padding: 3px;
+   width: 6rem;
+   z-index: 10;
+ }
+
+ .carousel-btn-arrow-left {
+   transform: rotate(135deg);
+ }
+
+ .carousel--btn-arrow-right {
+   transform: rotate(-45deg);
+ }
+
+ .dots {
+   display: inline-block;
+   left: 50%;
+   margin-top: 2rem;
+   position: absolute;
+   transform: translateX(-50%);
+ }
+
+ .dots .dot {
+   background: #ccc;
+   border: 0;
+   border-radius: 50%;
+   cursor: pointer;
+   height: 2rem;
+   margin: 0 0.3rem;
+   outline: none;
+   transform: scale(0.5);
+   width: 2rem;
+ }
+
+ .dots .dot.active {
+   background: black;
+ }

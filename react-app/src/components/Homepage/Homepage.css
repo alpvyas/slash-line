@@ -40,6 +40,9 @@
 
 .user-players-container {
   height: 650px;
+  width: 2000px;
+  margin-left: 500px;
+  margin-bottom: 250px;
 }
 
 /* .misc-container {
