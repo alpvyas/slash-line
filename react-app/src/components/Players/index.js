@@ -14,15 +14,26 @@ import houser_bunt from "../../images/houser-bunt.png";
 import glove_closeup from "../../images/close-up-baseball-held-glove.png";
 import { add_player } from "../../store/myTeam";
 import PlayerDetail from "../PlayerDetails";
+import mookie_betts from "../../images/mookie_betts.png";
+import { get_single_player_stats } from "../../store/stats";
 
 
 const Players = () => {
   const dispatch = useDispatch();
-  const [playerSpotlight, setPlayerSpotlight] = useState({});
   // const [userTeam, setUserTeam] = useState([])
   const players = useSelector(state => state.players.players);
   const userTeam = useSelector(state => state.userTeam.userTeam);
 
+  const [spotlightPlayer, setSpotlightPlayer] = useState({});
+  const [spotlightName, setSpotlightName] = useState("");
+
+
+  const getStats = async (player) => {
+    const response = await dispatch(get_single_player_stats(player))
+    setSpotlightPlayer(response);
+    setSpotlightName(player.name_display_first_last)
+    console.log("Player Stats: ", response)
+  }
 
   // const onRowClick = (player_id) => {
   //   return (
@@ -39,7 +50,7 @@ const Players = () => {
   }
 
   const show_player_stats = player => {
-    setPlayerSpotlight(player)
+    setSpotlightPlayer(player)
   };
 
 
@@ -48,7 +59,7 @@ const Players = () => {
       Header: "Player",
       accessor: "name_display_first_last",
       Cell: props => (
-        <button onClick={() => show_player_stats(props.row.original)}>
+        <button onClick={() => getStats(props.row.original)}>
           {props.row.original.name_display_first_last}
         </button>
       ),
@@ -142,10 +153,20 @@ const Players = () => {
           </div>
         </div>
         <div className="bottom-container">
-           <div className="misc-container">
-             <PlayerDetail player={playerSpotlight}/>
+           <div className="spotlight-container">
+             <div className="header">
+               <h3>Player Spotlight</h3>
+             </div>
+             <div className="image-details-container">
+              <div className="player-image-container">
+                <img src={mookie_betts} alt="mookie-betts-img" className="player-image" />
+              </div>
+              <div className="player-details-container">
+                <PlayerDetail player={spotlightPlayer} name={spotlightName}/>
+              </div>
+             </div>
            </div>
-           <div className="misc-container"></div>
+           {/* <div className="misc-container"></div> */}
          </div>
         <div className="footer-container">
           <Footer />

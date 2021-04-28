@@ -40,11 +40,14 @@
 
 .user-players-container {
   height: 650px;
+  width: 2000px;
+  margin-left: 500px;
+  margin-bottom: 250px;
 }
 
-.misc-container {
+/* .misc-container {
   border: 2px solid #EF3E42;
-}
+} */
 
 .middle-container,
 .bottom-container {

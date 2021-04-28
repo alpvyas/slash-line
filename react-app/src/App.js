@@ -42,6 +42,15 @@ function App() {
   //   })();
   // }, []);
 
+  useEffect(() => {
+    dispatch(get_roster_40())
+    }, [dispatch])
+
+    
+    useEffect(() => {
+      dispatch(get_stats_from_backend())
+    }, [dispatch]);
+
   useEffect(()=>{
     dispatch(sessionActions.restoreUser())
     .then(()=> setLoaded(true))
@@ -52,6 +61,7 @@ function App() {
     return null;
   };
 
+  
 
   return (
     <BrowserRouter>

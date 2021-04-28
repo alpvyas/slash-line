@@ -23,3 +23,19 @@
   flex-direction: row;
   background-color: whitesmoke;
 }
+
+.table-container {
+  position: relative;
+  margin-top: 100px;
+  margin-bottom: 100px;
+  width: 70%
+}
+
+.middle-container,
+.bottom-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  background: transparent;
+  margin-bottom: 50px;
+}

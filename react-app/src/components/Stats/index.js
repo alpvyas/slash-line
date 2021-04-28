@@ -8,6 +8,7 @@ import houser_bunt from "../../images/houser-bunt.png";
 import { get_season_hitting_stats, get_stats_from_backend } from "../../store/stats";
 import ReactTable from "../ReactTable";
 import Footer from "../Footer";
+import "./Stats.css";
 
 const Stats = () => {
   const dispatch = useDispatch();
@@ -112,17 +113,17 @@ const Stats = () => {
             <Carousel items={games} show={5} infiniteLoop={true}/>
           </div>
           <div className="middle-container">
-          <div className="table-container">
-            <div className="header">
-              <h3>Stats</h3>
+            <div className="table-container">
+              <div className="header">
+                <h3>Stats</h3>
+              </div>
+              <ReactTable columns={columns} data={stats}/>
             </div>
-            <ReactTable columns={columns} data={stats}/>
-          </div>
         </div>
-        <div className="footer-container">
+      </div>
+      <div className="footer-container">
           <Footer />
          </div>
-      </div>
     </>
   )
 }

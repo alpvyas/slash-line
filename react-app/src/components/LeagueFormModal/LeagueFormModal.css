@@ -75,3 +75,7 @@
   line-height: 1.1875;
   box-sizing: border-box;
 }
+
+.create-league-btn {
+  background-color: whitesmoke;
+}
