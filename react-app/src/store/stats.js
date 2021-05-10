@@ -1,18 +1,18 @@
 import { store } from "../index";
 
-const GET_TEAM_SEASON_STATS = "stats/team/seasons/GET";
-const GET_TEAM_GAME_STATS = "stats/teams/games/GET";
-const GET_PLAYER_SEASON_STATS = "stats/players/seasons/GET";
-const GET_PLAYER_GAME_STATS = "stats/players/games/GET";
-const GET_CAREER_HITTING_STATS = "stats/players/career/hitting/GET";
-const GET_CAREER_PITCHING_STATS = "stats/players/career/pitching/GET";
+// const GET_TEAM_SEASON_STATS = "stats/team/seasons/GET";
+// const GET_TEAM_GAME_STATS = "stats/teams/games/GET";
+// const GET_PLAYER_SEASON_STATS = "stats/players/seasons/GET";
+// const GET_PLAYER_GAME_STATS = "stats/players/games/GET";
+// const GET_CAREER_HITTING_STATS = "stats/players/career/hitting/GET";
+// const GET_CAREER_PITCHING_STATS = "stats/players/career/pitching/GET";
 
-const ADD_TEAM_SEASON_STATS = "stats/team/seasons/ADD";
-const ADD_TEAM_GAME_STATS = "stats/teams/games/ADD";
+// const ADD_TEAM_SEASON_STATS = "stats/team/seasons/ADD";
+// const ADD_TEAM_GAME_STATS = "stats/teams/games/ADD";
 const ADD_PLAYERS_SEASON_STATS = "stats/players/seasons/ADD";
-const ADD_PLAYER_GAME_STATS = "stats/players/games/ADD";
-const ADD_CAREER_HITTING_STATS = "stats/players/career/hitting/ADD";
-const ADD_CAREER_PITCHING_STATS = "stats/players/career/pitching/ADD";
+// const ADD_PLAYER_GAME_STATS = "stats/players/games/ADD";
+// const ADD_CAREER_HITTING_STATS = "stats/players/career/hitting/ADD";
+// const ADD_CAREER_PITCHING_STATS = "stats/players/career/pitching/ADD";
 
 const add = (playerStats, season) => ({
   type: ADD_PLAYERS_SEASON_STATS,
@@ -20,25 +20,6 @@ const add = (playerStats, season) => ({
   season: season,
 });
 
-// const players = [
-//                   {
-//                     player_id: 641355
-//                   }, 
-//                   {
-//                     player_id: 608369
-//                   }, 
-//                   {
-//                     player_id: 621035
-//                   }, 
-//                   {
-//                     player_id: 457759
-//                   }, 
-//                   {
-//                     player_id: 605131
-//                   }, 
-//                  ];
-
-// const player = 641355;
 const season = 2021;
 const gameType = "R";
 

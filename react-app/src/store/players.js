@@ -131,6 +131,14 @@ export const get_roster_40 = () => async (dispatch) => {
     dispatch(add(allPlayers));
  
 
+  // fetch(`api/players`, {
+  // method: "POST",
+  // headers: {
+  //   "Content-Type": "application/json",
+  // },
+  // body: JSON.stringify(allPlayers)
+  // })
+
   return allPlayers;
 };
 
