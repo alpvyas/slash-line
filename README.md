@@ -1,20 +1,13 @@
-# Flask React Project
+# Slash Line
 
-This is the backend for the Flask React project.
+By Alpesh Vyas
+[Visit Slash Line]()
 
-## Getting started
+## Slash Line at a Glance
 
-1. Clone this repository (only this branch)
+Slash Line is a fullstack fantasy baseball app where users can create leagues and teams using real-time MLB team, player and game data and statistics.
 
-   ```bash
-   git clone https://github.com/appacademy-starters/python-project-starter.git
-   ```
-
-2. Install dependencies
-
-      ```bash
-      pipenv install --dev -r dev-requirements.txt && pipenv install -r requirements.txt
-      ```
+Slash Line is integrated with the MLB Data API as well as the 
 
 3. Create a **.env** file based on the example with proper settings for your
    development environment
