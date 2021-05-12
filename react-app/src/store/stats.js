@@ -45,55 +45,62 @@ export const get_stats_from_backend = () => async (dispatch, getState) => {
 
   const state = getState();
   const players = state.players.players;
+
+  const response = fetch(`api/stats`, {
+  method: "GET",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  })
   
-  const responses = players.map(player => fetch(`/api/stats/game_type/${gameType}/season/${season}/players/${player.player_id}`, {
-    method: "GET",
-  }));
+  // const responses = players.map(player => fetch(`/api/stats/game_type/${gameType}/season/${season}/players/${player.player_id}`, {
+  //   method: "GET",
+  // }));
 
   // console.log("HELLO")
   // const data = await response.json()
 
-  console.log("BACKEND REPLY: ", responses)
-  console.log("PLAYERS: ", players)
+//   console.log("BACKEND REPLY: ", responses)
+//   console.log("PLAYERS: ", players)
 
-  const resolvedResponses = await Promise.all(responses);
-  console.log("RESOLVED RESPONSES: ", resolvedResponses)
-  const playerSats = resolvedResponses.map(response => response.json());
-  const resolvedPlayerStats = await Promise.all(playerSats);
+//   const resolvedResponses = await Promise.all(responses);
+//   console.log("RESOLVED RESPONSES: ", resolvedResponses)
+//   const playerSats = resolvedResponses.map(response => response.json());
+//   const resolvedPlayerStats = await Promise.all(playerSats);
 
-  const resolvedStatsList = []
-  resolvedPlayerStats.forEach(stats => resolvedStatsList.push(stats))
-  const allPlayerStats = []
-console.log("RESOLVED STATS LIST: ", resolvedStatsList)
-  resolvedStatsList.forEach(playerStat =>{
-    if (playerStat.sport_hitting_tm.queryResults.row) {
-      allPlayerStats.push(playerStat.sport_hitting_tm.queryResults.row)
-    }
-  })
+//   const resolvedStatsList = []
+//   resolvedPlayerStats.forEach(stats => resolvedStatsList.push(stats))
+//   const allPlayerStats = []
+// console.log("RESOLVED STATS LIST: ", resolvedStatsList)
+//   resolvedStatsList.forEach(playerStat =>{
+//     if (playerStat.sport_hitting_tm.queryResults.row) {
+//       allPlayerStats.push(playerStat.sport_hitting_tm.queryResults.row)
+//     }
+//   })
 
-  console.log("ALL PLAYER STATS: ", allPlayerStats)
+//   console.log("ALL PLAYER STATS: ", allPlayerStats)
 
-  // const filteredPlayers = players.filter(player => player.player_id !== undefined)
+//   // const filteredPlayers = players.filter(player => player.player_id !== undefined)
 
-  // console.log("FILTERED PLAYERS LENGTH: ", filteredPlayers.length)
+//   // console.log("FILTERED PLAYERS LENGTH: ", filteredPlayers.length)
 
-  allPlayerStats.forEach(playerStatObj => {
-    const id = playerStatObj.player_id;
-    console.log("PLAYER ID AND NAME: ", playerStatObj.sport, " and ", id, " and ", playerStatObj.team_abbrev)
-    let flag = true;
-    let i = 0;
-    while(true) {
-      if (players[i] && (players[i].player_id === id)) {
-        playerStatObj.name = players[i].name_display_first_last;
-        flag = false;
-        break;
-      }else {
-        i++;
-      }
-    }
-  })
-  // console.log("BEFORE DISPATCH")
-  dispatch(add(allPlayerStats, season))
+//   allPlayerStats.forEach(playerStatObj => {
+//     const id = playerStatObj.player_id;
+//     console.log("PLAYER ID AND NAME: ", playerStatObj.sport, " and ", id, " and ", playerStatObj.team_abbrev)
+//     let flag = true;
+//     let i = 0;
+//     while(true) {
+//       if (players[i] && (players[i].player_id === id)) {
+//         playerStatObj.name = players[i].name_display_first_last;
+//         flag = false;
+//         break;
+//       }else {
+//         i++;
+//       }
+//     }
+//   })
+//   // console.log("BEFORE DISPATCH")
+//   dispatch(add(allPlayerStats, season))
   // console.log("AFTER DISPATCH / END OF STATS THUNK") 
 
 };

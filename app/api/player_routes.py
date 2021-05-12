@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, request, json
+from flask import Blueprint, jsonify, request, json, session
 import requests
 from app.models import db, Player
 
@@ -15,7 +15,10 @@ teams = [108, 109, 110, 111, 112, 113, 114, 115, 116, 117,
 
 def add_players():
     players = json.loads(request.data.decode("utf-8"))
-    print("PLAYERS LENGTH: ", len(players))
+
+    Player.query.delete()
+    db.session.commit()
+
     for player_data in players:
         player_id = player_data["player_id"]
         response = requests.get(
@@ -63,4 +66,4 @@ def add_players():
 
 @player_routes.route("/", methods=['POST'])
 def update_players():
-    return add_players()
+    return "pass"  # add_players()
