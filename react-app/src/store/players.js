@@ -109,6 +109,12 @@ const add = (allPlayers) => ({
 //   dispatch(add(data))
 // }
 
+export const get_players = () => async (dispatch) => {
+  const response = fetch("/api/players", {
+    method: "GET"
+  })
+};
+
 export const get_roster_40 = () => async (dispatch) => {
   const responses = teams.map(team => fetch(
   `http://lookup-service-prod.mlb.com/json/named.roster_40.bam?team_id='${team.id}'`, {
@@ -131,13 +137,13 @@ export const get_roster_40 = () => async (dispatch) => {
     dispatch(add(allPlayers));
  
 
-  // fetch(`api/players`, {
-  // method: "POST",
-  // headers: {
-  //   "Content-Type": "application/json",
-  // },
-  // body: JSON.stringify(allPlayers)
-  // })
+  fetch(`api/players/`, {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify(allPlayers)
+  })
 
   return allPlayers;
 };

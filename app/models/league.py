@@ -27,7 +27,7 @@ class League(db.Model):
             "name": self.name,
             "league_type": self.league_type,
             "permissions": self.permissions,
-            "draft_type": self.draft,
+            "draft_type": self.draft_type,
             "draft_date": self.draft_date,
             "draft_time": self.draft_time,
             "user_id": self.user_id,

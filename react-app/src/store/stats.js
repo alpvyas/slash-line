@@ -54,28 +54,36 @@ export const get_stats_from_backend = () => async (dispatch, getState) => {
   // const data = await response.json()
 
   console.log("BACKEND REPLY: ", responses)
+  console.log("PLAYERS: ", players)
 
   const resolvedResponses = await Promise.all(responses);
-  // console.log("RESOLVED RESPONSES: ", resolvedResponses)
+  console.log("RESOLVED RESPONSES: ", resolvedResponses)
   const playerSats = resolvedResponses.map(response => response.json());
   const resolvedPlayerStats = await Promise.all(playerSats);
 
   const resolvedStatsList = []
   resolvedPlayerStats.forEach(stats => resolvedStatsList.push(stats))
   const allPlayerStats = []
-// console.log("RESOLVED STATS LIST: ", resolvedStatsList)
+console.log("RESOLVED STATS LIST: ", resolvedStatsList)
   resolvedStatsList.forEach(playerStat =>{
     if (playerStat.sport_hitting_tm.queryResults.row) {
       allPlayerStats.push(playerStat.sport_hitting_tm.queryResults.row)
     }
   })
 
+  console.log("ALL PLAYER STATS: ", allPlayerStats)
+
+  // const filteredPlayers = players.filter(player => player.player_id !== undefined)
+
+  // console.log("FILTERED PLAYERS LENGTH: ", filteredPlayers.length)
+
   allPlayerStats.forEach(playerStatObj => {
-    let id = playerStatObj.player_id;
+    const id = playerStatObj.player_id;
+    console.log("PLAYER ID AND NAME: ", playerStatObj.sport, " and ", id, " and ", playerStatObj.team_abbrev)
     let flag = true;
     let i = 0;
     while(true) {
-      if (players[i].player_id === id) {
+      if (players[i] && (players[i].player_id === id)) {
         playerStatObj.name = players[i].name_display_first_last;
         flag = false;
         break;

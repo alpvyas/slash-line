@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: ce53bd6cfbc6
+Revision ID: daa0f119a0f5
 Revises: 
-Create Date: 2021-05-10 12:49:05.557446
+Create Date: 2021-05-11 18:26:16.393483
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'ce53bd6cfbc6'
+revision = 'daa0f119a0f5'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -34,22 +34,22 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('first_name', sa.String(length=30), nullable=False),
     sa.Column('last_name', sa.String(length=30), nullable=False),
-    sa.Column('age', sa.String(length=10), nullable=False),
-    sa.Column('bats', sa.String(length=10), nullable=False),
-    sa.Column('birth_date', sa.String(length=10), nullable=False),
-    sa.Column('height_feet', sa.String(length=10), nullable=False),
-    sa.Column('height_inches', sa.String(length=10), nullable=False),
-    sa.Column('jersey_number', sa.String(length=10), nullable=False),
-    sa.Column('mlb_player_id', sa.String(length=10), nullable=False),
+    sa.Column('age', sa.String(length=30), nullable=False),
+    sa.Column('bats', sa.String(length=30), nullable=False),
+    sa.Column('birth_date', sa.String(length=30), nullable=False),
+    sa.Column('height_feet', sa.String(length=30), nullable=False),
+    sa.Column('height_inches', sa.String(length=30), nullable=False),
+    sa.Column('jersey_number', sa.String(length=30), nullable=False),
+    sa.Column('mlb_player_id', sa.String(length=30), nullable=False),
     sa.Column('mlb_team_name', sa.String(length=50), nullable=False),
     sa.Column('nick_name', sa.String(length=30), nullable=False),
-    sa.Column('primary_position', sa.String(length=10), nullable=False),
-    sa.Column('primary_position_text', sa.String(length=30), nullable=False),
+    sa.Column('primary_position', sa.String(length=30), nullable=False),
+    sa.Column('primary_position_txt', sa.String(length=30), nullable=False),
     sa.Column('primary_stat_type', sa.String(length=30), nullable=False),
     sa.Column('status', sa.String(length=30), nullable=False),
-    sa.Column('team_abbrev', sa.String(length=10), nullable=False),
-    sa.Column('throws', sa.String(length=10), nullable=False),
-    sa.Column('weight', sa.String(length=10), nullable=False),
+    sa.Column('team_abbrev', sa.String(length=30), nullable=False),
+    sa.Column('throws', sa.String(length=30), nullable=False),
+    sa.Column('weight', sa.String(length=30), nullable=False),
     sa.Column('created_at', sa.DateTime(), nullable=False),
     sa.Column('updated_at', sa.DateTime(), nullable=False),
     sa.PrimaryKeyConstraint('id')

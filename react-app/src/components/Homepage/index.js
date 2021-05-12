@@ -79,8 +79,9 @@ const Homepage = () => {
     
     dispatch(get_leagues(user.id))
     .then(data => setLeagues(data["leagues"]));
-
     }, [dispatch, user])
+
+    // console.log("LEAGUES: ", leagues)
 
     leagues.forEach(league => {
       let draftDateTime = league["draft_date"];
@@ -177,7 +178,7 @@ const Homepage = () => {
           <NavBar />
         </div>
         <div className="score-carousel-container">
-          {games && <Carousel items={games} show={5} infiniteLoop={true}/>}
+          {/* {games && <Carousel items={games} show={5} infiniteLoop={true}/>} */}
         </div>
         <div className="middle-container">
           <div className="standings-list-container">

@@ -15,9 +15,9 @@ def get_player_stats(game_type, season, player_id):
     response = requests.get(
         f"http://lookup-service-prod.mlb.com/json/named.sport_hitting_tm.bam?league_list_id='mlb'&game_type='{game_type}'&season='{season}'&player_id='{player_id}'")
     data = response.text
-    print("I'm inside the backend")
-    print("THIS IS THE NEW BACKEND RESPONSE: ", (data))
-    print("THIS IS THE RESPONSE JSONIFIED: ", jsonify(data))
+    # print("I'm inside the backend")
+    # print("THIS IS THE NEW BACKEND RESPONSE: ", (data))
+    # print("THIS IS THE RESPONSE JSONIFIED: ", jsonify(data))
     return data
 
 
@@ -28,6 +28,7 @@ def get_player_stats(game_type, season, player_id):
 @stats_routes.route("/game_type/<string:game_type>/season/<int:season>/players/<int:player_id>", methods=['POST'])
 def update_players(players):
     return add_players(players)
+
 
 @stats_routes.route("/game_type/<string:game_type>/season/<int:season>/players/<int:player_id>", methods=['GET'])
 def get_stats(game_type, season, player_id):
