@@ -1,5 +1,3 @@
-from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy.orm import backref
 import datetime
 from .db import db
 
@@ -11,10 +9,10 @@ class League(db.Model):
 
     name = db.Column(db.String(30), nullable=False, unique=True)
     league_type = db.Column(db.String(30), nullable=False)
-    permissions = db.Column(db.String(30), nullable=False,
+    permissions = db.Column(db.String(50), nullable=False,
                             default="Commissioner Only")
-    draft = db.Column(db.String(30), nullable=False,
-                      default="Live Standard Draft")
+    draft_type = db.Column(db.String(30), nullable=False,
+                           default="Live Standard Draft")
     draft_date = db.Column(db.String(30), nullable=False)
     draft_time = db.Column(db.String(30), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
@@ -29,7 +27,7 @@ class League(db.Model):
             "name": self.name,
             "league_type": self.league_type,
             "permissions": self.permissions,
-            "draft": self.draft,
+            "draft_type": self.draft_type,
             "draft_date": self.draft_date,
             "draft_time": self.draft_time,
             "user_id": self.user_id,

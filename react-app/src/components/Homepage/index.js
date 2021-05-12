@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useMemo }from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { get_leagues } from "../../store/createLeague";
-// import { get_game_details } from "../../store/gameDetails";
-import { game_details } from "../../mock_game_data";
+import { get_game_details, get_game_details_backend } from "../../store/gameDetails";
+// import { game_details } from "../../mock_game_data";
 import Carousel from "../Carousel";
 import Scorecard from "../Containers/Scorecard";
 import LeagueFormModal from "../LeagueFormModal";
@@ -15,11 +15,11 @@ import Standings from "../Containers/Standings";
 import Footer from "../Footer";
 import { get_roster_40 } from "../../store/players";
 import { get_stats_from_backend } from "../../store/stats";
-// import { get_game_details } from "../../store/gameDetails";
 
 const Homepage = () => {
   const dispatch = useDispatch();
-  const [leagues, setLeagues] = useState([])
+  const [leagues, setLeagues] = useState([]);
+  const [count, setCount] = useState(0);
   const user = useSelector((state) => state.session.user);
   const userPlayers = useSelector(state => state.userTeam.userTeam);
 
@@ -48,18 +48,28 @@ const Homepage = () => {
 
   const today = year + '-' + month + '-' + day;
   
-  // useEffect(() => {
-  //   // const game_data_interval = setInterval(() => {
-  //   //   dispatch(get_game_details(today))
-  //   // }, 60000);
-  //     const response = dispatch(get_game_details());
+  setInterval(() => setCount(count + 1), 5000);
 
+  useEffect(() => {
+      const response = dispatch(get_game_details_backend(today));
+      console.log("RESPONSE GAME DETAILS: ", response)
+
+    }, [dispatch, today])
+
+
+  // useEffect(() => {
+
+  //   const interval = setInterval(() => {
+  //     const response = dispatch(get_game_details(today));
   //     console.log("RESPONSE GAME DETAILS: ", response)
 
-  //   // return () => clearInterval(game_data_interval)
-  //   }, [dispatch])
+  //   }, 5000)
+    
+  //   return () => clearInterval(interval)
 
-  // const game_details = useSelector(state => state.gameDetails);
+  //   }, [dispatch, today])
+
+  const game_details = useSelector(state => state.gameDetails);
 
   const games = game_details&&game_details.map((game_detail) => (
     <Scorecard game={game_detail}/>
@@ -69,8 +79,9 @@ const Homepage = () => {
     
     dispatch(get_leagues(user.id))
     .then(data => setLeagues(data["leagues"]));
-
     }, [dispatch, user])
+
+    // console.log("LEAGUES: ", leagues)
 
     leagues.forEach(league => {
       let draftDateTime = league["draft_date"];
@@ -79,9 +90,9 @@ const Homepage = () => {
       let time = dateTimeArray[1];
 
       let dateArray = date.split("-");
-      console.log("DATE: ", dateArray)
+      // console.log("DATE: ", dateArray)
       let timeArray = time.split(":");
-      console.log("TIME: ", timeArray)
+      // console.log("TIME: ", timeArray)
 
       let year = dateArray[0];
       let month = dateArray[1];
@@ -167,7 +178,7 @@ const Homepage = () => {
           <NavBar />
         </div>
         <div className="score-carousel-container">
-          {games && <Carousel items={games} show={5} infiniteLoop={true}/>}
+          {/* {games && <Carousel items={games} show={5} infiniteLoop={true}/>} */}
         </div>
         <div className="middle-container">
           <div className="standings-list-container">

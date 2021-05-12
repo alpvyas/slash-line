@@ -142,7 +142,7 @@ const Players = () => {
           <NavBar />
         </div>
         <div className="score-carousel-container-players">
-          {games && <Carousel items={games} show={5} infiniteLoop={true}/>}
+          {/* {games && <Carousel items={games} show={5} infiniteLoop={true}/>} */}
         </div>
         <div className="middle-container">
           <div className="table-container">

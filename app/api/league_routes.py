@@ -17,6 +17,7 @@ def get_one_league(league_id):
 def get_all_leagues(user_id):
 
     leagues = League.query.filter_by(user_id=user_id).all()
+    print("BACKEND LEAGUES: ", leagues)
     return json.dumps({"leagues": [league.to_dict() for league in
                                    leagues]}, default=str)
 
@@ -27,7 +28,7 @@ def add_league(user_id):
     league = League(name=league_data["name"],
                     type=league_data["type"],
                     permissions=league_data["permissions"],
-                    draft=league_data["draft"],
+                    draft_type=league_data["draft"],
                     draft_date=league_data["draft_date"],
                     draft_time=league_data["draft_time"],
                     user_id=league_data["user_id"])

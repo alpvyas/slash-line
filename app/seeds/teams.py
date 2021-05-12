@@ -6,57 +6,49 @@ def seed_teams():
     teams = [
         {
             "name": "Press Your Pollock",
-            "wins": 36,
-            "losses": 27,
+            "points": 36,
             "user_id": 1,
             "league_id": 1,
         },
         {
             "name": "I Maeda Mistake",
-            "wins": 33,
-            "losses": 30,
+            "points": 33,
             "user_id": 9,
             "league_id": 1,
         },
         {
             "name": "Yes We Kenley!",
-            "wins": 36,
-            "losses": 27,
+            "points": 36,
             "user_id": 2,
             "league_id": 1,
         },
         {
             "name": "Joc Straps",
-            "wins": 32,
-            "losses": 31,
+            "points": 32,
             "user_id": 3,
             "league_id": 1,
         },
         {
             "name": "Hell's Bellinger",
-            "wins": 31,
-            "losses": 32,
+            "points": 31,
             "user_id": 4,
             "league_id": 1,
         },
         {
             "name": "Buehler's Day Off",
-            "wins": 20,
-            "losses": 43,
+            "points": 20,
             "user_id": 5,
             "league_id": 1,
         },
         {
             "name": "I Did It All For The Mookie",
-            "wins": 25,
-            "losses": 38,
+            "points": 25,
             "user_id": 6,
             "league_id": 1,
         },
         {
             "name": "Scherzer Thing",
-            "wins": 29,
-            "losses": 34,
+            "points": 29,
             "user_id": 7,
             "league_id": 1,
         }
@@ -65,8 +57,7 @@ def seed_teams():
 
     for team in teams:
         t = Team(name=team["name"],
-                 wins=team["wins"],
-                 losses=team["losses"],
+                 points=team["points"],
                  user_id=team["user_id"],
                  league_id=team["league_id"],
                  )

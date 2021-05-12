@@ -8,7 +8,7 @@ const Table = ({columns, rows, row_keys}) => {
   
   return (
     <>
-    {console.log("INSIDE TABLE: ", rows)}
+    {/* {console.log("INSIDE TABLE: ", rows)} */}
       <table className="dodgers-table">
         <thead>
           <tr>

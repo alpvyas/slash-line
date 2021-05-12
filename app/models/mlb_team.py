@@ -1,4 +1,3 @@
-from sqlalchemy.orm import backref
 from .db import db
 
 
@@ -13,8 +12,6 @@ class MLB_Team(db.Model):
     state = db.Column(db.String(30), nullable=False, unique=False)
     league = db.Column(db.String(30), nullable=False, unique=False)
     division = db.Column(db.String(30), nullable=False, unique=False)
-    players = db.relationship(
-        "Player", backref="MLB_Team", cascade="all, delete-orphan")
 
     def to_dict(self):
         return {
