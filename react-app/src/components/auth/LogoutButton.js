@@ -6,11 +6,12 @@ import {useDispatch} from 'react-redux'
 const LogoutButton = ({setAuthenticated}) => {
   const dispatch = useDispatch()
   let history = useHistory()
-  const onLogout = (e) => {
+  const onLogout = async (e) => {
     e.preventDefault();
-   dispatch(logout());
-  //  history.replace("/")
-  return <Redirect to ="/" ></Redirect>
+   const response = await dispatch(logout());
+  if (response) history.replace("/")
+
+  // return <Redirect to ="/" ></Redirect>
   };
 
   return (

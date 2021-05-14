@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo }from "react";
+import React, { useState, useEffect, useMemo, memo }from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { get_leagues } from "../../store/createLeague";
 import { get_game_details, get_game_details_backend } from "../../store/gameDetails";
@@ -16,6 +16,7 @@ import Footer from "../Footer";
 import { get_roster_40 } from "../../store/players";
 import { get_stats_from_backend } from "../../store/stats";
 import LogoutButton from "../auth/LogoutButton";
+import { Redirect, useHistory } from "react-router";
 
 const Homepage = () => {
   const dispatch = useDispatch();
@@ -23,6 +24,8 @@ const Homepage = () => {
   const [count, setCount] = useState(0);
   const user = useSelector((state) => state.session.user);
   const userPlayers = useSelector(state => state.userTeam.userTeam);
+
+
 
   // useEffect(() => {
   //   dispatch(get_roster_40())
@@ -77,9 +80,10 @@ const Homepage = () => {
   ));
 
   useEffect(() => {
-    
-    dispatch(get_leagues(user.id))
+    if (user){
+      dispatch(get_leagues(user.id))
     .then(data => setLeagues(data["leagues"]));
+    }
     }, [dispatch, user])
 
     // console.log("LEAGUES: ", leagues)
@@ -206,7 +210,7 @@ const Homepage = () => {
              </div>
            </div>
 
-           <div className="misc-container"><LogoutButton/></div>
+           {/* <div className="misc-container"><LogoutButton/></div> */}
          </div>
          <div className="footer-container">
           <Footer />
@@ -216,4 +220,4 @@ const Homepage = () => {
   )
 }
 
-export default Homepage;
+export default memo(Homepage);
