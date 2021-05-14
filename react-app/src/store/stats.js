@@ -46,7 +46,7 @@ export const get_stats_from_backend = () => async (dispatch, getState) => {
   const state = getState();
   const players = state.players.players;
 
-  const response = fetch(`api/stats`, {
+  const response = fetch(`/api/stats`, {
   method: "GET",
   headers: {
     "Content-Type": "application/json",

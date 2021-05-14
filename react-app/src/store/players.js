@@ -133,11 +133,12 @@ export const get_roster_40 = () => async (dispatch) => {
   const allPlayers = [];
   
   resolvedRosterObjects.forEach(roster => allPlayers.push(...roster.roster_40.queryResults.row))
+  
+  dispatch(add(allPlayers));
+  
+  console.log("ALL PLAYERS: ", allPlayers)
 
-    dispatch(add(allPlayers));
- 
-
-  fetch(`api/players/`, {
+  fetch(`/api/players/`, {
   method: "POST",
   headers: {
     "Content-Type": "application/json",

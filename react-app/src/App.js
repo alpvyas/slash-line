@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import * as sessionActions from "./store/session";
@@ -73,7 +73,8 @@ function App() {
           <Landing />
         </Route>
         <Route exact path="/home">
-          <Homepage />
+          {/* <Homepage /> */}
+          <MyTeam />
         </Route>
         <ProtectedRoute exact path="/users/:id" authenticated={authenticated}>
           <Profile />

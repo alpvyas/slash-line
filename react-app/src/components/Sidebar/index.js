@@ -8,8 +8,9 @@ import { Drawer, Divider, IconButton } from "@material-ui/core";
 import {logout} from "../../store/session"
 import ReorderIcon from "@material-ui/icons/Reorder";
 import "./Sidebar.css";
-import { NavLink, useHistory} from "react-router-dom";
+import { NavLink, Redirect, useHistory} from "react-router-dom";
 import { useDispatch } from "react-redux";
+// import LogoutButton from "../auth/LogoutButton";
 
 const styles = {
   sideNav: {
@@ -96,11 +97,15 @@ const Sidebar = ({ items, depthStep = 25, depth =0, expanded }) => {
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   const dispatch = useDispatch();
-  let history = useHistory();
+  const history = useHistory();
 
-  const onLogout = (e) => {
-   dispatch(logout())
-   history.replace("/")
+  const onLogout = async (e) => {
+    e.preventDefault()
+    const response = await dispatch(logout())
+    if (response) {
+        localStorage.clear("token")
+        history.push("/")
+    }
   };
 
   const toggle = () => {
@@ -141,7 +146,10 @@ const Sidebar = ({ items, depthStep = 25, depth =0, expanded }) => {
                                 )}
                             </React.Fragment>
                         ))}
-                        <NavLink to="/">
+                        {/* <ListItem to="/">
+                            <LogoutButton />
+                        </ListItem> */}
+                        <NavLink to="/testing">
                             <ListItem
                                 button
                                 className="sidebar-item"

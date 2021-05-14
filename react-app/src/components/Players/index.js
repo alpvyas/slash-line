@@ -121,11 +121,6 @@ const Players = () => {
 
   ], [addPlayer]);
 
-  // const get_players_by_pos = (players, positions) => {
-  //   const position_players = players.filter(player => positions.includes(player["position_txt"]))
-
-  //   return position_players;
-  // };
 
   useEffect(() => {
     dispatch(get_roster_40())
@@ -142,7 +137,7 @@ const Players = () => {
           <NavBar />
         </div>
         <div className="score-carousel-container-players">
-          {/* {games && <Carousel items={games} show={5} infiniteLoop={true}/>} */}
+          {games && <Carousel items={games} show={5} infiniteLoop={true}/>}
         </div>
         <div className="middle-container">
           <div className="table-container">
