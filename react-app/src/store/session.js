@@ -44,7 +44,9 @@ export const logout = () => async (dispatch) => {
     },
   });
 
+  console.log("RESPONSE LOGOUT: ", response)
   dispatch(removeUser())
+  
   return response
 };
 

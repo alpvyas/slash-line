@@ -6,7 +6,9 @@ class Player_Stats(db.Model):
     __tablename__ = "player_stats"
 
     id = db.Column(db.Integer, primary_key=True)
-
+    
+    mlb_player_id = db.Column(db.String, nullable=False)
+    
     a = db.Column(db.String(10), nullable=True)
     ab = db.Column(db.String(10), nullable=True)
     ao = db.Column(db.String(10), nullable=True)
@@ -84,8 +86,6 @@ class Player_Stats(db.Model):
     wp = db.Column(db.String(10), nullable=True)
     wpct = db.Column(db.String(10), nullable=True)
     xbh = db.Column(db.String(10), nullable=True)
-    player_id = db.Column(db.Integer, db.ForeignKey(
-        "players.id"), nullable=False)
     updated_at = db.Column(db.DateTime, nullable=False,
                            default=datetime.datetime.now())
 

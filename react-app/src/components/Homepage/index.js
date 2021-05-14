@@ -15,6 +15,7 @@ import Standings from "../Containers/Standings";
 import Footer from "../Footer";
 import { get_roster_40 } from "../../store/players";
 import { get_stats_from_backend } from "../../store/stats";
+import LogoutButton from "../auth/LogoutButton";
 
 const Homepage = () => {
   const dispatch = useDispatch();
@@ -205,7 +206,7 @@ const Homepage = () => {
              </div>
            </div>
 
-           {/* <div className="misc-container"></div> */}
+           <div className="misc-container"><LogoutButton/></div>
          </div>
          <div className="footer-container">
           <Footer />

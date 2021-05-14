@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, request, json
+from flask import Blueprint, jsonify, request, json, session
 import requests
 from app.models import db, Player
 
@@ -8,28 +8,26 @@ player_routes = Blueprint("player_routes",
 # ------------------------------------------------------------------------------
 #                         Player Operation Functions
 # ------------------------------------------------------------------------------
-teams = [108, 109, 110, 111, 112, 113, 114, 115, 116, 117,
-         118, 119, 120, 121, 133, 134, 135, 136, 137, 138,
-         139, 140, 141, 142, 143, 144, 145, 146, 147, 158]
 
 
 def add_players():
     players = json.loads(request.data.decode("utf-8"))
-    print("PLAYERS LENGTH: ", len(players))
+    print("PLAYERS FROM FRONT END: ", players)
+
+    d = Player.query.all()
+    for player in d:
+        db.session.delete(player)
+        db.session.commit()
+
     for player_data in players:
         player_id = player_data["player_id"]
+
         response = requests.get(
             f"http://lookup-service-prod.mlb.com/json/named.player_info.bam?sport_code='mlb'&player_id='{player_id}'")
 
         data = json.loads(response.text)
 
         player_info = data["player_info"]["queryResults"]["row"]
-
-        # print("DATA: ", data, " END DATA")
-
-        # print("PLAYER_INFO TYPE: ", type(player_info), " END TYPE")
-
-        # print("PLAYER_INFO: ", player_info, " END PLAYER_INFO")
 
         player = Player(first_name=player_info["name_use"],
                         last_name=player_info["name_last"],
@@ -52,8 +50,6 @@ def add_players():
 
         db.session.add(player)
         db.session.commit()
-    # print("I'm inside the backend")
-    # print("THIS IS PLAYERS: ", player_data)
 
     return "pass"
 # ------------------------------------------------------------------------------

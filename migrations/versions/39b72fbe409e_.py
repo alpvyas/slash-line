@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: daa0f119a0f5
+Revision ID: 39b72fbe409e
 Revises: 
-Create Date: 2021-05-11 18:26:16.393483
+Create Date: 2021-05-13 14:05:28.435900
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'daa0f119a0f5'
+revision = '39b72fbe409e'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -30,60 +30,9 @@ def upgrade():
     sa.UniqueConstraint('name'),
     sa.UniqueConstraint('stadium')
     )
-    op.create_table('players',
-    sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('first_name', sa.String(length=30), nullable=False),
-    sa.Column('last_name', sa.String(length=30), nullable=False),
-    sa.Column('age', sa.String(length=30), nullable=False),
-    sa.Column('bats', sa.String(length=30), nullable=False),
-    sa.Column('birth_date', sa.String(length=30), nullable=False),
-    sa.Column('height_feet', sa.String(length=30), nullable=False),
-    sa.Column('height_inches', sa.String(length=30), nullable=False),
-    sa.Column('jersey_number', sa.String(length=30), nullable=False),
-    sa.Column('mlb_player_id', sa.String(length=30), nullable=False),
-    sa.Column('mlb_team_name', sa.String(length=50), nullable=False),
-    sa.Column('nick_name', sa.String(length=30), nullable=False),
-    sa.Column('primary_position', sa.String(length=30), nullable=False),
-    sa.Column('primary_position_txt', sa.String(length=30), nullable=False),
-    sa.Column('primary_stat_type', sa.String(length=30), nullable=False),
-    sa.Column('status', sa.String(length=30), nullable=False),
-    sa.Column('team_abbrev', sa.String(length=30), nullable=False),
-    sa.Column('throws', sa.String(length=30), nullable=False),
-    sa.Column('weight', sa.String(length=30), nullable=False),
-    sa.Column('created_at', sa.DateTime(), nullable=False),
-    sa.Column('updated_at', sa.DateTime(), nullable=False),
-    sa.PrimaryKeyConstraint('id')
-    )
-    op.create_table('users',
-    sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('first_name', sa.String(length=30), nullable=False),
-    sa.Column('last_name', sa.String(length=30), nullable=False),
-    sa.Column('username', sa.String(length=30), nullable=False),
-    sa.Column('email', sa.String(length=255), nullable=False),
-    sa.Column('hashed_password', sa.String(length=255), nullable=False),
-    sa.Column('created_at', sa.DateTime(), nullable=False),
-    sa.Column('updated_at', sa.DateTime(), nullable=False),
-    sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('email'),
-    sa.UniqueConstraint('username')
-    )
-    op.create_table('leagues',
-    sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('name', sa.String(length=30), nullable=False),
-    sa.Column('league_type', sa.String(length=30), nullable=False),
-    sa.Column('permissions', sa.String(length=50), nullable=False),
-    sa.Column('draft_type', sa.String(length=30), nullable=False),
-    sa.Column('draft_date', sa.String(length=30), nullable=False),
-    sa.Column('draft_time', sa.String(length=30), nullable=False),
-    sa.Column('user_id', sa.Integer(), nullable=False),
-    sa.Column('created_at', sa.DateTime(), nullable=False),
-    sa.Column('updated_at', sa.DateTime(), nullable=False),
-    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
-    sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('name')
-    )
     op.create_table('player_stats',
     sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('mlb_player_id', sa.String(), nullable=False),
     sa.Column('a', sa.String(length=10), nullable=True),
     sa.Column('ab', sa.String(length=10), nullable=True),
     sa.Column('ao', sa.String(length=10), nullable=True),
@@ -161,10 +110,60 @@ def upgrade():
     sa.Column('wp', sa.String(length=10), nullable=True),
     sa.Column('wpct', sa.String(length=10), nullable=True),
     sa.Column('xbh', sa.String(length=10), nullable=True),
-    sa.Column('player_id', sa.Integer(), nullable=False),
     sa.Column('updated_at', sa.DateTime(), nullable=False),
-    sa.ForeignKeyConstraint(['player_id'], ['players.id'], ),
     sa.PrimaryKeyConstraint('id')
+    )
+    op.create_table('players',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('first_name', sa.String(length=30), nullable=False),
+    sa.Column('last_name', sa.String(length=30), nullable=False),
+    sa.Column('age', sa.String(length=30), nullable=False),
+    sa.Column('bats', sa.String(length=30), nullable=False),
+    sa.Column('birth_date', sa.String(length=30), nullable=False),
+    sa.Column('height_feet', sa.String(length=30), nullable=False),
+    sa.Column('height_inches', sa.String(length=30), nullable=False),
+    sa.Column('jersey_number', sa.String(length=30), nullable=False),
+    sa.Column('mlb_player_id', sa.String(length=30), nullable=False),
+    sa.Column('mlb_team_name', sa.String(length=50), nullable=False),
+    sa.Column('nick_name', sa.String(length=30), nullable=False),
+    sa.Column('primary_position', sa.String(length=30), nullable=False),
+    sa.Column('primary_position_txt', sa.String(length=30), nullable=False),
+    sa.Column('primary_stat_type', sa.String(length=30), nullable=False),
+    sa.Column('status', sa.String(length=30), nullable=False),
+    sa.Column('team_abbrev', sa.String(length=30), nullable=False),
+    sa.Column('throws', sa.String(length=30), nullable=False),
+    sa.Column('weight', sa.String(length=30), nullable=False),
+    sa.Column('created_at', sa.DateTime(), nullable=False),
+    sa.Column('updated_at', sa.DateTime(), nullable=False),
+    sa.PrimaryKeyConstraint('id')
+    )
+    op.create_table('users',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('first_name', sa.String(length=30), nullable=False),
+    sa.Column('last_name', sa.String(length=30), nullable=False),
+    sa.Column('username', sa.String(length=30), nullable=False),
+    sa.Column('email', sa.String(length=255), nullable=False),
+    sa.Column('hashed_password', sa.String(length=255), nullable=False),
+    sa.Column('created_at', sa.DateTime(), nullable=False),
+    sa.Column('updated_at', sa.DateTime(), nullable=False),
+    sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('email'),
+    sa.UniqueConstraint('username')
+    )
+    op.create_table('leagues',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('name', sa.String(length=30), nullable=False),
+    sa.Column('league_type', sa.String(length=30), nullable=False),
+    sa.Column('permissions', sa.String(length=50), nullable=False),
+    sa.Column('draft_type', sa.String(length=30), nullable=False),
+    sa.Column('draft_date', sa.String(length=30), nullable=False),
+    sa.Column('draft_time', sa.String(length=30), nullable=False),
+    sa.Column('user_id', sa.Integer(), nullable=False),
+    sa.Column('created_at', sa.DateTime(), nullable=False),
+    sa.Column('updated_at', sa.DateTime(), nullable=False),
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
+    sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('name')
     )
     op.create_table('teams',
     sa.Column('id', sa.Integer(), nullable=False),
@@ -194,9 +193,9 @@ def downgrade():
     # ### commands auto generated by Alembic - please adjust! ###
     op.drop_table('user_team_players')
     op.drop_table('teams')
-    op.drop_table('player_stats')
     op.drop_table('leagues')
     op.drop_table('users')
     op.drop_table('players')
+    op.drop_table('player_stats')
     op.drop_table('mlb_teams')
     # ### end Alembic commands ###
