@@ -20,6 +20,10 @@ from .config import Config
 
 app = Flask(__name__)
 
+# CSRFProtect(app)
+
+app.config["SECRET_KEY"] = "thisismysecretkey"
+
 # Setup login manager
 login = LoginManager(app)
 login.login_view = 'auth.unauthorized'
