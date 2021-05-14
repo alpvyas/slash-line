@@ -20,11 +20,6 @@ from .config import Config
 
 app = Flask(__name__)
 
-csrf = CSRFProtect(app)
-app.config["SECRET_KEY"] = "123456"
-app.config["WTF_CSRF_SECRET_KEY"] = "78910"
-csrf.init_app(app)
-
 # Setup login manager
 login = LoginManager(app)
 login.login_view = 'auth.unauthorized'
