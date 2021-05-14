@@ -73,8 +73,8 @@ function App() {
           <Landing />
         </Route>
         <Route exact path="/home">
-          {/* <Homepage /> */}
-          <MyTeam />
+          <Homepage />
+          {/* <MyTeam /> */}
         </Route>
         <ProtectedRoute exact path="/users/:id" authenticated={authenticated}>
           <Profile />

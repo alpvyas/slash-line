@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { memo, useState } from "react";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
@@ -104,7 +104,8 @@ const Sidebar = ({ items, depthStep = 25, depth =0, expanded }) => {
     const response = await dispatch(logout())
     if (response) {
         localStorage.clear("token")
-        history.push("/")
+        history.replace("/")
+        return <Redirect to="/" />
     }
   };
 
@@ -171,4 +172,4 @@ const Sidebar = ({ items, depthStep = 25, depth =0, expanded }) => {
     )
 };
 
-export default Sidebar;
+export default memo(Sidebar);
