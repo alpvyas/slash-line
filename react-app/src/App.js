@@ -14,6 +14,7 @@ import Players from "./components/Players";
 import Testing from "./components/Testing/";
 import Stats from "./components/Stats";
 import Footer from "./components/Footer";
+import NotFound from "./components/NotFound";
 
 function App() {
   const dispatch = useDispatch();
@@ -90,6 +91,9 @@ function App() {
         </Route>
         <Route exact path="/stats">
           <Stats />
+        </Route>
+        <Route exact path="not-found">
+          <NotFound />
         </Route>
       </Switch>
     </BrowserRouter>
