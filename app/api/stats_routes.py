@@ -128,11 +128,6 @@ def get_player_stats():
 #                    RESTful Routes -- Stats
 # ------------------------------------------------------------------------------
 
-@stats_routes.route("/game_type/<string:game_type>/season/<int:season>/players/<int:player_id>", methods=['POST'])
-def update_players(players):
-    return add_players(players)
-
-
 @stats_routes.route("/", methods=['GET'])
 def get_stats():
     return "HELLO"  # get_player_stats()
