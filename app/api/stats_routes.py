@@ -12,26 +12,28 @@ stats_routes = Blueprint("stats_routes",
 
 
 def get_player_stats():
-    print("HELLO")
+
+    d = Player_Stats.query.all()
+    for stats in d:
+        db.session.delete(stats)
+        db.session.commit()
+
     game_type = "R"
     today = date.today()
     year = today.year
 
     players = Player.query.all()
 
-    print("PLAYERS: ", players)
-
     for player in players:
         player_id = player.mlb_player_id
 
-        # if the player is a hitter/not a picther
-        if player.primary_stat_type == "hitting":
-            # get the players hitting stats
-            response = requests.get(
-                f"http://lookup-service-prod.mlb.com/json/named.sport_hitting_tm.bam?league_list_id='mlb'&game_type='{game_type}'&season='{year}'&player_id='{player_id}'")
+        response = requests.get(
+            f"http://lookup-service-prod.mlb.com/json/named.sport_hitting_tm.bam?league_list_id='mlb'&game_type='{game_type}'&season='{year}'&player_id='{player_id}'")
 
-            data = json.loads(response.text)
+        data = json.loads(response.text)
 
+        print("STATS DATA BACKEND: ", data)
+        if ((data["sport_hitting_tm"]["queryResults"]["totalSize"]) == "1"):
             stats_data = data["sport_hitting_tm"]["queryResults"]["row"]
 
             stats = Player_Stats(mlb_player_id=player_id,
@@ -121,7 +123,7 @@ def get_player_stats():
     print("I'm inside the backend")
     # print("THIS IS THE NEW BACKEND RESPONSE: ", (data))
     # print("THIS IS THE RESPONSE JSONIFIED: ", jsonify(data))
-    return "hello"  # data
+    return jsonify("hello")  # data
 
 
 # ------------------------------------------------------------------------------
@@ -130,4 +132,4 @@ def get_player_stats():
 
 @stats_routes.route("/", methods=['GET'])
 def get_stats():
-    return "HELLO"  # get_player_stats()
+    return get_player_stats()

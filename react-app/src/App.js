@@ -43,14 +43,14 @@ function App() {
   //   })();
   // }, []);
 
-  useEffect(() => {
-    dispatch(get_roster_40())
-    }, [dispatch])
+  // useEffect(() => {
+  //   dispatch(get_roster_40())
+  //   }, [dispatch])
 
     
-    useEffect(() => {
-      dispatch(get_stats_from_backend())
-    }, [dispatch]);
+    // useEffect(() => {
+    //   dispatch(get_stats_from_backend())
+    // }, [dispatch]);
 
   useEffect(()=>{
     dispatch(sessionActions.restoreUser())
