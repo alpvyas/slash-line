@@ -5,7 +5,7 @@ import ProtectedRoute from "./components/auth/ProtectedRoute";
 import * as sessionActions from "./store/session";
 import { authenticate } from "./services/auth";
 import { get_roster_40, teams } from "./store/players";
-import { get_stats_from_backend } from "./store/stats";
+import { get_stats_from_backend, update_season_stats } from "./store/stats";
 import Landing from "./components/Landing";
 import Homepage from "./components/Homepage";
 import Profile from "./components/Profile";
@@ -23,6 +23,27 @@ function App() {
   const user = useSelector(state => state.session.user);
   
   const players = useSelector(state => state.players.players);
+
+  const currentTime = new Date().getTime();
+  const callTime = new Date().setHours(2,0,0,0);
+  let waitTime;
+
+  if (currentTime < callTime) {
+    waitTime = callTime - currentTime;
+  }else {
+    waitTime = callTime + 86400000 - currentTime;
+  }
+
+  console.log("WAIT TIME: ", waitTime)
+
+  setTimeout(() => {
+    console.log("I'M IN SET TIMEOUT")
+    setInterval(() => {
+      dispatch(get_roster_40())
+      dispatch(update_season_stats())
+      dispatch(get_stats_from_backend())
+    }, 300000)
+  }, 60000)
   
   // const userTeam = useSelector(state => state.userTeam.userTeam);
   // const injuredPlayers = useSelector(state => state.injuredList.injuredList);

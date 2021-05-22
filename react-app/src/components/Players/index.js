@@ -122,9 +122,9 @@ const Players = () => {
   ], [addPlayer]);
 
 
-  useEffect(() => {
-    dispatch(get_roster_40())
-    }, [dispatch])
+  // useEffect(() => {
+  //   dispatch(get_roster_40())
+  //   }, [dispatch])
 
     const games = game_details&&game_details.map((game_detail) => (
     <Scorecard game={game_detail}/>

@@ -97,13 +97,13 @@ const Stats = () => {
   // // const playerID = "641355"
   // const players = [641355, 571970, 572041, 608369, 621035, 457759, 605131]
 
-  useEffect(() => {
-    dispatch(update_season_stats())
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(update_season_stats())
+  // }, [dispatch]);
 
-  useEffect(() => {
-    dispatch(get_stats_from_backend())
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(get_stats_from_backend())
+  // }, [dispatch]);
 
 
   return (
