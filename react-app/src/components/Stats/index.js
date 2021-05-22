@@ -5,7 +5,7 @@ import NavBar from "../NavBar";
 import Carousel from "../Carousel";
 import baseball_glove_dirt from "../../images/baseball-glove-dirt.png";
 import houser_bunt from "../../images/houser-bunt.png";
-import { get_season_hitting_stats, get_stats_from_backend } from "../../store/stats";
+import { get_season_hitting_stats, get_stats_from_backend, update_season_stats } from "../../store/stats";
 import ReactTable from "../ReactTable";
 import Footer from "../Footer";
 import "./Stats.css";
@@ -97,6 +97,9 @@ const Stats = () => {
   // // const playerID = "641355"
   // const players = [641355, 571970, 572041, 608369, 621035, 457759, 605131]
 
+  useEffect(() => {
+    dispatch(update_season_stats())
+  }, [dispatch]);
 
   useEffect(() => {
     dispatch(get_stats_from_backend())

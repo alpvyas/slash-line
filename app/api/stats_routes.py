@@ -11,10 +11,10 @@ stats_routes = Blueprint("stats_routes",
 # ------------------------------------------------------------------------------
 
 
-def get_player_stats():
+def update():
 
-    d = Player_Stats.query.all()
-    for stats in d:
+    delete = Player_Stats.query.all()
+    for stats in delete:
         db.session.delete(stats)
         db.session.commit()
 
@@ -32,7 +32,6 @@ def get_player_stats():
 
         data = json.loads(response.text)
 
-        print("STATS DATA BACKEND: ", data)
         if ((data["sport_hitting_tm"]["queryResults"]["totalSize"]) == "1"):
             stats_data = data["sport_hitting_tm"]["queryResults"]["row"]
 
@@ -120,16 +119,27 @@ def get_player_stats():
             db.session.add(stats)
             db.session.commit()
 
-    print("I'm inside the backend")
-    # print("THIS IS THE NEW BACKEND RESPONSE: ", (data))
-    # print("THIS IS THE RESPONSE JSONIFIED: ", jsonify(data))
-    return jsonify("hello")  # data
+    return jsonify({"message": "Player Stats have been updated."})
 
+
+def get_season_stats():
+
+    stats = Player_Stats.query.all()
+    print("BACKEND STATS: ", stats)
+
+    print("TYPE: ", type(stats[0]))
+    return jsonify(stats[0].to_dict())
 
 # ------------------------------------------------------------------------------
 #                    RESTful Routes -- Stats
 # ------------------------------------------------------------------------------
 
+
 @stats_routes.route("/", methods=['GET'])
 def get_stats():
-    return get_player_stats()
+    return get_season_stats()
+
+
+@stats_routes.route("/update", methods=['GET'])
+def update_stats():
+    return update()

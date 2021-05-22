@@ -32,7 +32,7 @@ function App() {
   //     dispatch(get_roster_40(team.id))
   //     })
   
-  //   }, [])
+  //   }, [dispatch])
   // useEffect(() => {
   //   (async() => {
   //     const user = await authenticate();
