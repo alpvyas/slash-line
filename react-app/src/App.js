@@ -37,13 +37,29 @@ function App() {
   console.log("WAIT TIME: ", waitTime)
 
   setTimeout(() => {
-    console.log("I'M IN SET TIMEOUT")
+    console.log("I'M IN 1st SET TIMEOUT")
     setInterval(() => {
       dispatch(get_roster_40())
-      dispatch(update_season_stats())
-      dispatch(get_stats_from_backend())
-    }, 300000)
+      console.log("Dispatched roster call")
+    }, 600000)
   }, 60000)
+
+  setTimeout(() => {
+    console.log("I'M IN 2nd SET TIMEOUT")
+    setInterval(() => {
+      dispatch(update_season_stats())
+      console.log("Dispatched season stats call")
+    }, 3600000)
+  }, 600000)
+
+  setTimeout(() => {
+    console.log("I'M IN 2nd SET TIMEOUT")
+    setInterval(() => {
+      dispatch(get_stats_from_backend())
+      console.log("Dispatched get stats call")
+    }, 3600000)
+  }, 960000)
+
   
   // const userTeam = useSelector(state => state.userTeam.userTeam);
   // const injuredPlayers = useSelector(state => state.injuredList.injuredList);
