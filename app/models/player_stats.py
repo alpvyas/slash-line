@@ -169,6 +169,6 @@ class Player_Stats(db.Model):
             "wpct": self.wpct,
             "xbh": self.xbh,
 
-            "player_id": self.player_id,
+            "mlb_player_id": self.mlb_player_id,
             "update_at": self.updated_at,
         }

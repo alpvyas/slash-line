@@ -41,6 +41,17 @@ export const get_single_player_stats = (player) => async (dispatch) => {
   return resolvedPlayerStats.sport_hitting_tm.queryResults.row;
 };
 
+export const update_season_stats = () => async (dispatch) => {
+
+  const response = await fetch(`/api/stats/update`, {
+  method: "GET",
+  })
+
+  const data = await response.json()
+
+  console.log("STATS DATA: ", data)
+};
+
 export const get_stats_from_backend = () => async (dispatch) => {
 
   const response = await fetch(`/api/stats`, {
