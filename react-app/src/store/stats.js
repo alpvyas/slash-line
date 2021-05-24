@@ -43,8 +43,11 @@ export const update_stats = () => async (dispatch) => {
     method: "GET",
   });
 
-  if (response) dispatch(get_stats)
-
+  if (response) {
+    const message = await response.json()
+    console.log(message)
+    dispatch(get_stats())
+  }
   return response;
 };
 

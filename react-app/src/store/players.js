@@ -119,26 +119,26 @@ const add = (allPlayers) => ({
 //update players --scheduled
 export const update_players = () => async (dispatch) => {
 
-  const rosters = dispatch(get_roster_40);
+  const players = await dispatch(get_roster_40());
 
-  if (rosters) dispatch(post_players(rosters));
+  if (players) dispatch(post_players(players));
 };
 
 //post updated players to backend database
-export const post_players = (rosters) => async (dispatch) => {
-  const response = fetch(`/api/players/`, {
+export const post_players = (players) => async (dispatch) => {
+  const response = await fetch(`/api/players/`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(rosters)
+    body: JSON.stringify(players)
     })
 
-  if (response) dispatch(update_stats);
+  if (response) dispatch(update_stats());
 };
 
 export const get_players = () => async (dispatch) => {
-  const response = fetch("/api/players", {
+  const response = await fetch("/api/players", {
     method: "GET"
   })
 };
@@ -166,13 +166,13 @@ export const get_roster_40 = () => async (dispatch) => {
   
   console.log("ALL PLAYERS: ", allPlayers)
 
-  fetch(`/api/players/`, {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json",
-  },
-  body: JSON.stringify(allPlayers)
-  })
+  // fetch(`/api/players/`, {
+  // method: "POST",
+  // headers: {
+  //   "Content-Type": "application/json",
+  // },
+  // body: JSON.stringify(allPlayers)
+  // })
 
   return allPlayers;
 };
