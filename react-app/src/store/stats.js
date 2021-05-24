@@ -1,5 +1,9 @@
 import { store } from "../index";
 
+/* ----------------------------------------------------------------------------
+                          ACTION TYPES
+------------------------------------------------------------------------------*/
+
 // const GET_TEAM_SEASON_STATS = "stats/team/seasons/GET";
 // const GET_TEAM_GAME_STATS = "stats/teams/games/GET";
 // const GET_PLAYER_SEASON_STATS = "stats/players/seasons/GET";
@@ -14,6 +18,11 @@ const ADD_PLAYERS_SEASON_STATS = "stats/players/seasons/ADD";
 // const ADD_CAREER_HITTING_STATS = "stats/players/career/hitting/ADD";
 // const ADD_CAREER_PITCHING_STATS = "stats/players/career/pitching/ADD";
 
+
+/* ----------------------------------------------------------------------------
+                          ACTION CREATORS
+------------------------------------------------------------------------------*/
+
 const add = (playerStats, season) => ({
   type: ADD_PLAYERS_SEASON_STATS,
   data: playerStats,
@@ -22,6 +31,10 @@ const add = (playerStats, season) => ({
 
 const season = 2021;
 const gameType = "R";
+
+/* ----------------------------------------------------------------------------
+                          THUNK ACTION CREATORS
+------------------------------------------------------------------------------*/
 
 export const get_single_player_stats = (player) => async (dispatch) => {
   const response = await fetch(`/api/stats/game_type/${gameType}/season/${season}/players/${player.player_id}`, {
@@ -135,6 +148,10 @@ export const get_stats_from_backend = () => async (dispatch) => {
 //   dispatch(add(allPlayerStats, season))
 //   console.log("MARKER 6") 
 // };
+
+/* ----------------------------------------------------------------------------
+                          STATS REDUCER
+------------------------------------------------------------------------------*/
 
 const initialState = { stats: [] };
 
