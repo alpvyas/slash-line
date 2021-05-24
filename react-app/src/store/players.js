@@ -126,7 +126,7 @@ export const update_players = () => async (dispatch) => {
 
 //post updated players to backend database
 export const post_players = (players) => async (dispatch) => {
-  const response = await fetch(`/api/players/`, {
+  const response = await fetch('/api/players/', {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -134,7 +134,11 @@ export const post_players = (players) => async (dispatch) => {
     body: JSON.stringify(players)
     })
 
-  if (response) dispatch(update_stats());
+  if (response) {
+    const message = await response.json();
+    console.log(message);
+    dispatch(update_stats());
+  }
 };
 
 export const get_players = () => async (dispatch) => {

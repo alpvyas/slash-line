@@ -51,7 +51,7 @@ def add_players():
         db.session.add(player)
         db.session.commit()
 
-    return "pass"
+    return jsonify({"message": "Players successfully updated."})
 # ------------------------------------------------------------------------------
 #                    RESTful Routes -- Players
 # ------------------------------------------------------------------------------

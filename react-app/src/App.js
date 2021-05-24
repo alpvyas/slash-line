@@ -55,8 +55,8 @@ useEffect(() => {
 
     setInterval(() => {
       dispatch(update_players())
-    }, 600000)
-  }, 10000)
+    }, 86400000)
+  }, waitTime)
   return () => clearTimeout(timer)
 }, [])
  
