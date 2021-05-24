@@ -50,7 +50,14 @@ function App() {
   // }, 10000)
 
 useEffect(() => {
-  dispatch(update_players())
+  const timer = setTimeout(() => {
+    dispatch(update_players())
+
+    setInterval(() => {
+      dispatch(update_players())
+    }, 600000)
+  }, 10000)
+  return () => clearTimeout(timer)
 }, [])
  
 
