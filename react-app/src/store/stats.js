@@ -1,5 +1,9 @@
 import { store } from "../index";
 
+/* ----------------------------------------------------------------------------
+                          ACTION TYPES
+------------------------------------------------------------------------------*/
+
 // const GET_TEAM_SEASON_STATS = "stats/team/seasons/GET";
 // const GET_TEAM_GAME_STATS = "stats/teams/games/GET";
 // const GET_PLAYER_SEASON_STATS = "stats/players/seasons/GET";
@@ -14,6 +18,11 @@ const ADD_PLAYERS_SEASON_STATS = "stats/players/seasons/ADD";
 // const ADD_CAREER_HITTING_STATS = "stats/players/career/hitting/ADD";
 // const ADD_CAREER_PITCHING_STATS = "stats/players/career/pitching/ADD";
 
+
+/* ----------------------------------------------------------------------------
+                          ACTION CREATORS
+------------------------------------------------------------------------------*/
+
 const add = (playerStats, season) => ({
   type: ADD_PLAYERS_SEASON_STATS,
   data: playerStats,
@@ -22,6 +31,39 @@ const add = (playerStats, season) => ({
 
 const season = 2021;
 const gameType = "R";
+
+/* ----------------------------------------------------------------------------
+                          THUNK ACTION CREATORS
+------------------------------------------------------------------------------*/
+
+//update player stats backend--scheduled
+export const update_stats = () => async (dispatch) => {
+
+  const response = await fetch('/api/stats/update', {
+    method: "GET",
+  });
+
+  if (response) {
+    const message = await response.json()
+    console.log(message)
+    dispatch(get_stats())
+  }
+  return response;
+};
+
+//get player stats from backend database
+export const get_stats = () => async (dispatch) => {
+
+  const response = await fetch(`/api/stats`, {
+  method: "GET",
+  })
+
+  const statsData = await response.json()
+
+  console.log("STATS DATA: ", statsData)
+
+
+};
 
 export const get_single_player_stats = (player) => async (dispatch) => {
   const response = await fetch(`/api/stats/game_type/${gameType}/season/${season}/players/${player.player_id}`, {
@@ -52,15 +94,15 @@ export const update_season_stats = () => async (dispatch) => {
   console.log("STATS DATA: ", data)
 };
 
-export const get_stats_from_backend = () => async (dispatch) => {
+// export const get_stats = () => async (dispatch) => {
 
-  const response = await fetch(`/api/stats`, {
-  method: "GET",
-  })
+//   const response = await fetch(`/api/stats`, {
+//   method: "GET",
+//   })
 
-  const data = await response.json()
+//   const data = await response.json()
 
-  console.log("STATS DATA: ", data)
+//   console.log("STATS DATA: ", data)
   
  
 
@@ -110,7 +152,7 @@ export const get_stats_from_backend = () => async (dispatch) => {
 //   dispatch(add(allPlayerStats, season))
   // console.log("AFTER DISPATCH / END OF STATS THUNK") 
 
-};
+// };
 
 // export const get_season_hitting_stats = (gameType, season) => async (dispatch) => { 
 //   const responses = players.map(player => fetch(`http://lookup-service-prod.mlb.com/json/named.sport_hitting_tm.bam?league_list_id='mlb'&game_type='R'&season='2018'&player_id='${player}'`, {
@@ -135,6 +177,10 @@ export const get_stats_from_backend = () => async (dispatch) => {
 //   dispatch(add(allPlayerStats, season))
 //   console.log("MARKER 6") 
 // };
+
+/* ----------------------------------------------------------------------------
+                          STATS REDUCER
+------------------------------------------------------------------------------*/
 
 const initialState = { stats: [] };
 

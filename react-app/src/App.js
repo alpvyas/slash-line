@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import * as sessionActions from "./store/session";
 import { authenticate } from "./services/auth";
-import { get_roster_40, teams } from "./store/players";
+import { get_roster_40, teams, update_players } from "./store/players";
 import { get_stats_from_backend, update_season_stats } from "./store/stats";
 import Landing from "./components/Landing";
 import Homepage from "./components/Homepage";
@@ -36,29 +36,30 @@ function App() {
 
   console.log("WAIT TIME: ", waitTime)
 
-  setTimeout(() => {
-    console.log("I'M IN 1st SET TIMEOUT")
-    setInterval(() => {
-      dispatch(get_roster_40())
-      console.log("Dispatched roster call")
-    }, 600000)
-  }, 60000)
+  // setTimeout(() => {
+  //   console.log("I'M IN SET TIMEOUT")
+  //   console.log("BEFORE FIRST DISPATCH CALL")
+  //   dispatch(update_players())
+  //   console.log("AFTER FIRST DISPATCH CALL")
+  //   setInterval(() => {
+  //     console.log("INSIDE SET INTERVAL")
+  //     console.log("BEFORE DISPATCH CALL")
+  //     dispatch(update_players())
+  //     console.log("AFTER DISPATCH CALL")
+  //   }, 600000)
+  // }, 10000)
 
-  setTimeout(() => {
-    console.log("I'M IN 2nd SET TIMEOUT")
-    setInterval(() => {
-      dispatch(update_season_stats())
-      console.log("Dispatched season stats call")
-    }, 3600000)
-  }, 600000)
+useEffect(() => {
+  const timer = setTimeout(() => {
+    dispatch(update_players())
 
-  setTimeout(() => {
-    console.log("I'M IN 2nd SET TIMEOUT")
     setInterval(() => {
-      dispatch(get_stats_from_backend())
-      console.log("Dispatched get stats call")
-    }, 3600000)
-  }, 960000)
+      dispatch(update_players())
+    }, 86400000)
+  }, waitTime)
+  return () => clearTimeout(timer)
+}, [])
+ 
 
   
   // const userTeam = useSelector(state => state.userTeam.userTeam);
