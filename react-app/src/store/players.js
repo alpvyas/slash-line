@@ -1,8 +1,6 @@
+import { update_stats } from "./stats";
 
-// export const team_ids = [108, 109, 110, 111, 112, 113, 114, 115, 116, 117,
-//              118, 119, 120, 121, 133, 134, 135, 136, 137, 138,
-//              139, 140, 141, 142, 143, 144, 145, 146, 147, 158];
-
+// team ids for MLB DATA API
 export const teams = [
                   {
                     team: "ATL",
@@ -98,16 +96,46 @@ export const teams = [
                   
 ];
 
+/* ----------------------------------------------------------------------------
+                          ACTION TYPES
+------------------------------------------------------------------------------*/
+
 const ADD_PLAYERS = "players/ADD";
+
+/* ----------------------------------------------------------------------------
+                          ACTION CREATORS
+------------------------------------------------------------------------------*/
 
 const add = (allPlayers) => ({
     type: ADD_PLAYERS,
     roster: allPlayers
 });
 
-// export const add_players = (data) => async (dispatch) => {
-//   dispatch(add(data))
-// }
+
+/* ----------------------------------------------------------------------------
+                          THUNK ACTION CREATORS
+------------------------------------------------------------------------------*/
+
+//update players --scheduled
+export const update_players = () => async (dispatch) => {
+
+  const rosters = dispatch(get_roster_40);
+
+  if (rosters) dispatch(post_players(rosters));
+};
+
+//post updated players to backend database
+export const post_players = (rosters) => async (dispatch) => {
+  const response = fetch(`/api/players/`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(rosters)
+    })
+
+  if (response) dispatch(update_stats);
+};
 
 export const get_players = () => async (dispatch) => {
   const response = fetch("/api/players", {
@@ -125,7 +153,7 @@ export const get_roster_40 = () => async (dispatch) => {
   }))
 
   const resolvedResponses = await Promise.all(responses);
-  // console.log("RESOLVED RESPONSES:", resolvedResponses) 
+ 
   const rosterObjects = resolvedResponses.map(response => response.json());
 
   const resolvedRosterObjects = await Promise.all(rosterObjects);
@@ -148,6 +176,10 @@ export const get_roster_40 = () => async (dispatch) => {
 
   return allPlayers;
 };
+
+/* ----------------------------------------------------------------------------
+                          PLAYERS REDUCER
+------------------------------------------------------------------------------*/
 
 const initialState = { players: [] };
 
