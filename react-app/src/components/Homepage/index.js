@@ -22,7 +22,7 @@ const Homepage = () => {
   const dispatch = useDispatch();
   const [leagues, setLeagues] = useState([]);
   const [count, setCount] = useState(0);
-  const user = useSelector((state) => state.session.user);
+  const user = useSelector(state => state.session.user);
   const userPlayers = useSelector(state => state.userTeam.userTeam);
 
 
