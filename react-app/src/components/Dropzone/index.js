@@ -1,18 +1,22 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { DropzoneArea, DropzoneDialog } from "material-ui-dropzone";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { upload_files } from "../../store/uploads";
+import { DropzoneDialog } from "material-ui-dropzone";
 import Button from "@material-ui/core/Button";
 import "./Dropzone.css";
 
 const Dropzone = () => {
+  const dispatch = useDispatch();
 
   const [open, setOpen] = useState(false);
   const [files, setFiles] = useState([]);
-  const isOpen = useSelector(state => state.open);
 
   const handleSave = files => {
     setFiles(files);
+    console.log("FRONTEND FILES: ", files)
     setOpen(false);
+
+    const response = dispatch(upload_files(files));
   };
 
   const handleOpen = () => {
@@ -30,7 +34,7 @@ const Dropzone = () => {
       </Button>
       <DropzoneDialog
         open={open}
-        onSave={() => handleSave()}
+        onSave={(files) => handleSave(files)}
         acceptedFiles={['image/jpeg', 'image/png', 'image/bmp']}
         showPreviews={true}
         maxFileSize={5000000}
