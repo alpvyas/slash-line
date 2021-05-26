@@ -16,6 +16,14 @@ const Dropzone = () => {
     console.log("FRONTEND FILES: ", files)
     setOpen(false);
 
+    const formData = new FormData();
+
+    files.forEach((file, i) => {
+      formData.append(i, file);
+    });
+
+    console.log("FORM DATA: ", formData)
+
     const response = dispatch(upload_files(files));
   };
 
@@ -34,7 +42,7 @@ const Dropzone = () => {
       </Button>
       <DropzoneDialog
         open={open}
-        onSave={(files) => handleSave(files)}
+        onSave={(fileObjects) => handleSave(fileObjects)}
         acceptedFiles={['image/jpeg', 'image/png', 'image/bmp']}
         showPreviews={true}
         maxFileSize={5000000}
