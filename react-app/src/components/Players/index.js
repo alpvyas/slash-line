@@ -57,20 +57,20 @@ const Players = () => {
   const columns = useMemo((height, date, bday, day, month, year) => [
     {
       Header: "Player",
-      accessor: "name_display_first_last",
+      accessor: "last_name",
       Cell: props => (
         <button onClick={() => getStats(props.row.original)}>
-          {props.row.original.name_display_first_last}
+          {props.row.original.first_name}{" "}{props.row.original.last_name}
         </button>
       ),
     },
     {
       Header: "Team",
-      accessor: "team_name",
+      accessor: "mlb_team_name",
     },
     {
       Header: "Position",
-      accessor: "position_txt",
+      accessor: "primary_position_txt",
     },
     {
       Header: "Bats",
@@ -105,10 +105,14 @@ const Players = () => {
         return month + " / " + day + " / " + year
       },
     },
-    // {
-    //   Header: "Player ID",
-    //   accessor: "player_id",
-    // },
+     {
+      Header: "Nickname",
+      accessor: "nick_name",
+    },
+    {
+      Header: "Status",
+      accessor: "status",
+    },
     {
       Header: "",
       accessor: "player_id",
@@ -121,10 +125,6 @@ const Players = () => {
 
   ], [addPlayer]);
 
-
-  // useEffect(() => {
-  //   dispatch(get_roster_40())
-  //   }, [dispatch])
 
     const games = game_details&&game_details.map((game_detail) => (
     <Scorecard game={game_detail}/>

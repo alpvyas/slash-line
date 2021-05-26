@@ -52,9 +52,23 @@ def add_players():
         db.session.commit()
 
     return jsonify({"message": "Players successfully updated."})
+
+
+def get_players():
+
+    players = Player.query.all()
+
+    return jsonify({"players": [player.to_dict() for player in players],
+                    "message": "Retrieved players successfully."})
+
 # ------------------------------------------------------------------------------
 #                    RESTful Routes -- Players
 # ------------------------------------------------------------------------------
+
+
+@player_routes.route("/", methods=['GET'])
+def get_players_from_db():
+    return get_players()
 
 
 @player_routes.route("/", methods=['POST'])

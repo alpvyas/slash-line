@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import * as sessionActions from "./store/session";
 import { authenticate } from "./services/auth";
-import { get_roster_40, teams, update_players } from "./store/players";
+import { get_players, get_roster_40, teams, update_players } from "./store/players";
 import { get_stats_from_backend, update_season_stats } from "./store/stats";
 import Landing from "./components/Landing";
 import Homepage from "./components/Homepage";
@@ -34,21 +34,6 @@ function App() {
     waitTime = callTime + 86400000 - currentTime;
   }
 
-  console.log("WAIT TIME: ", waitTime)
-
-  // setTimeout(() => {
-  //   console.log("I'M IN SET TIMEOUT")
-  //   console.log("BEFORE FIRST DISPATCH CALL")
-  //   dispatch(update_players())
-  //   console.log("AFTER FIRST DISPATCH CALL")
-  //   setInterval(() => {
-  //     console.log("INSIDE SET INTERVAL")
-  //     console.log("BEFORE DISPATCH CALL")
-  //     dispatch(update_players())
-  //     console.log("AFTER DISPATCH CALL")
-  //   }, 600000)
-  // }, 10000)
-
 useEffect(() => {
   const timer = setTimeout(() => {
     dispatch(update_players())
@@ -60,7 +45,9 @@ useEffect(() => {
   return () => clearTimeout(timer)
 }, [])
  
-
+ useEffect(() => {
+    dispatch(get_players())
+    }, [])
   
   // const userTeam = useSelector(state => state.userTeam.userTeam);
   // const injuredPlayers = useSelector(state => state.injuredList.injuredList);
@@ -80,11 +67,6 @@ useEffect(() => {
   //     setLoaded(true);
   //   })();
   // }, []);
-
-  // useEffect(() => {
-  //   dispatch(get_roster_40())
-  //   }, [dispatch])
-
     
     // useEffect(() => {
     //   dispatch(get_stats_from_backend())
@@ -113,7 +95,6 @@ useEffect(() => {
         </Route>
         <Route exact path="/home">
           <Homepage />
-          {/* <MyTeam /> */}
         </Route>
         <ProtectedRoute exact path="/users/:id" authenticated={authenticated}>
           <Profile />
