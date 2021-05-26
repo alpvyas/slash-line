@@ -1,11 +1,10 @@
-import React, { useState, useEffect, useMemo } from "react";
-import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import * as sessionActions from "./store/session";
 import { authenticate } from "./services/auth";
-import { get_roster_40, teams, update_players } from "./store/players";
-import { get_stats_from_backend, update_season_stats } from "./store/stats";
+import { update_players } from "./store/players";
 import Landing from "./components/Landing";
 import Homepage from "./components/Homepage";
 import Profile from "./components/Profile";
@@ -13,8 +12,8 @@ import MyTeam from "./components/MyTeam";
 import Players from "./components/Players";
 import Testing from "./components/Testing/";
 import Stats from "./components/Stats";
-import Footer from "./components/Footer";
 import NotFound from "./components/NotFound";
+import Dropzone from "./components/Dropzone";
 
 function App() {
   const dispatch = useDispatch();
@@ -24,6 +23,8 @@ function App() {
   
   const players = useSelector(state => state.players.players);
 
+
+  //calculating wait time for scheduled data update used in following useEffect/setTimeout
   const currentTime = new Date().getTime();
   const callTime = new Date().setHours(2,0,0,0);
   let waitTime;
@@ -34,21 +35,7 @@ function App() {
     waitTime = callTime + 86400000 - currentTime;
   }
 
-  console.log("WAIT TIME: ", waitTime)
-
-  // setTimeout(() => {
-  //   console.log("I'M IN SET TIMEOUT")
-  //   console.log("BEFORE FIRST DISPATCH CALL")
-  //   dispatch(update_players())
-  //   console.log("AFTER FIRST DISPATCH CALL")
-  //   setInterval(() => {
-  //     console.log("INSIDE SET INTERVAL")
-  //     console.log("BEFORE DISPATCH CALL")
-  //     dispatch(update_players())
-  //     console.log("AFTER DISPATCH CALL")
-  //   }, 600000)
-  // }, 10000)
-
+//sets up data update scheduled for each night at 2AM PST
 useEffect(() => {
   const timer = setTimeout(() => {
     dispatch(update_players())
@@ -80,15 +67,6 @@ useEffect(() => {
   //     setLoaded(true);
   //   })();
   // }, []);
-
-  // useEffect(() => {
-  //   dispatch(get_roster_40())
-  //   }, [dispatch])
-
-    
-    // useEffect(() => {
-    //   dispatch(get_stats_from_backend())
-    // }, [dispatch]);
 
   useEffect(()=>{
     dispatch(sessionActions.restoreUser())
@@ -130,8 +108,11 @@ useEffect(() => {
         <Route exact path="/stats">
           <Stats />
         </Route>
-        <Route exact path="not-found">
+        <Route exact path="/not-found">
           <NotFound />
+        </Route>
+        <Route exact path="/upload">
+          <Dropzone />
         </Route>
       </Switch>
     </BrowserRouter>
