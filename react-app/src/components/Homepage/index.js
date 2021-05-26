@@ -25,17 +25,6 @@ const Homepage = () => {
   const user = useSelector((state) => state.session.user);
   const userPlayers = useSelector(state => state.userTeam.userTeam);
 
-
-
-  // useEffect(() => {
-  //   dispatch(get_roster_40())
-  //   }, [dispatch])
-
-    
-  //   useEffect(() => {
-  //     dispatch(get_stats_from_backend())
-  //   }, [dispatch]);
-
   const date = new Date();
 
   let year = date.getFullYear();

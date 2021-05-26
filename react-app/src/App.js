@@ -5,7 +5,7 @@ import ProtectedRoute from "./components/auth/ProtectedRoute";
 import * as sessionActions from "./store/session";
 import { authenticate } from "./services/auth";
 import { get_players, get_roster_40, teams, update_players } from "./store/players";
-import { get_stats_from_backend, update_season_stats } from "./store/stats";
+import { get_stats, get_stats_from_backend, update_season_stats } from "./store/stats";
 import Landing from "./components/Landing";
 import Homepage from "./components/Homepage";
 import Profile from "./components/Profile";
@@ -34,20 +34,24 @@ function App() {
     waitTime = callTime + 86400000 - currentTime;
   }
 
-useEffect(() => {
-  const timer = setTimeout(() => {
-    dispatch(update_players())
-
-    setInterval(() => {
+  useEffect(() => {
+    const timer = setTimeout(() => {
       dispatch(update_players())
-    }, 86400000)
-  }, waitTime)
-  return () => clearTimeout(timer)
-}, [])
+
+      setInterval(() => {
+        dispatch(update_players())
+      }, 86400000)
+    }, waitTime)
+    return () => clearTimeout(timer)
+  }, [])
  
  useEffect(() => {
     dispatch(get_players())
     }, [])
+
+  useEffect(() => {
+      dispatch(get_stats())
+    }, []);
   
   // const userTeam = useSelector(state => state.userTeam.userTeam);
   // const injuredPlayers = useSelector(state => state.injuredList.injuredList);
@@ -68,9 +72,6 @@ useEffect(() => {
   //   })();
   // }, []);
     
-    // useEffect(() => {
-    //   dispatch(get_stats_from_backend())
-    // }, [dispatch]);
 
   useEffect(()=>{
     dispatch(sessionActions.restoreUser())

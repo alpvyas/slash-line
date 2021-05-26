@@ -62,6 +62,8 @@ export const get_stats = () => async (dispatch) => {
 
   console.log("STATS DATA: ", statsData)
 
+  dispatch(add(statsData, season))
+
 
 };
 
