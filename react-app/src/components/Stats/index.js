@@ -1,17 +1,25 @@
-import React, { useMemo } from "react";
-import { useSelector } from "react-redux";
-import { games } from "../../mock_game_data";
+import React, { useEffect, useMemo } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import NavBar from "../NavBar";
 import Carousel from "../Carousel";
 import houser_bunt from "../../images/houser-bunt.png";
 import ReactTable from "../ReactTable";
 import Footer from "../Footer";
 import "./Stats.css";
+import Scorecard from "../Containers/Scorecard";
 
 const Stats = () => {
+  const dispatch = useDispatch();
+  
   const players = useSelector(state => state.players.players);
   
   const stats = useSelector(state => state.stats.stats.stats);
+
+  const game_details = useSelector(state => state.gameDetails.gameDetails);
+
+  const games = game_details&&game_details.map((game_detail) => (
+    <Scorecard game={game_detail}/>
+  ));
 
   const columns = useMemo(() => [
     {

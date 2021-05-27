@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useMemo, memo }from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { get_leagues } from "../../store/createLeague";
-import { get_game_details, get_game_details_backend } from "../../store/gameDetails";
-// import { game_details } from "../../mock_game_data";
 import Carousel from "../Carousel";
 import Scorecard from "../Containers/Scorecard";
 import LeagueFormModal from "../LeagueFormModal";
@@ -13,8 +11,6 @@ import bauer_practice from "../../images/bauer-practice.png";
 import "./Homepage.css";
 import Standings from "../Containers/Standings";
 import Footer from "../Footer";
-import { get_roster_40 } from "../../store/players";
-import { get_stats_from_backend } from "../../store/stats";
 import LogoutButton from "../auth/LogoutButton";
 import { Redirect, useHistory } from "react-router";
 
@@ -25,29 +21,8 @@ const Homepage = () => {
   const user = useSelector((state) => state.session.user);
   const userPlayers = useSelector(state => state.userTeam.userTeam);
 
-  const date = new Date();
-
-  let year = date.getFullYear();
-  let month = date.getMonth();
-  let day = date.getDate();
-
-  const months = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
-  
-  for (let index = 0; index < months.length; index++) {
-    if (month === index) month = months[index]
-  };
-
-  if (day < 10) day = `0${day}`;
-
-  const today = year + '-' + month + '-' + day;
   
   setInterval(() => setCount(count + 1), 5000);
-
-  useEffect(() => {
-      const response = dispatch(get_game_details_backend(today));
-      console.log("RESPONSE GAME DETAILS: ", response)
-
-    }, [dispatch, today])
 
 
   // useEffect(() => {
@@ -62,7 +37,7 @@ const Homepage = () => {
 
   //   }, [dispatch, today])
 
-  const game_details = useSelector(state => state.gameDetails);
+  const game_details = useSelector(state => state.gameDetails.gameDetails);
 
   const games = game_details&&game_details.map((game_detail) => (
     <Scorecard game={game_detail}/>
@@ -75,8 +50,6 @@ const Homepage = () => {
     }
     }, [dispatch, user])
 
-    // console.log("LEAGUES: ", leagues)
-
     leagues.forEach(league => {
       let draftDateTime = league["draft_date"];
       let dateTimeArray = draftDateTime.split(" ");
@@ -84,9 +57,8 @@ const Homepage = () => {
       let time = dateTimeArray[1];
 
       let dateArray = date.split("-");
-      // console.log("DATE: ", dateArray)
+    
       let timeArray = time.split(":");
-      // console.log("TIME: ", timeArray)
 
       let year = dateArray[0];
       let month = dateArray[1];
@@ -108,7 +80,7 @@ const Homepage = () => {
   const row_keys = ["name", "league_type", "permissions", "draft",
                     "date", "time"];
 
-  const myPlayerColumns = useMemo((height, date, bday, day, month, year) => [
+  const myPlayerColumns = useMemo((date, bday, day, month, year) => [
     {
       Header: "Player",
       accessor: "name_display_first_last",
@@ -132,9 +104,9 @@ const Homepage = () => {
     {
       Header: "Height",
       accessor: "height_feet",
-      Cell: props => (
-        height = `${props.row.original.height_feet}${"'"}${props.row.original.height_inches}`
-      ),
+      Cell: props => {
+        return `${props.row.original.height_feet}${"'"}${props.row.original.height_inches}`
+      },
     },
     {
       Header: "Weight",
@@ -172,7 +144,7 @@ const Homepage = () => {
           <NavBar />
         </div>
         <div className="score-carousel-container">
-          {/* {games && <Carousel items={games} show={5} infiniteLoop={true}/>} */}
+          {games && <Carousel items={games} show={5} infiniteLoop={true}/>}
         </div>
         <div className="middle-container">
           <div className="standings-list-container">

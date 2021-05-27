@@ -1,7 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { get_roster_40, teams } from "../../store/players";
-import { game_details } from "../../mock_game_data";
 import NavBar from "../NavBar";
 import Carousel from "../Carousel";
 import Scorecard from "../Containers/Scorecard";
@@ -126,7 +124,9 @@ const Players = () => {
   ], [addPlayer]);
 
 
-    const games = game_details&&game_details.map((game_detail) => (
+  const game_details = useSelector(state => state.gameDetails.gameDetails);
+
+  const games = game_details&&game_details.map((game_detail) => (
     <Scorecard game={game_detail}/>
   ));
 

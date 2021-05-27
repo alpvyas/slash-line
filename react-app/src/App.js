@@ -15,6 +15,7 @@ import Testing from "./components/Testing/";
 import Stats from "./components/Stats";
 import Footer from "./components/Footer";
 import NotFound from "./components/NotFound";
+import { get_game_details, get_game_details_backend } from "./store/gameDetails";
 
 function App() {
   const dispatch = useDispatch();
@@ -45,13 +46,41 @@ function App() {
     return () => clearTimeout(timer)
   }, [])
  
- useEffect(() => {
+  useEffect(() => {
     dispatch(get_players())
     }, [])
 
   useEffect(() => {
       dispatch(get_stats())
     }, []);
+
+
+  const date = new Date();
+
+  let year = date.getFullYear();
+  let month = date.getMonth();
+  let day = date.getDate();
+
+  const months = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+  
+  for (let index = 0; index < months.length; index++) {
+    if (month === index) month = months[index]
+  };
+
+  if (day < 10) day = `0${day}`;
+
+  const today = year + '-' + month + '-' + day;
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      dispatch(get_game_details_backend(today))
+
+      setInterval(() => {
+        dispatch(get_game_details_backend(today))
+      }, 60000)
+    }, 10000)
+    return () => clearTimeout(timer)
+  }, [])
   
   // const userTeam = useSelector(state => state.userTeam.userTeam);
   // const injuredPlayers = useSelector(state => state.injuredList.injuredList);

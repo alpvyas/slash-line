@@ -8,28 +8,28 @@ const Scorecard = ({ game }) => {
 
   const datetime = game.DateTime;
 
-  // const datetime_array = datetime.split("T");
-  // const time = datetime_array[1].split(":");
-  // const hour_24_clock = parseInt(time[0], 10);
-  // const hour = hour_24_clock - 15;
-  // const minutes = parseInt(time[1], 10);
-  // const formatted_minutes = minutes < 10 ? `0${minutes}` : minutes;
+  const datetime_array = datetime.split("T");
+  const time = datetime_array[1].split(":");
+  const hour_24_clock = parseInt(time[0], 10);
+  const hour = hour_24_clock - 15;
+  const minutes = parseInt(time[1], 10);
+  const formatted_minutes = minutes < 10 ? `0${minutes}` : minutes;
 
-  // const AMPM = hour_24_clock < 12 ? "AM" : "PM"
+  const AMPM = hour_24_clock < 12 ? "AM" : "PM"
 
-  // const game_time = " " + hour.toString(10) + ":" + formatted_minutes.toString(10) + AMPM;
+  const game_time = " " + hour.toString(10) + ":" + formatted_minutes.toString(10) + AMPM;
 
-  // let content;
+  let content;
 
-  // if (game.Status === "InProgress"){
-  //     content = <span> {inning_half}{game.Inning} </span>;
-  // }else if (game.Status === "Scheduled"){
-  //     content = <span> Today {game_time} </span>;
-  // }else if (game.Status === "Final"){
-  //     content = <span> Final </span>;
-  // }else{
-  //   content = <span> TBD </span>
-  // }
+  if (game.Status === "InProgress"){
+      content = <span> {inning_half}{game.Inning} </span>;
+  }else if (game.Status === "Scheduled"){
+      content = <span> Today {game_time} </span>;
+  }else if (game.Status === "Final"){
+      content = <span> Final </span>;
+  }else{
+      content = <span> TBD </span>
+  }
 
 
   return (
@@ -51,7 +51,7 @@ const Scorecard = ({ game }) => {
           </div>
         </div>
         <div className="card-row-status">
-          {datetime}
+          {content}
         </div>
       </div>
   )
