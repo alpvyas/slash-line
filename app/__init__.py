@@ -42,7 +42,7 @@ app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
 app.register_blueprint(league_routes, url_prefix='/api/leagues')
 app.register_blueprint(
-    team_routes, url_prefix='/api/leagues/<int:league_id>')
+    team_routes, url_prefix='/api/teams')
 app.register_blueprint(player_routes, url_prefix='/api/players')
 app.register_blueprint(stats_routes, url_prefix='/api/stats')
 app.register_blueprint(game_detail_routes, url_prefix='/api/game_details')

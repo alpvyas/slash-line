@@ -7,12 +7,12 @@ import "./Standings.css";
 
 const Standings = () => {
   const dispatch = useDispatch();
-  const currentLeague = useSelector(state => state.currentLeague);
+  // const currentLeague = useSelector(state => state.currentLeague);
 
   const [teams, setTeams] = useState([]);
 
   useEffect(() => {
-      dispatch(get_league_teams(currentLeague))
+      dispatch(get_league_teams(1))
       .then(teams => setTeams(teams));
     
   }, [dispatch])

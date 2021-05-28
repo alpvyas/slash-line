@@ -16,27 +16,11 @@ import { Redirect, useHistory } from "react-router";
 
 const Homepage = () => {
   const dispatch = useDispatch();
-  const [leagues, setLeagues] = useState([]);
+  const leagues = useSelector(state => state.leagues.leagues.managed);
+  const [userLeagues, setUserLeagues] = useState([]);
   const [currentLeague, setCurrentLeague] = useState();
-  const [count, setCount] = useState(0);
   const user = useSelector((state) => state.session.user);
   const userPlayers = useSelector(state => state.userTeam.userTeam);
-
-  
-  setInterval(() => setCount(count + 1), 5000);
-
-
-  // useEffect(() => {
-
-  //   const interval = setInterval(() => {
-  //     const response = dispatch(get_game_details(today));
-  //     console.log("RESPONSE GAME DETAILS: ", response)
-
-  //   }, 5000)
-    
-  //   return () => clearInterval(interval)
-
-  //   }, [dispatch, today])
 
   const game_details = useSelector(state => state.gameDetails.gameDetails);
 
@@ -47,17 +31,18 @@ const Homepage = () => {
   useEffect(() => {
     if (user){
       dispatch(get_user_leagues(user.id))
-    // .then(data => {
-    //   setLeagues(data["leagues"])
-    //   console.log("LEAGUES: ", leagues)
-    //   setCurrentLeague(leagues[1].id)
-    //   console.log("CURRENT LEAGUE: ", currentLeague)
-    // }
-    // )
-  }
-    }, [dispatch, user])
+      .then(data => {
+        setUserLeagues(data["managed"])
+        console.log("USER LEAGUES: ", userLeagues)
+        console.log("USER LEAGUES[0]: ", userLeagues[0])
+        setCurrentLeague(userLeagues[0])
+        console.log("CURRENT LEAGUE: ", currentLeague)
+      }
+      )
+    }
+  }, [dispatch, user])
 
-    leagues.forEach(league => {
+    userLeagues.forEach(league => {
       let draftDateTime = league["draft_date"];
       let dateTimeArray = draftDateTime.split(" ");
       let date = dateTimeArray[0];
