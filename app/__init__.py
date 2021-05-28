@@ -13,6 +13,7 @@ from .api.team_routes import team_routes
 from .api.player_routes import player_routes
 from .api.stats_routes import stats_routes
 from .api.game_detail_routes import game_detail_routes
+from .api.upload_routes import upload_routes
 
 from .seeds import seed_commands
 
@@ -46,6 +47,7 @@ app.register_blueprint(
 app.register_blueprint(player_routes, url_prefix='/api/players')
 app.register_blueprint(stats_routes, url_prefix='/api/stats')
 app.register_blueprint(game_detail_routes, url_prefix='/api/game_details')
+app.register_blueprint(upload_routes, url_prefix='/api/upload')
 db.init_app(app)
 Migrate(app, db)
 

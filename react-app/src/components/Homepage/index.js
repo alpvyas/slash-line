@@ -16,10 +16,12 @@ import { Redirect, useHistory } from "react-router";
 
 const Homepage = () => {
   const dispatch = useDispatch();
+
   const leagues = useSelector(state => state.leagues.leagues.managed);
   const [userLeagues, setUserLeagues] = useState([]);
   const [currentLeague, setCurrentLeague] = useState();
   const user = useSelector((state) => state.session.user);
+
   const userPlayers = useSelector(state => state.userTeam.userTeam);
 
   const game_details = useSelector(state => state.gameDetails.gameDetails);
