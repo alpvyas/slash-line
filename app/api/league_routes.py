@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, json, request
-from app.models import db, League
+from app.models import db, League, Team
 
 league_routes = Blueprint("league_routes",
                           __name__)
@@ -14,15 +14,27 @@ def get_one_league(league_id):
     return league
 
 
-def get_all_leagues(user_id):
+def get_user_leagues(user_id):
 
-    leagues = League.query.filter_by(user_id=user_id).all()
-    print("BACKEND LEAGUES: ", leagues)
-    return json.dumps({"leagues": [league.to_dict() for league in
-                                   leagues]}, default=str)
+    managed = League.query.filter_by(user_id=user_id).all()
+
+    print("MANAGED: ", managed)
+    teams = Team.query.filter_by(user_id=user_id).all()
+    print("TEAMS: ", teams)
+    league_ids = [team.league_id for team in teams]
+    print("LEAGUE IDS: ", league_ids)
+
+    member = [League.query.filter_by(
+        id=league).first() for league in league_ids]
+
+    print("MEMBER: ", member)
+    return json.dumps({"errors": "",
+                       "managed": [league.to_dict() for league in
+                                   managed],
+                       "member": [league.to_dict() for league in member]}, default=str)
 
 
-def add_league(user_id):
+def add_new_league(user_id):
     league_data = json.loads(request.data.decode("utf-8"))
 
     league = League(name=league_data["name"],
@@ -64,12 +76,12 @@ def delete_league(league_id):
 
 # get_all
 # add_league
-@league_routes.route("/league", methods=['GET', 'POST'])
+@league_routes.route("/user/<int:user_id>", methods=['GET', 'POST'])
 def get_or_add_leagues(user_id):
     if request.method == 'GET':
-        return get_all_leagues(user_id)
+        return get_user_leagues(user_id)
     elif request.method == 'POST':
-        return add_league(user_id)
+        return add_new_league(user_id)
 
 # delete_league
 

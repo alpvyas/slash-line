@@ -1,11 +1,25 @@
-const GET_PLAYER = "teams/GET";
-const ADD_PLAYER = "teams/ADD";
-const ADD_IL = "teams/ADD_IL";
-const REMOVE_IL = "teams/REMOVE_IL";
+/* ----------------------------------------------------------------------------
+                          ACTION TYPES
+------------------------------------------------------------------------------*/
+
+const GET_PLAYER = "team/GET";
+const ADD_PLAYER = "team/ADD";
+const REMOVE_PLAYER = "team/REMOVE"
+const ADD_IL = "team/ADD_IL";
+const REMOVE_IL = "team/REMOVE_IL";
+
+/* ----------------------------------------------------------------------------
+                          ACTION CREATORS
+------------------------------------------------------------------------------*/
 
 const add = (player) => ({
   type: ADD_PLAYER,
   data: player
+});
+
+const remove = (player) => ({
+  type: REMOVE_PLAYER,
+  data: player,
 });
 
 const addIL = (player) => ({
@@ -17,6 +31,10 @@ const removeIL = (player) => ({
   type: REMOVE_IL,
   data: player,
 })
+
+/* ----------------------------------------------------------------------------
+                          THUNK ACTION CREATORS
+------------------------------------------------------------------------------*/
 
 export const get_league_teams = (leagueId) => async (dispatch) => { 
   const response = await fetch(`/api/leagues/${leagueId}/teams`, {
@@ -33,13 +51,29 @@ export const get_league_teams = (leagueId) => async (dispatch) => {
   };
 };
 
-export const add_player = (player) => dispatch => {
-  dispatch(add(player))
-  return player
+export const add_player = (player, userId, leagueId) => async dispatch => {
+  console.log("INSIDE ADD PLAYER THUNK")
+  const response = await fetch(`/api/leagues/${leagueId}/teams/${userId}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: player,
+  });
+
+  const status = await response.json();
+
+  console.log("STATUS MESSAGE: ", status.message)
+  if (status.ok) {
+    dispatch(add(player))
+  }else{
+    alert(status.message)
+  }
+
 }
 
 export const remove_player = (player) => dispatch => {
-
+  dispatch(remove(player))
   return "Player Removed"
 }
 
@@ -52,6 +86,10 @@ export const make_active = (player) => dispatch => {
   dispatch(removeIL(player))
   return player
 }
+
+/* ----------------------------------------------------------------------------
+                          USER TEAM REDUCER
+------------------------------------------------------------------------------*/
 
 const initialState = { userTeam: [], injuredList: [] };
 let newState;

@@ -1,5 +1,3 @@
-import { store } from "../index";
-
 /* ----------------------------------------------------------------------------
                           ACTION TYPES
 ------------------------------------------------------------------------------*/
@@ -62,6 +60,8 @@ export const get_stats = () => async (dispatch) => {
 
   console.log("STATS DATA: ", statsData)
 
+  dispatch(add(statsData, season))
+
 
 };
 
@@ -91,7 +91,6 @@ export const update_season_stats = () => async (dispatch) => {
 
   const data = await response.json()
 
-  console.log("STATS DATA: ", data)
 };
 
 // export const get_stats = () => async (dispatch) => {
@@ -189,7 +188,6 @@ const statsReducer = (state = initialState, action) => {
     case ADD_PLAYERS_SEASON_STATS:
       let newState = {...state};
       newState.stats = action.data;
-      console.log("newState.stats UPDATED")
       return newState;
     default:
       return state;

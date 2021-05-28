@@ -124,11 +124,9 @@ def update():
 
 def get_season_stats():
 
-    stats = Player_Stats.query.all()
-    print("BACKEND STATS: ", stats)
+    player_stats = Player_Stats.query.all()
 
-    print("TYPE: ", type(stats[0]))
-    return jsonify(stats[0].to_dict())
+    return jsonify({"stats": [stats.to_dict() for stats in player_stats]})
 
 # ------------------------------------------------------------------------------
 #                    RESTful Routes -- Stats

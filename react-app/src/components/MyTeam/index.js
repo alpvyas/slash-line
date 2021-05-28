@@ -12,9 +12,7 @@ import InjuredList from "../Containers/InjuredList";
 import { add_to_IL } from "../../store/myTeam";
 import { Table } from "@material-ui/core";
 import PlayerDetail from "../PlayerDetails";
-import { get_single_player_stats, get_stats_from_backend } from "../../store/stats";
-// import { get_game_details } from "../../store/gameDetails";
-import { game_details } from "../../mock_game_data";
+import { get_single_player_stats } from "../../store/stats";
 import Scorecard from "../Containers/Scorecard";
 import Carousel from "../Carousel";
 import mookie_betts from "../../images/mookie_betts.png";
@@ -101,6 +99,8 @@ const MyTeam = () => {
       ),
     },
   ], []);
+
+  const game_details = useSelector(state => state.gameDetails.gameDetails);
 
   const games = game_details&&game_details.map((game_detail) => (
     <Scorecard game={game_detail}/>

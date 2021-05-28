@@ -141,13 +141,24 @@ export const post_players = (players) => async (dispatch) => {
   }
 };
 
+//gets player data from backend
 export const get_players = () => async (dispatch) => {
   const response = await fetch("/api/players", {
     method: "GET"
   })
+
+  const responseObject = await response.json()
+
+  const players = responseObject.players
+
+  console.log("PLAYERS: ", players)
+  dispatch(add(players));
 };
 
+//gets player data from MLB Data API
+//data comes as a roster of 40 player objects for each team
 export const get_roster_40 = () => async (dispatch) => {
+  //calling the API for each team and saving all responses in a variable
   const responses = teams.map(team => fetch(
   `http://lookup-service-prod.mlb.com/json/named.roster_40.bam?team_id='${team.id}'`, {
   method: "GET",
@@ -156,6 +167,8 @@ export const get_roster_40 = () => async (dispatch) => {
   },
   }))
 
+  //Following 5 lines resolves the responses and adds each player to an array of
+  //all players
   const resolvedResponses = await Promise.all(responses);
  
   const rosterObjects = resolvedResponses.map(response => response.json());
@@ -166,18 +179,9 @@ export const get_roster_40 = () => async (dispatch) => {
   
   resolvedRosterObjects.forEach(roster => allPlayers.push(...roster.roster_40.queryResults.row))
   
+  //adding all players to state
   dispatch(add(allPlayers));
   
-  console.log("ALL PLAYERS: ", allPlayers)
-
-  // fetch(`/api/players/`, {
-  // method: "POST",
-  // headers: {
-  //   "Content-Type": "application/json",
-  // },
-  // body: JSON.stringify(allPlayers)
-  // })
-
   return allPlayers;
 };
 
@@ -191,9 +195,7 @@ const playersReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_PLAYERS:
       let newState = {...state, };
-      // console.log("NEW STATE:", newState)
       newState.players = action.roster
-      // console.log("ACTION.DATA:", action.data)
       return newState;
     default:
       return state;

@@ -4,7 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import * as sessionActions from "./store/session";
 import { authenticate } from "./services/auth";
-import { update_players } from "./store/players";
+
+import { get_players, get_roster_40, teams, update_players } from "./store/players";
+import { get_stats, get_stats_from_backend, update_season_stats } from "./store/stats";
 import Landing from "./components/Landing";
 import Homepage from "./components/Homepage";
 import Profile from "./components/Profile";
@@ -13,7 +15,9 @@ import Players from "./components/Players";
 import Testing from "./components/Testing/";
 import Stats from "./components/Stats";
 import NotFound from "./components/NotFound";
+import { get_game_details, get_game_details_backend } from "./store/gameDetails";
 import Dropzone from "./components/Dropzone";
+
 
 function App() {
   const dispatch = useDispatch();
@@ -23,8 +27,8 @@ function App() {
   
   const players = useSelector(state => state.players.players);
 
-
   //calculating wait time for scheduled data update used in following useEffect/setTimeout
+
   const currentTime = new Date().getTime();
   const callTime = new Date().setHours(2,0,0,0);
   let waitTime;
@@ -47,7 +51,41 @@ useEffect(() => {
   return () => clearTimeout(timer)
 }, [])
  
+  useEffect(() => {
+    dispatch(get_players())
+    }, [])
 
+  useEffect(() => {
+      dispatch(get_stats())
+    }, []);
+
+
+  const date = new Date();
+
+  let year = date.getFullYear();
+  let month = date.getMonth();
+  let day = date.getDate();
+
+  const months = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+  
+  for (let index = 0; index < months.length; index++) {
+    if (month === index) month = months[index]
+  };
+
+  if (day < 10) day = `0${day}`;
+
+  const today = year + '-' + month + '-' + day;
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      dispatch(get_game_details_backend(today))
+
+      setInterval(() => {
+        dispatch(get_game_details_backend(today))
+      }, 60000)
+    }, 10000)
+    return () => clearTimeout(timer)
+  }, [])
   
   // const userTeam = useSelector(state => state.userTeam.userTeam);
   // const injuredPlayers = useSelector(state => state.injuredList.injuredList);
@@ -58,15 +96,16 @@ useEffect(() => {
   //     })
   
   //   }, [dispatch])
-  // useEffect(() => {
-  //   (async() => {
-  //     const user = await authenticate();
-  //     if (!user.errors) {
-  //       setAuthenticated(true);
-  //     }
-  //     setLoaded(true);
-  //   })();
-  // }, []);
+
+  useEffect(() => {
+    (async() => {
+      const user = await authenticate();
+      if (!user.errors) {
+        setAuthenticated(true);
+      }
+      setLoaded(true);
+    })();
+  }, []);
 
   useEffect(()=>{
     dispatch(sessionActions.restoreUser())
@@ -89,22 +128,21 @@ useEffect(() => {
         <Route exact path="/">
           <Landing />
         </Route>
-        <Route exact path="/home">
+        <ProtectedRoute exact path="/home" authenticated={authenticated}>
           <Homepage />
-          {/* <MyTeam /> */}
-        </Route>
+        </ProtectedRoute>
         <ProtectedRoute exact path="/users/:id" authenticated={authenticated}>
           <Profile />
         </ProtectedRoute>
-        <Route exact path="/myteam">
+        <ProtectedRoute exact path="/myteam" authenticated={authenticated}>
           <MyTeam />
-        </Route>
+        </ProtectedRoute>
         <Route exact path="/players">
           <Players />
         </Route>
-        <Route exact path="/team">
+        <ProtectedRoute exact path="/team" authenticated={authenticated}>
           <MyTeam />
-        </Route>
+        </ProtectedRoute>
         <Route exact path="/stats">
           <Stats />
         </Route>

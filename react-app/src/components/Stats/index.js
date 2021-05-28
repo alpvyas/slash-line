@@ -1,21 +1,25 @@
 import React, { useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { games } from "../../mock_game_data";
 import NavBar from "../NavBar";
 import Carousel from "../Carousel";
-import baseball_glove_dirt from "../../images/baseball-glove-dirt.png";
 import houser_bunt from "../../images/houser-bunt.png";
-import { get_season_hitting_stats, get_stats_from_backend, update_season_stats } from "../../store/stats";
 import ReactTable from "../ReactTable";
 import Footer from "../Footer";
 import "./Stats.css";
+import Scorecard from "../Containers/Scorecard";
 
 const Stats = () => {
   const dispatch = useDispatch();
+  
   const players = useSelector(state => state.players.players);
   
-  // const playersLAD = players.filter(player => player.team_abbrev === "LAD")
-  const stats = useSelector(state => state.stats.stats);
+  const stats = useSelector(state => state.stats.stats.stats);
+
+  const game_details = useSelector(state => state.gameDetails.gameDetails);
+
+  const games = game_details&&game_details.map((game_detail) => (
+    <Scorecard game={game_detail}/>
+  ));
 
   const columns = useMemo(() => [
     {
@@ -91,20 +95,6 @@ const Stats = () => {
       accessor: "ops",
     },
   ], []);
-
-  const season = "2021";
-  const gameType = "R";
-  // // const playerID = "641355"
-  // const players = [641355, 571970, 572041, 608369, 621035, 457759, 605131]
-
-  // useEffect(() => {
-  //   dispatch(update_season_stats())
-  // }, [dispatch]);
-
-  // useEffect(() => {
-  //   dispatch(get_stats_from_backend())
-  // }, [dispatch]);
-
 
   return (
     <>

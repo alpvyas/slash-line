@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, request
 import requests
 from app.models import db
+import os
 
 game_detail_routes = Blueprint("game_detail_routes",
                                __name__)
@@ -10,28 +11,28 @@ game_detail_routes = Blueprint("game_detail_routes",
 # ------------------------------------------------------------------------------
 
 
-def get_details(date):
+def game_details(date):
 
-    # response = requests.get(
-    #     f"https://fly.sportsdata.io/v3/mlb/scores/json/GamesByDate/{date}", headers={'Ocp-Apim-Subscription-Key': '10502986f1944b58a416ba0d87ce4b5f'})
+    # url = "https://api-baseball.p.rapidapi.com/games"
+    # rapid_api_key = os.environ.get('X_RAPIDAPI_KEY')
+    # querystring = {"date": "2021-04-24"}
 
-    url = "https://api-baseball.p.rapidapi.com/games"
+    # headers = {
+    #     'x-rapidapi-key': rapid_api_key,
+    #     'x-rapidapi-host': "api-baseball.p.rapidapi.com"
+    # }
 
-    querystring = {"date": "2021-04-24"}
+    sports_data_api_key = os.environ.get('OCP_APIM_SUBSCRIPTION_KEY')
 
-    headers = {
-        'x-rapidapi-key': "47062ed2b6msh013afab20f9237fp1c52dbjsn61991d838413",
-        'x-rapidapi-host': "api-baseball.p.rapidapi.com"
-    }
+    url = f"https://fly.sportsdata.io/v3/mlb/scores/json/GamesByDate/{date}"
+
+    headers = {'Ocp-Apim-Subscription-Key': sports_data_api_key}
 
     response = requests.request(
-        "GET", url, headers=headers, params=querystring)
+        "GET", url, headers=headers)
 
     data = response.text
-    print("I'm inside the backend")
-    print("THIS IS THE DATE PARAM: ", date)
-    print("THIS IS THE NEW BACKEND RESPONSE: ", (data))
-    print("THIS IS THE RESPONSE JSONIFIED: ", jsonify(data))
+
     return data
 
 
@@ -41,4 +42,4 @@ def get_details(date):
 
 @game_detail_routes.route("/date/<path:date>", methods=['GET'])
 def get_game_details(date):
-    return get_details(date)
+    return game_details(date)

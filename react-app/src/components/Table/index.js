@@ -1,14 +1,16 @@
-import React from "react";
+import React, { useState }from "react";
 import { useSelector} from "react-redux";
 
 import "./Table.css";
 
-const Table = ({columns, rows, row_keys}) => {
+const Table = ({columns, rows, row_keys, button}) => {
   const user = useSelector(state => state.session.user);
+  // console.log("ROWS: ", rows)
+  const [currentLeague, setCurrentLeague] = useState();
   
   return (
     <>
-    {/* {console.log("INSIDE TABLE: ", rows)} */}
+    {/* {console.log("INSIDE TABLE: ", rows[0])} */}
       <table className="dodgers-table">
         <thead>
           <tr>
@@ -24,6 +26,11 @@ const Table = ({columns, rows, row_keys}) => {
                 // console.log("KEY: ", row.key)
                 <td>{row[key]}</td>
               ))}
+              
+              {button && <td>
+                <button type="button" onClick={() => {setCurrentLeague(row.id)
+                console.log("Current League Set", currentLeague)}}>Set Current League</button>
+              </td>}
             </tr>
           ))}
         </tbody>

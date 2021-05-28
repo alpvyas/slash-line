@@ -1,7 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { get_roster_40, teams } from "../../store/players";
-import { game_details } from "../../mock_game_data";
 import NavBar from "../NavBar";
 import Carousel from "../Carousel";
 import Scorecard from "../Containers/Scorecard";
@@ -21,6 +19,9 @@ import { get_single_player_stats } from "../../store/stats";
 const Players = () => {
   const dispatch = useDispatch();
   // const [userTeam, setUserTeam] = useState([])
+
+  const user = useSelector(state => state.session.user);
+  const league = useSelector(state => state.currentLeague)
   const players = useSelector(state => state.players.players);
   const userTeam = useSelector(state => state.userTeam.userTeam);
 
@@ -42,7 +43,7 @@ const Players = () => {
   //   }
 
  const addPlayer = (player) => {
-    const response = dispatch(add_player(player))
+    const response = dispatch(add_player(player, user.id, league.id))
     // setUserTeam([player])
     console.log("PLAYER: ", player)
     console.log("USER TEAM: ", userTeam)
@@ -57,20 +58,20 @@ const Players = () => {
   const columns = useMemo((height, date, bday, day, month, year) => [
     {
       Header: "Player",
-      accessor: "name_display_first_last",
+      accessor: "last_name",
       Cell: props => (
         <button onClick={() => getStats(props.row.original)}>
-          {props.row.original.name_display_first_last}
+          {props.row.original.first_name}{" "}{props.row.original.last_name}
         </button>
       ),
     },
     {
       Header: "Team",
-      accessor: "team_name",
+      accessor: "mlb_team_name",
     },
     {
       Header: "Position",
-      accessor: "position_txt",
+      accessor: "primary_position_txt",
     },
     {
       Header: "Bats",
@@ -105,10 +106,14 @@ const Players = () => {
         return month + " / " + day + " / " + year
       },
     },
-    // {
-    //   Header: "Player ID",
-    //   accessor: "player_id",
-    // },
+     {
+      Header: "Nickname",
+      accessor: "nick_name",
+    },
+    {
+      Header: "Status",
+      accessor: "status",
+    },
     {
       Header: "",
       accessor: "player_id",
@@ -122,11 +127,9 @@ const Players = () => {
   ], [addPlayer]);
 
 
-  // useEffect(() => {
-  //   dispatch(get_roster_40())
-  //   }, [dispatch])
+  const game_details = useSelector(state => state.gameDetails.gameDetails);
 
-    const games = game_details&&game_details.map((game_detail) => (
+  const games = game_details&&game_details.map((game_detail) => (
     <Scorecard game={game_detail}/>
   ));
 

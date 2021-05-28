@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createLeague } from "../../store/createLeague"
+import { createLeague } from "../../store/leagues"
 
 function LeagueForm() {
   const dispatch = useDispatch()

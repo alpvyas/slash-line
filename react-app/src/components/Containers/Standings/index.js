@@ -1,12 +1,14 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { get_league_teams } from "../../../store/teams";
 import Table from "../../Table";
 import "./Standings.css";
 
 const Standings = () => {
   const dispatch = useDispatch();
+  // const currentLeague = useSelector(state => state.currentLeague);
+
   const [teams, setTeams] = useState([]);
 
   useEffect(() => {
