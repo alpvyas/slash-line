@@ -23,8 +23,6 @@ function App() {
   const [loaded, setLoaded] = useState(false);
   const user = useSelector(state => state.session.user);
   
-  const players = useSelector(state => state.players.players);
-
   const currentTime = new Date().getTime();
   const callTime = new Date().setHours(2,0,0,0);
   let waitTime;
@@ -91,15 +89,16 @@ function App() {
   //     })
   
   //   }, [dispatch])
-  // useEffect(() => {
-  //   (async() => {
-  //     const user = await authenticate();
-  //     if (!user.errors) {
-  //       setAuthenticated(true);
-  //     }
-  //     setLoaded(true);
-  //   })();
-  // }, []);
+
+  useEffect(() => {
+    (async() => {
+      const user = await authenticate();
+      if (!user.errors) {
+        setAuthenticated(true);
+      }
+      setLoaded(true);
+    })();
+  }, []);
     
 
   useEffect(()=>{
@@ -123,21 +122,21 @@ function App() {
         <Route exact path="/">
           <Landing />
         </Route>
-        <Route exact path="/home">
+        <ProtectedRoute exact path="/home" authenticated={authenticated}>
           <Homepage />
-        </Route>
+        </ProtectedRoute>
         <ProtectedRoute exact path="/users/:id" authenticated={authenticated}>
           <Profile />
         </ProtectedRoute>
-        <Route exact path="/myteam">
+        <ProtectedRoute exact path="/myteam" authenticated={authenticated}>
           <MyTeam />
-        </Route>
+        </ProtectedRoute>
         <Route exact path="/players">
           <Players />
         </Route>
-        <Route exact path="/team">
+        <ProtectedRoute exact path="/team" authenticated={authenticated}>
           <MyTeam />
-        </Route>
+        </ProtectedRoute>
         <Route exact path="/stats">
           <Stats />
         </Route>

@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, json, request
-from app.models import db, Team
+from app.models import db, Team, User_Team_Player
 
 team_routes = Blueprint("team_routes",
                         __name__)
@@ -38,6 +38,27 @@ def delete_team(team_id, user_id):
     return jsonify({"message": "Team successfully deleted"})
 
 
+def add_player_to_team(league_id, user_id):
+    player_id = json.loads(request.data.decode("utf-8"))
+
+    user_team = Team.query.filter_by(
+        league_id=league_id).filter_by(user_id=user_id)
+
+    roster = User_Team_Player.query.filter_by(team_id=user_team.id)
+
+    players = [player_id for player_id in roster]
+
+    for player in players:
+        if player == player_id:
+            return jsonify({"ok": False, "message": "Player already on roster."})
+
+    new_player = User_Team_Player(player_id=player_id,
+                                  team_id=user_team.id)
+
+    db.session.add(new_player)
+    db.session.commit()
+    return jsonify({"ok": True, "message": "Player successfully added to roster."})
+
 # def edit_league(league_id):
 #     league_data = json.loads(request.data.decode("utf-8"))
 #     league = get_one_league(league_id)
@@ -56,6 +77,8 @@ def delete_team(team_id, user_id):
 
 # get_all
 # add_team
+
+
 @team_routes.route("/teams", methods=['GET', 'POST'])
 def get_or_add_teams(league_id):
     if request.method == 'GET':
@@ -63,6 +86,13 @@ def get_or_add_teams(league_id):
     elif request.method == 'POST':
         return add_team(league_id)
 
+
+@team_routes.route("team/<int:user_id>", methods=['GET', 'POST'])
+def get_or_add_user_team(league_id, user_id):
+    if request.method == 'GET':
+        return get_user_team(league_id, user_id)
+    elif request.method == 'POST':
+        return add_player_to_team(league_id, user_id)
 # delete_team
 
 

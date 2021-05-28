@@ -19,6 +19,9 @@ import { get_single_player_stats } from "../../store/stats";
 const Players = () => {
   const dispatch = useDispatch();
   // const [userTeam, setUserTeam] = useState([])
+
+  const user = useSelector(state => state.session.user);
+  const league = useSelector(state => state.currentLeague)
   const players = useSelector(state => state.players.players);
   const userTeam = useSelector(state => state.userTeam.userTeam);
 
@@ -40,7 +43,7 @@ const Players = () => {
   //   }
 
  const addPlayer = (player) => {
-    const response = dispatch(add_player(player))
+    const response = dispatch(add_player(player, user.id, league.id))
     // setUserTeam([player])
     console.log("PLAYER: ", player)
     console.log("USER TEAM: ", userTeam)

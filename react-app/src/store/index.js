@@ -7,10 +7,12 @@ import myTeamReducer from "./myTeam";
 import playersReducer from "./players";
 import sessionReducer from "./session";
 import statsReducer from "./stats";
+import leagueReducer from "./leagues";
 
 const rootReducer = combineReducers({
   session: sessionReducer,
   players: playersReducer,
+  leagues: leagueReducer,
   userTeam: myTeamReducer,
   stats: statsReducer,
   gameDetails: gameDetailsReducer,

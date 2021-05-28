@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo, memo }from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { get_leagues } from "../../store/createLeague";
+import { get_user_leagues } from "../../store/leagues";
 import Carousel from "../Carousel";
 import Scorecard from "../Containers/Scorecard";
 import LeagueFormModal from "../LeagueFormModal";
@@ -17,6 +17,7 @@ import { Redirect, useHistory } from "react-router";
 const Homepage = () => {
   const dispatch = useDispatch();
   const [leagues, setLeagues] = useState([]);
+  const [currentLeague, setCurrentLeague] = useState();
   const [count, setCount] = useState(0);
   const user = useSelector((state) => state.session.user);
   const userPlayers = useSelector(state => state.userTeam.userTeam);
@@ -45,9 +46,15 @@ const Homepage = () => {
 
   useEffect(() => {
     if (user){
-      dispatch(get_leagues(user.id))
-    .then(data => setLeagues(data["leagues"]));
-    }
+      dispatch(get_user_leagues(user.id))
+    // .then(data => {
+    //   setLeagues(data["leagues"])
+    //   console.log("LEAGUES: ", leagues)
+    //   setCurrentLeague(leagues[1].id)
+    //   console.log("CURRENT LEAGUE: ", currentLeague)
+    // }
+    // )
+  }
     }, [dispatch, user])
 
     leagues.forEach(league => {
@@ -75,10 +82,9 @@ const Homepage = () => {
     });
 
   const columns = ["League Name", "League Type", "Permissions",
-                   "Draft", "Draft Date", "Draft Time"];
+                   "Draft", "Draft Date", "Draft Time", ""];
 
-  const row_keys = ["name", "league_type", "permissions", "draft",
-                    "date", "time"];
+  const row_keys = ["name", "league_type", "permissions",     "draft_type", "date", "time"];
 
   const myPlayerColumns = useMemo((date, bday, day, month, year) => [
     {
@@ -157,7 +163,7 @@ const Homepage = () => {
             <div className="header">
               <h3>Leagues</h3>
             </div>
-           <Table columns={columns} rows={leagues} row_keys={row_keys}/>
+           <Table columns={columns} rows={leagues} row_keys={row_keys} button={true}/>
            <LeagueFormModal />
           </div>
          </div>
