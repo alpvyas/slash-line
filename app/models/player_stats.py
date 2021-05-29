@@ -9,6 +9,8 @@ class Player_Stats(db.Model):
 
     mlb_player_id = db.Column(db.String, nullable=False, default="")
 
+    full_name = db.Column(db.String(50), nullable=True, default="")
+    team_abbrev = db.Column(db.String(10), nullable=True, default="")
     a = db.Column(db.String(10), nullable=True, default="")
     ab = db.Column(db.String(10), nullable=True, default="")
     ao = db.Column(db.String(10), nullable=True, default="")
@@ -92,6 +94,9 @@ class Player_Stats(db.Model):
     def to_dict(self):
         return {
             "id": self.id,
+            "full_name": self.full_name,
+            "team_abbrev": self.team_abbrev,
+
             "a": self.a,
             "ab": self.ab,
             "ao": self.ao,

@@ -76,7 +76,7 @@ const ReactTable = ({ columns, data }) => {
 
   const handleFilterChange = e => {
     const value = e.target.value;
-    setFilter("name_display_first_last", value)
+    setGlobalFilter(value)
     setFilterInput(value);
   };
 
@@ -89,12 +89,8 @@ const ReactTable = ({ columns, data }) => {
         <div className="search-container">
           <input
           className="search-bar"
-          value={filterInput}
+          value={filterInput || ""}
           onChange={handleFilterChange}
-        //   onChange={e => {
-        //   setValue(e.target.value);
-        //   onChange(e.target.value);
-        // }}
           placeholder=" Search..."
           />
           <span className="underline"></span>

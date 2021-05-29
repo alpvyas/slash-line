@@ -40,19 +40,21 @@ def delete_team(team_id, user_id):
 
 def add_player_to_team(league_id, user_id):
     player_id = json.loads(request.data.decode("utf-8"))
-
+    print("PLAYER ID: ", type(player_id))
     user_team = Team.query.filter_by(
-        league_id=league_id).filter_by(user_id=user_id)
+        league_id=league_id).filter_by(user_id=user_id).first()
 
-    roster = User_Team_Player.query.filter_by(team_id=user_team.id)
+    print("USER TEAM: ", user_team.id)
+    roster = User_Team_Player.query.filter_by(team_id=user_team.id).all()
 
-    players = [player_id for player_id in roster]
-
+    print("ROSTER: ", roster)
+    players = [int(player.mlb_player_id) for player in roster]
+    print("PLAYERS: ", players)
     for player in players:
         if player == player_id:
             return jsonify({"ok": False, "message": "Player already on roster."})
 
-    new_player = User_Team_Player(player_id=player_id,
+    new_player = User_Team_Player(mlb_player_id=player_id,
                                   team_id=user_team.id)
 
     db.session.add(new_player)

@@ -21,7 +21,7 @@ const Players = () => {
   // const [userTeam, setUserTeam] = useState([])
 
   const user = useSelector(state => state.session.user);
-  const league = useSelector(state => state.currentLeague)
+  const league = useSelector(state => state.leagues.current)
   const players = useSelector(state => state.players.players);
   const userTeam = useSelector(state => state.userTeam.userTeam);
 
@@ -43,7 +43,9 @@ const Players = () => {
   //   }
 
  const addPlayer = (player) => {
-    const response = dispatch(add_player(player, user.id, league.id))
+   console.log("USER: ", user.id)
+   console.log("LEAGUE: ", league.id)
+    const response = dispatch(add_player(player.mlb_player_id, user.id, league.id))
     // setUserTeam([player])
     console.log("PLAYER: ", player)
     console.log("USER TEAM: ", userTeam)
@@ -58,10 +60,10 @@ const Players = () => {
   const columns = useMemo((height, date, bday, day, month, year) => [
     {
       Header: "Player",
-      accessor: "last_name",
+      accessor: "full_name",
       Cell: props => (
         <button onClick={() => getStats(props.row.original)}>
-          {props.row.original.first_name}{" "}{props.row.original.last_name}
+          {props.row.original.full_name}
         </button>
       ),
     },
@@ -83,10 +85,7 @@ const Players = () => {
     },
     {
       Header: "Height",
-      accessor: "height_feet",
-      Cell: props => (
-        height = `${props.row.original.height_feet}${"'"}${props.row.original.height_inches}`
-      ),
+      accessor: "height",
     },
     {
       Header: "Weight",
@@ -116,7 +115,7 @@ const Players = () => {
     },
     {
       Header: "",
-      accessor: "player_id",
+      accessor: "mlb_player_id",
       Cell: props => (
         <button onClick={() => addPlayer(props.row.original)}>
           Add Player
