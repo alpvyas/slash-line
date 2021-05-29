@@ -7,15 +7,15 @@ import "./Standings.css";
 
 const Standings = () => {
   const dispatch = useDispatch();
-  // const currentLeague = useSelector(state => state.currentLeague);
+  const currentLeague = useSelector(state => state.leagues.current);
 
   const [teams, setTeams] = useState([]);
 
   useEffect(() => {
-      dispatch(get_league_teams(1))
+      dispatch(get_league_teams(currentLeague.id))
       .then(teams => setTeams(teams));
     
-  }, [dispatch])
+  }, [dispatch, currentLeague])
 
   const headers = ["Rank", "Team", "Points"];
   const row_keys = ["id", "name", "wins"];
