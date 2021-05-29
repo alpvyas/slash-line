@@ -9,7 +9,7 @@ import holding_balls from "../../images/player-holding-balls.png";
 import glove_ball from "../../images/close-up-baseball-held-glove.png";
 import "./MyTeam.css";
 import InjuredList from "../Containers/InjuredList";
-import { add_to_IL } from "../../store/myTeam";
+import { add_to_IL } from "../../store/userTeam";
 import { Table } from "@material-ui/core";
 import PlayerDetail from "../PlayerDetails";
 import { get_single_player_stats } from "../../store/stats";

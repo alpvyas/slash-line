@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { make_active } from "../../../store/myTeam";
+import { make_active } from "../../../store/userTeam";
 import ReactTable from "../../ReactTable";
 import Table from "../../Table";
 

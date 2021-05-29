@@ -1,12 +1,20 @@
 import React, { useState }from "react";
-import { useSelector} from "react-redux";
+import { useDispatch, useSelector} from "react-redux";
+import { setCurrentLeague } from "../../store/leagues";
 
 import "./Table.css";
 
 const Table = ({columns, rows, row_keys, button}) => {
+  const dispatch = useDispatch();
   const user = useSelector(state => state.session.user);
   // console.log("ROWS: ", rows)
-  const [currentLeague, setCurrentLeague] = useState();
+  // const [currentLeague, setCurrentLeague] = useState();
+
+  const currentLeague = useSelector(state => state.leagues.current);
+
+  const setLeague = (league) => {
+    dispatch(setCurrentLeague(league))
+  }
   
   return (
     <>
@@ -28,8 +36,8 @@ const Table = ({columns, rows, row_keys, button}) => {
               ))}
               
               {button && <td>
-                <button type="button" onClick={() => {setCurrentLeague(row.id)
-                console.log("Current League Set", currentLeague)}}>Set Current League</button>
+                <button type="button" onClick={() => setLeague(row)
+                                      }>Set Current League</button>
               </td>}
             </tr>
           ))}

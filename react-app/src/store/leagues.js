@@ -5,7 +5,8 @@
 const OPEN_MODAL = "create-league/open";
 const CLOSE_MODAL = "create-league/close";
 
-const ADD_LEAGUES = "league/ADD"
+const ADD_LEAGUES = "league/ADD";
+const SET_LEAGUE = "league/SET";
 
 /* ----------------------------------------------------------------------------
                           ACTION CREATORS
@@ -29,7 +30,14 @@ const addLeagues = (leagues) => {
     type: ADD_LEAGUES,
     payload: leagues
   }
-}
+};
+
+const setLeague = (league) => {
+  return {
+    type: SET_LEAGUE,
+    payload: league
+  }
+};
 
 /* ----------------------------------------------------------------------------
                           THUNK ACTION CREATORS
@@ -69,17 +77,21 @@ export const createLeague =
 
       console.log("LEAGUE DATA: ", data)
       if (response.ok && !data.errors) {
-        dispatch(addLeagues(data))
+        dispatch(addLeagues(data));
       }
 
       return data;
     };
 
+  export const setCurrentLeague = (league) => dispatch => {
+    dispatch(setLeague(league));
+  }
+
 /* ----------------------------------------------------------------------------
                           LEAGUES REDUCER
 ------------------------------------------------------------------------------*/
 
-const initialState = { leagues: {managed: [], member: []}, status: false };
+const initialState = { leagues: {managed: [], member: []}, current: {}, status: false };
 const leagueReducer = (state = initialState, action) => {
   let newState;
   switch (action.type) {
@@ -93,6 +105,10 @@ const leagueReducer = (state = initialState, action) => {
       newState = {...state};
       newState.leagues.managed = action.payload.managed;
       newState.leagues.member = action.payload.member;
+      return newState;
+    case SET_LEAGUE:
+      newState = {...state};
+      newState.current = action.payload;
       return newState;
     default:
       return state;
