@@ -3,7 +3,7 @@ import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage' // defaults to localStorage for web
 import thunk from "redux-thunk";
 import gameDetailsReducer from "./gameDetails";
-import myTeamReducer from "./myTeam";
+import userTeamReducer from "./userTeam";
 import playersReducer from "./players";
 import sessionReducer from "./session";
 import statsReducer from "./stats";
@@ -13,7 +13,7 @@ const rootReducer = combineReducers({
   session: sessionReducer,
   players: playersReducer,
   leagues: leagueReducer,
-  userTeam: myTeamReducer,
+  userTeam: userTeamReducer,
   stats: statsReducer,
   gameDetails: gameDetailsReducer,
 });

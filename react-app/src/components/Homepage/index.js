@@ -17,17 +17,18 @@ import { Redirect, useHistory } from "react-router";
 const Homepage = () => {
   const dispatch = useDispatch();
 
-  const leagues = useSelector(state => state.leagues.leagues.managed);
-  const [userLeagues, setUserLeagues] = useState([]);
-  const [currentLeague, setCurrentLeague] = useState();
+  
   const user = useSelector((state) => state.session.user);
-
-  const userPlayers = useSelector(state => state.userTeam.userTeam);
-
-  const game_details = useSelector(state => state.gameDetails.gameDetails);
-
-  const games = game_details&&game_details.map((game_detail) => (
-    <Scorecard game={game_detail}/>
+  const leagues = useSelector(state => state.leagues.leagues.managed);
+  const currentLeague = useSelector(state => state.leagues.current);
+  
+  const [userLeagues, setUserLeagues] = useState([]);
+  const userPlayers = useSelector(state => state.userTeam.active);
+  
+  
+  const gameDetails = useSelector(state => state.gameDetails.gameDetails);
+  const games = gameDetails&&gameDetails.map((gameDetail) => (
+    <Scorecard game={gameDetail}/>
   ));
 
   useEffect(() => {
@@ -37,14 +38,12 @@ const Homepage = () => {
         setUserLeagues(data["managed"])
         console.log("USER LEAGUES: ", userLeagues)
         console.log("USER LEAGUES[0]: ", userLeagues[0])
-        setCurrentLeague(userLeagues[0])
-        console.log("CURRENT LEAGUE: ", currentLeague)
       }
       )
     }
   }, [dispatch, user])
 
-    userLeagues.forEach(league => {
+    leagues.forEach(league => {
       let draftDateTime = league["draft_date"];
       let dateTimeArray = draftDateTime.split(" ");
       let date = dateTimeArray[0];

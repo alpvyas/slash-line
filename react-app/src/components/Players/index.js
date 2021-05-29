@@ -10,7 +10,7 @@ import "./Players.css";
 import kershaw_warmup from "../../images/kershaw-warmup-stretch.png";
 import houser_bunt from "../../images/houser-bunt.png";
 import glove_closeup from "../../images/close-up-baseball-held-glove.png";
-import { add_player } from "../../store/myTeam";
+import { add_player } from "../../store/userTeam";
 import PlayerDetail from "../PlayerDetails";
 import mookie_betts from "../../images/mookie_betts.png";
 import { get_single_player_stats } from "../../store/stats";

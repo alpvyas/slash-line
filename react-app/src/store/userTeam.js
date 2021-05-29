@@ -53,7 +53,7 @@ export const get_league_teams = (leagueId) => async (dispatch) => {
 
 export const add_player = (player, userId, leagueId) => async dispatch => {
   console.log("INSIDE ADD PLAYER THUNK")
-  const response = await fetch(`/api/leagues/${leagueId}/teams/${userId}`, {
+  const response = await fetch(`/api/teams/leagues/${leagueId}/users/${userId}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -91,21 +91,21 @@ export const make_active = (player) => dispatch => {
                           USER TEAM REDUCER
 ------------------------------------------------------------------------------*/
 
-const initialState = { userTeam: [], injuredList: [] };
+const initialState = { active: [], injuredList: [] };
 let newState;
-const myTeamReducer = (state = initialState, action) => {
+const userTeamReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_PLAYER:
       newState = {...state};
-      newState.userTeam = [...state.userTeam, action.data];
+      newState.userTeam = [...state.active, action.data];
       return newState;
     case ADD_IL:
       newState = {...state};
       newState.injuredList = [...state.injuredList, action.data]
-      const updatedTeamList = newState.userTeam.filter(player => 
+      const updatedTeamList = newState.active.filter(player => 
         player.player_id !== action.data.player_id
       );
-      newState.userTeam = [...updatedTeamList];
+      newState.active = [...updatedTeamList];
       return newState;
     case REMOVE_IL:
       newState = {...state};
@@ -113,11 +113,11 @@ const myTeamReducer = (state = initialState, action) => {
         player.player_id !== action.data.player_id
       );
       newState.injuredList = [...updatedIL];
-      newState.userTeam = [...state.userTeam, action.data];
+      newState.active = [...state.active, action.data];
       return newState;
     default:
       return state;
   }
 };
 
-export default myTeamReducer;
+export default userTeamReducer;
