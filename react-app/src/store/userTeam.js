@@ -51,21 +51,21 @@ export const get_league_teams = (leagueId) => async (dispatch) => {
   };
 };
 
-export const add_player = (player, userId, leagueId) => async dispatch => {
+export const add_player = (playerId, userId, leagueId) => async dispatch => {
   console.log("INSIDE ADD PLAYER THUNK")
   const response = await fetch(`/api/teams/leagues/${leagueId}/users/${userId}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: player,
+    body: playerId,
   });
 
   const status = await response.json();
 
   console.log("STATUS MESSAGE: ", status.message)
   if (status.ok) {
-    dispatch(add(player))
+    dispatch(add(playerId))
   }else{
     alert(status.message)
   }

@@ -31,11 +31,14 @@ def add_players():
 
         player = Player(first_name=player_info["name_use"],
                         last_name=player_info["name_last"],
+                        full_name=player_info["name_display_first_last_html"],
                         age=player_info["age"],
                         bats=player_info["bats"],
                         birth_date=player_info["birth_date"],
                         height_feet=player_info["height_feet"],
                         height_inches=player_info["height_inches"],
+                        height=player_info["height_feet"] +
+                        "'" + player_info["height_inches"],
                         jersey_number=player_info["jersey_number"],
                         mlb_player_id=player_info["player_id"],
                         mlb_team_name=player_info["team_name"],

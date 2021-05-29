@@ -4,18 +4,17 @@ import { useDispatch, useSelector } from "react-redux";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import * as sessionActions from "./store/session";
 import { authenticate } from "./services/auth";
-
-import { get_players, get_roster_40, teams, update_players } from "./store/players";
-import { get_stats, get_stats_from_backend, update_season_stats } from "./store/stats";
+import { get_players, update_players } from "./store/players";
+import { get_stats } from "./store/stats";
 import Landing from "./components/Landing";
 import Homepage from "./components/Homepage";
 import Profile from "./components/Profile";
-import MyTeam from "./components/MyTeam";
+import UserTeam from "./components/UserTeam";
 import Players from "./components/Players";
 import Testing from "./components/Testing/";
 import Stats from "./components/Stats";
 import NotFound from "./components/NotFound";
-import { get_game_details, get_game_details_backend } from "./store/gameDetails";
+import { get_game_details_backend } from "./store/gameDetails";
 import Dropzone from "./components/Dropzone";
 
 
@@ -135,13 +134,13 @@ useEffect(() => {
           <Profile />
         </ProtectedRoute>
         <ProtectedRoute exact path="/myteam" authenticated={authenticated}>
-          <MyTeam />
+          <UserTeam />
         </ProtectedRoute>
         <Route exact path="/players">
           <Players />
         </Route>
         <ProtectedRoute exact path="/team" authenticated={authenticated}>
-          <MyTeam />
+          <UserTeam />
         </ProtectedRoute>
         <Route exact path="/stats">
           <Stats />

@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 7209353da180
+Revision ID: 36a8f6e1c8b7
 Revises: 
-Create Date: 2021-05-21 18:12:29.286971
+Create Date: 2021-05-28 23:03:03.008346
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '7209353da180'
+revision = '36a8f6e1c8b7'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -33,6 +33,8 @@ def upgrade():
     op.create_table('player_stats',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('mlb_player_id', sa.String(), nullable=False),
+    sa.Column('full_name', sa.String(length=50), nullable=True),
+    sa.Column('team_abbrev', sa.String(length=10), nullable=True),
     sa.Column('a', sa.String(length=10), nullable=True),
     sa.Column('ab', sa.String(length=10), nullable=True),
     sa.Column('ao', sa.String(length=10), nullable=True),
@@ -117,9 +119,11 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('first_name', sa.String(length=30), nullable=False),
     sa.Column('last_name', sa.String(length=30), nullable=False),
+    sa.Column('full_name', sa.String(length=50), nullable=False),
     sa.Column('age', sa.String(length=30), nullable=False),
     sa.Column('bats', sa.String(length=30), nullable=False),
     sa.Column('birth_date', sa.String(length=30), nullable=False),
+    sa.Column('height', sa.String(length=30), nullable=False),
     sa.Column('height_feet', sa.String(length=30), nullable=False),
     sa.Column('height_inches', sa.String(length=30), nullable=False),
     sa.Column('jersey_number', sa.String(length=30), nullable=False),
@@ -180,9 +184,8 @@ def upgrade():
     )
     op.create_table('user_team_players',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('player_id', sa.Integer(), nullable=False),
+    sa.Column('mlb_player_id', sa.String(length=30), nullable=False),
     sa.Column('team_id', sa.Integer(), nullable=False),
-    sa.ForeignKeyConstraint(['player_id'], ['players.id'], ),
     sa.ForeignKeyConstraint(['team_id'], ['teams.id'], ),
     sa.PrimaryKeyConstraint('id')
     )

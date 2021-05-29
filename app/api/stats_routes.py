@@ -38,6 +38,8 @@ def update():
             stats = Player_Stats(mlb_player_id=player_id,
 
 
+                                 full_name=player.full_name,
+                                 team_abbrev=player.team_abbrev,
                                  ab=stats_data["ab"],
                                  ao=stats_data["ao"],
                                  avg=stats_data["avg"],

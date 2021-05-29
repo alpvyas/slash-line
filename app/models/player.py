@@ -9,9 +9,11 @@ class Player(db.Model):
 
     first_name = db.Column(db.String(30), nullable=False)
     last_name = db.Column(db.String(30), nullable=False)
+    full_name = db.Column(db.String(50), nullable=False)
     age = db.Column(db.String(30), nullable=False)
     bats = db.Column(db.String(30), nullable=False)
     birth_date = db.Column(db.String(30), nullable=False)
+    height = db.Column(db.String(30), nullable=False)
     height_feet = db.Column(db.String(30), nullable=False)
     height_inches = db.Column(db.String(30), nullable=False)
     jersey_number = db.Column(db.String(30), nullable=False)
@@ -35,9 +37,11 @@ class Player(db.Model):
             "id": self.id,
             "first_name": self.first_name,
             "last_name": self.last_name,
+            "full_name": self.full_name,
             "age": self.age,
             "bats": self.bats,
             "birth_date": self.birth_date,
+            "height": self.height,
             "height_feet": self.height_feet,
             "height_inches": self.height_inches,
             "jersey_number": self.jersey_number,

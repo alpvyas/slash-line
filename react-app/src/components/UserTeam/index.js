@@ -7,7 +7,7 @@ import dodgers_cap from "../../images/dodgers-cap-glove.png";
 import sunset_field from "../../images/sunset-field.png";
 import holding_balls from "../../images/player-holding-balls.png";
 import glove_ball from "../../images/close-up-baseball-held-glove.png";
-import "./MyTeam.css";
+import "./UserTeam.css";
 import InjuredList from "../Containers/InjuredList";
 import { add_to_IL } from "../../store/userTeam";
 import { Table } from "@material-ui/core";
