@@ -7,16 +7,14 @@ import NavBar from "../NavBar";
 const Profile = () => {
    const history = useHistory()
     const dispatch = useDispatch()
-    // useEffect(()=>{
-    //     dispatch(getNotes(user.id))
-    //     dispatch(getNotebooks(user.id))
-    // }, [dispatch])
     let user = useSelector(state => state.session.user)
 
   return (
     <div className="container page-container">
-      <NavBar />
-      <div></div>
+      {/* <NavBar /> */}
+      <div>
+        <h2>Hello {user["first_name"]}!</h2>
+      </div>
     </div>
   )
 }
