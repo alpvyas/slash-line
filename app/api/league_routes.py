@@ -18,16 +18,16 @@ def get_user_leagues(user_id):
 
     managed = League.query.filter_by(user_id=user_id).all()
 
-    print("MANAGED: ", managed)
+    # print("MANAGED: ", managed)
     teams = Team.query.filter_by(user_id=user_id).all()
-    print("TEAMS: ", teams)
+    # print("TEAMS: ", teams)
     league_ids = [team.league_id for team in teams]
-    print("LEAGUE IDS: ", league_ids)
+    # print("LEAGUE IDS: ", league_ids)
 
     member = [League.query.filter_by(
         id=league).first() for league in league_ids]
 
-    print("MEMBER: ", member)
+    # print("MEMBER: ", member)
     return json.dumps({"errors": "",
                        "managed": [league.to_dict() for league in
                                    managed],

@@ -151,7 +151,6 @@ export const get_players = () => async (dispatch) => {
 
   const players = responseObject.players
 
-  console.log("PLAYERS: ", players)
   dispatch(add(players));
 };
 
