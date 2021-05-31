@@ -4,7 +4,8 @@
 
 const GET_PLAYER = "team/GET";
 const ADD_PLAYER = "team/ADD";
-const REMOVE_PLAYER = "team/REMOVE"
+const REMOVE_PLAYER = "team/REMOVE";
+const UPDATE_PLAYERS = "team/UPDATE_PLAYERS";
 const ADD_IL = "team/ADD_IL";
 const REMOVE_IL = "team/REMOVE_IL";
 
@@ -19,17 +20,22 @@ const add = (player) => ({
 
 const remove = (player) => ({
   type: REMOVE_PLAYER,
-  data: player,
+  data: player
+});
+
+const updateAllPlayers = (players) => ({
+  type: UPDATE_PLAYERS,
+  data: players
 });
 
 const addIL = (player) => ({
   type: ADD_IL,
-  data: player,
+  data: player
 });
 
 const removeIL = (player) => ({
   type: REMOVE_IL,
-  data: player,
+  data: player
 })
 
 /* ----------------------------------------------------------------------------
@@ -51,21 +57,37 @@ export const get_league_teams = (leagueId) => async (dispatch) => {
   };
 };
 
-export const add_player = (playerId, userId, leagueId) => async dispatch => {
+export const getUserAllPlayers = (userId) => async dispatch => {
+  const response = await fetch(`/api/teams/users/${userId}`, {
+    method: "GET",
+  });
+
+  const team = await response.json();
+
+  console.log("TEAM: ", team)
+
+  if (team.ok) {
+    dispatch(updateAllPlayers(team.players))
+  }else{
+    alert(team.message)
+  }
+};
+
+export const add_player = (player, userId, leagueId) => async dispatch => {
   console.log("INSIDE ADD PLAYER THUNK")
   const response = await fetch(`/api/teams/leagues/${leagueId}/users/${userId}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: playerId,
+    body: player.mlb_player_id,
   });
 
   const status = await response.json();
 
   console.log("STATUS MESSAGE: ", status.message)
   if (status.ok) {
-    dispatch(add(playerId))
+    dispatch(add(player))
   }else{
     alert(status.message)
   }
@@ -91,13 +113,13 @@ export const make_active = (player) => dispatch => {
                           USER TEAM REDUCER
 ------------------------------------------------------------------------------*/
 
-const initialState = { active: [], injuredList: [] };
+const initialState = { active: [], injuredList: [], allPlayers: []};
 let newState;
 const userTeamReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_PLAYER:
       newState = {...state};
-      newState.userTeam = [...state.active, action.data];
+      newState.active = [...state.active, action.data];
       return newState;
     case ADD_IL:
       newState = {...state};
@@ -114,6 +136,10 @@ const userTeamReducer = (state = initialState, action) => {
       );
       newState.injuredList = [...updatedIL];
       newState.active = [...state.active, action.data];
+      return newState;
+    case UPDATE_PLAYERS:
+      newState = {...state};
+      newState.allPlayers = [action.data];
       return newState;
     default:
       return state;

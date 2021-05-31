@@ -45,7 +45,7 @@ const Players = () => {
  const addPlayer = (player) => {
    console.log("USER: ", user.id)
    console.log("LEAGUE: ", league.id)
-    const response = dispatch(add_player(player.mlb_player_id, user.id, league.id))
+    const response = dispatch(add_player(player, user.id, league.id))
     // setUserTeam([player])
     console.log("PLAYER: ", player)
     console.log("USER TEAM: ", userTeam)

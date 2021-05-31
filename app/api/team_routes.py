@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, json, request
-from app.models import db, Team, User_Team_Player
+from app.models import db, Team, User_Team_Player, Player
 
 team_routes = Blueprint("team_routes",
                         __name__)
@@ -14,6 +14,23 @@ def get_league_teams(id):
 
     return json.dumps({"teams": [team.to_dict() for team in
                                  teams]}, default=str)
+
+
+def get_user_players(user_id):
+    user_team = Team.query.filter_by(user_id=user_id).all()
+    roster = []
+
+    for team in user_team:
+        players = User_Team_Player.query.filter_by(team_id=team.id).all()
+        roster = [*roster, *players]
+
+    all_players = [Player.query.filter_by(
+        mlb_player_id=player.mlb_player_id).first() for player in roster]
+
+    if all_players:
+        return jsonify({"ok": True, "message": "User Team successfully retrieved.", "players": [player.to_dict() for player in all_players]})
+    else:
+        return jsonify({"ok": False, "message": "Failed to retrieve user team. Please try again."})
 
 
 def add_team(user_id, league_id):
@@ -40,16 +57,13 @@ def delete_team(team_id, user_id):
 
 def add_player_to_team(league_id, user_id):
     player_id = json.loads(request.data.decode("utf-8"))
-    print("PLAYER ID: ", type(player_id))
     user_team = Team.query.filter_by(
         league_id=league_id).filter_by(user_id=user_id).first()
 
-    print("USER TEAM: ", user_team.id)
     roster = User_Team_Player.query.filter_by(team_id=user_team.id).all()
 
-    print("ROSTER: ", roster)
     players = [int(player.mlb_player_id) for player in roster]
-    print("PLAYERS: ", players)
+    # print("PLAYERS: ", players)
     for player in players:
         if player == player_id:
             return jsonify({"ok": False, "message": "Player already on roster."})
@@ -87,6 +101,11 @@ def get_or_add_teams(league_id):
         return get_league_teams(league_id)
     elif request.method == 'POST':
         return add_team(league_id)
+
+
+@team_routes.route("/users/<int:user_id>", methods=['GET'])
+def get_all_user_players(user_id):
+    return get_user_players(user_id)
 
 
 @team_routes.route("leagues/<int:league_id>/users/<int:user_id>", methods=['GET', 'POST'])

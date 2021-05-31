@@ -41,10 +41,10 @@ const MyTeam = () => {
  const columns = useMemo((height, date, bday, day, month, year) => [
     {
       Header: "Player",
-      accessor: "name_display_first_last",
+      accessor: "full_name",
       Cell: props => (
         <button onClick={() => getStats(props.row.original)}>
-          {props.row.original.name_display_first_last}
+          {props.row.original.full_name}
         </button>
       ),
     },
@@ -66,10 +66,7 @@ const MyTeam = () => {
     },
     {
       Header: "Height",
-      accessor: "height_feet",
-      Cell: props => (
-        height = `${props.row.original.height_feet}${"'"}${props.row.original.height_inches}`
-      ),
+      accessor: "height",
     },
     {
       Header: "Weight",

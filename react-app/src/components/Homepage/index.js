@@ -13,6 +13,7 @@ import Standings from "../Containers/Standings";
 import Footer from "../Footer";
 import LogoutButton from "../auth/LogoutButton";
 import { Redirect, useHistory } from "react-router";
+import { getUserAllPlayers } from "../../store/userTeam";
 
 const Homepage = () => {
   const dispatch = useDispatch();
@@ -23,7 +24,7 @@ const Homepage = () => {
   const currentLeague = useSelector(state => state.leagues.current);
   
   const [userLeagues, setUserLeagues] = useState([]);
-  const userPlayers = useSelector(state => state.userTeam.active);
+  const userAllPlayers = useSelector(state => state.userTeam.allPlayers[0]);
   
   
   const gameDetails = useSelector(state => state.gameDetails.gameDetails);
@@ -31,41 +32,49 @@ const Homepage = () => {
     <Scorecard game={gameDetail}/>
   ));
 
+  //gets the leagues that the current user belongs to
   useEffect(() => {
-    if (user){
+    if (user) {
       dispatch(get_user_leagues(user.id))
       .then(data => {
         setUserLeagues(data["managed"])
-        console.log("USER LEAGUES: ", userLeagues)
-        console.log("USER LEAGUES[0]: ", userLeagues[0])
+        // console.log("USER LEAGUES: ", userLeagues)
+        // console.log("USER LEAGUES[0]: ", userLeagues[0])
       }
       )
     }
-  }, [dispatch, user])
+  }, [user]);
 
-    leagues.forEach(league => {
-      let draftDateTime = league["draft_date"];
-      let dateTimeArray = draftDateTime.split(" ");
-      let date = dateTimeArray[0];
-      let time = dateTimeArray[1];
+  useEffect(() => {
+    if (user) {
+      dispatch(getUserAllPlayers(user.id))
+    }
+  }, [user]);
 
-      let dateArray = date.split("-");
-    
-      let timeArray = time.split(":");
+  //formatting date and time
+  leagues.forEach(league => {
+    let draftDateTime = league["draft_date"];
+    let dateTimeArray = draftDateTime.split(" ");
+    let date = dateTimeArray[0];
+    let time = dateTimeArray[1];
 
-      let year = dateArray[0];
-      let month = dateArray[1];
-      let day = dateArray[2];
+    let dateArray = date.split("-");
+  
+    let timeArray = time.split(":");
 
-      const hour_24_clock = parseInt(timeArray[0], 10);
-      const hour = hour_24_clock - 15;
-      const minutes = parseInt(timeArray[1], 10);
-      const formatted_minutes = minutes < 10 ? `0${minutes}` : minutes;
-      const AMPM = hour_24_clock < 12 ? "AM" : "PM"
+    let year = dateArray[0];
+    let month = dateArray[1];
+    let day = dateArray[2];
 
-      league.date = `${month} / ${day} / ${year}`
-      league.time = `${hour}:${formatted_minutes} ${AMPM}`
-    });
+    const hour_24_clock = parseInt(timeArray[0], 10);
+    const hour = hour_24_clock - 15;
+    const minutes = parseInt(timeArray[1], 10);
+    const formatted_minutes = minutes < 10 ? `0${minutes}` : minutes;
+    const AMPM = hour_24_clock < 12 ? "AM" : "PM"
+
+    league.date = `${month} / ${day} / ${year}`
+    league.time = `${hour}:${formatted_minutes} ${AMPM}`
+  });
 
   const columns = ["League Name", "League Type", "Permissions",
                    "Draft", "Draft Date", "Draft Time", ""];
@@ -75,7 +84,7 @@ const Homepage = () => {
   const myPlayerColumns = useMemo((date, bday, day, month, year) => [
     {
       Header: "Player",
-      accessor: "name_display_first_last",
+      accessor: "full_name",
     },
     {
       Header: "Position",
@@ -95,10 +104,7 @@ const Homepage = () => {
     },
     {
       Header: "Height",
-      accessor: "height_feet",
-      Cell: props => {
-        return `${props.row.original.height_feet}${"'"}${props.row.original.height_inches}`
-      },
+      accessor: "height",
     },
     {
       Header: "Weight",
@@ -159,7 +165,7 @@ const Homepage = () => {
                <h3>My Players</h3>
              </div>
              <div className="table-container">
-              <ReactTable columns={myPlayerColumns} data={userPlayers}/>
+              <ReactTable columns={myPlayerColumns} data={userAllPlayers}/>
              </div>
            </div>
 
