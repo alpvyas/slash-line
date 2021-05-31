@@ -43,13 +43,13 @@ const Homepage = () => {
       }
       )
     }
-  }, [user]);
+  }, [dispatch, user]);
 
   useEffect(() => {
     if (user) {
       dispatch(getUserAllPlayers(user.id))
     }
-  }, [user]);
+  }, [dispatch, user]);
 
   //formatting date and time
   leagues.forEach(league => {
@@ -165,7 +165,7 @@ const Homepage = () => {
                <h3>My Players</h3>
              </div>
              <div className="table-container">
-              <ReactTable columns={myPlayerColumns} data={userAllPlayers}/>
+              {userAllPlayers && <ReactTable columns={myPlayerColumns} data={userAllPlayers}/>}
              </div>
            </div>
 

@@ -8,6 +8,7 @@ const REMOVE_PLAYER = "team/REMOVE";
 const UPDATE_PLAYERS = "team/UPDATE_PLAYERS";
 const ADD_IL = "team/ADD_IL";
 const REMOVE_IL = "team/REMOVE_IL";
+const CLEAR_STATE = "team/CLEAR_STATE";
 
 /* ----------------------------------------------------------------------------
                           ACTION CREATORS
@@ -38,10 +39,15 @@ const removeIL = (player) => ({
   data: player
 })
 
+const clearState = () => ({
+  type: CLEAR_STATE,
+});
+
 /* ----------------------------------------------------------------------------
                           THUNK ACTION CREATORS
 ------------------------------------------------------------------------------*/
 
+//get all member teams for a league
 export const get_league_teams = (leagueId) => async (dispatch) => { 
   const response = await fetch(`/api/leagues/${leagueId}/teams`, {
   method: "GET",
@@ -57,6 +63,7 @@ export const get_league_teams = (leagueId) => async (dispatch) => {
   };
 };
 
+//get all players across all teams belonging to current user
 export const getUserAllPlayers = (userId) => async dispatch => {
   const response = await fetch(`/api/teams/users/${userId}`, {
     method: "GET",
@@ -64,17 +71,17 @@ export const getUserAllPlayers = (userId) => async dispatch => {
 
   const team = await response.json();
 
-  console.log("TEAM: ", team)
+  console.log("TEAM: ", team);
 
   if (team.ok) {
-    dispatch(updateAllPlayers(team.players))
+    dispatch(updateAllPlayers(team.players));
   }else{
-    alert(team.message)
+    alert(team.message);
   }
 };
 
+//add a player to a users team
 export const add_player = (player, userId, leagueId) => async dispatch => {
-  console.log("INSIDE ADD PLAYER THUNK")
   const response = await fetch(`/api/teams/leagues/${leagueId}/users/${userId}`, {
     method: "POST",
     headers: {
@@ -87,28 +94,35 @@ export const add_player = (player, userId, leagueId) => async dispatch => {
 
   console.log("STATUS MESSAGE: ", status.message)
   if (status.ok) {
-    dispatch(add(player))
+    dispatch(add(player));
   }else{
-    alert(status.message)
+    alert(status.message);
   }
 
 }
 
+//remove a player from users team
 export const remove_player = (player) => dispatch => {
-  dispatch(remove(player))
+  dispatch(remove(player));
   return "Player Removed"
 }
 
+//add player to team injured list
 export const add_to_IL = (player) => dispatch => {
-  dispatch(addIL(player))
+  dispatch(addIL(player));
   return player
 }
 
+//reactive player from injured list
 export const make_active = (player) => dispatch => {
-  dispatch(removeIL(player))
+  dispatch(removeIL(player));
   return player
 }
 
+//clear userTeam state when user logs out
+export const clearUserTeamState = () => dispatch => {
+  dispatch(clearState());
+}
 /* ----------------------------------------------------------------------------
                           USER TEAM REDUCER
 ------------------------------------------------------------------------------*/
@@ -141,6 +155,9 @@ const userTeamReducer = (state = initialState, action) => {
       newState = {...state};
       newState.allPlayers = [action.data];
       return newState;
+      case CLEAR_STATE:
+        newState = {...initialState};
+        return newState; 
     default:
       return state;
   }

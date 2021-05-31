@@ -1,4 +1,5 @@
 import User from "../components/User";
+import { clearUserTeamState } from "./userTeam";
 
 const GET_USER = "session/GET_USER";
 const REMOVE_USER = "session/REMOVE_USER";
@@ -45,9 +46,11 @@ export const logout = () => async (dispatch) => {
   });
 
   console.log("RESPONSE LOGOUT: ", response)
-  dispatch(removeUser())
+
+  dispatch(removeUser());
+  dispatch(clearUserTeamState());
   
-  return response
+  return response;
 };
 
 export const signup = (username, firstName, lastName, email, password) =>
