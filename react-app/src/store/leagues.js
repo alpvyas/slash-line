@@ -8,37 +8,37 @@ const CLOSE_MODAL = "create-league/close";
 const ADD_LEAGUES = "league/ADD";
 const SET_LEAGUE = "league/SET";
 
+const CLEAR_STATE = "leagues/CLEAR_STATE";
+
 /* ----------------------------------------------------------------------------
                           ACTION CREATORS
 ------------------------------------------------------------------------------*/
 
-export const openCreateLeague = () => {
-  return {
+export const openCreateLeague = () => (
+  {
     type: OPEN_MODAL,
-  };
-};
+  });
 
-export const closeCreateLeague = () => {
-  return {
+export const closeCreateLeague = () => (
+  {
     type: CLOSE_MODAL,
-  };
-};
+  });
 
 
-const addLeagues = (leagues) => {
-  return {
+const addLeagues = (leagues) => ({
     type: ADD_LEAGUES,
     payload: leagues
-  }
-};
+  });
 
-const setLeague = (league) => {
-  return {
+const setLeague = (league) => ({
     type: SET_LEAGUE,
     payload: league
-  }
-};
+  });
 
+const clearState = () => (
+  {
+    type: CLEAR_STATE,
+  });
 /* ----------------------------------------------------------------------------
                           THUNK ACTION CREATORS
 ------------------------------------------------------------------------------*/
@@ -87,6 +87,10 @@ export const createLeague =
     dispatch(setLeague(league));
   }
 
+  export const clearLeaguesState = () => dispatch => {
+    dispatch(clearState());
+  };
+
 /* ----------------------------------------------------------------------------
                           LEAGUES REDUCER
 ------------------------------------------------------------------------------*/
@@ -109,6 +113,9 @@ const leagueReducer = (state = initialState, action) => {
     case SET_LEAGUE:
       newState = {...state};
       newState.current = action.payload;
+      return newState;
+    case CLEAR_STATE:
+      newState = {...initialState};
       return newState;
     default:
       return state;

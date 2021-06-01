@@ -1,4 +1,5 @@
 import User from "../components/User";
+import { clearLeaguesState } from "./leagues";
 import { clearUserTeamState } from "./userTeam";
 
 const GET_USER = "session/GET_USER";
@@ -49,6 +50,7 @@ export const logout = () => async (dispatch) => {
 
   dispatch(removeUser());
   dispatch(clearUserTeamState());
+  dispatch(clearLeaguesState());
   
   return response;
 };
