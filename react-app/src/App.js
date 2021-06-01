@@ -130,7 +130,7 @@ useEffect(() => {
         <ProtectedRoute exact path="/home" authenticated={authenticated}>
           <Homepage />
         </ProtectedRoute>
-        <ProtectedRoute exact path="/users/:id" authenticated={authenticated}>
+        <ProtectedRoute exact path="/profile/users/:profileId" authenticated={authenticated}>
           <Profile />
         </ProtectedRoute>
         <ProtectedRoute exact path="/myteam" authenticated={authenticated}>

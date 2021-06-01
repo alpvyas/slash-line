@@ -9,7 +9,7 @@ import {logout} from "../../store/session"
 import ReorderIcon from "@material-ui/icons/Reorder";
 import "./Sidebar.css";
 import { NavLink, Redirect, useHistory} from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 // import LogoutButton from "../auth/LogoutButton";
 
 const styles = {
@@ -99,6 +99,8 @@ const Sidebar = ({ items, depthStep = 25, depth =0, expanded }) => {
   const dispatch = useDispatch();
   const history = useHistory();
 
+  const user = useSelector(state => state.session.user);
+
   const onLogout = async (e) => {
     e.preventDefault()
     const response = await dispatch(logout())
@@ -133,6 +135,22 @@ const Sidebar = ({ items, depthStep = 25, depth =0, expanded }) => {
             >
                 <div className="sidebar-container" style={styles.container}>
                     <List disablePadding dense>
+                        {user && <NavLink to={`/profile/users/${user.id}`} >
+                            <ListItem
+                                button
+                                className="sidebar-item"
+                                dense
+                                // onClick={onLogout}
+                            >
+                                <div
+                                    style={{ paddingLeft: depth * depthStep }}
+                                    className="item-content"
+                                >
+                                    <div className="item-text">Profile</div>
+                                </div>
+                            </ListItem>
+                        </NavLink>}
+
                         {items.map((sidebarItem, index) => (
                             <React.Fragment key={`${sidebarItem.name}${index}`}>
                                 {sidebarItem === "divider" ? (
@@ -147,10 +165,12 @@ const Sidebar = ({ items, depthStep = 25, depth =0, expanded }) => {
                                 )}
                             </React.Fragment>
                         ))}
+
                         {/* <ListItem to="/">
                             <LogoutButton />
                         </ListItem> */}
-                        <NavLink to="/testing">
+
+                        {user && <NavLink to="/">
                             <ListItem
                                 button
                                 className="sidebar-item"
@@ -164,7 +184,7 @@ const Sidebar = ({ items, depthStep = 25, depth =0, expanded }) => {
                                     <div className="item-text">Logout</div>
                                 </div>
                             </ListItem>
-                        </NavLink>
+                        </NavLink>}
                     </List>
                 </div>
             </Drawer>

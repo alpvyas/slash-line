@@ -1,37 +1,29 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { NavLink, Redirect } from "react-router-dom";
+import { NavLink, Redirect, useHistory, useParams } from "react-router-dom";
+import {logout} from "../../store/session";
 import logo from "../../images/logo.png"
 import LogoutButton from "../auth/LogoutButton";
 import Sidebar from "../Sidebar";
 import SettingsIcon from "@material-ui/icons/Settings";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import "./NavBar.css";
+import { useDispatch, useSelector } from "react-redux";
 
-const onClick = (e, item) => {
+const NavBar = () => {
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const user = useSelector(state => state.session.user);
+  const { user_id }  = useParams();
+  const [showSidebar, setShowSidebar] = useState(false)
+
+  const onClick = (e, item) => {
   window.alert(JSON.stringify(item, null, 2));
   };
 
-  const items = [
-    { name: "profile", label: "Profile", onClick },
-    {
-      name: "about",
-      label: "About",
-      items: [
-        {name: "what-is", label: "What is Slash Line?", onClick},
-        {name: "how-to", label: "How to play", onClick},
-        {name: "thanks", label: "Thanks", onClick},
-      ],
-    },
-    {
-      name: "coming-soon", 
-      label: "Coming Soon",
-      items: [
-        { name: "baseline", label: "Down the Baseline", onClick },
-        { name: "feedback", label: "Feedback", onClick },
-      ],
-    },
-    {
+
+  const profile = { name: "profile", label: "Profile", onClick };
+
+  const settings = {
       name: "settings",
       label: "Settings",
       Icon: SettingsIcon,
@@ -53,24 +45,39 @@ const onClick = (e, item) => {
           ],
         },
       ]
+    };
+
+  let items = [
+    {
+      name: "about",
+      label: "About",
+      items: [
+        {name: "what-is", label: "What is Slash Line?", onClick},
+        {name: "how-to", label: "How to play", onClick},
+        {name: "thanks", label: "Thanks", onClick},
+      ],
+    },
+    {
+      name: "coming-soon", 
+      label: "Coming Soon",
+      items: [
+        { name: "baseline", label: "Down the Baseline", onClick },
+        { name: "feedback", label: "Feedback", onClick },
+      ],
     },
   ]
+  
 
-const NavBar = () => {
-  const [user, setUser] = useState({});
-  const { user_id }  = useParams();
-  const [showSidebar, setShowSidebar] = useState(false)
-
-  useEffect(() => {
-    if (!user.id) {
-      return
-    }
-    (async () => {
-      const response = await fetch(`/api/users/${user.id}`);
-      const user = await response.json();
-      setUser(user);
-    })();
-  }, [user.id]);
+  // useEffect(() => {
+  //   if (!user.id) {
+  //     return
+  //   }
+  //   (async () => {
+  //     const response = await fetch(`/api/users/${user.id}`);
+  //     const user = await response.json();
+  //     setUser(user);
+  //   })();
+  // }, [user.id]);
 
   if (!user) {
     return null;
@@ -107,12 +114,7 @@ const NavBar = () => {
               </div>
             </div>
             <div className="dropdown-container">
-              <Sidebar items={items}/>
-              {/* <Dropdown items={["About", "Coming Soon", "Feedback", <LogoutButton />]}/> */}
-              {/* {(showSidebar)?<Sidebar setShowSidebar={setShowSidebar}/>:null} */}
-                {/* <div className="hamburgerBtn" onClick={()=>setShowSidebar(true)}>
-                  <i className="fas fa-bars" ></i>
-              </div> */}
+              <Sidebar  user={user} items={items}/>
             </div>
           </div>
         </nav>
