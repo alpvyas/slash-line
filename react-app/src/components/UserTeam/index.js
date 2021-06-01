@@ -22,7 +22,7 @@ const MyTeam = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.session.user);
   const injuredList = useSelector(state => state.userTeam.injuredList);
-  const players = useSelector(state => state.userTeam.userTeam);
+  const players = useSelector(state => state.userTeam.allPlayers[0]);
   const [spotlightPlayer, setSpotlightPlayer] = useState({});
   const [spotlightName, setSpotlightName] = useState("");
 
@@ -50,11 +50,11 @@ const MyTeam = () => {
     },
     {
       Header: "Position",
-      accessor: "position_txt",
+      accessor: "primary_position_txt",
     },
     {
       Header: "Team",
-      accessor: "team_name",
+      accessor: "team_abbrev",
     },
     {
       Header: "Bats",
