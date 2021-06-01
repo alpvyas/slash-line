@@ -20,7 +20,7 @@ const Homepage = () => {
 
   
   const user = useSelector((state) => state.session.user);
-  const leagues = useSelector(state => state.leagues.leagues.managed);
+  const leagues = useSelector(state => state.leagues.leagues.member);
 
   const userAllPlayers = useSelector(state => state.userTeam.allPlayers[0]);
   

@@ -27,11 +27,13 @@ def get_user_leagues(user_id):
     member = [League.query.filter_by(
         id=league).first() for league in league_ids]
 
+    member = [*member, *managed]
+
     # print("MEMBER: ", member)
-    return json.dumps({"errors": "",
-                       "managed": [league.to_dict() for league in
-                                   managed],
-                       "member": [league.to_dict() for league in member]}, default=str)
+    return jsonify({"errors": "",
+                    "managed": [league.to_dict() for league in
+                                managed],
+                    "member": [league.to_dict() for league in member]})
 
 
 def add_new_league(user_id):

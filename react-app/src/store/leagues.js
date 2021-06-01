@@ -73,7 +73,6 @@ export const createLeague =
 
       const data = await response.json()
 
-      console.log("LEAGUE DATA: ", data)
       if (response.ok && !data.errors) {
         dispatch(addLeagues(data));
       }
