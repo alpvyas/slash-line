@@ -21,9 +21,7 @@ const Homepage = () => {
   
   const user = useSelector((state) => state.session.user);
   const leagues = useSelector(state => state.leagues.leagues.managed);
-  const currentLeague = useSelector(state => state.leagues.current);
-  
-  const [userLeagues, setUserLeagues] = useState([]);
+
   const userAllPlayers = useSelector(state => state.userTeam.allPlayers[0]);
   
   
@@ -36,13 +34,7 @@ const Homepage = () => {
   useEffect(() => {
     if (user) {
       dispatch(get_user_leagues(user.id))
-      .then(data => {
-        setUserLeagues(data["managed"])
-        // console.log("USER LEAGUES: ", userLeagues)
-        // console.log("USER LEAGUES[0]: ", userLeagues[0])
       }
-      )
-    }
   }, [dispatch, user]);
 
   useEffect(() => {
@@ -88,11 +80,11 @@ const Homepage = () => {
     },
     {
       Header: "Position",
-      accessor: "position_txt",
+      accessor: "primary_position_txt",
     },
     {
       Header: "Team",
-      accessor: "team_name",
+      accessor: "team_abbrev",
     },
     {
       Header: "Bats",
@@ -123,10 +115,15 @@ const Homepage = () => {
 
         return month + " / " + day + " / " + year
       },
+
+    },
+    {
+      Header: "Status",
+      accessor: "status",
     },
     {
       Header: "",
-      accessor: "player_id",
+      accessor: "mlb_player_id",
       Cell: props => (
         <button>
           Place on IL

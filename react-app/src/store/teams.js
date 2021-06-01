@@ -18,7 +18,7 @@ const add = (teamData) => ({
                           THUNK ACTION CREATORS
 ------------------------------------------------------------------------------*/
 
-export const get_league_teams = (leagueId) => async (dispatch) => { 
+export const get_league_teams = (leagueId) => async (dispatch) => {
   const response = await fetch(`/api/teams/leagues/${leagueId}`, {
   method: "GET"
   });
@@ -27,7 +27,8 @@ export const get_league_teams = (leagueId) => async (dispatch) => {
 
   if (response.ok && !teams.errors) {
     return teams.teams;
-  };
+  }
+  
 };
 
 /* ----------------------------------------------------------------------------

@@ -62,9 +62,7 @@ export const createLeague =
         }),
       });
       const data = await response.json()
-      // if(response.ok && !data.errors){
-      //   dispatch(setUser(data))
-      // }
+  
       return data.errors;
   };
 
@@ -109,6 +107,7 @@ const leagueReducer = (state = initialState, action) => {
       newState = {...state};
       newState.leagues.managed = action.payload.managed;
       newState.leagues.member = action.payload.member;
+      newState.current = action.payload.member[0];
       return newState;
     case SET_LEAGUE:
       newState = {...state};
