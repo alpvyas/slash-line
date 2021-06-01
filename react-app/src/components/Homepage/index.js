@@ -149,7 +149,7 @@ const Homepage = () => {
             <div className="header">
               <h3>Standings</h3>
           </div>
-            <Standings />
+            {leagues && <Standings />}
           </div>
           <div className="create-league-container">
             <div className="header">

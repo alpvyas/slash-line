@@ -19,7 +19,7 @@ const add = (teamData) => ({
 ------------------------------------------------------------------------------*/
 
 export const get_league_teams = (leagueId) => async (dispatch) => { 
-  const response = await fetch(`/api/teams/league/${leagueId}`, {
+  const response = await fetch(`/api/teams/leagues/${leagueId}`, {
   method: "GET"
   });
 

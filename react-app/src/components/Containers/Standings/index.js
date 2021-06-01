@@ -5,17 +5,18 @@ import { get_league_teams } from "../../../store/teams";
 import Table from "../../Table";
 import "./Standings.css";
 
-const Standings = () => {
+const Standings = (user) => {
   const dispatch = useDispatch();
   const currentLeague = useSelector(state => state.leagues.current);
 
   const [teams, setTeams] = useState([]);
 
   useEffect(() => {
+    if (user && currentLeague) {
       dispatch(get_league_teams(currentLeague.id))
       .then(teams => setTeams(teams));
-    
-  }, [dispatch, currentLeague])
+    }
+  }, [dispatch, currentLeague, user])
 
   const headers = ["Rank", "Team", "Points"];
   const row_keys = ["id", "name", "wins"];
