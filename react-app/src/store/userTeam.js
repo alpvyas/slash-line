@@ -92,9 +92,9 @@ export const add_player = (player, userId, leagueId) => async dispatch => {
 
   const status = await response.json();
 
-  console.log("STATUS MESSAGE: ", status.message)
   if (status.ok) {
     dispatch(add(player));
+    alert(status.message);
   }else{
     alert(status.message);
   }

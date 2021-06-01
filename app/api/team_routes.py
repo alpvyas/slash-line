@@ -63,10 +63,27 @@ def add_player_to_team(league_id, user_id):
     roster = User_Team_Player.query.filter_by(team_id=user_team.id).all()
 
     players = [int(player.mlb_player_id) for player in roster]
-    # print("PLAYERS: ", players)
+
     for player in players:
         if player == player_id:
             return jsonify({"ok": False, "message": "Player already on roster."})
+
+    league_teams = Team.query.filter_by(league_id=league_id).all()
+
+    print("LEAGUE TEAMS: ", league_teams)
+    league_players = []
+
+    for league_team in league_teams:
+        roster = User_Team_Player.query.filter_by(
+            team_id=league_team.id).all()
+
+        players = [int(player.mlb_player_id) for player in roster]
+
+        league_players = [*league_players, *players]
+
+    for player in league_players:
+        if player == player_id:
+            return jsonify({"ok": False, "message": "Player is already on another team in the league."})
 
     new_player = User_Team_Player(mlb_player_id=player_id,
                                   team_id=user_team.id)
