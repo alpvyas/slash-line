@@ -7,9 +7,6 @@ import "./Table.css";
 const Table = ({columns, rows, row_keys, button}) => {
   const dispatch = useDispatch();
   const user = useSelector(state => state.session.user);
-  // console.log("ROWS: ", rows)
-  // const [currentLeague, setCurrentLeague] = useState();
-
   const currentLeague = useSelector(state => state.leagues.current);
 
   const setLeague = (league) => {

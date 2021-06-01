@@ -95,7 +95,7 @@ def add_player_to_team(league_id, user_id):
 # add_team
 
 
-@team_routes.route("/league/<int:league_id>", methods=['GET', 'POST'])
+@team_routes.route("/leagues/<int:league_id>", methods=['GET', 'POST'])
 def get_or_add_teams(league_id):
     if request.method == 'GET':
         return get_league_teams(league_id)
