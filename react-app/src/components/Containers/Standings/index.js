@@ -12,11 +12,11 @@ const Standings = (user) => {
   const [teams, setTeams] = useState([]);
 
   useEffect(() => {
-    if (user && currentLeague) {
+    if (user && (currentLeague !== undefined)) {
       dispatch(get_league_teams(currentLeague.id))
       .then(teams => setTeams(teams));
     }
-  }, [dispatch, currentLeague, user])
+  }, [dispatch, user])
 
   const headers = ["Rank", "Team", "Points"];
   const row_keys = ["id", "name", "wins"];
