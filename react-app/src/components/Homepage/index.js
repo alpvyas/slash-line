@@ -22,6 +22,8 @@ const Homepage = () => {
   const user = useSelector((state) => state.session.user);
   const leagues = useSelector(state => state.leagues.leagues.member);
 
+  console.log("LEAGUES: ", leagues)
+
   const userAllPlayers = useSelector(state => state.userTeam.allPlayers[0]);
   
   
@@ -146,7 +148,7 @@ const Homepage = () => {
             <div className="header">
               <h3>Standings</h3>
           </div>
-            {leagues && <Standings />}
+            {leagues && <Standings user={user}/>}
           </div>
           <div className="create-league-container">
             <div className="header">

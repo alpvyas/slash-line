@@ -22,12 +22,12 @@ def get_user_leagues(user_id):
     teams = Team.query.filter_by(user_id=user_id).all()
     # print("TEAMS: ", teams)
     league_ids = [team.league_id for team in teams]
-    # print("LEAGUE IDS: ", league_ids)
+    print("LEAGUE IDS: ", league_ids)
 
     member = [League.query.filter_by(
         id=league).first() for league in league_ids]
 
-    member = [*member, *managed]
+    # member = [*member, *managed]
 
     # print("MEMBER: ", member)
     return jsonify({"errors": "",
