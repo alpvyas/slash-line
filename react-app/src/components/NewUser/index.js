@@ -13,13 +13,15 @@ const NewUser = () => {
 
         <div className="main-content">
           <form>
-            
+
           </form>
         </div>
 
         <div className="footer">
 
         </div>
+
+        <div className="bottom-container"></div>
 
       </div>
     </>
