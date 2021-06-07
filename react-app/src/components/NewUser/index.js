@@ -25,7 +25,7 @@ const NewUser = () => {
 
         <div className="heres-another-div"></div>
         <div className="another-div"></div>
-
+        <div className="third-div"></div>
       </div>
     </>
   )};
