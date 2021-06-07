@@ -23,6 +23,8 @@ const NewUser = () => {
 
         <div className="bottom-container"></div>
 
+        <div className="heres-another-div"></div>
+
       </div>
     </>
   )};
