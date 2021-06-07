@@ -32,6 +32,7 @@ const NewUser = () => {
         <div className="6th-div"></div>
         <div className="7th-div"></div>
         <div className="8th-div"></div>
+        <div className="9th-div"></div>
       </div>
     </>
   )};
