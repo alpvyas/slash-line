@@ -18,7 +18,6 @@ import { get_single_player_stats } from "../../store/stats";
 
 const Players = () => {
   const dispatch = useDispatch();
-  // const [userTeam, setUserTeam] = useState([])
 
   const user = useSelector(state => state.session.user);
   const league = useSelector(state => state.leagues.current)
@@ -30,34 +29,21 @@ const Players = () => {
 
 
   const getStats = async (player) => {
-    console.log("PLAYER: ", player)
     const response = await dispatch(get_single_player_stats(player))
 
     setSpotlightPlayer(response);
     setSpotlightName(player.full_name)
-    console.log("Player Stats: ", response)
+  
   }
-
-  // const onRowClick = (player_id) => {
-  //   return (
-  //           console.log('Added this player: ', player_id))
-        
-  //   }
 
  const addPlayer = (player) => {
    console.log("USER: ", user.id)
    console.log("LEAGUE: ", league.id)
     const response = dispatch(add_player(player, user.id, league.id))
-    // setUserTeam([player])
     console.log("PLAYER: ", player)
     console.log("USER TEAM: ", userTeam)
     console.log("RESPONSE ", response)
   }
-
-  const show_player_stats = player => {
-    setSpotlightPlayer(player)
-  };
-
 
   const columns = useMemo((height, date, bday, day, month, year) => [
     {
