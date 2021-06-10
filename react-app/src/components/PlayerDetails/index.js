@@ -10,7 +10,7 @@ const PlayerDetail = (player, name) => {
   const columnsB = ["G", "AB", "R",
                    "H", "2B", "3B", "HR", "RBI", "BB", "SO", "SB", "CS", "AVG", "OBP", "SLG", "OPS"];
 
-  const row_keys_A = ["team_name", "position_txt", "bats", "throws", "height_feet", "weight", "birth_date"];
+  const row_keys_A = ["mlb_team_name", "primary_position_txt", "bats", "throws", "height", "weight", "birth_date"];
 
   const row_keys_B = ["g", "ab", "r", "h", "d", "t", "hr", "rbi", "bb", "so", "sb", "cs", "avg", "obp", "slg", "ops"]
 
@@ -18,7 +18,6 @@ const PlayerDetail = (player, name) => {
 
   return (
     <>
-      {console.log("PLAYER IN PLAYERDETAILS: ", player)}
       <div className="player-detail-container">
         <div className="header-container">
           <h4>{player.name}</h4>

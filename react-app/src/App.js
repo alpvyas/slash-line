@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import * as sessionActions from "./store/session";
 import { authenticate } from "./services/auth";
-import { get_players, update_players } from "./store/players";
+import { get_players, seedPlayers, update_players } from "./store/players";
 import { get_stats } from "./store/stats";
 import Landing from "./components/Landing";
 import Homepage from "./components/Homepage";
@@ -22,6 +22,7 @@ function App() {
   const dispatch = useDispatch();
   const [authenticated, setAuthenticated] = useState(false);
   const [loaded, setLoaded] = useState(false);
+  const [initialized, setInitialized] = useState(false);
   const user = useSelector(state => state.session.user);
   
   const players = useSelector(state => state.players.players);
@@ -36,19 +37,19 @@ function App() {
     waitTime = callTime - currentTime;
   }else {
     waitTime = callTime + 86400000 - currentTime;
-  }
+  };
 
-//sets up data update scheduled for each night at 2AM PST
-useEffect(() => {
-  const timer = setTimeout(() => {
-    dispatch(update_players())
-
-    setInterval(() => {
+  //sets up data update scheduled for each night at 2AM PST
+  useEffect(() => {
+    const timer = setTimeout(() => {
       dispatch(update_players())
-    }, 86400000)
-  }, waitTime)
-  return () => clearTimeout(timer)
-}, [])
+
+      setInterval(() => {
+        dispatch(update_players())
+      }, 86400000)
+    }, waitTime)
+    return () => clearTimeout(timer)
+  }, [])
  
   useEffect(() => {
     dispatch(get_players())
