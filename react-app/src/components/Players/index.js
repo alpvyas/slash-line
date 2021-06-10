@@ -30,9 +30,11 @@ const Players = () => {
 
 
   const getStats = async (player) => {
+    console.log("PLAYER: ", player)
     const response = await dispatch(get_single_player_stats(player))
+
     setSpotlightPlayer(response);
-    setSpotlightName(player.name_display_first_last)
+    setSpotlightName(player.full_name)
     console.log("Player Stats: ", response)
   }
 

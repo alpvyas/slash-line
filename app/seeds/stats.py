@@ -1,34 +1,35 @@
-from flask import Blueprint, jsonify, request, json, session
-from datetime import date
+from flask import json, session
+from app.models import db, Player_Stats
 import requests
-from app.models import db, Player, Player_Stats
 
-stats_routes = Blueprint("stats_routes",
-                         __name__)
-
-# ------------------------------------------------------------------------------
-#                         Stats Operation Functions
-# ------------------------------------------------------------------------------
+teams = [144, 146, 121, 143, 120, 112, 113, 158, 134, 138, 109, 115, 119, 135,
+         137, 110, 111, 147, 139, 141, 145, 114, 116, 118, 142, 117, 108, 133, 136, 140]
 
 
-def update():
+def seed_player_stats():
 
-    delete = Player_Stats.query.all()
-    for stats in delete:
-        db.session.delete(stats)
-        db.session.commit()
+    players = []
 
-    game_type = "R"
-    today = date.today()
-    year = today.year
-
-    players = Player.query.all()
+    for team in teams:
+        response = requests.get(
+            f"http://lookup-service-prod.mlb.com/json/named.roster_40.bam?team_id='{team}'"
+        )
+        data = json.loads(response.text)
+        roster = data["roster_40"]["queryResults"]["row"]
+        players = [*players, *roster]
 
     for player in players:
-        player_id = player.mlb_player_id
+        player_id = player["player_id"]
+
+        player_response = requests.get(
+            f"http://lookup-service-prod.mlb.com/json/named.player_info.bam?sport_code='mlb'&player_id='{player_id}'")
+
+        full_player_data = json.loads(player_response.text)
+
+        player_data = full_player_data["player_info"]["queryResults"]["row"]
 
         response = requests.get(
-            f"http://lookup-service-prod.mlb.com/json/named.sport_hitting_tm.bam?league_list_id='mlb'&game_type='{game_type}'&season='{year}'&player_id='{player_id}'")
+            f"http://lookup-service-prod.mlb.com/json/named.sport_hitting_tm.bam?league_list_id='mlb'&game_type='R'&season='2021'&player_id='{player_id}'")
 
         data = json.loads(response.text)
 
@@ -38,8 +39,8 @@ def update():
             stats = Player_Stats(mlb_player_id=player_id,
 
 
-                                 full_name=player.full_name,
-                                 team_abbrev=player.team_abbrev,
+                                 full_name=player_data["name_display_first_last_html"],
+                                 team_abbrev=player_data["team_abbrev"],
                                  ab=stats_data["ab"],
                                  ao=stats_data["ao"],
                                  avg=stats_data["avg"],
@@ -120,26 +121,3 @@ def update():
 
             db.session.add(stats)
             db.session.commit()
-
-    return jsonify({"message": "Player Stats have been updated."})
-
-
-def get_season_stats(player_id):
-
-    stats = Player_Stats.query.filter_by(mlb_player_id=player_id).first()
-
-    return jsonify(stats.to_dict())
-
-# ------------------------------------------------------------------------------
-#                    RESTful Routes -- Stats
-# ------------------------------------------------------------------------------
-
-
-@stats_routes.route("/players/<string:player_id>", methods=['GET'])
-def get_stats(player_id):
-    return get_season_stats(player_id)
-
-
-@stats_routes.route("/update", methods=['GET'])
-def update_stats():
-    return update()

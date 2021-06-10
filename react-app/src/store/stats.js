@@ -64,21 +64,14 @@ export const get_stats = () => async (dispatch) => {
 };
 
 export const get_single_player_stats = (player) => async (dispatch) => {
-  const response = await fetch(`/api/stats/game_type/${gameType}/season/${season}/players/${player.player_id}`, {
+  console.log("PLAYER: ", player)
+  const response = await fetch(`/api/stats/players/${player.mlb_player_id}`, {
     method: "GET",
   });
 
-  const resolvedResponse = await Promise.resolve(response);
-
-  // const result = await response.json();
-
-  const playerStats = await resolvedResponse.json();
-
-  const resolvedPlayerStats = await Promise.resolve(playerStats);
-
-  // return result
-
-  return resolvedPlayerStats.sport_hitting_tm.queryResults.row;
+  const result = await response.json();
+  console.log("RESULT: ", result)
+  return result;
 };
 
 export const update_season_stats = () => async (dispatch) => {

@@ -4,6 +4,8 @@ from .mlb_teams import seed_mlb_teams
 from .player_users import seed_player_users
 from .leagues import seed_leagues
 from .teams import seed_teams
+from .players import seed_players
+from .stats import seed_player_stats
 
 # Creates a seed group to hold our commands
 # So we can type `flask seed --help`
@@ -19,6 +21,8 @@ def seed():
     seed_player_users()
     seed_leagues()
     seed_teams()
+    seed_players()
+    seed_player_stats()
     # Add other seed functions here
 
 # Creates the `flask seed undo` command

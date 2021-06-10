@@ -20,7 +20,7 @@ const Homepage = () => {
 
   
   const user = useSelector((state) => state.session.user);
-  const leagues = useSelector(state => state.leagues.leagues.member);
+  const leagues = useSelector(state => state.leagues.leagues.managed);
 
   console.log("LEAGUES: ", leagues)
 
@@ -167,8 +167,6 @@ const Homepage = () => {
               {userAllPlayers && <ReactTable columns={myPlayerColumns} data={userAllPlayers}/>}
              </div>
            </div>
-
-           {/* <div className="misc-container"><LogoutButton/></div> */}
          </div>
          <div className="footer-container">
           <Footer />
