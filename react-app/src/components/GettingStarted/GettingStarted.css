@@ -30,8 +30,13 @@
   background-color: whitesmoke;
 }
 
-.middle-container,
-.bottom-container {
+.middle-container {
   display: flex;
   flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.middle-container {
+  height: 550px;
 }
