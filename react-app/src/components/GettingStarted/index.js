@@ -4,6 +4,8 @@ import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import Step1 from './Step1';
 import JoinLeague from './JoinLeague';
+import JoinUserLeague from './JoinUserLeague';
+import CreateTeam from './CreateTeam';
 import Footer from '../Footer';
 import NavBar from '../NavBar';
 import ball_in_glove from '../../images/baseball-glove-dirt.png';
@@ -22,7 +24,9 @@ const GettingStarted = () => {
         </div>
         <div className="middle-container">
           {/* <Step1 /> */}
-          <JoinLeague />
+          {/* <JoinLeague /> */}
+          {/* <JoinUserLeague /> */}
+          <CreateTeam />
         </div>
         <div className="footer-container">
           <Footer />
