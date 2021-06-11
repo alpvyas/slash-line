@@ -5,7 +5,7 @@ import { game_details } from "../../mock_game_data";
 // import Scorecard from "../Containers/Scorecard";
 // import Carousel from "../Carousel";
 import MaterialCarousel from "../MaterialCarousel";
-import GettingStartedModal from "../GettingStartedModal";
+import GettingStartedModal from "../MaterialModal";
 
 
 

@@ -16,6 +16,7 @@ import Stats from "./components/Stats";
 import NotFound from "./components/NotFound";
 import { get_game_details_backend } from "./store/gameDetails";
 import Dropzone from "./components/Dropzone";
+import GettingStarted from "./components/GettingStarted";
 
 
 function App() {
@@ -128,6 +129,9 @@ function App() {
         <Route exact path="/">
           <Landing />
         </Route>
+        <ProtectedRoute exact path="/getting-started" authenticated={authenticated}>
+          <GettingStarted />
+        </ProtectedRoute>
         <ProtectedRoute exact path="/home" authenticated={authenticated}>
           <Homepage />
         </ProtectedRoute>

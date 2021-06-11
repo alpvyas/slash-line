@@ -7,16 +7,15 @@ import Collapse from "@material-ui/core/Collapse";
 import { Drawer, Divider, IconButton } from "@material-ui/core";
 import {logout} from "../../store/session"
 import ReorderIcon from "@material-ui/icons/Reorder";
-import "./Sidebar.css";
 import { NavLink, Redirect, useHistory} from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-// import LogoutButton from "../auth/LogoutButton";
+import "./Sidebar.css";
 
 const styles = {
   sideNav: {
-    marginTop: '20px',
+    marginTop: '10px',
     zIndex: 3,
-    marginLeft: '0px',
+    marginLeft: '15px',
     position: 'relative',
   },
   link: {
@@ -25,7 +24,10 @@ const styles = {
   },
   container: {
       width: '750px',
-  }
+  },
+  hamburger: {
+    borderRadius: '100%',
+  },
 };
 
 const SidebarItem = ({ expanded, item, depthStep = 25, depth =0, ...rest }) => {
@@ -122,7 +124,7 @@ const Sidebar = ({ items, depthStep = 25, depth =0, expanded }) => {
         <>
             <div style={styles.sideNav}>
                 <IconButton
-                className="hamburger-icon" onClick={toggle}>
+                className="hamburger-icon" style={styles.hamburger} onClick={toggle}>
                     { !drawerOpen ? <ReorderIcon fontSize="large" /> : null }
                 </IconButton>
             </div>
