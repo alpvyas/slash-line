@@ -3,8 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
-import TextField from '@material-ui/core/TextField';
-import './GettingStartedModal.css';
+import './MaterialModal.css';
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -20,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
   } ,
 }));
 
-const GettingStartedModal = () => {
+const MaterialModal = () => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
 
@@ -59,4 +58,4 @@ const GettingStartedModal = () => {
     </>
   )};
 
-export default GettingStartedModal;
+export default MaterialModal;

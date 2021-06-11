@@ -55,10 +55,10 @@ code {
 }
 
 .item-text:hover {
-  /* color: red;
-  text-decoration: underline; */
-  /* border-color: red; */
-
+  color: red;
+  text-decoration: underline;
+  border-color: red;
+}
 .expand-arrow {
   font-size: 1.2rem !important;
 }

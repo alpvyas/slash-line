@@ -1,13 +1,11 @@
-import React, { useState, useEffect } from "react";
-import { NavLink, Redirect, useHistory, useParams } from "react-router-dom";
-import {logout} from "../../store/session";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { NavLink, useHistory, useParams } from "react-router-dom";
 import logo from "../../images/logo.png"
-import LogoutButton from "../auth/LogoutButton";
 import Sidebar from "../Sidebar";
 import SettingsIcon from "@material-ui/icons/Settings";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import "./NavBar.css";
-import { useDispatch, useSelector } from "react-redux";
 
 const NavBar = () => {
   const dispatch = useDispatch();
