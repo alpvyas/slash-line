@@ -32,11 +32,23 @@
 
 .middle-container {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
 .middle-container {
-  height: 550px;
+  height: 1200px;
+}
+
+.card {
+  border: 5px solid red;
+  position: relative;
+  height: 500px;
+  width: 500px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }

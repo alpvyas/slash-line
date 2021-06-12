@@ -2,11 +2,9 @@ import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
-import './Step1.css';
+import './Start.css';
 
-const Step1 = () => {
-
-  const [step, setStep] = useState("first");
+const Step1 = (step, setStep, join, setJoin) => {
 
   return (
     <>
