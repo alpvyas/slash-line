@@ -356,14 +356,14 @@ const GettingStarted = () => {
                     Back
                   </Button>
                   {/* {isStepOptional(activeStep) && ( */}
-                    <Button
+                    {/* <Button
                       variant="contained"
                       color="primary"
                       // onClick={handleSkip}
                       className={classes.button}
                       >
                         Skip
-                      </Button>
+                      </Button> */}
                   {/* )} */}
 
                   <Button
