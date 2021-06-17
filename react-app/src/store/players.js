@@ -121,7 +121,10 @@ export const update_players = () => async (dispatch) => {
 
   const players = await dispatch(get_roster_40());
 
-  if (players) dispatch(post_players(players));
+  if (players) {
+    dispatch(post_players(players));
+    return true;
+  }
 };
 
 //post updated players to backend database
