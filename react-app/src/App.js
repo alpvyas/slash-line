@@ -21,15 +21,21 @@ import GettingStarted from "./components/GettingStarted";
 
 function App() {
   const dispatch = useDispatch();
+  const [initialized, setInitialized] = useState(false);
   const [authenticated, setAuthenticated] = useState(false);
   const [loaded, setLoaded] = useState(false);
-  const [initialized, setInitialized] = useState(false);
-  const user = useSelector(state => state.session.user);
-  
-  const players = useSelector(state => state.players.players);
+  const deployed = useSelector(state => state.session.deployed);
+
+
+  if (!deployed) {
+    const update = dispatch(update_players());
+
+    if (update) {
+      dispatch(sessionActions.deployStatus())
+    }
+  }
 
   //calculating wait time for scheduled data update used in following useEffect/setTimeout
-
   const currentTime = new Date().getTime();
   const callTime = new Date().setHours(2,0,0,0);
   let waitTime;

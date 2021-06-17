@@ -4,6 +4,14 @@ import { clearUserTeamState } from "./userTeam";
 
 const GET_USER = "session/GET_USER";
 const REMOVE_USER = "session/REMOVE_USER";
+const DEPLOY = "session/DEPLOY";
+
+
+const deploy = () => {
+  return {
+    type: DEPLOY,
+  };
+};
 
 const setUser = user => {
   return {
@@ -14,10 +22,14 @@ const setUser = user => {
 
 const removeUser = () => {
   return {
-    type: REMOVE_USER
+    type: REMOVE_USER,
   };
 };
 
+
+export const deployStatus = (dispatch) => {
+  dispatch(deploy())
+};
 
 export const login = (email, password) => async (dispatch) => {
   const response = await fetch("/api/auth/login", {
@@ -86,7 +98,7 @@ export const signup = (username, firstName, lastName, email, password) =>
     return response
   };
 
-  const initialState = {};
+  const initialState = {deployed: false, };
   let newState;
 
   const sessionReducer = (state = initialState, action) => {
@@ -99,6 +111,9 @@ export const signup = (username, firstName, lastName, email, password) =>
         newState = {...state};
         newState.user = null;
         return newState;
+      case DEPLOY:
+        newState = {...state};
+        newState.deployed = true
       default:
         return state;
     };
