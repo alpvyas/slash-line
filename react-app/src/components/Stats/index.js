@@ -7,7 +7,6 @@ import ReactTable from "../ReactTable";
 import Footer from "../Footer";
 import "./Stats.css";
 import Scorecard from "../Containers/Scorecard";
-import { game_details } from "../../mock_game_data";
 
 const Stats = () => {
   const dispatch = useDispatch();
@@ -16,10 +15,9 @@ const Stats = () => {
   
   const stats = useSelector(state => state.stats.stats.stats);
 
-  // const game_details = useSelector(state => state.gameDetails.gameDetails);
-  const gameDetails = game_details;
+  const game_details = useSelector(state => state.gameDetails.gameDetails);
 
-  const games = gameDetails&&gameDetails.map((game_detail) => (
+  const games = game_details&&game_details.map((game_detail) => (
     <Scorecard game={game_detail}/>
   ));
 

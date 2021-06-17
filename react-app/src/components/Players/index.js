@@ -14,7 +14,6 @@ import { add_player } from "../../store/userTeam";
 import PlayerDetail from "../PlayerDetails";
 import mookie_betts from "../../images/mookie_betts.png";
 import { get_single_player_stats } from "../../store/stats";
-import { game_details } from "../../mock_game_data";
 
 
 const Players = () => {
@@ -115,10 +114,9 @@ const Players = () => {
   ], [addPlayer]);
 
 
-  // const game_details = useSelector(state => state.gameDetails.gameDetails);
-  const gameDetails = game_details;
+  const game_details = useSelector(state => state.gameDetails.gameDetails);
 
-  const games = gameDetails&&gameDetails.map((game_detail) => (
+  const games = game_details&&game_details.map((game_detail) => (
     <Scorecard game={game_detail}/>
   ));
 

@@ -83,16 +83,16 @@ function App() {
 
   const today = year + '-' + month + '-' + day;
 
-  // useEffect(() => {
-  //   const timer = setTimeout(() => {
-  //     dispatch(get_game_details_backend(today))
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      dispatch(get_game_details_backend(today))
 
-  //     setInterval(() => {
-  //       dispatch(get_game_details_backend(today))
-  //     }, 60000)
-  //   }, 10000)
-  //   return () => clearTimeout(timer)
-  // }, [])
+      setInterval(() => {
+        dispatch(get_game_details_backend(today))
+      }, 60000)
+    }, 10000)
+    return () => clearTimeout(timer)
+  }, [])
   
   // const userTeam = useSelector(state => state.userTeam.userTeam);
   // const injuredPlayers = useSelector(state => state.injuredList.injuredList);
