@@ -27,7 +27,7 @@ const removeUser = () => {
 };
 
 
-export const deployStatus = () => async (dispatch) => {
+export const deployStatus = (dispatch) => {
   dispatch(deploy())
 };
 
