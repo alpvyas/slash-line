@@ -26,7 +26,6 @@ function App() {
   const [loaded, setLoaded] = useState(false);
   const deployed = useSelector(state => state.session.deployed);
 
-
   // if (!deployed) {
   //   const update = dispatch(update_players());
 
@@ -34,6 +33,7 @@ function App() {
   //     dispatch(sessionActions.deployStatus())
   //   }
   // }
+
 
   //calculating wait time for scheduled data update used in following useEffect/setTimeout
   const currentTime = new Date().getTime();
