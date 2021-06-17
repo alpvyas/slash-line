@@ -14,6 +14,7 @@ import Footer from "../Footer";
 import LogoutButton from "../auth/LogoutButton";
 import { Redirect, useHistory } from "react-router";
 import { getUserAllPlayers } from "../../store/userTeam";
+import { game_details } from "../../mock_game_data";
 
 const Homepage = () => {
   const dispatch = useDispatch();
@@ -27,7 +28,8 @@ const Homepage = () => {
   const userAllPlayers = useSelector(state => state.userTeam.allPlayers[0]);
   
   
-  const gameDetails = useSelector(state => state.gameDetails.gameDetails);
+  // const gameDetails = useSelector(state => state.gameDetails.gameDetails);
+  const gameDetails = game_details;
   const games = gameDetails&&gameDetails.map((gameDetail) => (
     <Scorecard game={gameDetail}/>
   ));
