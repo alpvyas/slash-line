@@ -10,7 +10,7 @@ const JoinUserLeague = () => {
 
   return (
    
-      <div className="card">
+ <>
 
         {credentials===undefined && (
           <>
@@ -31,9 +31,9 @@ const JoinUserLeague = () => {
           </>
         )}
 
-      </div>
+      </>
    
-  );
+  )
 };
 
 export default JoinUserLeague;

@@ -11,7 +11,7 @@ const Success = () => {
 
   return (
     <>
-      <div className="card">
+
         <h2>You're all set!</h2>
         <h2>Make sure you sign players to your team.</h2>
         <div className="buttons-container">
@@ -19,7 +19,6 @@ const Success = () => {
             Complete Setup
           </Button>
         </div>
-      </div>
     </>
   );
 };
