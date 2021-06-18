@@ -21,10 +21,9 @@ const ADD_PLAYERS_SEASON_STATS = "stats/players/seasons/ADD";
                           ACTION CREATORS
 ------------------------------------------------------------------------------*/
 
-const add = (playerStats, season) => ({
+const add = (playerStats) => ({
   type: ADD_PLAYERS_SEASON_STATS,
   data: playerStats,
-  season: season,
 });
 
 const season = 2021;
@@ -58,7 +57,8 @@ export const get_stats = () => async (dispatch) => {
 
   const statsData = await response.json()
 
-  dispatch(add(statsData, season))
+  console.log("STATS:", statsData)
+  dispatch(add(statsData))
 
 
 };

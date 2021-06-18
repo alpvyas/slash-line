@@ -11,6 +11,13 @@ stats_routes = Blueprint("stats_routes",
 # ------------------------------------------------------------------------------
 
 
+def backend_stats():
+    stats = Player_Stats.query.all()
+
+    return jsonify({"stats": [stat.to_dict() for stat in stats],
+                    "message": "Retrieved stats successfully."})
+
+
 def update():
 
     delete = Player_Stats.query.all()
@@ -143,3 +150,8 @@ def get_stats(player_id):
 @stats_routes.route("/update", methods=['GET'])
 def update_stats():
     return update()
+
+
+@stats_routes.route("/", methods=['GET'])
+def get_backend_stats():
+    return backend_stats()
