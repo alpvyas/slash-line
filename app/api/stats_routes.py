@@ -142,6 +142,11 @@ def get_season_stats(player_id):
 # ------------------------------------------------------------------------------
 
 
+@stats_routes.route("/", methods=['GET'])
+def get_backend_stats():
+    return backend_stats()
+
+
 @stats_routes.route("/players/<string:player_id>", methods=['GET'])
 def get_stats(player_id):
     return get_season_stats(player_id)
@@ -150,8 +155,3 @@ def get_stats(player_id):
 @stats_routes.route("/update", methods=['GET'])
 def update_stats():
     return update()
-
-
-@stats_routes.route("/", methods=['GET'])
-def get_backend_stats():
-    return backend_stats()
