@@ -11,7 +11,7 @@ const OpenLeagues = () => {
 
   return (
     <>
-      <div className="card">
+
         <h2>That's ok! Here are some open leagues that you can join.</h2>
         <form className="input-container">
           
@@ -21,7 +21,6 @@ const OpenLeagues = () => {
             Next
           </Button>
         </div>
-      </div>
     </>
   );
 };

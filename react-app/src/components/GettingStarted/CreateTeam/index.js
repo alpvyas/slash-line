@@ -11,7 +11,7 @@ const CreateTeam = () => {
 
   return (
     <>
-      <div className="card">
+
         <h2>You're in the League!</h2>
         <h2>Let's create your team.</h2>
         <form className="input-container">
@@ -26,7 +26,6 @@ const CreateTeam = () => {
             Next
           </Button>
         </div>
-      </div>
     </>
   );
 };

@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import { makeStyles } from '@material-ui/core/styles';
 import JoinUserLeague from '../JoinUserLeague';
 import './JoinLeague.css';
+import OpenLeagues from '../OpenLeagues';
 
 const JoinLeague = () => {
 
   const [action, setAction] = useState("");
 
   return (
-      <div className="card">
+ <>
 
         {action==="" && (
           <>
@@ -22,23 +21,27 @@ const JoinLeague = () => {
                 Yes, I have the league credentials
               </Button>
 
-              <Button className="new-league-button" variant="outlined" color="primary" onClick={() => ("joinRandomLeague")}>
+              <Button className="new-league-button" variant="outlined" color="primary" onClick={() => setAction("joinOpen")}>
                 No, I don't have that information.
               </Button>
 
             </div>
           </>
-        )};
+        )}
 
 
         {action==="join" && (
           <>
             <JoinUserLeague />
-          </>)};
+          </>)}
 
-      </div>
+        {action==="joinOpen" && (
+          <>
+            <OpenLeagues />
+          </>)}
+</>
 
-  );
+  )
 };
 
 export default JoinLeague;

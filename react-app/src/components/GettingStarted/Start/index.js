@@ -11,9 +11,7 @@ const Start = () => {
   
   return (
     
-      <div className="card"> 
-
-
+<>
         {action === "none" && (
           <>
           <h2>Let's Get Started!</h2>
@@ -33,7 +31,7 @@ const Start = () => {
         {action==="join" && <JoinLeague />}
         {/* {action==="create" && <CreateLeague />} */}
 
-      </div> 
+      </> 
    
   );
 };

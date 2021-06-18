@@ -142,12 +142,11 @@ const GettingStarted = () => {
     // );
 
   return (
-    <>
       <div className="container page-container" style={{backgroundImage: `url(${ball_in_glove})`}}>
         <div className="nav-bar-container">
           <NavBar />
         </div>
-        <div className="middle-container">
+        <div className="get-started-container">
           <div>
             {activeStep === steps.length ? (
               <div>
@@ -161,9 +160,17 @@ const GettingStarted = () => {
             ) : (
               <div>
                 <Typography className={classes.instructions}>
-                  {getStepContent(activeStep)}
-                                  <div className="navigation-buttons">
-                  <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
+                  <div className="card">
+                    {getStepContent(activeStep)}
+                  </div>
+                <div className="navigation-buttons">
+                  <Button
+                    variant="outlined"
+                    color="primary"
+                    disabled={activeStep === 0}
+                    onClick={handleBack}
+                    className={classes.button}
+                    >
                     Back
                   </Button>
                   {/* {isStepOptional(activeStep) && ( */}
@@ -178,7 +185,7 @@ const GettingStarted = () => {
                   {/* )} */}
 
                   <Button
-                    variant="contained"
+                    variant="outlined"
                     color="primary"
                     onClick={handleNext}
                     className={classes.button}
@@ -195,7 +202,6 @@ const GettingStarted = () => {
           <Footer />
         </div>
       </div>
-    </>
   );
 };
 
