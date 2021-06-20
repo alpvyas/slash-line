@@ -80,6 +80,19 @@ export const createLeague =
       return data;
     };
 
+  export const joinUserLeague = (leagueId, passcode) => async(dispatch) => {
+  const response = await fetch('/api/leagues/join', {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      leagueId,
+      passcode,
+    })
+  });
+  };
+
   export const setCurrentLeague = (league) => dispatch => {
     dispatch(setLeague(league));
   }

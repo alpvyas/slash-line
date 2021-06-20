@@ -59,6 +59,18 @@ def delete_league(league_id):
     db.session.commit()
     return jsonify({"message": "League successfully deleted"})
 
+def join_user_league():
+    league_credentials = json.loads(request.data.decode("utf-8"))
+    
+    league = League.query.filter_by(id=league_credentials["leagueId"]).first()
+    
+    if league:
+        league_passcode = league.passcode
+        
+        if league_passcode == league_credentials["passcode"]:
+            
+    
+
 
 # def edit_league(league_id):
 #     league_data = json.loads(request.data.decode("utf-8"))
