@@ -18,7 +18,7 @@ def seed_teams():
         {
             "name": "I Maeda Mistake",
             "points": points(),
-            "user_id": 9,
+            "user_id": 40,
             "league_id": 1,
         },
         {
