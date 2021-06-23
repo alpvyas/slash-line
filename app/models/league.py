@@ -7,6 +7,7 @@ class League(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
 
+    passcode = db.Column(db.Integer, nullable=False, default=1253)
     name = db.Column(db.String(30), nullable=False, unique=True)
     league_type = db.Column(db.String(30), nullable=False)
     permissions = db.Column(db.String(50), nullable=False,
@@ -24,6 +25,7 @@ class League(db.Model):
     def to_dict(self):
         return {
             "id": self.id,
+            "passcode": self.passcode,
             "name": self.name,
             "league_type": self.league_type,
             "permissions": self.permissions,

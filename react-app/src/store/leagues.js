@@ -81,8 +81,10 @@ export const createLeague =
     };
 
   export const joinUserLeague = (leagueId, passcode) => async(dispatch) => {
+
+    console.log("DATA: ", leagueId, passcode)
   const response = await fetch('/api/leagues/join', {
-    method: "GET",
+    method: "PUT",
     headers: {
       "Content-Type": "application/json",
     },
@@ -91,6 +93,13 @@ export const createLeague =
       passcode,
     })
   });
+
+  console.log("MARKER 1")
+  const check = await response.json();
+  console.log("CHECK: ", check.ok)
+
+  return check.ok;
+
   };
 
   export const setCurrentLeague = (league) => dispatch => {
