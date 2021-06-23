@@ -19,7 +19,7 @@ const Standings = (user) => {
   }, [dispatch, user])
 
   const headers = ["Rank", "Team", "Points"];
-  const row_keys = ["id", "name", "wins"];
+  const row_keys = ["id", "name", "points"];
   return (
       // <div className="standings-container">
       <>

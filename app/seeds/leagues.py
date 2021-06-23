@@ -101,7 +101,7 @@ def seed_leagues():
             "league_type": "Points Only",
             "permissions": "Commissioner Only",
             "draft_type": "Live Standard Draft",
-            "user_id": 0,
+            "user_id": 27,
         },
         {
             "name": "Apple League",
@@ -136,7 +136,7 @@ def seed_leagues():
             "league_type": "Points Only",
             "permissions": "Commissioner Only",
             "draft_type": "Offline Draft",
-            "user_id": 0,
+            "user_id": 27,
         },
         {
             "name": "Avocado League",
@@ -157,14 +157,14 @@ def seed_leagues():
             "league_type": "Points Only",
             "permissions": "Commissioner Only",
             "draft_type": "Live Standard Draft",
-            "user_id": 0,
+            "user_id": 27,
         },
         {
             "name": "Apricot League",
             "league_type": "Points Only",
             "permissions": "Commissioner Only",
             "draft_type": "Offline Draft",
-            "user_id": 0,
+            "user_id": 27,
         },
         {
             "name": "Pear League",
@@ -199,7 +199,7 @@ def seed_leagues():
             "league_type": "Rotisserie",
             "permissions": "All Managers",
             "draft_type": "Offline Draft",
-            "user_id": 0,
+            "user_id": 27,
         }
 
     ]
