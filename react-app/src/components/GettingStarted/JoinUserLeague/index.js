@@ -2,44 +2,59 @@ import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
-import './JoinUserLeague.css';
+import CreateTeam from '../CreateTeam';
 import { useDispatch } from 'react-redux';
+import { joinUserLeague } from '../../../store/leagues';
+import './JoinUserLeague.css';
 
 const JoinUserLeague = () => {
   const dispatch = useDispatch();
 
-  const [credentials, setCredentials] = useState(undefined);
+  const [credentials, setCredentials] = useState(false);
+  const [leagueId, setLeagueId] = useState("");
+  const [passcode, setPasscode] = useState("");
 
   const joinLeague = () => {
-    dispatch()
+    const response = dispatch(joinUserLeague(leagueId, passcode));
 
+    if (response) {
+      setCredentials(true);
+    };
   };
 
   return (
-   
- <>
-
-        {credentials===undefined && (
-          <>
+   <>
+          {(!credentials) && (
+            <>
             <h2>Great! Enter the League ID and passcode below</h2>
 
             <form className="input-container">
-              <TextField variant="outlined" label="League ID"></TextField>
-              <TextField variant="outlined" label="Passcode"></TextField>
+              <TextField
+                variant="outlined"
+                label="League ID"
+                value={leagueId}
+                onChange={e => setLeagueId(e.target.value)}
+              />
+              <TextField 
+                variant="outlined"
+                label="Passcode"
+                value={passcode}
+                onChange={e => setPasscode(e.target.value)}
+              />
             </form>
 
             <div className="buttons-container">
 
-              <Button className="new-league-button" variant="outlined" color="primary" onClick={() => setCredentials(true)}>
+              <Button className="new-league-button" variant="outlined" color="primary" onClick={() => joinLeague()}>
                 Join this league
               </Button>
 
             </div>
-          </>
-        )}
-
-      </>
-   
+            </>
+          )}
+            
+          {credentials && <CreateTeam />}
+    </>
   )
 };
 

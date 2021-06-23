@@ -159,7 +159,7 @@ const GettingStarted = () => {
               </div>
             ) : (
               <div>
-                <Typography className={classes.instructions}>
+                <Typography component={'span'} className={classes.instructions}>
                   <div className="card">
                     {getStepContent(activeStep)}
                   </div>

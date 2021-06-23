@@ -59,17 +59,21 @@ def delete_league(league_id):
     db.session.commit()
     return jsonify({"message": "League successfully deleted"})
 
+
 def join_user_league():
     league_credentials = json.loads(request.data.decode("utf-8"))
-    
-    league = League.query.filter_by(id=league_credentials["leagueId"]).first()
-    
-    if league:
-        league_passcode = league.passcode
-        
-        if league_passcode == league_credentials["passcode"]:
-            
-    
+
+    print("LEAGUE CREDS: ", league_credentials)
+
+    league = League.query.filter_by(
+        id=int(league_credentials["leagueId"])).first()
+
+    # if league:
+    # league_passcode = league.passcode
+
+    # if league_passcode == league_credentials["passcode"]:
+    # return jsonify({"ok": True})
+    return jsonify({"ok": "true"})
 
 
 # def edit_league(league_id):
@@ -97,9 +101,14 @@ def get_or_add_leagues(user_id):
     elif request.method == 'POST':
         return add_new_league(user_id)
 
-# delete_league
+
+# join
+@league_routes.route("/join", methods=['PUT'])
+def join_league():
+    return join_user_league()
 
 
+# delete
 @league_routes.route("/league/<int:league_id>", methods=['DELETE'])
 def delete_user_league(user_id, league_id):
     return delete_league(league_id)
