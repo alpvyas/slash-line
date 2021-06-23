@@ -11,15 +11,29 @@ const JoinUserLeague = () => {
   const dispatch = useDispatch();
 
   const [credentials, setCredentials] = useState(false);
+  const [errors, setErrors] = useState("");
   const [leagueId, setLeagueId] = useState("");
   const [passcode, setPasscode] = useState("");
 
   const joinLeague = () => {
-    const response = dispatch(joinUserLeague(leagueId, passcode));
+    dispatch(joinUserLeague(leagueId, passcode)).then(
+      (check) => {
+        if (check.ok) {
+          setCredentials(true);
+        }else {
+          setErrors(check.errors)
+        }
+      }
+    )
 
-    if (response) {
-      setCredentials(true);
-    };
+    // console.log("RES: ", response)
+    // if (response.ok) {
+    //   console.log("MARKER2")
+    //   setCredentials(true);
+    // }else {
+    //   console.log("MARKER3")
+    //   setErrors(response.errors)
+    // }
   };
 
   return (
