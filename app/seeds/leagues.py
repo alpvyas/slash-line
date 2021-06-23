@@ -101,7 +101,7 @@ def seed_leagues():
             "league_type": "Points Only",
             "permissions": "Commissioner Only",
             "draft_type": "Live Standard Draft",
-            "user_id": 2
+            "user_id": 0,
         },
         {
             "name": "Apple League",
@@ -136,70 +136,70 @@ def seed_leagues():
             "league_type": "Points Only",
             "permissions": "Commissioner Only",
             "draft_type": "Offline Draft",
-            "user_id": 4
+            "user_id": 0,
         },
         {
             "name": "Avocado League",
             "league_type": "Rotisserie",
             "permissions": "All Managers",
             "draft_type": "Live Standard Draft",
-            "user_id": 5
+            "user_id": 5,
         },
         {
             "name": "Pumpkin League",
             "league_type": "Points Only",
             "permissions": "Commissioner Only",
             "draft_type": "Live Standard Draft",
-            "user_id": 5
+            "user_id": 5,
         },
         {
             "name": "Mango League",
             "league_type": "Points Only",
             "permissions": "Commissioner Only",
             "draft_type": "Live Standard Draft",
-            "user_id": 5
+            "user_id": 0,
         },
         {
             "name": "Apricot League",
             "league_type": "Points Only",
             "permissions": "Commissioner Only",
             "draft_type": "Offline Draft",
-            "user_id": 6
+            "user_id": 0,
         },
         {
             "name": "Pear League",
             "league_type": "Points Only",
             "permissions": "All Managers",
             "draft_type": "Live Standard Draft",
-            "user_id": 6
+            "user_id": 6,
         },
         {
             "name": "Cabbage League",
             "league_type": "Points Only",
             "permissions": "Commissioner Only",
             "draft_type": "Live Standard Draft",
-            "user_id": 7
+            "user_id": 7,
         },
         {
             "name": "Coconut League",
             "league_type": "Points Only",
             "permissions": "Commissioner Only",
             "draft_type": "Live Salary Cap Draft",
-            "user_id": 7
+            "user_id": 7,
         },
         {
             "name": "Lemon League",
             "league_type": "Points Only",
             "permissions": "Commissioner Only",
             "draft_type": "Offline Draft",
-            "user_id": 8
+            "user_id": 8,
         },
         {
             "name": "Pineapple League",
             "league_type": "Rotisserie",
             "permissions": "All Managers",
             "draft_type": "Offline Draft",
-            "user_id": 9
+            "user_id": 0,
         }
 
     ]
