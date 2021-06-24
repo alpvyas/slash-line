@@ -6,26 +6,31 @@ import { makeStyles } from '@material-ui/core/styles';
 import { get_league_teams } from '../../../store/leagues';
 import './CreateTeam.css';
 import { useDispatch } from 'react-redux';
+import Confirmation from "../Confirmation";
 
 const CreateTeam = ({ leagueId }) => {
   const dispatch = useDispatch();
 
   const [step, setStep] = useState("first");
+  const [clear, setClear] = useState(false);
   const [teamName, setTeamName] = useState("");
   const [message, setMessage] = useState("")
+  const [teams, setTeams] = useState("")
 
   const getCurrentTeams = () => {
     setTeamName(teamName)
+    setMessage("")
     dispatch(get_league_teams(leagueId))
     .then(
       teams => {
         for (const team of teams){
+          console.log("TEAM: ", team.name)
           if (team.name === teamName){
             setMessage("That team name has already been taken. Try another one.")
-          }else{
-            setMessage("Success!")
           }
         }
+        setTeams(teams)
+        setClear(true);
       }
     )
 
@@ -33,7 +38,8 @@ const CreateTeam = ({ leagueId }) => {
 
   return (
     <>
-      {console.log("LEAGUE ID: ", leagueId)}
+      {!clear && (
+        <>
         <h2>You're in the League!</h2>
         <h2>Let's create your team.</h2>
         <form className="input-container">
@@ -56,6 +62,10 @@ const CreateTeam = ({ leagueId }) => {
             Next
           </Button>
         </div>
+        </>
+        )}
+
+        {clear && <Confirmation teams={teams} leagueId={leagueId}/>}
     </>
   );
 };
