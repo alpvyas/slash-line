@@ -16,24 +16,17 @@ const JoinUserLeague = () => {
   const [passcode, setPasscode] = useState("");
 
   const joinLeague = () => {
-    dispatch(joinUserLeague(leagueId, passcode)).then(
+    dispatch(joinUserLeague(leagueId, passcode))
+    .then(
       (check) => {
         if (check.ok) {
           setCredentials(true);
-        }else {
+        }
+        else {
           setErrors(check.errors)
         }
       }
     )
-
-    // console.log("RES: ", response)
-    // if (response.ok) {
-    //   console.log("MARKER2")
-    //   setCredentials(true);
-    // }else {
-    //   console.log("MARKER3")
-    //   setErrors(response.errors)
-    // }
   };
 
   return (
@@ -67,7 +60,7 @@ const JoinUserLeague = () => {
             </>
           )}
             
-          {credentials && <CreateTeam />}
+          {credentials && <CreateTeam leagueId={leagueId}/>}
     </>
   )
 };

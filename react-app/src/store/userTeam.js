@@ -56,11 +56,13 @@ export const get_league_teams = (leagueId) => async (dispatch) => {
   },
   });
 
-  const teams = await response.json();
+  console.log("HELLO AGAIN")
 
-  if (response.ok && !teams.errors) {
-    return teams.teams;
-  };
+  // const teams = await response.json();
+
+  // if (response.ok && !teams.errors) {
+  //   return teams.teams;
+  // };
 };
 
 //get all players across all teams belonging to current user
@@ -117,6 +119,11 @@ export const add_to_IL = (player) => dispatch => {
 export const make_active = (player) => dispatch => {
   dispatch(removeIL(player));
   return player
+}
+
+export const checkTeamName = () => async (disaptch) => {
+
+
 }
 
 //clear userTeam state when user logs out

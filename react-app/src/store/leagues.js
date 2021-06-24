@@ -1,7 +1,7 @@
 /* ----------------------------------------------------------------------------
                           ACTION TYPES
 ------------------------------------------------------------------------------*/
-
+const TEST = "test";
 const OPEN_MODAL = "create-league/open";
 const CLOSE_MODAL = "create-league/close";
 
@@ -13,6 +13,12 @@ const CLEAR_STATE = "leagues/CLEAR_STATE";
 /* ----------------------------------------------------------------------------
                           ACTION CREATORS
 ------------------------------------------------------------------------------*/
+export const test = () => (
+  {
+    type: TEST,
+  }
+)
+
 
 export const openCreateLeague = () => (
   {
@@ -42,6 +48,34 @@ const clearState = () => (
 /* ----------------------------------------------------------------------------
                           THUNK ACTION CREATORS
 ------------------------------------------------------------------------------*/
+
+//get all member teams for a league
+export const get_league_teams = (leagueId) => async (dispatch) => { 
+  const response = await fetch(`/api/teams/leagues/${leagueId}`, {
+  method: "GET",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  });
+
+  const teams = await response.json();
+  console.log("TEAMS: ", teams)
+  if (response.ok && !teams.errors) {
+    return teams.teams;
+  };
+};
+
+// export const checkTeamName = (league) => async (dispatch) => {
+  //  const response = await fetch(`/api/leagues/${league}/teams`, {
+  // method: "GET",
+  // headers: {
+  //   "Content-Type": "application/json",
+  // },
+  // });
+  // console.log("HELLO!!!!")
+
+
+// }
 
 export const createLeague = 
   (user_id, name, type, permissions, draft, draft_date, draft_time) => 
@@ -132,6 +166,9 @@ const leagueReducer = (state = initialState, action) => {
     case CLEAR_STATE:
       newState = {...initialState};
       return newState;
+    case TEST:
+      newState = {...state}
+      return newState
     default:
       return state;
   }
