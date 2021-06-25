@@ -65,6 +65,16 @@ export const get_league_teams = (leagueId) => async (dispatch) => {
   };
 };
 
+export const getLeagueInfo = (leagueId) => async (dispatch) => {
+  const response = await fetch(`/api/leagues/${leagueId}`, {
+  method: "GET",
+  });
+
+  const league = await response.json();
+
+  return league
+};
+
 // export const checkTeamName = (league) => async (dispatch) => {
   //  const response = await fetch(`/api/leagues/${league}/teams`, {
   // method: "GET",

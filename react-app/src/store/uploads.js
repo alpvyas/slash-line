@@ -21,14 +21,16 @@ const add = () => ({
 ------------------------------------------------------------------------------*/
 
 //upload files
-export const upload_files = (files) => async (dispatch) => {
+export const upload_files = (fileList) => async (dispatch) => {
 
   const response = await fetch('/api/upload/', {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(files)
+    body: JSON.stringify({
+      fileList,
+    })
   });
 
   if (response) {
