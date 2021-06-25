@@ -13,18 +13,21 @@ const Dropzone = () => {
 
   const handleSave = files => {
     setFiles(files);
-    console.log("FRONTEND FILES: ", files)
+    console.log("FRONTEND FILES: ", files[0].name)
+    const fileList = [];
+    files.forEach(file => {
+      
+      fileList.push(file.name)
+    });
+    
+    console.log("FILELIST: ", fileList)
+    console.log("FILEs: ", files)
     setOpen(false);
 
-    const formData = new FormData();
 
-    files.forEach((file, i) => {
-      formData.append(i, file);
-    });
+    const response = dispatch(upload_files(fileList));
 
-    console.log("FORM DATA: ", formData)
-
-    const response = dispatch(upload_files(files));
+    console.log("RESPONSE ", response)
   };
 
   const handleOpen = () => {

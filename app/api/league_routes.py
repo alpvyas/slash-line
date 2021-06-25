@@ -9,9 +9,9 @@ league_routes = Blueprint("league_routes",
 # ------------------------------------------------------------------------------
 
 
-def get_one_league(league_id):
-    league = League.query.filter_by(id=league_id).first()
-    return league
+def get_league_info(league_id):
+    league = League.query.filter_by(id=int(league_id)).first()
+    return jsonify(league.to_dict())
 
 
 def get_user_leagues(user_id):
@@ -109,10 +109,13 @@ def join_league(league_id, passcode):
     return join_user_league(league_id, passcode)
 
 
-# delete
-@league_routes.route("/league/<int:league_id>", methods=['DELETE'])
-def delete_user_league(user_id, league_id):
-    return delete_league(league_id)
+# delete a league or get info re league
+@league_routes.route("/<int:league_id>", methods=['GET', 'DELETE'])
+def league_info(league_id):
+    if request.method == 'GET':
+        return get_league_info(league_id)
+    elif request.method == 'DELETE':
+        return delete_league(league_id)
 
 # # edit
 
