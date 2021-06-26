@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { upload_files } from "../../store/uploads";
 
 import Dropzone from '../Dropzone';
-
+//Here are some comments about this component. Working with s3 is so wonky for me...why?
 
 
 
