@@ -24,13 +24,15 @@ const Players = () => {
 
   const [spotlightPlayer, setSpotlightPlayer] = useState({});
   const [spotlightName, setSpotlightName] = useState("");
+  const [playerID, setPlayerID] =useState("");
 
 
   const getStats = async (player) => {
     const response = await dispatch(get_single_player_stats(player))
 
     setSpotlightPlayer(response);
-    setSpotlightName(player.full_name)
+    setSpotlightName(player.full_name);
+    setPlayerID(player.mlb_player_id);
   
   }
 
@@ -143,7 +145,7 @@ const Players = () => {
              </div>
              <div className="image-details-container">
               <div className="player-image-container">
-                <img src={mookie_betts} alt="mookie-betts-img" className="player-image" />
+                <img src={`https://img.mlbstatic.com/mlb-photos/image/upload/d_people:generic:headshot:67:current.png/w_426,q_auto:best/v1/people/${playerID}/headshot/67/current`} alt="player-img" className="player-image" />
               </div>
               <div className="player-details-container">
                 <PlayerDetail player={spotlightPlayer} name={spotlightName}/>
