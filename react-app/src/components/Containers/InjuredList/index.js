@@ -44,19 +44,19 @@ const InjuredList = () => {
   const columns = useMemo(() => [
     {
       Header: "Player",
-      accessor: "name_display_first_last",
+      accessor: "full_name",
     },
     {
       Header: "Position",
-      accessor: "position_txt",
+      accessor: "primary_position_txt",
     },
     {
       Header: "Team",
-      accessor: "team_name",
+      accessor: "mlb_team_name",
     },
     {
       Header: "",
-      accessor: "player_id",
+      accessor: "mlb_player_id",
       Cell: props => (
         <button onClick={() => makeActive(props.row.original)}>
            Make Active

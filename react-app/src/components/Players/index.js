@@ -37,11 +37,7 @@ const Players = () => {
   }
 
  const addPlayer = (player) => {
-   console.log("USER: ", user.id)
-   console.log("LEAGUE: ", league.id)
     const response = dispatch(add_player(player, user.id, league.id))
-    console.log("PLAYER: ", player)
-    console.log("USER TEAM: ", userTeam)
     console.log("RESPONSE ", response)
   }
 
