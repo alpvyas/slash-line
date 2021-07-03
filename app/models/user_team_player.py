@@ -7,7 +7,7 @@ class User_Team_Player(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     mlb_player_id = db.Column(db.String(30), nullable=False)
     team_id = db.Column(db.Integer, db.ForeignKey("teams.id"),
-                        nullable=False),
+                        nullable=False)
     status = db.Column(db.String(30), nullable=False, default="active")
 
     def to_dict(self):
@@ -15,6 +15,6 @@ class User_Team_Player(db.Model):
             "id": self.id,
             "mlb_player_id": self.mlb_player_id,
             "team_id": self.team_id,
-            "status": self.status
+            "status": self.status,
 
         }
