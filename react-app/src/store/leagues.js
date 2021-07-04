@@ -110,18 +110,18 @@ export const createLeague =
       return data.errors;
   };
 
-  export const get_user_leagues = (userId) => async (dispatch) => {
+  export const getUserLeagues = (userId) => async (dispatch) => {
     const response = await fetch(`/api/leagues/user/${userId}`, {
         method: "GET",
       });
 
-      const data = await response.json()
+      const leagues = await response.json()
 
-      if (response.ok && !data.errors) {
-        dispatch(addLeagues(data));
+      if (response.ok && !leagues.errors) {
+        dispatch(addLeagues(leagues));
       }
 
-      return data;
+      return leagues;
     };
 
   export const joinUserLeague = (leagueId, passcode) => async(dispatch) => {
@@ -153,7 +153,53 @@ export const createLeague =
                           LEAGUES REDUCER
 ------------------------------------------------------------------------------*/
 
-const initialState = { leagues: {managed: [], member: []}, current: {}, status: false };
+
+/* 
+
+
+leagues:  {
+            league_01: {
+                        league_info: {league info}
+                        teams: {
+                                team_01: {
+                                          user: {user info}
+                                          active: [],
+                                          injured: [],
+                                },
+                                team_02: {
+                                          user: {}
+                                          active: [],
+                                          injured: [],
+                                },
+                                team_03: {
+                                          user: {}
+                                          active: [],
+                                          injured: [],
+                                },
+                                team_04: {
+                                          user: {}
+                                          active: [],
+                                          injured: [],
+                                },
+                                team_05: {
+                                          user: {}
+                                          active: [],
+                                          injured: [],
+                                },
+                        },
+                        commisioner: {user info}
+            }
+
+
+}
+
+
+
+
+*/
+
+
+const initialState = {leagues: {}, status: false };
 const leagueReducer = (state = initialState, action) => {
   let newState;
   switch (action.type) {
@@ -164,10 +210,10 @@ const leagueReducer = (state = initialState, action) => {
       newState = Object.assign({}, state, { status: false });
       return newState;
     case ADD_LEAGUES:
+      const leagues = action.payload
       newState = {...state};
-      newState.leagues.managed = action.payload.managed;
-      newState.leagues.member = action.payload.member;
-      newState.current = action.payload.member[0];
+      newState.leagues = leagues;
+      newState.current = leagues[Object.keys(leagues)[0]];
       return newState;
     case SET_LEAGUE:
       newState = {...state};

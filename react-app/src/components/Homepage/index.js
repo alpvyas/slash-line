@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo, memo }from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { get_user_leagues } from "../../store/leagues";
+import { getUserLeagues } from "../../store/leagues";
 import Carousel from "../Carousel";
 import Scorecard from "../Containers/Scorecard";
 import LeagueFormModal from "../LeagueFormModal";
@@ -18,14 +18,12 @@ import { game_details } from "../../mock_game_data";
 
 const Homepage = () => {
   const dispatch = useDispatch();
-
-  
   const user = useSelector((state) => state.session.user);
-  const leagues = useSelector(state => state.leagues.leagues.managed);
+  const leagues = useSelector(state => state.leagues.leagues);
 
   console.log("LEAGUES: ", leagues)
 
-  const userAllPlayers = useSelector(state => state.userTeam.allPlayers[0]);
+  // const userAllPlayers = useSelector(state => state.userTeam.allPlayers[0]);
   
   
   // const gameDetails = useSelector(state => state.gameDetails.gameDetails);
@@ -37,7 +35,7 @@ const Homepage = () => {
   //gets the leagues that the current user belongs to
   useEffect(() => {
     if (user) {
-      dispatch(get_user_leagues(user.id))
+      dispatch(getUserLeagues(user.id))
       }
   }, [dispatch, user]);
 
@@ -48,8 +46,8 @@ const Homepage = () => {
   }, [dispatch, user]);
 
   //formatting date and time
-  leagues.forEach(league => {
-    let draftDateTime = league["draft_date"];
+  for (const league in leagues){
+    let draftDateTime = leagues[league].info["draft_date"];
     let dateTimeArray = draftDateTime.split(" ");
     let date = dateTimeArray[0];
     let time = dateTimeArray[1];
@@ -68,9 +66,14 @@ const Homepage = () => {
     const formatted_minutes = minutes < 10 ? `0${minutes}` : minutes;
     const AMPM = hour_24_clock < 12 ? "AM" : "PM"
 
-    league.date = `${month} / ${day} / ${year}`
-    league.time = `${hour}:${formatted_minutes} ${AMPM}`
-  });
+    leagues[league].info.date = `${month} / ${day} / ${year}`
+    leagues[league].info.time = `${hour}:${formatted_minutes} ${AMPM}`
+  };
+
+  const leaguesArray = []
+  for (const league in leagues){
+    leaguesArray.push(leagues[league].info)
+  }
 
   const columns = ["League Name", "League Type", "Permissions",
                    "Draft", "Draft Date", "Draft Time", ""];
@@ -156,7 +159,7 @@ const Homepage = () => {
             <div className="header">
               <h3>Leagues</h3>
             </div>
-           <Table columns={columns} rows={leagues} row_keys={row_keys} button={true}/>
+           <Table columns={columns} rows={leaguesArray} row_keys={row_keys} button={true}/>
            <LeagueFormModal />
           </div>
          </div>
@@ -166,7 +169,7 @@ const Homepage = () => {
                <h3>My Players</h3>
              </div>
              <div className="table-container">
-              {userAllPlayers && <ReactTable columns={myPlayerColumns} data={userAllPlayers}/>}
+              {/* {userAllPlayers && <ReactTable columns={myPlayerColumns} data={userAllPlayers}/>} */}
              </div>
            </div>
          </div>

@@ -22,11 +22,12 @@ import { game_details } from "../../mock_game_data";
 const MyTeam = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.session.user);
+  const currentLeague = useSelector(state => state.leagues.current);
   const injuredList = useSelector(state => state.userTeam.injuredList);
   const players = useSelector(state => state.userTeam.allPlayers[0]);
   const [spotlightPlayer, setSpotlightPlayer] = useState({});
   const [spotlightName, setSpotlightName] = useState("");
-  const [playerID, setPlayerID] =useState("");
+  const [playerID, setPlayerID] = useState("");
 
   const activePlayers = players
 

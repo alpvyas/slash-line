@@ -1,22 +1,25 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { get_league_teams } from "../../../store/teams";
+import { get_league_teams } from "../../../store/userTeam";
 import Table from "../../Table";
 import "./Standings.css";
 
 const Standings = (user) => {
   const dispatch = useDispatch();
   const currentLeague = useSelector(state => state.leagues.current);
-
   const [teams, setTeams] = useState([]);
 
   useEffect(() => {
     if (user && (currentLeague !== undefined)) {
-      dispatch(get_league_teams(currentLeague.id))
-      .then(teams => setTeams(teams));
+      const teamsObj = currentLeague.teams
+      const teamsArray = []
+      for (const team in teamsObj){
+        teamsArray.push(teamsObj[team].info)
+      }
+      setTeams(teamsArray)
     }
-  }, [dispatch, user])
+  }, [dispatch, user, currentLeague])
 
   const headers = ["Rank", "Team", "Points"];
   const row_keys = ["id", "name", "points"];

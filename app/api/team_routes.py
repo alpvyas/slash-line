@@ -53,7 +53,11 @@ def get_user_players(user_id):
         print("INJURED: ", injured)
         players["injured"] = injured
 
-        teams[team.id] = players
+        team_obj = {}
+        team_obj["info"] = team.to_dict()
+        team_obj["players"] = players
+
+        teams[str(team.league_id)] = team_obj
 
     all_players = [Player.query.filter_by(
         mlb_player_id=player.mlb_player_id).first() for player in roster]

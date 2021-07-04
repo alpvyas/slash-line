@@ -1,5 +1,5 @@
 import User from "../components/User";
-import { clearLeaguesState } from "./leagues";
+import { clearLeaguesState, getUserLeagues, get_user_leagues } from "./leagues";
 import { clearUserTeamState } from "./userTeam";
 
 const GET_USER = "session/GET_USER";
@@ -44,8 +44,11 @@ export const login = (email, password) => async (dispatch) => {
   });
 
   const data = await response.json();
+
   if (response.ok) {
+    // console.log("USER: ", data)
     dispatch(setUser(data))
+    // dispatch(getUserLeagues(user.id))
   };
 
   return data.errors
