@@ -5,7 +5,7 @@
 const GET_PLAYER = "team/GET";
 const ADD_PLAYER = "team/ADD";
 const REMOVE_PLAYER = "team/REMOVE";
-const UPDATE_PLAYERS = "team/UPDATE_PLAYERS";
+const UPDATE_TEAMS = "team/UPDATE_TEAMS";
 const ADD_IL = "team/ADD_IL";
 const REMOVE_IL = "team/REMOVE_IL";
 const CLEAR_STATE = "team/CLEAR_STATE";
@@ -24,9 +24,9 @@ const remove = (player) => ({
   data: player
 });
 
-const updateAllPlayers = (players) => ({
-  type: UPDATE_PLAYERS,
-  data: players
+const updateTeams = (teams) => ({
+  type: UPDATE_TEAMS,
+  data: teams
 });
 
 const addIL = (player) => ({
@@ -56,27 +56,27 @@ export const get_league_teams = (leagueId) => async (dispatch) => {
   },
   });
 
-  // const teams = await response.json();
+  const teams = await response.json();
 
-  // if (response.ok && !teams.errors) {
-  //   return teams.teams;
-  // };
+  if (response.ok && !teams.errors) {
+    return teams.teams;
+  };
 };
 
-//get all players across all teams belonging to current user
+//get all teams belonging to current user
 export const getUserAllPlayers = (userId) => async dispatch => {
   const response = await fetch(`/api/teams/users/${userId}`, {
     method: "GET",
   });
 
-  const team = await response.json();
+  const data = await response.json();
 
-  console.log("TEAM: ", team);
+  console.log("TEAMS: ", data);
 
-  if (team.ok) {
-    dispatch(updateAllPlayers(team.players));
+  if (data.ok) {
+    dispatch(updateTeams(data["teams"]));
   }else{
-    alert(team.message);
+    alert(data.message);
   }
 };
 
@@ -132,7 +132,7 @@ export const clearUserTeamState = () => dispatch => {
                           USER TEAM REDUCER
 ------------------------------------------------------------------------------*/
 
-const initialState = { active: [], injuredList: [], allPlayers: []};
+const initialState = {};
 let newState;
 const userTeamReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -156,9 +156,9 @@ const userTeamReducer = (state = initialState, action) => {
       newState.injuredList = [...updatedIL];
       newState.active = [...state.active, action.data];
       return newState;
-    case UPDATE_PLAYERS:
+    case UPDATE_TEAMS:
       newState = {...state};
-      newState.allPlayers = [action.data];
+      newState.teams = action.data;
       return newState;
       case CLEAR_STATE:
         newState = {...initialState};
