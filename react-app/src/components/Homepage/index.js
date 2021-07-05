@@ -178,7 +178,7 @@ const Homepage = () => {
          <div className="bottom-container">
            <div className="user-players-container">
              <div className="header">
-               <h3>My Players</h3>
+               <h3>My Team</h3>
              </div>
              <div className="table-container">
               {currentLeague && currentTeam && <ReactTable columns={userTeamColumns} data={currentTeam.players.active}/>}
