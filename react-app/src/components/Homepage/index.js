@@ -13,19 +13,18 @@ import Standings from "../Containers/Standings";
 import Footer from "../Footer";
 import LogoutButton from "../auth/LogoutButton";
 import { Redirect, useHistory } from "react-router";
-import { getUserAllPlayers } from "../../store/userTeam";
+import { getUserTeams } from "../../store/userTeams";
 import { game_details } from "../../mock_game_data";
 
 const Homepage = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.session.user);
   const leagues = useSelector(state => state.leagues.leagues);
+  // const currentLeague = useSelector(state => state.leagues.current);
+  const userTeams = useSelector(state => state.userTeams.teams);
+  const [currentTeam, setCurrentTeam] = useState(undefined);
+  const [currentLeague, setCurrentLeague] = useState(undefined);
 
-  console.log("LEAGUES: ", leagues)
-
-  // const userAllPlayers = useSelector(state => state.userTeam.allPlayers[0]);
-  
-  
   // const gameDetails = useSelector(state => state.gameDetails.gameDetails);
   const gameDetails = game_details;
   const games = gameDetails&&gameDetails.map((gameDetail) => (
@@ -36,14 +35,28 @@ const Homepage = () => {
   useEffect(() => {
     if (user) {
       dispatch(getUserLeagues(user.id))
+      .then(leagues => {
+        setCurrentLeague(leagues[1])
+      })
       }
   }, [dispatch, user]);
 
   useEffect(() => {
     if (user) {
-      dispatch(getUserAllPlayers(user.id))
+      dispatch(getUserTeams(user.id))
     }
   }, [dispatch, user]);
+
+  useEffect(() => {
+      if (currentLeague !== undefined) {
+        console.log("CL: ", currentLeague)
+        const leagueID = currentLeague.info["id"]
+        console.log("LEAGUE ID ", leagueID)
+        setCurrentTeam(userTeams[leagueID])
+      }
+    }, [dispatch, currentLeague]);
+  
+  console.log("CURRENT TEAM: ", currentTeam)
 
   //formatting date and time
   for (const league in leagues){
@@ -80,7 +93,7 @@ const Homepage = () => {
 
   const row_keys = ["name", "league_type", "permissions",     "draft_type", "date", "time"];
 
-  const myPlayerColumns = useMemo((date, bday, day, month, year) => [
+  const userTeamColumns = useMemo((date, bday, day, month, year) => [
     {
       Header: "Player",
       accessor: "full_name",
@@ -169,7 +182,7 @@ const Homepage = () => {
                <h3>My Players</h3>
              </div>
              <div className="table-container">
-              {/* {userAllPlayers && <ReactTable columns={myPlayerColumns} data={userAllPlayers}/>} */}
+              {currentLeague && currentTeam && <ReactTable columns={userTeamColumns} data={currentTeam.players.active}/>}
              </div>
            </div>
          </div>

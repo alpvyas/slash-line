@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { get_league_teams } from "../../../store/userTeam";
+import { get_league_teams } from "../../../store/userTeams";
 import Table from "../../Table";
 import "./Standings.css";
 

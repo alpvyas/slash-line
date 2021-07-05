@@ -64,7 +64,7 @@ export const get_league_teams = (leagueId) => async (dispatch) => {
 };
 
 //get all teams belonging to current user
-export const getUserAllPlayers = (userId) => async dispatch => {
+export const getUserTeams = (userId) => async dispatch => {
   const response = await fetch(`/api/teams/users/${userId}`, {
     method: "GET",
   });
@@ -134,7 +134,7 @@ export const clearUserTeamState = () => dispatch => {
 
 const initialState = {};
 let newState;
-const userTeamReducer = (state = initialState, action) => {
+const userTeamsReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_PLAYER:
       newState = {...state};
@@ -168,4 +168,4 @@ const userTeamReducer = (state = initialState, action) => {
   }
 };
 
-export default userTeamReducer;
+export default userTeamsReducer;
