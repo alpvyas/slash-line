@@ -20,7 +20,6 @@ const Players = () => {
   const user = useSelector(state => state.session.user);
   const league = useSelector(state => state.leagues.current)
   const players = useSelector(state => state.players.players);
-  const userTeam = useSelector(state => state.userTeam.userTeam);
 
   const [spotlightPlayer, setSpotlightPlayer] = useState({});
   const [spotlightName, setSpotlightName] = useState("");

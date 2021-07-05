@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import NavBar from "../NavBar";
 import ReactTable from "../ReactTable";
@@ -22,14 +22,25 @@ import { game_details } from "../../mock_game_data";
 const MyTeam = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.session.user);
-  const currentLeague = useSelector(state => state.leagues.current);
-  const injuredList = useSelector(state => state.userTeam.injuredList);
-  const players = useSelector(state => state.userTeam.allPlayers[0]);
+  const leagues = useSelector(state => state.leagues.leagues);
+  const userTeams = useSelector(state => state.userTeams.teams);
+  const currentLeague = useSelector(state => state.leagues.current)
+  const [currentTeam, setCurrentTeam] = useState(undefined);
+  // const [currentLeague, setCurrentLeague] = useState(undefined);
   const [spotlightPlayer, setSpotlightPlayer] = useState({});
   const [spotlightName, setSpotlightName] = useState("");
   const [playerID, setPlayerID] = useState("");
 
-  const activePlayers = players
+  console.log("CL TEAM PAGE: ", currentLeague)
+  console.log("CT TEAM PAGE: ", currentTeam)
+  useEffect(() => {
+      if (currentLeague !== undefined) {
+        console.log("CL: ", currentLeague)
+        const leagueID = currentLeague.info["id"]
+        console.log("LEAGUE ID ", leagueID)
+        setCurrentTeam(userTeams[leagueID])
+      }
+    }, [dispatch, currentLeague]);
 
   const addToIL = (player) => {
     const response = dispatch(add_to_IL(player))
@@ -124,13 +135,13 @@ const MyTeam = () => {
             <div className="header">
               <h3>Players</h3>
             </div>
-            <ReactTable columns={columns} data={players}/>
+            {currentTeam && <ReactTable columns={columns} data={currentTeam.players.active}/>}
           </div>
           <div className="table-container">
              <div className="section-header">
                <h3>Injured List</h3>
              </div>
-             {injuredList && <InjuredList />}
+             {currentTeam && <InjuredList players={currentTeam.players.injured}/>}
            </div>
          </div>
         <div className="bottom-container">
