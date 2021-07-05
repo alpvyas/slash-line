@@ -4,42 +4,14 @@ import { make_active } from "../../../store/userTeams";
 import ReactTable from "../../ReactTable";
 import Table from "../../Table";
 
-const InjuredList = () => {
-
+const InjuredList = ({ players }) => {
   const dispatch = useDispatch();
-  const injuredPlayers = useSelector(state => state.userTeam.injuredList);
 
   const makeActive = (player) => {
     const response = dispatch(make_active(player))
     console.log("REMOVE FROM IL: ", response)
   }
 
-  // const players = [
-  //                   {
-  //                     name_display_first_last:"Cody Bellinger",
-  //                     position_txt: "RF",
-  //                     il_status: "IL-10",
-  //                     date_added: "04/10/2021",
-  //                     change_status: changeStatus,
-  //                     remove_button: removeILButton,
-  //                   },
-  //                   {
-  //                     name_display_first_last:"Cody Bellinger",
-  //                     position_txt: "RF",
-  //                     il_status: "IL-10",
-  //                     date_added: "04/10/2021",
-  //                     change_status: changeStatus,
-  //                     remove_button: removeILButton,
-  //                   },
-  //                   {
-  //                     name_display_first_last:"Cody Bellinger",
-  //                     position_txt: "RF",
-  //                     il_status: "IL-10",
-  //                     date_added: "04/10/2021",
-  //                     change_status: changeStatus,
-  //                     remove_button: removeILButton,
-  //                   },
-  //                 ]
 
   const columns = useMemo(() => [
     {
@@ -65,14 +37,10 @@ const InjuredList = () => {
     },
   ], []);
 
-
-  // const columns = ["Player", "Position", "", ""];
-  // const row_keys = ["name_display_first_last", "position_txt", "change_status", "remove_button"]
-
   return (
     <>
       <div className="il-container">
-        <ReactTable columns={columns} data={injuredPlayers}/>
+        <ReactTable columns={columns} data={players}/>
       </div>
     </>
   )
