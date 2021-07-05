@@ -7,7 +7,7 @@ import ReactTable from "../ReactTable";
 import Footer from "../Footer";
 import "./Players.css";
 import houser_bunt from "../../images/houser-bunt.png";
-import { add_player } from "../../store/userTeam";
+import { add_player } from "../../store/userTeams";
 import PlayerDetail from "../PlayerDetails";
 import mookie_betts from "../../images/mookie_betts.png";
 import { get_single_player_stats } from "../../store/stats";

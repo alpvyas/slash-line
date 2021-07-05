@@ -9,7 +9,7 @@ import { get_stats } from "./store/stats";
 import Landing from "./components/Landing";
 import Homepage from "./components/Homepage";
 import Profile from "./components/Profile";
-import UserTeam from "./components/UserTeam";
+import UserTeams from "./components/UserTeams";
 import Players from "./components/Players";
 import Testing from "./components/Testing/";
 import Stats from "./components/Stats";
@@ -145,13 +145,13 @@ function App() {
           <Profile />
         </ProtectedRoute>
         <ProtectedRoute exact path="/myteam" authenticated={authenticated}>
-          <UserTeam />
+          <UserTeams />
         </ProtectedRoute>
         <Route exact path="/players">
           <Players />
         </Route>
         <ProtectedRoute exact path="/team" authenticated={authenticated}>
-          <UserTeam />
+          <UserTeams />
         </ProtectedRoute>
         <Route exact path="/stats">
           <Stats />

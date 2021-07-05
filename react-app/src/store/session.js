@@ -1,6 +1,6 @@
 import User from "../components/User";
 import { clearLeaguesState, getUserLeagues, get_user_leagues } from "./leagues";
-import { clearUserTeamState } from "./userTeam";
+import { clearUserTeamState } from "./userTeams";
 
 const GET_USER = "session/GET_USER";
 const REMOVE_USER = "session/REMOVE_USER";
