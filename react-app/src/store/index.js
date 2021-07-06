@@ -7,13 +7,13 @@ import userTeamsReducer from "./userTeams";
 import playersReducer from "./players";
 import sessionReducer from "./session";
 import statsReducer from "./stats";
-import leagueReducer from "./leagues";
+import leaguesReducer from "./leagues";
 import teamsReducer from "./teams";
 
 const rootReducer = combineReducers({
   session: sessionReducer,
   players: playersReducer,
-  leagues: leagueReducer,
+  leagues: leaguesReducer,
   userTeams: userTeamsReducer,
   stats: statsReducer,
   gameDetails: gameDetailsReducer,

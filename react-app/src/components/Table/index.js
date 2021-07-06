@@ -1,16 +1,26 @@
 import React, { useState }from "react";
 import { useDispatch, useSelector} from "react-redux";
-import { setCurrentLeague } from "../../store/leagues";
+import { selectedTeam, setCurrentLeague } from "../../store/leagues";
 
 import "./Table.css";
 
-const Table = ({columns, rows, row_keys, button}) => {
+const Table = ({ columns, rows, row_keys, teams, leagues }) => {
   const dispatch = useDispatch();
   const user = useSelector(state => state.session.user);
   const currentLeague = useSelector(state => state.leagues.current);
 
   const setLeague = (league) => {
     dispatch(setCurrentLeague(league))
+  }
+
+  const selectTeam = (team) => {
+    if (teams) {
+
+      const selected = currentLeague.teams[team.id];
+
+      dispatch(selectedTeam(selected))
+    }
+
   }
   
   return (
@@ -26,15 +36,20 @@ const Table = ({columns, rows, row_keys, button}) => {
         </thead>
         <tbody>
           {rows.map((row, index) => (
-            <tr key={index}>
+            <tr key={index} onClick={() => selectTeam(row)}>
               {row_keys.map((key) => (
                 // console.log("KEY: ", row.key)
                 <td>{row[key]}</td>
               ))}
               
-              {button && <td>
+              {leagues && <td>
                 <button type="button" onClick={() => setLeague(row)
-                                      }>Set Current League</button>
+                                      }>Select League</button>
+              </td>}
+
+              {teams && <td>
+                <button type="button" onClick={() => selectTeam(row)
+                                      }>View Details</button>
               </td>}
             </tr>
           ))}

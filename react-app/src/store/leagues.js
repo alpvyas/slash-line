@@ -2,13 +2,15 @@
                           ACTION TYPES
 ------------------------------------------------------------------------------*/
 const TEST = "test";
-const OPEN_MODAL = "create-league/open";
-const CLOSE_MODAL = "create-league/close";
+const OPEN_MODAL = "leagues/CREATE_OPEN";
+const CLOSE_MODAL = "leagues/CREATE_CLOSED";
 
-const ADD_LEAGUES = "league/ADD";
-const SET_LEAGUE = "league/SET";
+const ADD_LEAGUES = "leagues/ADD";
+const SET_LEAGUE = "leagues/SET";
 
 const CLEAR_STATE = "leagues/CLEAR_STATE";
+
+const SELECT_TEAM = "leagues/SELECT_TEAM"
 
 /* ----------------------------------------------------------------------------
                           ACTION CREATORS
@@ -31,12 +33,14 @@ export const closeCreateLeague = () => (
   });
 
 
-const addLeagues = (leagues) => ({
+const addLeagues = (leagues) => (
+  {
     type: ADD_LEAGUES,
     payload: leagues
   });
 
-const setLeague = (league) => ({
+const setLeague = (league) => (
+  {
     type: SET_LEAGUE,
     payload: league
   });
@@ -44,6 +48,12 @@ const setLeague = (league) => ({
 const clearState = () => (
   {
     type: CLEAR_STATE,
+  });
+
+const setSelectedTeam = (team) => (
+  {
+    type: SELECT_TEAM,
+    payload: team,
   });
 /* ----------------------------------------------------------------------------
                           THUNK ACTION CREATORS
@@ -143,10 +153,14 @@ export const createLeague =
 
   export const setCurrentLeague = (league) => dispatch => {
     dispatch(setLeague(league));
-  }
+  };
 
   export const clearLeaguesState = () => dispatch => {
     dispatch(clearState());
+  };
+
+  export const selectedTeam = (team) => dispatch => {
+    dispatch(setSelectedTeam(team));
   };
 
 /* ----------------------------------------------------------------------------
@@ -200,7 +214,7 @@ leagues:  {
 
 
 const initialState = {leagues: {}, status: false };
-const leagueReducer = (state = initialState, action) => {
+const leaguesReducer = (state = initialState, action) => {
   let newState;
   switch (action.type) {
     case OPEN_MODAL:
@@ -222,12 +236,13 @@ const leagueReducer = (state = initialState, action) => {
     case CLEAR_STATE:
       newState = {...initialState};
       return newState;
-    case TEST:
+    case SELECT_TEAM:
       newState = {...state}
+      newState.selectedTeam = action.payload
       return newState
     default:
       return state;
   }
 };
 
-export default leagueReducer;
+export default leaguesReducer;

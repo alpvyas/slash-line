@@ -19,15 +19,14 @@ const Standings = (user) => {
       }
       setTeams(teamsArray)
     }
-  }, [dispatch, user, currentLeague])
+  }, [dispatch, user, currentLeague]);
 
-  const headers = ["Rank", "Team", "Points"];
+  const headers = ["Rank", "Team", "Points", ""];
   const row_keys = ["id", "name", "points"];
   return (
-      // <div className="standings-container">
       <>
         <div className="table">
-          <Table columns={headers} rows={teams} row_keys={row_keys}/>
+          <Table columns={headers} rows={teams} row_keys={row_keys} teams={true}/>
         </div>
       </>
   )
