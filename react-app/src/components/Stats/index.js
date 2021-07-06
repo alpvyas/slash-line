@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import NavBar from "../NavBar";
 import Carousel from "../Carousel";
@@ -10,10 +10,6 @@ import Scorecard from "../Containers/Scorecard";
 import { game_details } from "../../mock_game_data";
 
 const Stats = () => {
-  const dispatch = useDispatch();
-  
-  const players = useSelector(state => state.players.players);
-  
   const stats = useSelector(state => state.stats.stats.stats);
 
   // const game_details = useSelector(state => state.gameDetails.gameDetails);

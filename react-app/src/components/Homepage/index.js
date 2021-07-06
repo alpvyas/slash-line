@@ -138,15 +138,6 @@ const Homepage = () => {
       Header: "Status",
       accessor: "status",
     },
-    {
-      Header: "",
-      accessor: "mlb_player_id",
-      Cell: props => (
-        <button>
-          Place on IL
-        </button>
-      ),
-    },
   ], []);
 
   return (
