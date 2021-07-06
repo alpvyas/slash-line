@@ -1,5 +1,5 @@
 # Slash Line
-*By Alpesh Vyas - [Visit Slash Line](http://slashline.herokuapp.com/)*
+*By Alpesh Vyas - [Visit Slash Line](http://slashlinebaseball.herokuapp.com/)*
 
 **Table of Contents**
 * [Slash Line at a Glance](#slashline-at-a-glance)
@@ -37,16 +37,16 @@ The backend serves the frontend, responds to frontend requests, acts as an inter
 ![Slash Line application architecture](/readme-resources/rappa-mappa-architecture.png)
 
 ## Frontend Overview
-RappaMappa is very frontend heavy application. It makes extensive use of 3rd-party APIs and resources to create a dynamic and data-rich experience. Below are the frontend technologies that make this application possible. 
+Slash Line is a very frontend heavy application. It makes extensive use of 3rd-party APIs and resources to create a dynamic and data-rich experience. Below are the frontend technologies that make this application possible. 
 
 ### Frontend Technologies Used:
 #### React
-At its core, RappaMappa is a React application. It uses very little of the core React library besides passing a few props, but makes extensive use of the technologies and libraries of the React ecosystem. Without the robust and well-documented React ecosystem, creating RappaMappa would have been a substantially more challenging enterprise. 
+At its core, Slash Line is a React application. It uses much of the core React library and also makes extensive use of the technologies and libraries of the React ecosystem. Without the robust and well-documented React ecosystem, creating Slash Line would have been a substantially more challenging enterprise. 
 
 #### Redux
 [Redux](https://redux.js.org/) and the [react-redux](https://react-redux.js.org/) library were used to manage application state and make fetch requests to the server for data. 
 
-All artist information is fetched on page load and kept in the Redux store. While this expensive operation lengthens the initial load time, it also allows for a snappy experience after that load.
+All player information and statistics are fetched on page load and kept in the Redux store. While this expensive operation lengthens the initial load time, it also allows for a snappy experience after that load.
 
 Redux also stores and sets information about the `activeRapper`, whichever artist has been selected by the user. By managing this state in Redux, it provides easy access to the information across components without prop threading. This was particularly important because there were so many components in the application, largely due to all the artist pins being individual components, that if too many components were re-rendering constantly because of state change it would cause significant performance issues or crash the application completely. Redux provided a relatively simple way to manage this point of complexity. 
 
