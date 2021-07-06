@@ -112,7 +112,7 @@ const Stats = () => {
               <div className="header">
                 <h3>Stats</h3>
               </div>
-              <ReactTable columns={columns} data={stats}/>
+              <ReactTable columns={columns} data={stats} allPlayers={true}/>
             </div>
         </div>
       </div>
