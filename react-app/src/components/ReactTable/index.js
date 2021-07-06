@@ -3,7 +3,7 @@ import { useAsyncDebounce, useFilters, useGlobalFilter, usePagination, useRowSel
 import "./ReactTable.css";
 
 const IndeterminateCheckbox = forwardRef(
-  ({ indeterminate, ...rest }, ref) => {
+  ({ indeterminate, ...rest }, ref, checkbox) => {
   const defaultRef = useRef()
   const resolvedRef = ref || defaultRef
 
@@ -54,25 +54,25 @@ const ReactTable = ({ columns, data, allPlayers }) => {
     usePagination,
     useRowSelect,
     hooks => {
-      hooks.visibleColumns.push(columns => [
-        {
-          id: "selection",
-          Header: ({ getToggleAllPageRowsSelectedProps }) => (
-            <div>
-              <IndeterminateCheckbox {...getToggleAllPageRowsSelectedProps()} />
-            </div>
-          ),
-          Cell: ({ row }) => (
-            <div>
-              <IndeterminateCheckbox {...row.getToggleRowSelectedProps()} />
-            </div>
-          ),
-        },
-        ...columns,
-      ])
+      if (allPlayers){
+        hooks.visibleColumns.push(columns => [
+          {
+            id: "selection",
+            Header: ({ getToggleAllPageRowsSelectedProps }) => (
+              <div>
+                <IndeterminateCheckbox {...getToggleAllPageRowsSelectedProps()}/>
+              </div>
+            ),
+            Cell: ({ row }) => (
+              <div>
+                <IndeterminateCheckbox {...row.getToggleRowSelectedProps()}/>
+              </div>
+            ),
+          },
+          ...columns,
+        ])
+    }
     });
-
-  // const [value, setValue] = useState(globalFilter)
 
   const handleFilterChange = e => {
     const value = e.target.value;
