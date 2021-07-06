@@ -19,7 +19,7 @@ const IndeterminateCheckbox = forwardRef(
 });
 
 
-const ReactTable = ({ columns, data }) => {
+const ReactTable = ({ columns, data, allPlayers }) => {
   const [filterInput, setFilterInput] = useState("");
   // const [globalFilter, setGlobalFilter] = useState("")
 
@@ -86,6 +86,9 @@ const ReactTable = ({ columns, data }) => {
 
   return (
     <>
+        {
+        allPlayers &&
+        <>
         <div className="search-container">
           <input
           className="search-bar"
@@ -96,6 +99,10 @@ const ReactTable = ({ columns, data }) => {
           <span className="underline"></span>
         </div>
         <div className="divider-container"></div>
+        </>
+        }
+
+        
         <table className="dodgers-table" {...getTableProps()}>
           <thead>
             {headerGroups.map(headerGroup => (

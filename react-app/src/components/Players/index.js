@@ -130,7 +130,7 @@ const Players = () => {
             <div className="header">
               <h3>Players</h3>
             </div>
-            <ReactTable columns={columns} data={players}/>
+            <ReactTable columns={columns} data={players} allPlayers={true}/>
           </div>
         </div>
         <div className="bottom-container">

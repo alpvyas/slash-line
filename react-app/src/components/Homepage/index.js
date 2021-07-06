@@ -8,6 +8,7 @@ import NavBar from "../NavBar/index";
 import Table from "../Table";
 import ReactTable from "../ReactTable";
 import bauer_practice from "../../images/bauer-practice.png";
+import sunset_field from "../../images/sunset-field.png";
 import "./Homepage.css";
 import Standings from "../Containers/Standings";
 import Footer from "../Footer";
@@ -21,6 +22,7 @@ const Homepage = () => {
   const user = useSelector((state) => state.session.user);
   const leagues = useSelector(state => state.leagues.leagues);
   const userTeams = useSelector(state => state.userTeams.teams);
+  const selectedTeam = useSelector(state => state.leagues.selectedTeam);
   const [currentTeam, setCurrentTeam] = useState(undefined);
   const [currentLeague, setCurrentLeague] = useState(undefined);
 
@@ -48,14 +50,10 @@ const Homepage = () => {
 
   useEffect(() => {
       if (currentLeague !== undefined) {
-        console.log("CL: ", currentLeague)
         const leagueID = currentLeague.info["id"]
-        console.log("LEAGUE ID ", leagueID)
         setCurrentTeam(userTeams[leagueID])
       }
     }, [dispatch, currentLeague]);
-  
-  console.log("CURRENT TEAM: ", currentTeam)
 
   //formatting date and time
   for (const league in leagues){
@@ -90,7 +88,7 @@ const Homepage = () => {
   const columns = ["League Name", "League Type", "Permissions",
                    "Draft", "Draft Date", "Draft Time", ""];
 
-  const row_keys = ["name", "league_type", "permissions",     "draft_type", "date", "time"];
+  const row_keys = ["name", "league_type", "permissions", "draft_type", "date", "time"];
 
   const userTeamColumns = useMemo((date, bday, day, month, year) => [
     {
@@ -153,7 +151,7 @@ const Homepage = () => {
 
   return (
     <>
-      <div className="container page-container" style={{backgroundImage: `url(${bauer_practice})`}}>
+      <div className="container page-container" style={{backgroundImage: `url(${sunset_field})`}}>
         <div className="nav-bar-container">
           <NavBar />
         </div>
@@ -171,17 +169,40 @@ const Homepage = () => {
             <div className="header">
               <h3>Leagues</h3>
             </div>
-           <Table columns={columns} rows={leaguesArray} row_keys={row_keys} button={true}/>
+           <Table columns={columns} rows={leaguesArray} row_keys={row_keys} leagues={true} button={true}/>
            <LeagueFormModal />
           </div>
          </div>
          <div className="bottom-container">
+          <div className="selected=team-container">
+             <div className="header">
+               <h3>Selected Team</h3>
+             </div>
+             <div className="table-container">
+              {
+                currentLeague &&
+                selectedTeam && 
+                <ReactTable 
+                  columns={userTeamColumns}
+                  data={[...selectedTeam.players.active, ...selectedTeam.players.injured]}
+                  allPlayers={false}/>
+              }
+             </div>
+          </div>
+
            <div className="user-players-container">
              <div className="header">
                <h3>My Team</h3>
              </div>
              <div className="table-container">
-              {currentLeague && currentTeam && <ReactTable columns={userTeamColumns} data={currentTeam.players.active}/>}
+              {
+                currentLeague &&
+                currentTeam &&
+                <ReactTable
+                  columns={userTeamColumns}
+                  data={currentTeam.players.active}
+                  allPlayers={false}/>
+              }
              </div>
            </div>
          </div>
