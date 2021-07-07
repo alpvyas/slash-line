@@ -90,7 +90,7 @@ const NavBar = () => {
               </NavLink>
             </div>
             <div className="name-container">
-              <div id="title">Slash Line</div>
+              <div id="title">Slash Line Baseball</div>
             </div>
             <div className="container tab-container link-container">
               <div className="nav-link-tab" id="stats-tab">

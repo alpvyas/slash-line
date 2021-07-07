@@ -66,7 +66,7 @@ const SplashNav = ({showSidebar, setShowSidebar, openSignup, openLogin}) => {
               <img id="logo-image" alt="logo" src={logo} />
             </div>
             <div className="name-container">
-              <div id="title" alt="slash-line">Slash Line</div>
+              <div id="title" alt="slash-line">Slash Line Baseball</div>
               {/* <img id="logo-image" alt="logo" src={slash_line} /> */}
             </div>
             <div className="tab-container">

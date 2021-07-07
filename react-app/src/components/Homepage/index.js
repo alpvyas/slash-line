@@ -165,11 +165,10 @@ const Homepage = () => {
           </div>
          </div>
          <div className="bottom-container">
-          <div className="selected=team-container">
+          <div className="selected-team-container">
              <div className="header">
                <h3>Selected Team</h3>
              </div>
-             <div className="table-container">
               {
                 currentLeague &&
                 selectedTeam && 
@@ -178,14 +177,12 @@ const Homepage = () => {
                   data={[...selectedTeam.players.active, ...selectedTeam.players.injured]}
                   allPlayers={false}/>
               }
-             </div>
           </div>
 
            <div className="user-players-container">
              <div className="header">
                <h3>My Team</h3>
              </div>
-             <div className="table-container">
               {
                 currentLeague &&
                 currentTeam &&
@@ -194,7 +191,6 @@ const Homepage = () => {
                   data={currentTeam.players.active}
                   allPlayers={false}/>
               }
-             </div>
            </div>
          </div>
          <div className="footer-container">
