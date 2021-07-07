@@ -1,69 +1,50 @@
 # Slash Line
+*By Alpesh Vyas - [Visit Slash Line](http://slashlinebaseball.herokuapp.com/)*
 
-By Alpesh Vyas
-[Visit Slash Line]()
+**Table of Contents**
+* [Slash Line at a Glance](#slashline-at-a-glance)
+* [Application Architecture & Technologies Used](#application-architecture) 
+* [Frontend Overview](#frontend-overview)
+* [Backend Overview](#backend-overview)
+* [Conclusion & Next Steps](#conclusion-and-next-steps)
 
 ## Slash Line at a Glance
+Slash Line is a fullstack fantasy baseball app that integrates real-time player, stats and game data which allows users to create and join public or private leagues, draft and trade for their favorite players and keep up with player and team stats and live updating game data.
 
-Slash Line is a fullstack fantasy baseball app where users can create leagues and teams using real-time MLB team, player and game data and statistics.
+Slash Line uses React, Redux and both vanilla CSS and Material-UI components on the frontend. Flask and SQLAlchemy are used on the backend to connect the app to a PostgreSQL database. 
 
-Slash Line is integrated with the MLB Data API used for player information and statistics as well as SportsDataAPI which was used for live game scores and data.
+Users can search and explore the player and player stats data tables, which feature apporximately 1,200 players, using the integrated search box. Users can also filter data by column.
 
-## Basic Setup
+##### Slash Line at a glance
+![Slash Line at a glance](/readme-resources/rappa-mappa-demo-1.gif)
 
-_IMPORTANT!_
-If you add any python dependencies to your pipfiles, you'll need to regenerate your requirements.txt before deployment.
-You can do this by running:
+Slash Line is also integrated with the [MLB Data API](https://appac.github.io/mlb-data-api-docs/) for player, team and stats data. The MLB API from [Sports Data IO](https://sportsdata.io/developers/api-documentation/mlb) for live game data used to update current game scores, innings and game status and times. 
 
-```bash
-pipenv lock -r > requirements.txt
-```
+##### Slash Line player data table
+![Slash Line player data table](/readme-resources/rappa-mappa-demo-2.gif)
 
-_ALSO IMPORTANT!_
-psycopg2-binary MUST remain a dev dependency because you can't install it on apline-linux.
-There is a layer in the Dockerfile that will install psycopg2 (not binary) for us.
+##### Slash Line stats data table
+![Slash Line stats data table](/readme-resources/rappa-mappa-demo-2.gif)
 
----
+##### Slash Line game carousel
+![Slash Line game carousel](/readme-resources/rappa-mappa-demo-2.gif)
 
-## Deploy to Heroku
+## Application Architecture
+As noted above, Slash Line uses React and Redux on the front end with Flask and PostgreSQL on the backend. The majority of the application logic occurs within front end's [Redux](https://redux.js.org/) store as well as the Flask backend with its interactions with the [MLB Data API](https://appac.github.io/mlb-data-api-docs/) and the MLB API from [Sports Data IO](https://sportsdata.io/developers/api-documentation/mlb). Slash Line uses both the [Material UI framework](https://material-ui.com/) and vanilla CSS3 for styling components. 
 
-1. Create a new project on Heroku
-2. Under Resources click "Find more add-ons" and add the add on called "Heroku Postgres"
-3. Install the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-command-line)
-4. Run
+The backend serves the frontend, responds to frontend requests, acts as an intermediary to serve MLB data to the frontend, and fetches data from the PostgreSQL database. 
 
-    ```bash
-    heroku login
-    ```
+![Slash Line application architecture](/readme-resources/rappa-mappa-architecture.png)
 
-5. Login to the heroku container registry
+## Frontend Overview
+Slash Line is a very frontend heavy application. It makes extensive use of 3rd-party APIs and resources to create a dynamic and data-rich experience. Below are the frontend technologies that make this application possible. 
 
-    ```bash
-    heroku container:login
-    ```
+### Frontend Technologies Used:
+#### React
+At its core, Slash Line is a React application. It uses much of the core React library and also makes extensive use of the technologies and libraries of the React ecosystem. Without the robust and well-documented React ecosystem, creating Slash Line would have been a substantially more challenging enterprise. 
 
-6. Update the `REACT_APP_BASE_URL` variable in the Dockerfile.
-   This should be the full URL of your Heroku app: i.e. "https://flask-react-aa.herokuapp.com"
-7. Push your docker container to heroku from the root directory of your project.
-   This will build the dockerfile and push the image to your heroku container registry
+#### Redux
+[Redux](https://redux.js.org/) and the [react-redux](https://react-redux.js.org/) library were used to manage application state and make fetch requests to the server for data. 
 
-    ```bash
-    heroku container:push web -a {NAME_OF_HEROKU_APP}
-    ```
+All player information and statistics are fetched on page load and kept in the Redux store. While this expensive operation lengthens the initial load time, it also allows for a snappy experience after that load.
 
-8. Release your docker container to heroku
-
-    ```bash
-    heroku container:release web -a {NAME_OF_HEROKU_APP}
-    ```
-
-9. set up your database:
-
-    ```bash
-    heroku run -a {NAME_OF_HEROKU_APP} flask db upgrade
-    heroku run -a {NAME_OF_HEROKU_APP} flask seed all
-    ```
-
-10. Under Settings find "Config Vars" and add any additional/secret .env variables.
-
-11. profit

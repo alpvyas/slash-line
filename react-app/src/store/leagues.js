@@ -163,55 +163,19 @@ export const createLeague =
     dispatch(setSelectedTeam(team));
   };
 
+  export const getOpenLeagues = () => async (dispatch) => {
+    const response = await fetch(`/api/leagues/open`, {
+    method: "GET",
+    });
+
+    const leagues = await response.json();
+
+    return leagues
+  };
+
 /* ----------------------------------------------------------------------------
                           LEAGUES REDUCER
 ------------------------------------------------------------------------------*/
-
-
-/* 
-
-
-leagues:  {
-            league_01: {
-                        league_info: {league info}
-                        teams: {
-                                team_01: {
-                                          user: {user info}
-                                          active: [],
-                                          injured: [],
-                                },
-                                team_02: {
-                                          user: {}
-                                          active: [],
-                                          injured: [],
-                                },
-                                team_03: {
-                                          user: {}
-                                          active: [],
-                                          injured: [],
-                                },
-                                team_04: {
-                                          user: {}
-                                          active: [],
-                                          injured: [],
-                                },
-                                team_05: {
-                                          user: {}
-                                          active: [],
-                                          injured: [],
-                                },
-                        },
-                        commisioner: {user info}
-            }
-
-
-}
-
-
-
-
-*/
-
 
 const initialState = {leagues: {}, status: false };
 const leaguesReducer = (state = initialState, action) => {

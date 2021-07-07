@@ -16,6 +16,7 @@ class League(db.Model):
                            default="Live Standard Draft")
     draft_date = db.Column(db.String(30), nullable=False)
     draft_time = db.Column(db.String(30), nullable=False)
+    public = db.Column(db.Integer, nullable=False, default=1)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
     created_at = db.Column(db.DateTime, nullable=False,
                            default=datetime.datetime.now())
@@ -25,14 +26,12 @@ class League(db.Model):
     def to_dict(self):
         return {
             "id": self.id,
-            "passcode": self.passcode,
             "name": self.name,
             "league_type": self.league_type,
             "permissions": self.permissions,
             "draft_type": self.draft_type,
             "draft_date": self.draft_date,
             "draft_time": self.draft_time,
+            "public": self.public,
             "user_id": self.user_id,
-            "created_at": self.created_at,
-            "update_at": self.updated_at,
         }

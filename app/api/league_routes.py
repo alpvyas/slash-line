@@ -142,6 +142,12 @@ def join_user_league(league_id, passcode):
     return jsonify({"ok": "", "errors": "That info doesn't seem to work. Check your inputs and try again."})
 
 
+def get_open_leagues():
+    leagues = League.query.filter_by(public=1).all()
+
+    return jsonify([league.to_dict() for league in leagues])
+
+
 # def edit_league(league_id):
 #     league_data = json.loads(request.data.decode("utf-8"))
 #     league = get_one_league(league_id)
@@ -172,6 +178,12 @@ def get_or_add_leagues(user_id):
 @league_routes.route("/<int:league_id>/join/<int:passcode>", methods=['GET'])
 def join_league(league_id, passcode):
     return join_user_league(league_id, passcode)
+
+
+# get open leagues
+@league_routes.route("/open", methods=['GET'])
+def get_leagues():
+    return get_open_leagues()
 
 
 # delete a league or get info re league
