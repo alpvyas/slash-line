@@ -170,6 +170,7 @@ export const createLeague =
 
     const leagues = await response.json();
 
+    console.log("OPEN LEAGUES: ", leagues)
     return leagues
   };
 

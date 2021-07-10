@@ -26,14 +26,21 @@ function App() {
   const [loaded, setLoaded] = useState(false);
   const deployed = useSelector(state => state.session.deployed);
 
-  // if (!deployed) {
-  //   const update = dispatch(update_players());
+  useEffect(() => {
+    (async() => {
+      const user = await authenticate();
+      if (!user.errors) {
+        setAuthenticated(true);
+      }
+      setLoaded(true);
+    })();
+  }, []);
 
-  //   if (update) {
-  //     dispatch(sessionActions.deployStatus())
-  //   }
-  // }
-
+  useEffect(()=>{
+    dispatch(sessionActions.restoreUser())
+    .then(()=> setLoaded(true))
+    
+  },[])
 
   //calculating wait time for scheduled data update used in following useEffect/setTimeout
   const currentTime = new Date().getTime();
@@ -93,37 +100,11 @@ function App() {
   //   }, 10000)
   //   return () => clearTimeout(timer)
   // }, [])
-  
-  // const userTeam = useSelector(state => state.userTeam.userTeam);
-  // const injuredPlayers = useSelector(state => state.injuredList.injuredList);
-  
-  // useEffect(() => {
-  //   teams.forEach((team) => {
-  //     dispatch(get_roster_40(team.id))
-  //     })
-  
-  //   }, [dispatch])
 
-  useEffect(() => {
-    (async() => {
-      const user = await authenticate();
-      if (!user.errors) {
-        setAuthenticated(true);
-      }
-      setLoaded(true);
-    })();
-  }, []);
 
-  useEffect(()=>{
-    dispatch(sessionActions.restoreUser())
-    .then(()=> setLoaded(true))
-    
-  },[dispatch])
-
-  if (!loaded) {
+if (!loaded) {
     return null;
   };
-
   
 
   return (
@@ -133,18 +114,21 @@ function App() {
           <Testing />
         </Route>
         <Route exact path="/">
-          <Landing />
+          <Landing authenticated={authenticated} setAuthenticated={setAuthenticated}/>
         </Route>
+        {/* <Route exact path="/home">
+          <Homepage />
+        </Route> */}
         <ProtectedRoute exact path="/getting-started" authenticated={authenticated}>
           <GettingStarted />
         </ProtectedRoute>
-        <ProtectedRoute exact path="/home" authenticated={authenticated}>
+        <ProtectedRoute path="/home" authenticated={authenticated}>
           <Homepage />
         </ProtectedRoute>
         <ProtectedRoute exact path="/profile/users/:profileId" authenticated={authenticated}>
           <Profile />
         </ProtectedRoute>
-        <ProtectedRoute exact path="/myteam" authenticated={authenticated}>
+        <ProtectedRoute path="/myteam" authenticated={authenticated}>
           <UserTeams />
         </ProtectedRoute>
         <Route exact path="/players">

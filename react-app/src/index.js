@@ -14,11 +14,11 @@ ReactDOM.render(
   <React.StrictMode>
     <ReduxProvider store={store}>
       {/* <PersistGate loading={null} persistor={persistor}> */}
-        <ModalProvider>
+        {/* <ModalProvider> */}
           <BrowserRouter>
             <App />
           </BrowserRouter>
-        </ModalProvider>
+        {/* </ModalProvider> */}
       {/* </PersistGate> */}
     </ReduxProvider>
   </React.StrictMode>,

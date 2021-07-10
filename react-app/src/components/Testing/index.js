@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { NavLink, Redirect } from "react-router-dom";
+import { login } from "../../store/session";
 import { upload_files } from "../../store/uploads";
 
 import Dropzone from '../Dropzone';
@@ -10,6 +12,8 @@ import Dropzone from '../Dropzone';
 const Testing = () => {
   const dispatch = useDispatch();
 
+  const user = useSelector(state => state.session.user);
+
   const [files, setFiles] = useState("")
 
   const handleSave = async (e) => {
@@ -19,6 +23,15 @@ const Testing = () => {
 
     console.log("RESPONSE ", response)
   };
+
+  const handleLogin = () => {
+    const user = dispatch(login("demo@demo.com", "password"))
+  }
+
+    if (user) {
+    return (
+    <Redirect to="/team"/>
+  )}
 
   return (
     <>
@@ -36,6 +49,8 @@ const Testing = () => {
         <br></br>
         <button type="submit">Upload</button>
       </form>
+
+      <button type="button" onClick={() => handleLogin()}>LOGIN</button>
     </>
   )
 

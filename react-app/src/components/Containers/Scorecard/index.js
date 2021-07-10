@@ -31,26 +31,29 @@ const Scorecard = ({ game }) => {
       content = <span> TBD </span>
   }
 
+  const generateKey = () => {
+    return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
+  };
 
   return (
-      <div className="card-container">
-        <div className="card-row">
-          <div className="row-item-team">
-            <b>{game.AwayTeam}</b>
+      <div key={ generateKey() } className="card-container">
+        <div key={ generateKey() } className="card-row">
+          <div key={ generateKey() } key={ generateKey() } className="row-item-team">
+            <b key={ generateKey() }>{game.AwayTeam}</b>
           </div>
-          <div className="row-item-runs">
-            <b>{game.AwayTeamHits}</b>
-          </div>
-        </div>
-        <div className="card-row">
-          <div className="row-item-team">
-            <b>{game.HomeTeam}</b>
-          </div>
-          <div className="row-item-runs">
-            <b>{game.HomeTeamHits}</b>
+          <div key={ generateKey() } className="row-item-runs">
+            <b key={ generateKey() }>{game.AwayTeamHits}</b>
           </div>
         </div>
-        <div className="card-row-status">
+        <div key={ generateKey() } className="card-row">
+          <div key={ generateKey() } className="row-item-team">
+            <b key={ generateKey() }>{game.HomeTeam}</b>
+          </div>
+          <div key={ generateKey() } className="row-item-runs">
+            <b key={ generateKey() }>{game.HomeTeamHits}</b>
+          </div>
+        </div>
+        <div key={ generateKey() } className="card-row-status">
           {content}
         </div>
       </div>

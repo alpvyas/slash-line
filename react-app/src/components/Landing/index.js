@@ -13,12 +13,12 @@ import logo from "../../images/logo.png";
 import baseball_grass from "../../images/baseball-grass-full.png";
 import "./landing.css";
 
-const Landing = () => {
+const Landing = ({ authenticated, setAuthenticated }) => {
   const dispatch = useDispatch();
   const user = useSelector(state => state.session.user);
   const [login, setLogin] = useState(false);
   const [signup, setSignup] = useState(false);
-  const [authenticated, setAuthenticated] = useState(false);
+  // const [authenticated, setAuthenticated] = useState(false);
   // const [showSidebar, setShowSidebar] = useState(false); 
 
   Modal.setAppElement("#root");

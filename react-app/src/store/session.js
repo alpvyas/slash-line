@@ -1,17 +1,9 @@
-import User from "../components/User";
-import { clearLeaguesState, getUserLeagues, get_user_leagues } from "./leagues";
+import { clearLeaguesState } from "./leagues";
 import { clearUserTeamState } from "./userTeams";
 
 const GET_USER = "session/GET_USER";
 const REMOVE_USER = "session/REMOVE_USER";
-const DEPLOY = "session/DEPLOY";
 
-
-const deploy = () => {
-  return {
-    type: DEPLOY,
-  };
-};
 
 const setUser = user => {
   return {
@@ -24,11 +16,6 @@ const removeUser = () => {
   return {
     type: REMOVE_USER,
   };
-};
-
-
-export const deployStatus = () => async (dispatch) => {
-  dispatch(deploy())
 };
 
 export const login = (email, password) => async (dispatch) => {
@@ -45,11 +32,12 @@ export const login = (email, password) => async (dispatch) => {
 
   const data = await response.json();
 
-  if (response.ok) {
-    // console.log("USER: ", data)
+  if (response.ok && !data.errors) {
+    console.log("DATA: ", data)
+    console.log("I MADE IT TO THIS POINT")
     dispatch(setUser(data))
-    // dispatch(getUserLeagues(user.id))
   };
+
 
   return data.errors
 };
@@ -87,6 +75,7 @@ export const signup = (username, firstName, lastName, email, password) =>
     });
 
     const data = await response.json();
+
     if (response.ok && !data.errors) {
       dispatch(setUser(data));
     };
@@ -101,7 +90,7 @@ export const signup = (username, firstName, lastName, email, password) =>
     return response
   };
 
-  const initialState = {deployed: false, };
+  const initialState = {};
   let newState;
 
   const sessionReducer = (state = initialState, action) => {
@@ -114,9 +103,6 @@ export const signup = (username, firstName, lastName, email, password) =>
         newState = {...state};
         newState.user = null;
         return newState;
-      case DEPLOY:
-        newState = {...state};
-        newState.deployed = true
       default:
         return state;
     };
