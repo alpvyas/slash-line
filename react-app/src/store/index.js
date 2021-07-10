@@ -9,6 +9,7 @@ import sessionReducer from "./session";
 import statsReducer from "./stats";
 import leaguesReducer from "./leagues";
 import teamsReducer from "./teams";
+import getStartedReducer from "./getStarted";
 
 const rootReducer = combineReducers({
   session: sessionReducer,
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
   stats: statsReducer,
   gameDetails: gameDetailsReducer,
   teams: teamsReducer,
+  getStarted: getStartedReducer,
 });
 
 let enhancer;

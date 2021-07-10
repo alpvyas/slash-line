@@ -11,7 +11,7 @@ const LoginForm = ({
   setAuthenticated,
   setSignup,
   setLogin,
-  demoLogin,
+  // demoLogin,
  }) => {
   const dispatch = useDispatch();
   const [errors, setErrors] = useState([]);
@@ -19,14 +19,19 @@ const LoginForm = ({
   const [password, setPassword] = useState("");
   const user = useSelector(state => state.session.user);
 
-  const onLogin = async (e) => {
+  const onLogin = (e) => {
     e.preventDefault();
-    const userAuth = await dispatch(sessionActions.login(email, password));
+    const userAuth = dispatch(sessionActions.login(email, password))
+    .then(() => setAuthenticated(true))
     // if (!userAuth.errors) {
-    setAuthenticated(true);
+    // setAuthenticated(true);
     // } else {
     //   setErrors(userAuth.errors);
     // }
+  };
+
+  const demoLogin = () => {
+    const user = dispatch(sessionActions.login("demo@demo.com", "password")).then(() => setAuthenticated(true));
   };
 
   const signupButton = () => {
@@ -41,6 +46,11 @@ const LoginForm = ({
   const updatePassword = (e) => {
     setPassword(e.target.value);
   };
+
+  // if (user) {
+  //   return (
+  //   <Redirect to="/home"/>
+  // )}
 
   // const checkError = {};
   // if (errors) {
@@ -61,7 +71,7 @@ const LoginForm = ({
         <span className="login-slash">Slash Line</span>
       </div>
 
-      <form className="login-form" onSubmit={onLogin}>
+      <form className="login-form" onSubmit={(e) => onLogin(e)}>
         <div>
           {/* <label htmlFor="email">Email</label> */}
           <input
@@ -69,7 +79,7 @@ const LoginForm = ({
             type="text"
             placeholder="Email address"
             value={email}
-            onChange={updateEmail}
+            onChange={(e) => updateEmail(e.target.value)}
           />
           {/* {"email" in checkError ? <div className="form-error-container">
             <p className="error-text">{checkError.email}</p></div> : null} */}
@@ -81,18 +91,18 @@ const LoginForm = ({
             type="password"
             placeholder="Password"
             value={password}
-            onChange={updatePassword}
+            onChange={(e) => updatePassword(e.target.value)}
           />
           {/* {"password" in checkError ? <div className="form-error-container">
             <p className="error-text">{checkError.password}</p></div> : null} */}
         </div>
         <button className="text" type="submit">Login</button>
-        <button className="text" onClick={demoLogin}>Demo User</button>
+        <button className="text" onClick={(e) => demoLogin(e)}>Demo User</button>
       </form>
       <div className="login-footer-container">
         <div className="no-account">
           <span>Don't have an account?</span>
-          <button className="create-button" onClick={signupButton}>
+          <button className="create-button" onClick={() => signupButton()}>
             Create an account
           </button>
         </div>

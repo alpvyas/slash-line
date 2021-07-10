@@ -1,13 +1,24 @@
 import React, { useEffect, useState } from "react";
 import Scorecard from "../Containers/Scorecard"; //when I get rid of this it messes up the styling of the scorecards. why?
 import "./Carousel.css";
+import { game_details } from "../../mock_game_data";
 
 
-const Carousel = ({ items, show, infiniteLoop}) => {
+const Carousel = ({ show=5, infiniteLoop=true}) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [length, setLength] = useState(items.length);
-  const [isRepeating, setIsRepeating] = useState(infiniteLoop && items > show);
+  const [length, setLength] = useState(15);
+  const [isRepeating, setIsRepeating] = useState(infiniteLoop && 15 > show);
   const [transitionEnabled, setTransitionEnabled] = useState(true);
+
+  const generateKey = () => {
+    return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
+  };
+
+  // const gameDetails = useSelector(state => state.gameDetails.gameDetails);
+  const gameDetails = game_details;
+  const items = gameDetails&&gameDetails.map((gameDetail) => (
+    <Scorecard  key={ generateKey() } game={gameDetail}/>
+  ));
 
   useEffect(() => {
     setLength(items.length);
@@ -60,15 +71,15 @@ const Carousel = ({ items, show, infiniteLoop}) => {
 // {`carousel-content show-${4}`} 
   return (
     <>
-      <div className="carousel-container">
-        <div className="carousel-wrapper">
+      <div key={ generateKey() } className="carousel-container">
+        <div key={ generateKey() } className="carousel-wrapper">
           {currentIndex > 0 && (
-          <button className="left-arrow" onClick={prev}>
+          <button key={ generateKey() } className="left-arrow" onClick={prev}>
             &lt;
           </button>
           )}
-          <div className="carousel-content-wrapper">
-            <div className="carousel-content"
+          <div key={ generateKey() } className="carousel-content-wrapper">
+            <div key={ generateKey() } className="carousel-content"
              style={{ transform: `translateX(-${currentIndex * (120)}%)`,
                       transition: !transitionEnabled ? "none" : undefined,
             }}
@@ -80,7 +91,7 @@ const Carousel = ({ items, show, infiniteLoop}) => {
             </div>
           </div>
           {(isRepeating || currentIndex < (length - show)) && (
-          <button className="right-arrow" onClick={next}>
+          <button key={ generateKey() } className="right-arrow" onClick={next}>
             &gt;
           </button>
           )}
