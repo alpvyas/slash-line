@@ -19,8 +19,8 @@ const LoginModal = () => {
   const user = useSelector(state => state.session.user);
   const [login, setLogin] = useState(false);
   const [signup, setSignup] = useState(false);
-  const [authenticated, setAuthenticated] = useState(false);
-  const [showSidebar, setShowSidebar] = useState(false); 
+  // const [authenticated, setAuthenticated] = useState(false);
+  // const [showSidebar, setShowSidebar] = useState(false); 
 
   Modal.setAppElement("#root");
   const closeSignup = () => {
@@ -44,14 +44,14 @@ const LoginModal = () => {
 
   const demoLogin = () => {
     const user = dispatch(sessionActions.login("demo@demo.com", "password"));
-    setAuthenticated(true);
+    // setAuthenticated(true);
   };
 
-  if (user) {
-    return (
-      <Redirect to="/home" />
-    )
-  };
+  // if (user) {
+  //   return (
+  //     <Redirect to="/home" />
+  //   )
+  // };
 
   return (
     <>
@@ -68,8 +68,8 @@ const LoginModal = () => {
           </button>
         </div>
         <SignUpForm
-          authenticated={authenticated}
-          setAuthenticated={setAuthenticated}
+          // authenticated={authenticated}
+          // setAuthenticated={setAuthenticated}
           signup={signup}
           setSignup={setSignup}
           login={login}
@@ -89,8 +89,8 @@ const LoginModal = () => {
             </button>
           </div>
           <LoginForm
-          authenticated={authenticated}
-          setAuthenticated={setAuthenticated}
+          // authenticated={authenticated}
+          // setAuthenticated={setAuthenticated}
           signup={signup}
           setSignup={setSignup}
           login={login}

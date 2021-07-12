@@ -41,12 +41,13 @@ def login():
     form['csrf_token'].data = request.cookies['csrf_token']
     print("VALIDATE ON SUBMIT: ", form.validate_on_submit())
     if form.validate_on_submit():
-        # Add the user to the session, we are logged in!
         user = User.query.filter(User.email == form.data['email']).first()
         login_user(user)
         return jsonify(user.to_dict())
-    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
-    # return jsonify("hello")
+        # Add the user to the session, we are logged in!
+    else:
+        return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+        # return jsonify("hello")
 
 
 @auth_routes.route('/logout')
