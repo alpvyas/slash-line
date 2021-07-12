@@ -6,8 +6,8 @@ import * as sessionActions from "../../store/session";
 import "./index.css";
 
 const SignUpForm = ({
-  authenticated,
-  setAuthenticated,
+  // authenticated,
+  // setAuthenticated,
   setSignup,
   setLogin,
 }) => {

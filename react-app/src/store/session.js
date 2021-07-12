@@ -3,6 +3,7 @@ import { clearUserTeamState } from "./userTeams";
 
 const GET_USER = "session/GET_USER";
 const REMOVE_USER = "session/REMOVE_USER";
+const SET_AUTH = "session/SET_AUTH";
 
 
 const setUser = user => {
@@ -15,6 +16,13 @@ const setUser = user => {
 const removeUser = () => {
   return {
     type: REMOVE_USER,
+  };
+};
+
+const setAuthStatus = authStatus => {
+  return {
+    type: SET_AUTH,
+    payload: authStatus,
   };
 };
 
@@ -90,6 +98,10 @@ export const signup = (username, firstName, lastName, email, password) =>
     return response
   };
 
+  export const setAuthenticated = (authStatus) => async (dispatch) => {
+    dispatch(setAuthStatus(authStatus));
+  };
+
   const initialState = {};
   let newState;
 
@@ -98,10 +110,15 @@ export const signup = (username, firstName, lastName, email, password) =>
       case GET_USER:
         newState = {...state};
         newState.user = action.payload;
+        newState.authenticated = true;
         return newState;
       case REMOVE_USER:
         newState = {...state};
         newState.user = null;
+        return newState;
+      case SET_AUTH:
+        newState = {...state};
+        newState.authenticated = true;
         return newState;
       default:
         return state;

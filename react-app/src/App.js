@@ -4,7 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import * as sessionActions from "./store/session";
 import { authenticate } from "./services/auth";
-import { get_players, seedPlayers, update_players } from "./store/players";
+import { setAuthenticated } from "./store/session";
+import { get_players, update_players } from "./store/players";
 import { get_stats } from "./store/stats";
 import Landing from "./components/Landing";
 import Homepage from "./components/Homepage";
@@ -14,7 +15,6 @@ import Players from "./components/Players";
 import Testing from "./components/Testing/";
 import Stats from "./components/Stats";
 import NotFound from "./components/NotFound";
-import { get_game_details_backend } from "./store/gameDetails";
 import Dropzone from "./components/Dropzone";
 import GettingStarted from "./components/GettingStarted";
 
@@ -22,15 +22,17 @@ import GettingStarted from "./components/GettingStarted";
 function App() {
   const dispatch = useDispatch();
   const [initialized, setInitialized] = useState(false);
-  const [authenticated, setAuthenticated] = useState(false);
+  // const [authenticated, setAuthenticated] = useState(false);
+  const authenticated = useSelector(state => state.session.authenticated);
   const [loaded, setLoaded] = useState(false);
-  const deployed = useSelector(state => state.session.deployed);
+  
 
   useEffect(() => {
     (async() => {
       const user = await authenticate();
       if (!user.errors) {
-        setAuthenticated(true);
+        // setAuthenticated(true);
+        dispatch(setAuthenticated(true))
       }
       setLoaded(true);
     })();
@@ -90,17 +92,6 @@ function App() {
 
   const today = year + '-' + month + '-' + day;
 
-  // useEffect(() => {
-  //   const timer = setTimeout(() => {
-  //     dispatch(get_game_details_backend(today))
-
-  //     setInterval(() => {
-  //       dispatch(get_game_details_backend(today))
-  //     }, 60000)
-  //   }, 10000)
-  //   return () => clearTimeout(timer)
-  // }, [])
-
 
 if (!loaded) {
     return null;
@@ -116,13 +107,13 @@ if (!loaded) {
         <Route exact path="/">
           <Landing authenticated={authenticated} setAuthenticated={setAuthenticated}/>
         </Route>
-        {/* <Route exact path="/home">
-          <Homepage />
-        </Route> */}
+        {/* <Route exact path="/home"> */}
+          {/* <Homepage /> */}
+        {/* </Route> */}
         <ProtectedRoute exact path="/getting-started" authenticated={authenticated}>
           <GettingStarted />
         </ProtectedRoute>
-        <ProtectedRoute path="/home" authenticated={authenticated}>
+        <ProtectedRoute exact path="/home" authenticated={authenticated}>
           <Homepage />
         </ProtectedRoute>
         <ProtectedRoute exact path="/profile/users/:profileId" authenticated={authenticated}>

@@ -7,8 +7,8 @@ import logo from "../../images/logo.png";
 import "./index.css";
 
 const LoginForm = ({ 
-  authenticated,
-  setAuthenticated,
+  // authenticated,
+  // setAuthenticated,
   setSignup,
   setLogin,
   // demoLogin,
@@ -21,8 +21,8 @@ const LoginForm = ({
 
   const onLogin = (e) => {
     e.preventDefault();
-    const userAuth = dispatch(sessionActions.login(email, password))
-    .then(() => setAuthenticated(true))
+    // if (!authenticated)
+    const userAuth = dispatch(sessionActions.login(email, password));
     // if (!userAuth.errors) {
     // setAuthenticated(true);
     // } else {
@@ -31,7 +31,7 @@ const LoginForm = ({
   };
 
   const demoLogin = () => {
-    const user = dispatch(sessionActions.login("demo@demo.com", "password")).then(() => setAuthenticated(true));
+    const user = dispatch(sessionActions.login("demo@demo.com", "password"))
   };
 
   const signupButton = () => {

@@ -13,9 +13,10 @@ import logo from "../../images/logo.png";
 import baseball_grass from "../../images/baseball-grass-full.png";
 import "./landing.css";
 
-const Landing = ({ authenticated, setAuthenticated }) => {
+const Landing = () => {
   const dispatch = useDispatch();
   const user = useSelector(state => state.session.user);
+  const authenticated = useSelector(state => state.session.authenticated);
   const [login, setLogin] = useState(false);
   const [signup, setSignup] = useState(false);
   // const [authenticated, setAuthenticated] = useState(false);
@@ -43,10 +44,10 @@ const Landing = ({ authenticated, setAuthenticated }) => {
 
   const demoLogin = () => {
     const user = dispatch(sessionActions.login("demo@demo.com", "password"));
-    setAuthenticated(true);
+    // setAuthenticated(true);
   };
 
-  if (user) {
+  if (user && authenticated) {
     return (
       <Redirect to="/home" />
     )
@@ -67,8 +68,8 @@ const Landing = ({ authenticated, setAuthenticated }) => {
           </button>
         </div>
         <SignUpForm
-          authenticated={authenticated}
-          setAuthenticated={setAuthenticated}
+          // authenticated={authenticated}
+          // setAuthenticated={setAuthenticated}
           signup={signup}
           setSignup={setSignup}
           login={login}
@@ -88,14 +89,14 @@ const Landing = ({ authenticated, setAuthenticated }) => {
             </button>
           </div>
           <LoginForm
-          authenticated={authenticated}
-          setAuthenticated={setAuthenticated}
+          // authenticated={authenticated}
+          // setAuthenticated={setAuthenticated}
           signup={signup}
           setSignup={setSignup}
           login={login}
           setLogin={setLogin}
           openLogin={openLogin}
-          demoLogin={demoLogin}
+          // demoLogin={demoLogin}
           />
         </Modal>
         <div id="splash-container">
