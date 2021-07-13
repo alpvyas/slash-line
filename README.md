@@ -34,7 +34,7 @@ As noted above, Slash Line uses React and Redux on the front end with Flask and 
 
 The backend serves the frontend, responds to frontend requests, acts as an intermediary to serve MLB data to the frontend, and fetches data from the PostgreSQL database. 
 
-![Slash Line application architecture](/readme-resources/rappa-mappa-architecture.png)
+![Slash Line application architecture](https://github.com/alpvyas/slash-line/blob/main/db_images/slashline_architecture.png)
 
 ## Frontend Overview
 Slash Line is a very frontend heavy application. It makes extensive use of 3rd-party APIs and resources to create a dynamic and data-rich experience. Below are the frontend technologies that make this application possible. 
