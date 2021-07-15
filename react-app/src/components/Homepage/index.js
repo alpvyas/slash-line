@@ -7,13 +7,10 @@ import LeagueFormModal from "../LeagueFormModal";
 import NavBar from "../NavBar/index";
 import Table from "../Table";
 import ReactTable from "../ReactTable";
-import bauer_practice from "../../images/bauer-practice.png";
 import sunset_field from "../../images/sunset-field.png";
 import "./Homepage.css";
 import Standings from "../Containers/Standings";
 import Footer from "../Footer";
-import LogoutButton from "../auth/LogoutButton";
-import { Redirect, useHistory } from "react-router";
 import { getUserTeams } from "../../store/userTeams";
 import { game_details } from "../../mock_game_data";
 
@@ -37,7 +34,7 @@ const Homepage = () => {
     if (user) {
       dispatch(getUserLeagues(user.id))
       .then(leagues => {
-        setCurrentLeague(leagues[1])
+        setCurrentLeague(leagues[Object.keys(leagues)[0]])
       })
       }
   }, [dispatch, user]);
@@ -53,7 +50,7 @@ const Homepage = () => {
         const leagueID = currentLeague.info["id"]
         setCurrentTeam(userTeams[leagueID])
       }
-    }, [dispatch, currentLeague]);
+    }, [currentLeague, userTeams]);
 
   //formatting date and time
   for (const league in leagues){
