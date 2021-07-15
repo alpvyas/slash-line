@@ -37,13 +37,13 @@ const Homepage = () => {
         setCurrentLeague(leagues[Object.keys(leagues)[0]])
       })
       }
-  }, [dispatch, user]);
+  }, []);
 
   useEffect(() => {
     if (user) {
       dispatch(getUserTeams(user.id))
     }
-  }, [dispatch, user]);
+  }, []);
 
   useEffect(() => {
       if (currentLeague !== undefined) {
