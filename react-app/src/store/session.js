@@ -1,5 +1,7 @@
 import { clearLeaguesState } from "./leagues";
 import { clearUserTeamState } from "./userTeams";
+import { getUserLeagues } from "./leagues";
+import { getUserTeams } from "./userTeams";
 
 const GET_USER = "session/GET_USER";
 const REMOVE_USER = "session/REMOVE_USER";
@@ -42,8 +44,9 @@ export const login = (email, password) => async (dispatch) => {
 
   if (response.ok && !data.errors) {
     console.log("DATA: ", data)
-    console.log("I MADE IT TO THIS POINT")
     dispatch(setUser(data))
+    dispatch(getUserLeagues(data.id))
+    dispatch(getUserTeams(data.id))
   };
 
 
