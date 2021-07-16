@@ -151,13 +151,13 @@ const Homepage = () => {
             <div className="header">
               <h3>Standings</h3>
           </div>
-            {leagues && <Standings user={user}/>}
+            {/* {leagues && <Standings user={user}/>} */}
           </div>
           <div className="create-league-container">
             <div className="header">
               <h3>Leagues</h3>
             </div>
-           <Table columns={columns} rows={leaguesArray} row_keys={row_keys} leagues={true} button={true}/>
+           {/* <Table columns={columns} rows={leaguesArray} row_keys={row_keys} leagues={true} button={true}/> */}
            <LeagueFormModal />
           </div>
          </div>
@@ -166,28 +166,28 @@ const Homepage = () => {
              <div className="header">
                <h3>Selected Team</h3>
              </div>
-              {
+              {/* {
                 currentLeague &&
                 selectedTeam && 
                 <ReactTable 
                   columns={userTeamColumns}
                   data={[...selectedTeam.players.active, ...selectedTeam.players.injured]}
                   allPlayers={false}/>
-              }
+              } */}
           </div>
 
            <div className="user-players-container">
              <div className="header">
                <h3>My Team</h3>
              </div>
-              {
+              {/* {
                 currentLeague &&
                 currentTeam &&
                 <ReactTable
                   columns={userTeamColumns}
                   data={currentTeam.players.active}
                   allPlayers={false}/>
-              }
+              } */}
            </div>
          </div>
          <div className="footer-container">
