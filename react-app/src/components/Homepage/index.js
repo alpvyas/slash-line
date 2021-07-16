@@ -166,28 +166,28 @@ const Homepage = () => {
              <div className="header">
                <h3>Selected Team</h3>
              </div>
-              {/* {
+              {
                 currentLeague &&
                 selectedTeam && 
                 <ReactTable 
                   columns={userTeamColumns}
                   data={[...selectedTeam.players.active, ...selectedTeam.players.injured]}
                   allPlayers={false}/>
-              } */}
+              }
           </div>
 
            <div className="user-players-container">
              <div className="header">
                <h3>My Team</h3>
              </div>
-              {/* {
+              {
                 currentLeague &&
                 currentTeam &&
                 <ReactTable
                   columns={userTeamColumns}
                   data={currentTeam.players.active}
                   allPlayers={false}/>
-              } */}
+              }
            </div>
          </div>
          <div className="footer-container">
