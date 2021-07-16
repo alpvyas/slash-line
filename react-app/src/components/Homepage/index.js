@@ -157,7 +157,7 @@ const Homepage = () => {
             <div className="header">
               <h3>Leagues</h3>
             </div>
-           {/* <Table columns={columns} rows={leaguesArray} row_keys={row_keys} leagues={true} button={true}/> */}
+           <Table columns={columns} rows={leaguesArray} row_keys={row_keys} leagues={true} button={true}/>
            <LeagueFormModal />
           </div>
          </div>
