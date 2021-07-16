@@ -63,8 +63,8 @@ export const logout = () => async (dispatch) => {
   console.log("RESPONSE LOGOUT: ", response)
 
   dispatch(removeUser());
-  dispatch(clearUserTeamState());
-  dispatch(clearLeaguesState());
+  // dispatch(clearUserTeamState());
+  // dispatch(clearLeaguesState());
   
   return response;
 };
