@@ -151,7 +151,7 @@ const Homepage = () => {
             <div className="header">
               <h3>Standings</h3>
           </div>
-            {/* {leagues && <Standings user={user}/>} */}
+            {leagues && <Standings user={user}/>}
           </div>
           <div className="create-league-container">
             <div className="header">
