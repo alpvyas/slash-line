@@ -28,13 +28,14 @@ const setAuthStatus = authStatus => {
   };
 };
 
-export const login = (email, password) => async (dispatch) => {
+export const login = (username, email, password) => async (dispatch) => {
   const response = await fetch("/api/auth/login", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
+      username,
       email,
       password,
     }),
@@ -90,6 +91,38 @@ export const signup = (username, firstName, lastName, email, password) =>
     if (response.ok && !data.errors) {
       dispatch(setUser(data));
     };
+  };
+
+  export const validateUsername = (username) => async (dispatch) => {
+    const response = await fetch("/api/users/validate-username", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username,
+      }),
+    });
+     console.log("RESPONSE: ", response)
+    const valid = await response.json();
+    console.log("valid: ", valid)
+    return valid;
+  };
+
+  export const validateEmail = (email) => async (dispatch) => {
+    const response = await fetch("/api/users/validate-email", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email,
+      }),
+    });
+
+    const valid = await response.json();
+
+    return valid;
   };
 
   export const restoreUser = () => async (dispatch) => {

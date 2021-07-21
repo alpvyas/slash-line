@@ -3,6 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink, Redirect } from "react-router-dom";
 import { login } from "../../store/session";
 import { upload_files } from "../../store/uploads";
+import LoginForm from "../authorization/LoginForm"
+import SignupForm from "../authorization/SignupForm"
+import LandingModal from "../LandingModal";
 
 import Dropzone from '../Dropzone';
 //Here are some comments about this component. Working with s3 is so wonky for me...why?
@@ -28,14 +31,14 @@ const Testing = () => {
     const user = dispatch(login("demo@demo.com", "password"))
   }
 
-    if (user) {
-    return (
-    <Redirect to="/team"/>
-  )}
+  //   if (user) {
+  //   return (
+  //   <Redirect to="/team"/>
+  // )}
 
   return (
     <>
-      <h1>Simple Flask AWS S3 Uploader</h1>
+      {/* <h1>Simple Flask AWS S3 Uploader</h1>
 
       <form onSubmit={(e) => handleSave(e)} >
 
@@ -50,7 +53,9 @@ const Testing = () => {
         <button type="submit">Upload</button>
       </form>
 
-      <button type="button" onClick={() => handleLogin()}>LOGIN</button>
+      <button type="button" onClick={() => handleLogin()}>LOGIN</button> */}
+
+      <LandingModal />
     </>
   )
 

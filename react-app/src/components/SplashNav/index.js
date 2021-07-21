@@ -8,7 +8,7 @@ import NotificationsIcon from "@material-ui/icons/Notifications";
 import slash_line from "../../images/slash-line.png";
 import "./splashNav.css"
 
-const SplashNav = ({showSidebar, setShowSidebar, openSignup, openLogin}) => {
+const SplashNav = ({showSidebar, setShowSidebar, handleSignup, handleLogin}) => {
 
   const onClick = (e, item) => {
   window.alert(JSON.stringify(item, null, 2));
@@ -77,11 +77,11 @@ const SplashNav = ({showSidebar, setShowSidebar, openSignup, openLogin}) => {
               </div>
               <div className="slash-icon">/</div>
               <div className="nav-link-tab" id="signup-tab">
-                <button className="inactive" onClick={openSignup}>sign up</button>
+                <button className="inactive" onClick={() => handleSignup()}>sign up</button>
               </div>
               <div className="slash-icon">/</div>
               <div className="nav-link-tab" id="login-tab">
-                <button className="inactive" onClick={openLogin}>login</button>
+                <button className="inactive" onClick={() => handleLogin()}>login</button>
               </div>
             </div>
             <div className="dropdown-container">
