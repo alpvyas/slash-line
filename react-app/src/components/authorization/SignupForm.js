@@ -116,7 +116,7 @@ const SignupForm = ({ setAuthenticated, setSignup, setLogin }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const response = dispatch(login(username, email, password)).then((res) => {
+    dispatch(login(username, email, password)).then((res) => {
       if (!res.errors) {
         setAuthenticated(true);
       } else {

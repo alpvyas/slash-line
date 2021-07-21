@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { NavLink, Redirect } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { login } from '../../store/session';
+import React from 'react';
+// import { NavLink, Redirect } from 'react-router-dom';
+// import { useDispatch, useSelector } from 'react-redux';
+// import { login } from '../../store/session';
 import Dialog from '@material-ui/core/Dialog';
 import Grid from '@material-ui/core/Grid';
 import slashline_logo from "../../images/logo.png";
@@ -12,32 +12,13 @@ import './LandingModal.css';
 
 const LandingModal = ({ open, setOpen, signup, setSignup, login, setLogin}) => {
 
-    const dispatch = useDispatch();
-
-    // const [open, setOpen] = useState(true);
-    // const [login, setLogin] = useState(true);
-    // const [signup, setSignup] = useState(false);
-    const [authenticated, setAuthenticated] = useState(false);
-
-    const user = useSelector(state => state.session.user);
-
-    const handleOpen = () => {
-      setOpen(true);
-    };
+    // const handleOpen = () => {
+    //   setOpen(true);
+    // };
 
     const handleClose = () => {
       setOpen(false);
     };
-
-    // const openSignup = () => {
-    //   if (toggleLogin) setToggleLogin(false);
-    //   setToggleSignup(true);
-    // };
-
-    // const openLogin = () => {
-    //   if (toggleSignup) setToggleSignup(true);
-    //   setToggleLogin(true);
-    // };
 
   return (
     <>
