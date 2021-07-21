@@ -7,70 +7,107 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
+import { makeStyles } from '@material-ui/core/styles';
 import './index.css';
 
-const LoginForm = ({ setAuthenticated }) => {
+const LoginForm = ({ setLogin, setSignup }) => {
   const dispatch = useDispatch();
-  const [errors, setErrors] = useState([]);
-  const [username, setUsername] = useState('')
+  const [errors, setErrors] = useState({});
+  const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const demoLogin = () => {
-    const response = dispatch(login('demo@demo.com', 'password')).then(() => setAuthenticated(true));
+    dispatch(login('Demo', 'demo@demo.com', 'password'));
   };
 
-  const updateUsername = (e) => {
-    setUsername(e.target.value);
+  const signupForm = () => {
+    setLogin(false);
+    setSignup(true);
   };
 
-  const updatePassword = (e) => {
-    setPassword(e.target.value);
+  const updateUsername = (username) => {
+    // if (validateEmail(username)) {
+    //   setEmail(username);
+    // } else {
+      setUsername(username);
+    // }
   };
 
-  // const checkErrors = () => {};
+  const updatePassword = (password) => {
+    setPassword(password);
+  };
+
+  const validateEmail = (email) => {
+    const regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+    if (!(regex.test(String(email).toLowerCase()))) {
+      return false;
+    }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const response = dispatch(login(username, email, password)).then((res) => {
-      if (!res.errors) {
-        setAuthenticated(true);
-      } else {
+    dispatch(login(username, email, password)).then((res) => {
+      if (res.errors) {
         setErrors(res.errors);
       };
-    } )
+    });
   };
+
+//   const useStyles = makeStyles({
+//   root: {
+//     background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+//     border: 0,
+//     borderRadius: 3,
+//     boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+//     color: 'white',
+//     height: 48,
+//     padding: '0 30px',
+//     alignContent: 'center'
+//   },
+// });
+
+// const classes = useStyles();
 
   return (
     <>
-      <DialogTitle id="form-dialog-title">Login</DialogTitle>
+      <DialogTitle id="form-dialog-title">
+        <Typography variant="h4" align="center">Login</Typography>
+      </DialogTitle>
         <DialogContent>
         <DialogContentText>
-          To login, please enter your username or email address and your password.
+          <Typography variant="h6" align="center">To login, please enter your username or email address and password.</Typography>
         </DialogContentText>
           <TextField
             autoFocus
             margin="dense"
             id="username"
             label="Username or Email"
-            type="email"
-            fullWidth
+            type="text"
+            style={{width: '53vh', align: 'center'}}
+            helperText={username}
+            onChange={(e) => updateUsername(e.target.value)}
           />
           <TextField
-            autoFocus
             margin="dense"
             id="password"
             label="Password"
             type="password"
-            fullWidth
+            style={{width: '53vh'}}
+            onChange={(e) => updatePassword(e.target.value)}
           />
         </DialogContent>
-        <DialogActions>
-          <Button onClick={() => handleSubmit()}>Submit</Button>
+        <DialogActions style={{justifyContent: 'center'}}>
+          <Button className="submit-button" onClick={() => handleSubmit()}>Submit</Button>
+          <Button style={{textAlign: 'center'}}className="submit-button" onClick={() => demoLogin()}>Demo User</Button>
         </DialogActions>
         <DialogContent>
           <DialogContentText>
-            Don't have an account? Create one here.
+            <Typography align="center">Don't have an account?
+            <button onClick={() => signupForm()}>Create one here.</button></Typography> 
           </DialogContentText>
         </DialogContent>
     </>

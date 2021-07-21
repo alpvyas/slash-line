@@ -6,6 +6,7 @@ import SignUpForm from "../auth/SignUpForm";
 import LoginForm from "../auth/LoginForm";
 import * as sessionActions from "../../store/session";
 import SplashNav from "../SplashNav";
+import LandingModal from "../LandingModal";
 import Footer from "../Footer";
 import Sidebar from "../Sidebar";
 
@@ -17,34 +18,32 @@ const Landing = () => {
   const dispatch = useDispatch();
   const user = useSelector(state => state.session.user);
   const authenticated = useSelector(state => state.session.authenticated);
-  const [login, setLogin] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [login, setLogin] = useState(true);
   const [signup, setSignup] = useState(false);
   // const [authenticated, setAuthenticated] = useState(false);
   // const [showSidebar, setShowSidebar] = useState(false); 
 
   Modal.setAppElement("#root");
-  const closeSignup = () => {
-    setSignup(false);
-  };
+  // const closeSignup = () => {
+  //   setSignup(false);
+  // };
 
-  const closeLogin = () => {
-    if (signup) setSignup(false);
-    setLogin(false);
-  };
+  // const closeLogin = () => {
+  //   if (signup) setSignup(false);
+  //   setLogin(false);
+  // };
 
-  const openSignup = () => {
+  const handleSignup = () => {
     if (login) setLogin(false);
     setSignup(true);
+    setOpen(true);
   };
 
-  const openLogin = () => {
+  const handleLogin = () => {
     if (signup) setSignup(false);
     setLogin(true);
-  };
-
-  const demoLogin = () => {
-    const user = dispatch(sessionActions.login("demo@demo.com", "password"));
-    // setAuthenticated(true);
+    setOpen(true);
   };
 
   if (user && authenticated) {
@@ -55,7 +54,7 @@ const Landing = () => {
 
   return (
     <div className="container page-container" style={{backgroundImage: `url(${baseball_grass})`}}>
-      <Modal
+      {/* <Modal
         isOpen={signup}
         contentLabel="Sign up"
         className="defaultInner"
@@ -98,9 +97,17 @@ const Landing = () => {
           openLogin={openLogin}
           // demoLogin={demoLogin}
           />
-        </Modal>
+        </Modal> */}
+        <LandingModal
+          open={open}
+          setOpen={setOpen}
+          signup={signup}
+          setSignup={setSignup}
+          login={login}
+          setLogin={setLogin}
+        />
         <div id="splash-container">
-          <SplashNav openLogin={openLogin} openSignup={openSignup}/>
+          <SplashNav handleLogin={handleLogin} handleSignup={handleSignup}/>
         </div>
       <Footer />
     </div>

@@ -9,7 +9,6 @@ import * as sessionActions from "../../store/session";
 import SplashNav from "../SplashNav";
 import Footer from "../Footer";
 import Sidebar from "../Sidebar";
-
 import logo from "../../images/logo.png"
 import baseball_grass from "../../images/baseball-grass.png";
 import "./LoginModal.css";
