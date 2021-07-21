@@ -88,7 +88,6 @@ const LoginForm = ({ setLogin, setSignup }) => {
             label="Username or Email"
             type="text"
             style={{width: '53vh', align: 'center'}}
-            helperText={username}
             onChange={(e) => updateUsername(e.target.value)}
           />
           <TextField

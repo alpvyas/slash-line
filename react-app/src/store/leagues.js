@@ -143,9 +143,9 @@ export const createLeague =
 
   const check = await response.json();
 
-  if (!check.ok) {
-    alert(check.errors)
-  }
+  // if (!check.ok) {
+  //   alert(check.errors)
+  // }
 
   return check;
 
