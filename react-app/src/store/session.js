@@ -93,7 +93,7 @@ export const signup = (username, firstName, lastName, email, password) =>
     };
   };
 
-  export const validateUsername = (username) => async (dispatch) => {
+  export const validateUsername = (username) => async () => {
     const response = await fetch("/api/users/validate-username", {
       method: "POST",
       headers: {
@@ -109,7 +109,7 @@ export const signup = (username, firstName, lastName, email, password) =>
     return valid;
   };
 
-  export const validateEmail = (email) => async (dispatch) => {
+  export const validateEmail = (email) => async () => {
     const response = await fetch("/api/users/validate-email", {
       method: "POST",
       headers: {
