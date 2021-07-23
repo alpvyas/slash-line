@@ -13,6 +13,8 @@ import Box from '@material-ui/core/Box';
 import { makeStyles } from '@material-ui/core/styles';
 import Start from './Start';
 import JoinLeague from './JoinLeague';
+import CreateTeam from './CreateTeam';
+import ProfileBasics from './ProfileBasics';
 import slashline_logo from "../../images/logo.png";
 import './StartWizard.css';
 
@@ -21,6 +23,12 @@ const StartWizard = () => {
   const dispatch = useDispatch();
   const user = useSelector(state => state.session.user);
   const [step, setStep] = useState("start");
+  const [teamName, setTeamName] = useState('');
+  const [colors, setColors] = useState({}); 
+  const [leagueID, setLeagueID] = useState('');
+  const [aboutMe, setAboutMe] = useState('');
+  const [location, setLocation] = useState('');
+  const [avatar, setAvatar] = useState(null);
 
 
   return (
@@ -44,8 +52,12 @@ const StartWizard = () => {
         </Grid>
         </div>
         {step === 'start' && <Start step={step} setStep={setStep} />}
-        {step === 'joinLeague' && <JoinLeague step={step} setStep={setStep} />}
 
+        {step === 'joinLeague' && <JoinLeague setStep={setStep} leagueID={leagueID} setLeagueID={setLeagueID} />}
+
+        {step === 'createTeam' && <CreateTeam setStep={setStep} leagueID={leagueID} setTeamName={setTeamName} teamName={teamName} setColors={setColors} colors={colors}/>}
+
+        {step === 'profile' && <ProfileBasics setStep={setStep} setAboutMe={setAboutMe} setlocation={setLocation} setAvatar={setAvatar} user={user}/>}
       </Dialog>
     </>
   )

@@ -15,12 +15,12 @@ import { makeStyles } from '@material-ui/core/styles';
 import { getOpenLeagues, joinUserLeague } from '../../store/leagues';
 
 
-const JoinLeague = ({ step, setStep}) => {
+const JoinLeague = ({ setStep, leagueID, setLeagueID }) => {
 
   const dispatch = useDispatch();
   const [openLeagues, setOpenLeagues] = useState([]);
   const [leagueType, setLeagueType] = useState('');
-  const [leagueID, setLeagueID] = useState('');
+  // const [leagueID, setLeagueID] = useState('');
   const [passcode, setPasscode] = useState('')
   const [errors, setErrors] = useState({})
 

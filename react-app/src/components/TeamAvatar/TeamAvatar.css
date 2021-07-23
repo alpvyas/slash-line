@@ -1,0 +1,30 @@
+.avatar-container:hover,
+.avatar-container:focus {
+   box-shadow: 0 0.5em 0.5em -0.4em var(--hover);
+   transform: translateY(-2em);
+}
+.avatar-container {
+  --color: #ffa260;
+  --hover: red;
+}
+
+button {
+  color: var(--color);
+  transition: 0.45s;
+}
+
+button:hover,
+button:focus {
+  border-color: var(--hover);
+  color: #fff;
+}
+
+button {
+  background: none;
+  /* border: 1px solid; */
+  /* font: inherit; */
+  /* line-height: 1; */
+  /* margin: 0.5em; */
+  /* padding: 1em 2em; */
+  border-radius: 65%;
+}

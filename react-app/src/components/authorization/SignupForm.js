@@ -143,6 +143,7 @@ const SignupForm = ({ setAuthenticated, setSignup, setLogin }) => {
             variant="outlined"
             fullWidth
             // required={true}
+            onChange={(e) => updateFirstName(e.target.value)}
           />
           <TextField
             margin="dense"
@@ -152,6 +153,7 @@ const SignupForm = ({ setAuthenticated, setSignup, setLogin }) => {
             variant="outlined"
             fullWidth
             // required={true}
+            onChange={(e) => updateLastName(e.target.value)}
           />
           <TextField
             margin="dense"

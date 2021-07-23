@@ -7,6 +7,9 @@ import LoginForm from "../authorization/LoginForm"
 import SignupForm from "../authorization/SignupForm"
 import LandingModal from "../LandingModal";
 import StartWizard from "../StartWizard";
+import TeamAvatar from "../TeamAvatar";
+import Grid from '@material-ui/core/Grid';
+import { ARI, ATL, BAL, BOS, CHC, CIN, CLE, COL, CWS, DET, HOU, KC, LAA, LAD, MIA, MIL, MIN, NYM, NYY, OAK, PHI, PIT, SD, SEA, SF, STL, TB, TEX, TOR, WSH } from '../../images';
 
 import Dropzone from '../Dropzone';
 
@@ -36,6 +39,8 @@ const Testing = () => {
   //   <Redirect to="/team"/>
   // )}
 
+  // const mlbTeams = [ARI, ATL, BAL, BOS, CHC, CIN, CLE, COL, CWS, DET, HOU, KC, LAA, LAD, MIA, MIL, MIN, NYM, NYY, OAK, PHI, PIT, SD, SEA, SF, STL, TB, TEX, TOR, WSH];
+
   return (
     <>
       {/* <h1>Simple Flask AWS S3 Uploader</h1>
@@ -53,7 +58,16 @@ const Testing = () => {
         <button type="submit">Upload</button>
       </form> */}
       <StartWizard />
-
+      {/* <TeamAvatar logo/> */}
+      {/* <Grid container direction="row" justifyContent="center" alignItems="center">
+        {mlbTeams.map(team => {
+          return (
+            <Grid item xs={2}>
+              <TeamAvatar logo={team}/>
+            </Grid>
+          )
+        })}
+      </Grid> */}
     </>
   )
 
