@@ -16,19 +16,26 @@ import Dropzone from '../Dropzone';
 
 
 const Testing = () => {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-  // const user = useSelector(state => state.session.user);
+  const user = useSelector(state => state.session.user);
 
-  // const [files, setFiles] = useState("")
+  const [file, setFile] = useState("")
 
-  // const handleSave = async (e) => {
-  //   e.preventDefault()
-  //   console.log("FILES: ", files)
-  //   const response = dispatch(upload_files(files));
+  const handleUpload = async (e) => {
+    e.preventDefault()
+    console.log("FILE: ", file)
+    const data = new FormData();
+    data.append('image', file, file.name)
+    console.log("DATA: ", data.get('image'))
+    const response = dispatch(upload_files(data));
 
-  //   console.log("RESPONSE ", response)
-  // };
+    console.log("RESPONSE ", response)
+  };
+
+  const handleSelect = (event) => {
+    setFile(event.target.files[0]);
+  };
 
   // const handleLogin = () => {
   //   const user = dispatch(login("demo@demo.com", "password"))
@@ -43,31 +50,22 @@ const Testing = () => {
 
   return (
     <>
-      {/* <h1>Simple Flask AWS S3 Uploader</h1>
+      <h1>Simple Flask AWS S3 Uploader</h1>
 
-      <form onSubmit={(e) => handleSave(e)} >
+      <form onSubmit={(e) => handleUpload(e)} >
 
         <label htmlFor="user_file">Upload Your File</label>
         <br></br>
         <input
           type="file"
-          name="user_file"
-          value={files}
-          onChange={(e) => setFiles(e.target.value)}/>
+          name="file"
+          onChange={(e) => handleSelect(e)}/>
         <br></br>
         <button type="submit">Upload</button>
-      </form> */}
-      <StartWizard />
-      {/* <TeamAvatar logo/> */}
-      {/* <Grid container direction="row" justifyContent="center" alignItems="center">
-        {mlbTeams.map(team => {
-          return (
-            <Grid item xs={2}>
-              <TeamAvatar logo={team}/>
-            </Grid>
-          )
-        })}
-      </Grid> */}
+      </form>
+  
+      {/* <StartWizard /> */}
+      
     </>
   )
 

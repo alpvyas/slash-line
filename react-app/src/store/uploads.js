@@ -21,7 +21,7 @@ const add = () => ({
 ------------------------------------------------------------------------------*/
 
 //upload files
-export const upload_files = (fileList) => async (dispatch) => {
+export const upload_files = (data) => async (dispatch) => {
 
   const response = await fetch('/api/upload/', {
     method: "POST",
@@ -29,7 +29,7 @@ export const upload_files = (fileList) => async (dispatch) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      fileList,
+      data,
     })
   });
 
