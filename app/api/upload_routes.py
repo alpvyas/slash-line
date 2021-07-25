@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, request, json, session
+from flask import Blueprint, jsonify, request, json
 from werkzeug.utils import secure_filename
 import boto3
 # from botocore.exceptions import ClientError
@@ -21,33 +21,18 @@ bucket_name = os.environ.get("AWS_BUCKET_NAME")
 # ------------------------------------------------------------------------------
 
 
-def upload(file_name="ILOVEBELLINGER", bucket=bucket_name, object_name=None):
+def upload():
+    print("REQ: ", request.form)
+    image = request.form
 
-    data = json.loads(request.data.decode("utf-8"))
-    # file_name = io.BytesIO('')
-    if object_name is None:
-        object_name = file_name
-
-    files = data["fileList"]
-
-    for file in files:
-        s3.upload_file(file, bucket, object_name)
-        # with open(file, "rb") as f:
-
-    print("FILE: ", files)
-
-    return jsonify("TRUE")
-
-    # print("FILES: ", files)
-    # for file in files:
-    # print("THIS FILE: ", file)
-    # if file:
-    #     filename = secure_filename(file["path"])
-    #     s3.upload_file(
-    #         Bucket=bucket_name,
-    #         Filename=filename,
-    #         Key=filename
-    #     )
+    if image:
+        filename = secure_filename(image.filename)
+        image.save(filename)
+        s3.upload_file(
+            Bucket='slashline-profile-pictures',
+            Filename=filename,
+            Key=filename
+        )
 
     return jsonify({"message": "Upload Successful"})
 
