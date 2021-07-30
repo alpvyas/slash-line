@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo, memo }from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getUserLeagues } from "../../store/leagues";
+import { getUserLeagues, setCurrentLeague } from "../../store/leagues";
 import Carousel from "../Carousel";
 import Scorecard from "../Containers/Scorecard";
 import LeagueFormModal from "../LeagueFormModal";
@@ -21,7 +21,7 @@ const Homepage = () => {
   const userTeams = useSelector(state => state.userTeams.teams);
   const selectedTeam = useSelector(state => state.leagues.selectedTeam);
   const [currentTeam, setCurrentTeam] = useState(undefined);
-  const [currentLeague, setCurrentLeague] = useState(undefined);
+  const currentLeague = useSelector(state => state.leagues.current);
 
   // const gameDetails = useSelector(state => state.gameDetails.gameDetails);
   const gameDetails = game_details;
@@ -47,7 +47,11 @@ const Homepage = () => {
 
   useEffect(() => {
       if (currentLeague !== undefined) {
+        console.log("I'M HERE")
+        console.log("CurrentLeague: ", currentLeague)
+        console.log("I'M HERE")
         const leagueID = currentLeague.info["id"]
+        console.log("league id: ", leagueID)
         setCurrentTeam(userTeams[leagueID])
       }
     }, [currentLeague, userTeams]);
@@ -140,32 +144,30 @@ const Homepage = () => {
   return (
     <>
       <div className="container page-container" style={{backgroundImage: `url(${sunset_field})`}}>
-        <div className="nav-bar-container">
+
           <NavBar />
-        </div>
+    
         <div className="score-carousel-container">
           {games && <Carousel items={games} show={5} infiniteLoop={true}/>}
         </div>
-        <div className="middle-container">
+        <div className="middle-container" style={{marginBottom: '150px'}}>
+
           <div className="standings-list-container">
-            <div className="header">
               <h3>Standings</h3>
+              {leagues && <Standings user={user}/>}
           </div>
-            {leagues && <Standings user={user}/>}
-          </div>
+
           <div className="create-league-container">
-            <div className="header">
               <h3>Leagues</h3>
-            </div>
-           <Table columns={columns} rows={leaguesArray} row_keys={row_keys} leagues={true} button={true}/>
-           <LeagueFormModal />
+              <Table columns={columns} rows={leaguesArray} row_keys={row_keys} leagues={true} button={true}/>
+              <LeagueFormModal />
           </div>
-         </div>
-         <div className="bottom-container">
+        </div>
+
+         <div className="bottom-container" style={{marginBottom: '150px'}}>
+           
           <div className="selected-team-container">
-             <div className="header">
                <h3>Selected Team</h3>
-             </div>
               {
                 currentLeague &&
                 selectedTeam && 
@@ -177,9 +179,7 @@ const Homepage = () => {
           </div>
 
            <div className="user-players-container">
-             <div className="header">
                <h3>My Team</h3>
-             </div>
               {
                 currentLeague &&
                 currentTeam &&
@@ -190,9 +190,8 @@ const Homepage = () => {
               }
            </div>
          </div>
-         <div className="footer-container">
-          <Footer />
-         </div>
+        <Footer />
+ 
       </div>
     </>
   )

@@ -28,12 +28,12 @@ const LoginForm = ({ setLogin, setSignup }) => {
     setSignup(true);
   };
 
-  const updateUsername = (username) => {
-    // if (validateEmail(username)) {
-    //   setEmail(username);
-    // } else {
-      setUsername(username);
-    // }
+  const updateUsername = (userName) => {
+    if (validateEmail(userName)) {
+      setEmail(userName);
+    } else {
+      setUsername(userName);
+    }
   };
 
   const updatePassword = (password) => {
@@ -46,13 +46,17 @@ const LoginForm = ({ setLogin, setSignup }) => {
     if (!(regex.test(String(email).toLowerCase()))) {
       return false;
     }
+    return true;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(login(username, email, password)).then((res) => {
+    await dispatch(login(username, email, password))
+    .then((res) => {
+      // console.log("RES: ", res)
       if (res.errors) {
-        setErrors(res.errors);
+        // console.log("RES ERRORS: ", res.errors)
+        setErrors({...errors, message: res.errors});
       };
     });
   };
@@ -80,6 +84,8 @@ const LoginForm = ({ setLogin, setSignup }) => {
         <DialogContent>
         <DialogContentText>
           <Typography variant="h6" align="center">To login, please enter your username or email address and password.</Typography>
+
+          {errors && <Typography variant="h6" align="center" style={{color: 'red'}}>{ errors.message }</Typography>}
         </DialogContentText>
           <TextField
             autoFocus
@@ -100,8 +106,8 @@ const LoginForm = ({ setLogin, setSignup }) => {
           />
         </DialogContent>
         <DialogActions style={{justifyContent: 'center'}}>
-          <Button className="submit-button" onClick={() => handleSubmit()}>Submit</Button>
-          <Button style={{textAlign: 'center'}}className="submit-button" onClick={() => demoLogin()}>Demo User</Button>
+          <Button className="submit-button" onClick={(e) => handleSubmit(e)}>Submit</Button>
+          <Button style={{textAlign: 'center'}}className="submit-button" onClick={(e) => demoLogin(e)}>Demo User</Button>
         </DialogActions>
         <DialogContent>
           <DialogContentText>

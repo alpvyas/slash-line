@@ -12,6 +12,7 @@ import Grid from '@material-ui/core/Grid';
 import { ARI, ATL, BAL, BOS, CHC, CIN, CLE, COL, CWS, DET, HOU, KC, LAA, LAD, MIA, MIL, MIN, NYM, NYY, OAK, PHI, PIT, SD, SEA, SF, STL, TB, TEX, TOR, WSH } from '../../images';
 
 import Dropzone from '../Dropzone';
+import MaterialHomepage from "../MaterialHomepage";
 
 
 
@@ -50,7 +51,7 @@ const Testing = () => {
 
   return (
     <>
-      <h1>Simple Flask AWS S3 Uploader</h1>
+      {/* <h1>Simple Flask AWS S3 Uploader</h1>
 
       <form onSubmit={(e) => handleUpload(e)} >
 
@@ -62,9 +63,11 @@ const Testing = () => {
           onChange={(e) => handleSelect(e)}/>
         <br></br>
         <button type="submit">Upload</button>
-      </form>
+      </form> */}
   
       {/* <StartWizard /> */}
+
+      <MaterialHomepage />
       
     </>
   )

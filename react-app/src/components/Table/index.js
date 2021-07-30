@@ -7,7 +7,7 @@ import "./Table.css";
 
 const Table = ({ columns, rows, row_keys, teams, leagues, joinOpen }) => {
   const dispatch = useDispatch();
-  const user = useSelector(state => state.session.user);
+  const stateLeagues = useSelector(state => state.leagues.leagues);
   const currentLeague = useSelector(state => state.leagues.current);
 
   const generateKey = () => {
@@ -19,7 +19,7 @@ const Table = ({ columns, rows, row_keys, teams, leagues, joinOpen }) => {
       const selected = currentLeague.teams[row.id];
       dispatch(selectedTeam(selected))
     }else if (leagues) {
-      dispatch(setCurrentLeague(row))
+      dispatch(setCurrentLeague(stateLeagues[row.id]))
     }else if (joinOpen) {
       dispatch(joinOpenLeague(row))
     }

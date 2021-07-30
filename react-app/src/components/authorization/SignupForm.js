@@ -21,17 +21,14 @@ const SignupForm = ({ setAuthenticated, setSignup, setLogin }) => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
-  const onSignUp = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    // if (password === repeatPassword) {
-    // let successfulSignUp = await dispatch(signup(username, firstName, lastName, email, password))
-    //     .catch(async (res) => {
-    //       console.log("THIS IS RES", res)
-    //       const data = await res.json();
-    //       if (data && data.errors) setErrors(data.errors)
-    //     })
-    //     setErrors(successfulSignUp)
-    //   }
+    if (!errorStatus){
+    const successfulSignUp = dispatch(signup(username, firstName, lastName, email, password))
+        .then(res => {
+          if (res.errors) setErrors({...errors, signUpError: res.errors, signUpErrorStatus: true})
+        })
+    }
   };
 
   const loginForm = () => {
@@ -39,11 +36,11 @@ const SignupForm = ({ setAuthenticated, setSignup, setLogin }) => {
     setLogin(true);
   };
 
-  const updateFirstName = (e) => {
-    setFirstName(e.target.value);
+  const updateFirstName = (name) => {
+    setFirstName(name);
   };
-  const updateLastName = (e) => {
-    setLastName(e.target.value);
+  const updateLastName = (name) => {
+    setLastName(name);
   };
 
   const updateEmail = (email) => {
@@ -92,6 +89,9 @@ const SignupForm = ({ setAuthenticated, setSignup, setLogin }) => {
     }
   };
 
+  //check overall error status
+  const errorStatus = (errors.usernameErrorStatus || errors.passwordErrorStatus || errors.confirmPasswordErrorStatus || errors.emailErrorStatus);
+
   //check if username is valid
   const checkUsername = (username) => {
     dispatch(validateUsername(username))
@@ -114,16 +114,16 @@ const SignupForm = ({ setAuthenticated, setSignup, setLogin }) => {
   };
 
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    dispatch(login(username, email, password)).then((res) => {
-      if (!res.errors) {
-        setAuthenticated(true);
-      } else {
-        setErrors(res.errors);
-      };
-    } )
-  };
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   dispatch(login(username, email, password)).then((res) => {
+  //     if (!res.errors) {
+  //       setAuthenticated(true);
+  //     } else {
+  //       setErrors(res.errors);
+  //     };
+  //   } )
+  // };
 
   return (
     <>
@@ -143,6 +143,7 @@ const SignupForm = ({ setAuthenticated, setSignup, setLogin }) => {
             variant="outlined"
             fullWidth
             // required={true}
+            value={firstName}
             onChange={(e) => updateFirstName(e.target.value)}
           />
           <TextField
@@ -153,6 +154,7 @@ const SignupForm = ({ setAuthenticated, setSignup, setLogin }) => {
             variant="outlined"
             fullWidth
             // required={true}
+            value={lastName}
             onChange={(e) => updateLastName(e.target.value)}
           />
           <TextField
@@ -165,6 +167,7 @@ const SignupForm = ({ setAuthenticated, setSignup, setLogin }) => {
             // required={true}
             error={errors.usernameErrorStatus}
             helperText={errors.usernameError}
+            value={username}
             onChange={(e) => updateUsername(e.target.value)}
           />
           <TextField
@@ -177,6 +180,7 @@ const SignupForm = ({ setAuthenticated, setSignup, setLogin }) => {
             // required={true}
             error={errors.emailErrorStatus}
             helperText={errors.emailError}
+            value={email}
             onChange={(e) => updateEmail(e.target.value)}
           />
           <TextField
@@ -189,6 +193,7 @@ const SignupForm = ({ setAuthenticated, setSignup, setLogin }) => {
             // required={true}
             error={errors.passwordErrorStatus}
             helperText={errors.passwordError}
+            value={password}
             onChange={(e) => updatePassword(e.target.value)}
           />
           <TextField
@@ -201,12 +206,13 @@ const SignupForm = ({ setAuthenticated, setSignup, setLogin }) => {
             // required={true}
             error={errors.confirmPasswordErrorStatus}
             helperText={errors.confirmPasswordError}
+            value={confirmPassword}
             onChange={(e) => updateConfirmPassword(e.target.value)}
             onPaste={e => e.preventDefault()}
           />
         </DialogContent>
         <DialogActions style={{justifyContent: 'center'}}>
-          <Button className="submit-button" onClick={() => handleSubmit()}>Submit</Button>
+          <Button disabled={errorStatus} className="submit-button" onClick={(e) => handleSubmit(e)}>Submit</Button>
         </DialogActions>
         <DialogContent>
           <DialogContentText>
