@@ -15,26 +15,35 @@ def seed_player_stats():
             f"http://lookup-service-prod.mlb.com/json/named.roster_40.bam?team_id='{team}'"
         )
         data = json.loads(response.text)
+        # data = response.json()
         roster = data["roster_40"]["queryResults"]["row"]
         players = [*players, *roster]
 
     for player in players:
         player_id = player["player_id"]
-
         player_response = requests.get(
             f"http://lookup-service-prod.mlb.com/json/named.player_info.bam?sport_code='mlb'&player_id='{player_id}'")
-
         full_player_data = json.loads(player_response.text)
+        # full_player_data = player_response.json()
 
         player_data = full_player_data["player_info"]["queryResults"]["row"]
 
+        # response = requests.get(
+        #     f"http://lookup-service-prod.mlb.com/json/named.sport_hitting_tm.bam?league_list_id='mlb'&game_type='R'&season='2019'&player_id='{player_id}'")
+        # response = requests.get(
+        #     f"http://lookup-service-prod.mlb.com/json/named.proj_pecota_batting.bam?season='2021'&player_id='{player_id}'")
         response = requests.get(
-            f"http://lookup-service-prod.mlb.com/json/named.sport_hitting_tm.bam?league_list_id='mlb'&game_type='R'&season='2021'&player_id='{player_id}'")
+            f"http://lookup-service-prod.mlb.com/json/named.sport_career_hitting.bam?league_list_id='mlb'&game_type='R'&player_id='{player_id}'")
 
         data = json.loads(response.text)
+        # data = response.json()
 
-        if ((data["sport_hitting_tm"]["queryResults"]["totalSize"]) == "1"):
-            stats_data = data["sport_hitting_tm"]["queryResults"]["row"]
+        # if ((data["sport_hitting_tm"]["queryResults"]["totalSize"]) == "1"):
+        # if ((data["proj_pecota_batting"]["queryResults"]["totalSize"]) == "1"):
+        if ((data["sport_career_hitting"]["queryResults"]["totalSize"]) == "1"):
+            # stats_data = data["sport_hitting_tm"]["queryResults"]["row"]
+            # stats_data = data["proj_pecota_batting"]["queryResults"]["row"]
+            stats_data = data["sport_career_hitting"]["queryResults"]["row"]
 
             stats = Player_Stats(mlb_player_id=player_id,
 

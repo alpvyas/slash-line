@@ -51,7 +51,7 @@ export const login = (username, email, password) => async (dispatch) => {
   };
 
 
-  return data.errors
+  return data;
 };
 
 export const logout = () => async (dispatch) => {
@@ -91,6 +91,8 @@ export const signup = (username, firstName, lastName, email, password) =>
     if (response.ok && !data.errors) {
       dispatch(setUser(data));
     };
+
+    return data;
   };
 
   export const validateUsername = (username) => async () => {

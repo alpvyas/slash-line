@@ -1,5 +1,5 @@
 import React, { useState, useEffect, forwardRef, useRef } from "react";
-import { useAsyncDebounce, useFilters, useGlobalFilter, usePagination, useRowSelect, useSortBy, useTable } from "react-table";
+import { useFilters, useGlobalFilter, usePagination, useRowSelect, useSortBy, useTable } from "react-table";
 import "./ReactTable.css";
 
 const IndeterminateCheckbox = forwardRef(
