@@ -47,11 +47,7 @@ const Homepage = () => {
 
   useEffect(() => {
       if (currentLeague !== undefined) {
-        console.log("I'M HERE")
-        console.log("CurrentLeague: ", currentLeague)
-        console.log("I'M HERE")
         const leagueID = currentLeague.info["id"]
-        console.log("league id: ", leagueID)
         setCurrentTeam(userTeams[leagueID])
       }
     }, [currentLeague, userTeams]);
