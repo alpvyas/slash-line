@@ -19,6 +19,7 @@ const Table = ({ columns, rows, row_keys, teams, leagues, joinOpen }) => {
       const selected = currentLeague.teams[row.id];
       dispatch(selectedTeam(selected))
     }else if (leagues) {
+      console.log("LEAGUE:::: ", stateLeagues[row.id])
       dispatch(setCurrentLeague(stateLeagues[row.id]))
     }else if (joinOpen) {
       dispatch(joinOpenLeague(row))

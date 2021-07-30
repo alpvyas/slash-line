@@ -152,8 +152,10 @@ export const createLeague =
   };
 
   export const setCurrentLeague = (league) => dispatch => {
+    const teams = league.teams;
+    // console.log("TEAMS:::::", teams)
     dispatch(setLeague(league));
-    // dispatch(setSelectedTeam(league.teams[1]));
+    dispatch(setSelectedTeam(league.teams[Object.keys(teams)[0]]));
   };
 
   export const clearLeaguesState = () => dispatch => {
