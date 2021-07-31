@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useMemo, memo }from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getUserLeagues, setCurrentLeague } from "../../store/leagues";
+import Button from '@material-ui/core/Button';
 import Carousel from "../Carousel";
 import Scorecard from "../Containers/Scorecard";
 import LeagueFormModal from "../LeagueFormModal";
@@ -13,6 +14,7 @@ import Standings from "../Containers/Standings";
 import Footer from "../Footer";
 import { getUserTeams } from "../../store/userTeams";
 import { game_details } from "../../mock_game_data";
+import CreateLeagueModal from "../CreateLeagueModal";
 
 const Homepage = () => {
   const dispatch = useDispatch();
@@ -20,8 +22,9 @@ const Homepage = () => {
   const leagues = useSelector(state => state.leagues.leagues);
   const userTeams = useSelector(state => state.userTeams.teams);
   const selectedTeam = useSelector(state => state.leagues.selectedTeam);
-  const [currentTeam, setCurrentTeam] = useState(undefined);
   const currentLeague = useSelector(state => state.leagues.current);
+  const [currentTeam, setCurrentTeam] = useState(undefined);
+  const [createLeague, setCreateLeague] = useState(false);
 
   // const gameDetails = useSelector(state => state.gameDetails.gameDetails);
   const gameDetails = game_details;
@@ -156,7 +159,8 @@ const Homepage = () => {
           <div className="create-league-container">
               <h3>Leagues</h3>
               <Table columns={columns} rows={leaguesArray} row_keys={row_keys} leagues={true} button={true}/>
-              <LeagueFormModal />
+              <Button className="submit-button" style={{backgroundColor: "whitesmoke", marginTop: "20px"}} onClick={() => setCreateLeague(true)}>Create New League</Button>
+              {createLeague && <CreateLeagueModal open={createLeague} setCreateLeague={setCreateLeague}/>}
           </div>
         </div>
 

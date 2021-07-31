@@ -1,9 +1,8 @@
-import { clearLeaguesState } from "./leagues";
-import { clearUserTeamState } from "./userTeams";
 import { getUserLeagues } from "./leagues";
 import { getUserTeams } from "./userTeams";
 
 const GET_USER = "session/GET_USER";
+const NEW_USER = "session/NEW_USER";
 const REMOVE_USER = "session/REMOVE_USER";
 const SET_AUTH = "session/SET_AUTH";
 
@@ -11,6 +10,13 @@ const SET_AUTH = "session/SET_AUTH";
 const setUser = user => {
   return {
     type: GET_USER,
+    payload: user,
+  };
+};
+
+const newUser = user => {
+  return {
+    type: NEW_USER,
     payload: user,
   };
 };
@@ -64,8 +70,6 @@ export const logout = () => async (dispatch) => {
   console.log("RESPONSE LOGOUT: ", response)
 
   dispatch(removeUser());
-  // dispatch(clearUserTeamState());
-  // dispatch(clearLeaguesState());
   
   return response;
 };
@@ -89,7 +93,7 @@ export const signup = (username, firstName, lastName, email, password) =>
     const data = await response.json();
 
     if (response.ok && !data.errors) {
-      dispatch(setUser(data));
+      dispatch(newUser(data));
     };
 
     return data;
@@ -149,6 +153,12 @@ export const signup = (username, firstName, lastName, email, password) =>
         newState = {...state};
         newState.user = action.payload;
         newState.authenticated = true;
+        return newState;
+      case NEW_USER:
+        newState = {...state};
+        newState.user = action.payload;
+        newState.authenticated = true;
+        newState.newUser = true;
         return newState;
       case REMOVE_USER:
         newState = {...state};

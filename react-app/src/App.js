@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import * as sessionActions from "./store/session";
@@ -17,12 +17,12 @@ import Stats from "./components/Stats";
 import NotFound from "./components/NotFound";
 import Dropzone from "./components/Dropzone";
 import GettingStarted from "./components/GettingStarted";
+import StartWizard from "./components/StartWizard";
 
 
 function App() {
   const dispatch = useDispatch();
-  const [initialized, setInitialized] = useState(false);
-  // const [authenticated, setAuthenticated] = useState(false);
+  // const [initialized, setInitialized] = useState(false);
   const authenticated = useSelector(state => state.session.authenticated);
   const [loaded, setLoaded] = useState(false);
   
@@ -31,7 +31,6 @@ function App() {
     (async() => {
       const user = await authenticate();
       if (!user.errors) {
-        // setAuthenticated(true);
         dispatch(setAuthenticated(true))
       }
       setLoaded(true);
@@ -97,8 +96,7 @@ if (!loaded) {
     return null;
   };
   
-
-  return (
+return (
     <BrowserRouter>
       <Switch>
         <Route path="/testing" exact={true}>
@@ -111,7 +109,7 @@ if (!loaded) {
           {/* <Homepage /> */}
         {/* </Route> */}
         <ProtectedRoute exact path="/getting-started" authenticated={authenticated}>
-          <GettingStarted />
+          <StartWizard />
         </ProtectedRoute>
         <ProtectedRoute exact path="/home" authenticated={authenticated}>
           <Homepage />

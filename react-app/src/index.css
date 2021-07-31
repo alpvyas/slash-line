@@ -1,4 +1,21 @@
 /* TODO Add site wide styles */
 html {
-  height: 100%;
+  /* height: 100%; */
+  /* -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover; */
 }
+
+/* set background image per page */
+/* .landing {
+  background: url("../../react-app/src/images/baseball-grass-full.png") no-repeat center center fixed;
+} */
+
+/* .about-bg {
+  background: url(images/about.bg.jpg) no-repeat center center fixed;
+}
+
+.contact-bg {
+  background: url(images/contact-bg.jpg) no-repeat center center fixed;
+} */

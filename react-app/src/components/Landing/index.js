@@ -2,22 +2,17 @@ import React, { useState, useEffect } from "react";
 import Modal from "react-modal";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router";
-import SignUpForm from "../auth/SignUpForm";
-import LoginForm from "../auth/LoginForm";
-import * as sessionActions from "../../store/session";
 import SplashNav from "../SplashNav";
 import LandingModal from "../LandingModal";
 import Footer from "../Footer";
-import Sidebar from "../Sidebar";
-
-import logo from "../../images/logo.png";
-import baseball_grass from "../../images/baseball-grass-full.png";
+import baseball_grass from "../../images/baseball-grass.png";
 import "./landing.css";
 
 const Landing = () => {
   const dispatch = useDispatch();
   const user = useSelector(state => state.session.user);
   const authenticated = useSelector(state => state.session.authenticated);
+  const newUser = useSelector(state => state.session.newUser);
   const [open, setOpen] = useState(false);
   const [login, setLogin] = useState(true);
   const [signup, setSignup] = useState(false);
@@ -46,13 +41,20 @@ const Landing = () => {
     setOpen(true);
   };
 
-  if (user && authenticated) {
+  if (user && authenticated && !newUser) {
     return (
       <Redirect to="/home" />
     )
   };
 
+  if (user && authenticated && newUser) {
+    return (
+      <Redirect to="/getting-started" />
+    )
+  };
+
   return (
+    // <div className="container page-container">
     <div className="container page-container" style={{backgroundImage: `url(${baseball_grass})`}}>
       {/* <Modal
         isOpen={signup}

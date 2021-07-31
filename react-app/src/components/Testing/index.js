@@ -13,6 +13,7 @@ import { ARI, ATL, BAL, BOS, CHC, CIN, CLE, COL, CWS, DET, HOU, KC, LAA, LAD, MI
 
 import Dropzone from '../Dropzone';
 import MaterialHomepage from "../MaterialHomepage";
+import CreateLeagueForm from "../CreateLeagueForm";
 
 
 
@@ -67,7 +68,9 @@ const Testing = () => {
   
       {/* <StartWizard /> */}
 
-      <MaterialHomepage />
+      {/* <MaterialHomepage /> */}
+
+      <CreateLeagueForm />
       
     </>
   )
