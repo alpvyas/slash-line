@@ -14,7 +14,7 @@
   width: 1000px;
 }
 
-.footer-container {
+/* .footer-container {
   position: relative;
   width: 100%;
   height: 150px;
@@ -22,7 +22,7 @@
   display: flex;
   flex-direction: row;
   background-color: whitesmoke;
-}
+} */
 
 .table-container {
   position: relative;

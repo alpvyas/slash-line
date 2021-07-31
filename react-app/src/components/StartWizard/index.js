@@ -16,6 +16,7 @@ import JoinLeague from './JoinLeague';
 import CreateTeam from './CreateTeam';
 import ProfileBasics from './ProfileBasics';
 import slashline_logo from "../../images/logo.png";
+import ballInGlove from '../../images/baseball-glove-dirt.png';
 import './StartWizard.css';
 
 const StartWizard = () => {
@@ -33,32 +34,34 @@ const StartWizard = () => {
 
   return (
     <>
-    <Dialog
-        open={true}
-        // onClose={handleClose}
-        aria-labelledby="form-dialog-title"
-        style={{ overflow: "hidden" }}
-      >
-        <div style={{ padding: 20 }}>
-        <Grid
-          container
-          direction="column"
-          justifyContent="space-around"
-          alignItems="center"
-          style={{margin: '15px 15px -15px 15px'}}
-        >
-          <img alt="logo" src={slashline_logo} style={{height: '50px', width: '50px'}} />
-          <Typography variant="h3" align="center" style={{color: '#ef3e42', textShadow: '-1px -1px 0 #ef3e42, 1px -1px 0 #ef3e42, -1px 1px 0 #ef3e42, 1px 1px 0 #ef3e42'}}>Slash Line Baseball</Typography>
-        </Grid>
-        </div>
-        {step === 'start' && <Start step={step} setStep={setStep} />}
+      <div className="container page-container" style={{height: "100%", width: "100%", backgroundImage: `url(${ballInGlove})`}}>
+        <Dialog
+            open={true}
+            // onClose={handleClose}
+            aria-labelledby="form-dialog-title"
+            style={{ overflow: "hidden" }}
+          >
+            <div style={{ padding: 20 }}>
+            <Grid
+              container
+              direction="column"
+              justifyContent="space-around"
+              alignItems="center"
+              style={{margin: '15px 15px -15px 15px'}}
+            >
+              <img alt="logo" src={slashline_logo} style={{height: '50px', width: '50px'}} />
+              <Typography variant="h3" align="center" style={{color: '#ef3e42', textShadow: '-1px -1px 0 #ef3e42, 1px -1px 0 #ef3e42, -1px 1px 0 #ef3e42, 1px 1px 0 #ef3e42'}}>Slash Line Baseball</Typography>
+            </Grid>
+            </div>
+            {step === 'start' && <Start step={step} setStep={setStep} />}
 
-        {step === 'joinLeague' && <JoinLeague setStep={setStep} leagueID={leagueID} setLeagueID={setLeagueID} />}
+            {step === 'joinLeague' && <JoinLeague setStep={setStep} leagueID={leagueID} setLeagueID={setLeagueID} />}
 
-        {step === 'createTeam' && <CreateTeam setStep={setStep} leagueID={leagueID} setTeamName={setTeamName} teamName={teamName} setColors={setColors} colors={colors}/>}
+            {step === 'createTeam' && <CreateTeam setStep={setStep} leagueID={leagueID} setTeamName={setTeamName} teamName={teamName} setColors={setColors} colors={colors}/>}
 
-        {step === 'profile' && <ProfileBasics setStep={setStep} setAboutMe={setAboutMe} setlocation={setLocation} setAvatar={setAvatar} user={user}/>}
-      </Dialog>
+            {step === 'profile' && <ProfileBasics setStep={setStep} setAboutMe={setAboutMe} setlocation={setLocation} setAvatar={setAvatar} user={user}/>}
+        </Dialog>
+      </div>
     </>
   )
 };

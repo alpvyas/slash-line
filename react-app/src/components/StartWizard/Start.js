@@ -17,18 +17,18 @@ const Start = ({ step, setStep}) => {
 
   return (
     <>
-      <DialogTitle id="form-dialog-title">
-        <Typography variant="h4" align="center">Welcome!</Typography>
-      </DialogTitle>
-        <DialogContent>
-        <DialogContentText>
-          <Typography variant="h6" align="center">Let's get you started here at Slash Line. When you're ready move on to the next step.</Typography>
-        </DialogContentText>
-          
-        </DialogContent>
-        <DialogActions style={{justifyContent: 'center'}}>
-          <Button className="submit-button" onClick={() => setStep("joinLeague")}>Let's Go!</Button>
-        </DialogActions>
+        <DialogTitle id="form-dialog-title">
+          <Typography variant="h4" align="center">Welcome!</Typography>
+        </DialogTitle>
+          <DialogContent>
+          <DialogContentText>
+            <Typography variant="h6" align="center">Let's get you started here at Slash Line. When you're ready to start, click below.</Typography>
+          </DialogContentText>
+            
+          </DialogContent>
+          <DialogActions style={{justifyContent: 'center'}}>
+            <Button className="submit-button" onClick={() => setStep("joinLeague")}>Let's Go!</Button>
+          </DialogActions>
     </>
   );
 };

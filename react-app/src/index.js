@@ -12,15 +12,13 @@ export const store = configureStore();
 
 ReactDOM.render(
   <React.StrictMode>
-    <ReduxProvider store={store}>
-      {/* <PersistGate loading={null} persistor={persistor}> */}
-        {/* <ModalProvider> */}
+      <PersistGate loading={null} persistor={persistor}>
+        <ReduxProvider store={store}>
           <BrowserRouter>
             <App />
           </BrowserRouter>
-        {/* </ModalProvider> */}
-      {/* </PersistGate> */}
-    </ReduxProvider>
+        </ReduxProvider>
+      </PersistGate>
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -1,5 +1,4 @@
 /* html {
-  background: url(../../images/baseball-grass-full.png) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -9,8 +8,8 @@
 .page-container {
   display: flex;
   flex-direction: column;
-  /* background-attachment: fixed;
-  object-fit: fill; */
+  background-attachment: fixed;
+  object-fit: fill;
 }
 
 #splash-container {

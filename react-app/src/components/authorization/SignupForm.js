@@ -26,7 +26,11 @@ const SignupForm = ({ setAuthenticated, setSignup, setLogin }) => {
     if (!errorStatus){
     const successfulSignUp = dispatch(signup(username, firstName, lastName, email, password))
         .then(res => {
-          if (res.errors) setErrors({...errors, signUpError: res.errors, signUpErrorStatus: true})
+          if (res.errors){
+            setErrors({...errors, signUpError: res.errors, signUpErrorStatus: true})
+          } else {
+            
+          }
         })
     }
   };
