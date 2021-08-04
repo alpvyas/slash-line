@@ -147,9 +147,9 @@ const Homepage = () => {
           <NavBar />
     
         <div className="score-carousel-container">
-          {games && <Carousel items={games} show={5} infiniteLoop={true}/>}
+          {games && <Carousel children={games} show={4} infiniteLoop={true}/>}
         </div>
-        <div className="middle-container" style={{marginBottom: '150px'}}>
+        <div className="home-middle-container" style={{marginBottom: '150px'}}>
 
           <div className="standings-list-container">
               <h3>Standings</h3>
@@ -164,7 +164,7 @@ const Homepage = () => {
           </div>
         </div>
 
-         <div className="bottom-container" style={{marginBottom: '150px'}}>
+         <div className="home-bottom-container">
            
           <div className="selected-team-container">
                <h3>Selected Team</h3>

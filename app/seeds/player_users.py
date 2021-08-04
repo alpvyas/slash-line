@@ -222,13 +222,6 @@ def seed_player_users():
             "password": "password",
         },
         {
-            "first_name": "Trevor",
-            "last_name": "Bauer",
-            "username": "baueroutage",
-            "email": "baueroutage27@dodgers.com",
-            "password": "password",
-        },
-        {
             "first_name": "Scott",
             "last_name": "Alexander",
             "username": "scott75",

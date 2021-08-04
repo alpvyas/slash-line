@@ -47,6 +47,28 @@ const clearState = () => ({
                           THUNK ACTION CREATORS
 ------------------------------------------------------------------------------*/
 
+//create a new team
+export const addNewTeam = (teamName, colors, leagueID, userID) => async (dispatch) => {
+  const response = await fetch(`/api/teams`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: {
+      teamName,
+      colors,
+      leagueID,
+      userID,
+    },
+  });
+
+  const success = await response.json();
+
+  if (response.ok && !success.errors) {
+    return success;
+  };
+};
+
 //get all member teams for a league
 export const get_league_teams = (leagueId) => async (dispatch) => { 
   const response = await fetch(`/api/leagues/${leagueId}/teams`, {

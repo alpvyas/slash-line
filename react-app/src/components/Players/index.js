@@ -12,6 +12,7 @@ import PlayerDetail from "../PlayerDetails";
 import mookie_betts from "../../images/mookie_betts.png";
 import { get_single_player_stats } from "../../store/stats";
 import { game_details } from "../../mock_game_data";
+import Button from '@material-ui/core/Button';
 
 
 const Players = () => {
@@ -45,7 +46,7 @@ const Players = () => {
       Header: "Player",
       accessor: "full_name",
       Cell: props => (
-        <button onClick={() => getStats(props.row.original)}>
+        <button className="player-name-button" onClick={() => getStats(props.row.original)}>
           {props.row.original.full_name}
         </button>
       ),
@@ -100,7 +101,7 @@ const Players = () => {
       Header: "",
       accessor: "mlb_player_id",
       Cell: props => (
-        <button onClick={() => addPlayer(props.row.original)}>
+        <button className="add-player-button" onClick={() => addPlayer(props.row.original)}>
           Add Player
         </button>
       ),

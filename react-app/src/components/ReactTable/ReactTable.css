@@ -25,6 +25,11 @@ tr:nth-child(even) {
   background: #A5ACAF;
 }
 
+.non-header-row:hover {
+  background-color: #ffff99;
+  cursor: pointer;
+}
+
 thead {
   background: #005A9C;
   border-bottom: 3px solid #EF3E42;

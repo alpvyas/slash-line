@@ -61,8 +61,8 @@ const CreateTeam = ({ setStep, leagueID, setTeamName, teamName, setColors, color
 
   const handleBack = () => {
     if (buildStep === 'name') setStep('joinLeague');
-    if (buildStep === 'color') setStep('name');
-    if (buildStep === 'confirm') setStep('color');
+    if (buildStep === 'color') setBuildStep('name');
+    if (buildStep === 'confirm') setBuildStep('color');
   };
 
   const handleNext = () => {
@@ -115,7 +115,7 @@ const CreateTeam = ({ setStep, leagueID, setTeamName, teamName, setColors, color
               >
                 {Object.values(mlbTeams).map(team => {
                   return (
-                    <Grid item xs={2}>
+                    <Grid item xs={1}>
                       <TeamAvatar updateColors={updateColors} logo={team} mlbTeams={mlbTeams}/>
                     </Grid>
                   )
@@ -125,15 +125,17 @@ const CreateTeam = ({ setStep, leagueID, setTeamName, teamName, setColors, color
 
             {buildStep === 'confirm' &&
               <Box>
+                <h4>Team Colors:</h4>
                 {colorKeys.map(key => {
                   return (
                       <div className="color-container">
-                        <Box style={{color: `${colors[key]}`}}>{key}</Box>
+                        <Box style={{color: `${colors[key]}`}}>&#9632;{key}</Box>
                       </div>
                   ) 
                 })}
                 <div className="team-name-container">
-                        <Box>Team Name: {teamName}</Box>
+                  <h4>Team Name:</h4>
+                        <Box>{teamName}</Box>
                 </div>
               </Box>
             }

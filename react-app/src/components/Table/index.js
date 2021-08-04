@@ -39,22 +39,22 @@ const Table = ({ columns, rows, row_keys, teams, leagues, joinOpen }) => {
         </thead>
         <tbody>
           {rows.map((row, index) => (
-            <tr key={ generateKey() } onClick={() => selectRow(row)}>
+            <tr className="non-header-row" key={ generateKey() } onClick={() => selectRow(row)}>
               {row_keys.map((key) => (
                 // console.log("KEY: ", row.key)
                 <td key={ generateKey() }>{row[key]}</td>
               ))}
               
               {leagues && <td key={ generateKey() }>
-                <button type="button">Select League</button>
+                <button type="button" className="select-league-button">Select League</button>
               </td>}
 
               {teams && <td key={ generateKey() }>
-                <button type="button">View Details</button>
+                <button type="button" className="view-details-button">View Details</button>
               </td>}
 
               {joinOpen && <td key={ generateKey() }>
-                <button type="button">Join This League</button>
+                <button type="button" className="join-league-button">Join This League</button>
               </td>}
             </tr>
           ))}

@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import Dialog from '@material-ui/core/Dialog';
-import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -9,9 +7,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
 import Table from "../Table";
-import { makeStyles } from '@material-ui/core/styles';
 import { getOpenLeagues, joinUserLeague } from '../../store/leagues';
 
 
@@ -98,8 +94,8 @@ const JoinLeague = ({ setStep, leagueID, setLeagueID }) => {
     .then(
       (check) => {
         if (check.ok) {
-          setStep('createTeam');
           setErrors({...errors, joinLeagueError: '', joinLeagueErrorStatus: false})
+          setStep('createTeam');
         }
         else {
           setErrors({...errors, joinLeagueError: check.errors, joinLeagueErrorStatus: true})

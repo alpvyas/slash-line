@@ -68,14 +68,13 @@ def get_user_players(user_id):
         return jsonify({"ok": False, "message": "Failed to retrieve user team. Please try again."})
 
 
-def add_team(user_id, league_id):
-    team_data = json.loads(request.data.decode("utf-8"))
+def add_team():
+    team_data = request.json
 
     team = Team(name=team_data["name"],
-                wins=team_data["wins"],
-                losses=team_data["losses"],
-                user_id=team_data["user_id"],
-                league_id=team_data["league_id"])
+                # colors=team_data["colors"],
+                user_id=team_data["userID"],
+                league_id=team_data["leagueID"])
 
     db.session.add(team)
     db.session.commit()
@@ -147,12 +146,12 @@ def add_player_to_team(league_id, user_id):
 # add_team
 
 
-@team_routes.route("/leagues/<int:league_id>", methods=['GET', 'POST'])
+@team_routes.route("/", methods=['GET', 'POST'])
 def get_or_add_teams(league_id):
     if request.method == 'GET':
         return get_league_teams(league_id)
     elif request.method == 'POST':
-        return add_team(league_id)
+        return add_team()
 
 
 @team_routes.route("/users/<int:user_id>", methods=['GET'])
