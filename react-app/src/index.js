@@ -7,6 +7,7 @@ import App from "./App";
 import configureStore, { persistor } from "./store";
 import "./index.css";
 import { ModalProvider } from "./context/Modal";
+import Footer from "./components/Footer";
 
 export const store = configureStore();
 
@@ -16,6 +17,7 @@ ReactDOM.render(
         <ReduxProvider store={store}>
           <BrowserRouter>
             <App />
+            {/* <Footer /> */}
           </BrowserRouter>
         </ReduxProvider>
       </PersistGate>

@@ -37,3 +37,24 @@ th {
 th:first-child {
   border-left: none;
 }
+
+.select-league-button:hover {
+  color: #005A9C;
+  cursor: pointer;
+  border-bottom: 1px solid #005A9C;
+  border-radius: 0px;
+}
+
+.view-details-button:hover {
+  color: #005A9C;
+  cursor: pointer;
+  border-bottom: 1px solid #005A9C;
+  border-radius: 0px;
+}
+
+.join-league-button:hover {
+  color: #005A9C;
+  cursor: pointer;
+  border-bottom: 1px solid #005A9C;
+  border-radius: 0px;
+}

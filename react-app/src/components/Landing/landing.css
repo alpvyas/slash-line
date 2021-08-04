@@ -7,9 +7,11 @@
 
 .page-container {
   display: flex;
+  position: relative;
   flex-direction: column;
   background-attachment: fixed;
   object-fit: fill;
+  min-height: 100vh;
 }
 
 #splash-container {

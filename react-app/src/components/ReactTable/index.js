@@ -127,7 +127,7 @@ const ReactTable = ({ columns, data, allPlayers }) => {
             {page.map((row, index) => {
               prepareRow(row);
               return (
-                <tr {...row.getRowProps()}>
+                <tr className="non-header-row" {...row.getRowProps()}>
                   {row.cells.map(cell => {
                     return <td {...cell.getCellProps()}>
                       {cell.render("Cell")}

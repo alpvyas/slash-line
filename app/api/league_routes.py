@@ -125,7 +125,7 @@ def delete_league(league_id):
     return jsonify({"message": "League successfully deleted"})
 
 
-def join_user_league(league_id, passcode):
+def join_league(league_id, passcode):
     # league_credentials = json.loads(request.data.decode("utf-8"))
 
     # print("LEAGUE CREDS: ", league_credentials)
@@ -176,8 +176,8 @@ def get_or_add_leagues(user_id):
 
 # join
 @league_routes.route("/<int:league_id>/join/<int:passcode>", methods=['GET'])
-def join_league(league_id, passcode):
-    return join_user_league(league_id, passcode)
+def join_new_league(league_id, passcode):
+    return join_league(league_id, passcode)
 
 
 # get open leagues

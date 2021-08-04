@@ -8,18 +8,18 @@
   --hover: red;
 }
 
-button {
+.avatar-container {
   color: var(--color);
   transition: 0.45s;
 }
 
-button:hover,
-button:focus {
+.avatar-container:hover,
+.avatar-container:focus {
   border-color: var(--hover);
   color: #fff;
 }
 
-button {
+.avatar-container {
   background: none;
   /* border: 1px solid; */
   /* font: inherit; */

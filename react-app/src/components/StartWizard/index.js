@@ -2,15 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Dialog from '@material-ui/core/Dialog';
 import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
 import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
-import { makeStyles } from '@material-ui/core/styles';
 import Start from './Start';
 import JoinLeague from './JoinLeague';
 import CreateTeam from './CreateTeam';
@@ -18,11 +10,11 @@ import ProfileBasics from './ProfileBasics';
 import slashline_logo from "../../images/logo.png";
 import ballInGlove from '../../images/baseball-glove-dirt.png';
 import './StartWizard.css';
+import Confirm from './Confirm';
 
 const StartWizard = () => {
-
-  const dispatch = useDispatch();
   const user = useSelector(state => state.session.user);
+  const userID = useSelector(state => state.session.user.id);
   const [step, setStep] = useState("start");
   const [teamName, setTeamName] = useState('');
   const [colors, setColors] = useState({}); 
@@ -31,15 +23,25 @@ const StartWizard = () => {
   const [location, setLocation] = useState('');
   const [avatar, setAvatar] = useState(null);
 
+  const userSelections = {
+    userID,
+    teamName,
+    colors,
+    leagueID,
+    aboutMe,
+    location,
+    avatar,
+  };
+
 
   return (
-    <>
-      <div className="container page-container" style={{height: "100%", width: "100%", backgroundImage: `url(${ballInGlove})`}}>
+<>
         <Dialog
             open={true}
             // onClose={handleClose}
             aria-labelledby="form-dialog-title"
-            style={{ overflow: "hidden" }}
+            style={{ overflow: "hidden", backgroundImage: `url(${ballInGlove})`}}
+            className="page-container"
           >
             <div style={{ padding: 20 }}>
             <Grid
@@ -47,6 +49,7 @@ const StartWizard = () => {
               direction="column"
               justifyContent="space-around"
               alignItems="center"
+              
               style={{margin: '15px 15px -15px 15px'}}
             >
               <img alt="logo" src={slashline_logo} style={{height: '50px', width: '50px'}} />
@@ -59,10 +62,11 @@ const StartWizard = () => {
 
             {step === 'createTeam' && <CreateTeam setStep={setStep} leagueID={leagueID} setTeamName={setTeamName} teamName={teamName} setColors={setColors} colors={colors}/>}
 
-            {step === 'profile' && <ProfileBasics setStep={setStep} setAboutMe={setAboutMe} setlocation={setLocation} setAvatar={setAvatar} user={user}/>}
-        </Dialog>
-      </div>
-    </>
+            {step === 'profile' && <ProfileBasics setStep={setStep} setAboutMe={setAboutMe} setLocation={setLocation} setAvatar={setAvatar} user={user}/>}
+
+            {step === 'confirm' && <Confirm userSelections={userSelections}/>}
+          </Dialog>
+      </>
   )
 };
 

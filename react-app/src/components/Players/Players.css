@@ -108,3 +108,13 @@
   margin-right: 20px;
   width: 100%;
 }
+
+.player-name-button:hover {
+  color: #005A9C;
+  cursor: pointer;
+}
+
+.add-player-button:hover {
+  color: #005A9C;
+  cursor: pointer;
+}

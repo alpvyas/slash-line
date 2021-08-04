@@ -11,10 +11,11 @@
 
 .page-container {
   display: flex;
+  position: relative;
   flex-direction: column;
   justify-content: space-between;
   background-attachment: fixed;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 .score-carousel-container {
@@ -48,12 +49,19 @@
   border: 2px solid #EF3E42;
 } */
 
-.middle-container,
-.bottom-container {
+.home-middle-container {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  background-color: rgb(222, 151, 21);
+  /* background-color: rgb(222, 151, 21); */
+}
+
+.home-bottom-container {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-bottom: 400px;
 }
 
 /* .footer-container {

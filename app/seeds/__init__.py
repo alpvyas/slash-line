@@ -1,3 +1,4 @@
+from app.seeds.profiles import seed_profiles
 from flask.cli import AppGroup
 from .users import seed_users, undo_users
 from .mlb_teams import seed_mlb_teams
@@ -7,6 +8,7 @@ from .teams import seed_teams
 from .players import seed_players
 from .stats import seed_player_stats
 from .user_team_players import seed_team_players
+from .profiles import seed_profiles
 
 # Creates a seed group to hold our commands
 # So we can type `flask seed --help`
@@ -25,6 +27,7 @@ def seed():
     seed_players()
     seed_player_stats()
     seed_team_players()
+    seed_profiles()
     # Add other seed functions here
 
 # Creates the `flask seed undo` command
