@@ -1,4 +1,4 @@
-# Slash Line
+# Slash Line Baseball
 *By Alpesh Vyas - [Visit Slash Line](http://slashlinebaseball.herokuapp.com/)*
 
 **Table of Contents**
@@ -9,11 +9,11 @@
 * [Conclusion & Next Steps](#conclusion-and-next-steps)
 
 ## Slash Line at a Glance
-Slash Line is a fullstack fantasy baseball app that integrates real-time player, stats and game data which allows users to create and join public or private leagues, draft and trade for their favorite players and keep up with player and team stats and live updating game data.
+Slash Line Baseball is a fullstack fantasy baseball app that integrates real-time player, stats and game data which allows users to create and join public or private leagues, draft and trade for their favorite players and keep up with player and team stats and live updating game data.
 
-Slash Line uses React, Redux and both vanilla CSS and Material-UI components on the frontend. Flask and SQLAlchemy are used on the backend to connect the app to a PostgreSQL database. 
+Slash Line uses React, Redux and both vanilla CSS and Material-UI components on the frontend. Flask and SQLAlchemy are used on the backend to connect the app to a PostgreSQL database as well as top interact with external third-party APIs.
 
-Users can search and explore the player and player stats data tables, which feature apporximately 1,200 players, using the integrated search box. Users can also filter data by column.
+Users can search and explore the player info and player stats data tables, which feature apporximately 1,200 players, using the integrated search box. Users can also filter data by column in ascending or descending order.
 
 ##### Slash Line at a glance
 ![Slash Line at a glance](/readme-resources/rappa-mappa-demo-1.gif)
