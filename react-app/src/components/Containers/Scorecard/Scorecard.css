@@ -12,6 +12,7 @@
   box-sizing: border-box;
   cursor: pointer;
   margin: 10px 15px 10px 15px;
+  border: 1px solid #EF3E42;
 }
 
 .card-row {
