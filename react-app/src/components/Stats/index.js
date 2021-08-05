@@ -100,8 +100,8 @@ const Stats = () => {
           <div className="nav-bar-container">
             <NavBar />
           </div>
-          <div className="score-carousel-container">
-            <Carousel items={games} show={5} infiniteLoop={true}/>
+          <div className="score-carousel-container-stats">
+            <Carousel children={games} show={4} infiniteLoop={true}/>
           </div>
           <div className="middle-container">
             <div className="table-container">
@@ -111,10 +111,8 @@ const Stats = () => {
               <ReactTable columns={columns} data={stats} allPlayers={true}/>
             </div>
         </div>
+        <Footer />
       </div>
-      <div className="footer-container">
-          <Footer />
-         </div>
     </>
   )
 }

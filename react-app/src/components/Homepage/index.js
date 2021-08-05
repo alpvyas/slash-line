@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo, memo }from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getUserLeagues, setCurrentLeague } from "../../store/leagues";
+import { getUserLeagues, setCurrentLeague, setSelectedTeam } from "../../store/leagues";
 import Button from '@material-ui/core/Button';
 import Carousel from "../Carousel";
 import Scorecard from "../Containers/Scorecard";
@@ -21,8 +21,8 @@ const Homepage = () => {
   const user = useSelector((state) => state.session.user);
   const leagues = useSelector(state => state.leagues.leagues);
   const userTeams = useSelector(state => state.userTeams.teams);
-  const selectedTeam = useSelector(state => state.leagues.selectedTeam);
-  const currentLeague = useSelector(state => state.leagues.current);
+  const selectedTeam = useSelector(state => state.leagues.current.selectedTeam);
+  const currentLeague = useSelector(state => state.leagues.current.league);
   const [currentTeam, setCurrentTeam] = useState(undefined);
   const [createLeague, setCreateLeague] = useState(false);
 
@@ -36,9 +36,13 @@ const Homepage = () => {
   useEffect(() => {
     if (user) {
       dispatch(getUserLeagues(user.id))
-      .then(leagues => {
-        setCurrentLeague(leagues[Object.keys(leagues)[0]])
-      })
+      // .then(leagues => {
+      //   setCurrentLeague(leagues[Object.keys(leagues)[0]])
+      // })
+      // .then(() => {
+      //   const currentTeams = currentLeague.teams;
+      //   dispatch(setSelectedTeam(currentLeague.teams[Object.keys(currentTeams)[0]]))
+      // })
       }
   }, []);
 

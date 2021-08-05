@@ -157,6 +157,20 @@
   right: 24px;
 }
 
+.left-arrow:hover {
+  color: #EF3E42;
+  border: 1px solid #EF3E42;
+  cursor: pointer;
+  background-color: #e3e3e3;
+}
+
+.right-arrow:hover {
+  color: #EF3E42;
+  border: 1px solid #EF3E42;
+  cursor: pointer;
+  background-color: #e3e3e3;
+}
+
 @media (hover: none) and (pointer: coarse) {
 
   .left-arrow,

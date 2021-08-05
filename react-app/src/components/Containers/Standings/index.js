@@ -7,7 +7,7 @@ import "./Standings.css";
 
 const Standings = (user) => {
   const dispatch = useDispatch();
-  const currentLeague = useSelector(state => state.leagues.current);
+  const currentLeague = useSelector(state => state.leagues.current.league);
   const [teams, setTeams] = useState([]);
 
   useEffect(() => {

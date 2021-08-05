@@ -34,13 +34,17 @@ def update():
     for player in players:
         player_id = player.mlb_player_id
 
+        # response = requests.get(
+        #     f"http://lookup-service-prod.mlb.com/json/named.sport_hitting_tm.bam?league_list_id='mlb'&game_type='{game_type}'&season='{year}'&player_id='{player_id}'")
         response = requests.get(
-            f"http://lookup-service-prod.mlb.com/json/named.sport_hitting_tm.bam?league_list_id='mlb'&game_type='{game_type}'&season='{year}'&player_id='{player_id}'")
+            f"http://lookup-service-prod.mlb.com/json/named.sport_career_hitting.bam?league_list_id='mlb'&game_type='R'&player_id='{player_id}'")
 
         data = json.loads(response.text)
 
-        if ((data["sport_hitting_tm"]["queryResults"]["totalSize"]) == "1"):
-            stats_data = data["sport_hitting_tm"]["queryResults"]["row"]
+        # if ((data["sport_hitting_tm"]["queryResults"]["totalSize"]) == "1"):
+        if ((data["sport_career_hitting"]["queryResults"]["totalSize"]) == "1"):
+            # stats_data = data["sport_hitting_tm"]["queryResults"]["row"]
+            stats_data = data["sport_career_hitting"]["queryResults"]["row"]
 
             stats = Player_Stats(mlb_player_id=player_id,
 

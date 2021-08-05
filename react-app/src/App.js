@@ -16,8 +16,9 @@ import Testing from "./components/Testing/";
 import Stats from "./components/Stats";
 import NotFound from "./components/NotFound";
 import Dropzone from "./components/Dropzone";
-import GettingStarted from "./components/GettingStarted";
+// import GettingStarted from "./components/GettingStarted";
 import StartWizard from "./components/StartWizard";
+import Admin from "./components/Admin";
 
 
 function App() {
@@ -134,6 +135,9 @@ return (
         </Route>
         <Route exact path="/upload">
           <Dropzone />
+        </Route>
+        <Route exact path="/admin">
+          <Admin />
         </Route>
       </Switch>
     </BrowserRouter>
