@@ -26,8 +26,8 @@ const MyTeam = () => {
   const [spotlightName, setSpotlightName] = useState("");
   const [playerID, setPlayerID] = useState("");
 
-  console.log("CL TEAM PAGE: ", currentLeague)
-  console.log("CT TEAM PAGE: ", currentTeam)
+  // console.log("CL TEAM PAGE: ", currentLeague)
+  // console.log("CT TEAM PAGE: ", currentTeam)
   useEffect(() => {
       if (currentLeague !== undefined) {
         console.log("CL: ", currentLeague)
@@ -39,7 +39,7 @@ const MyTeam = () => {
 
   const addToIL = (player) => {
     const response = dispatch(add_to_IL(player))
-    console.log("RESPONSE ", response)
+    // console.log("RESPONSE ", response)
   }
 
   const getStats = async (player) => {
