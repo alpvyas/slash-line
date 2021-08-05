@@ -38,7 +38,7 @@ const Players = () => {
 
  const addPlayer = (player) => {
     const response = dispatch(add_player(player, user.id, league.id))
-    console.log("RESPONSE ", response)
+    // console.log("RESPONSE ", response)
   }
 
   const columns = useMemo((height, date, bday, day, month, year) => [

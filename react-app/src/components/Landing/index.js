@@ -16,18 +16,6 @@ const Landing = () => {
   const [open, setOpen] = useState(false);
   const [login, setLogin] = useState(true);
   const [signup, setSignup] = useState(false);
-  // const [authenticated, setAuthenticated] = useState(false);
-  // const [showSidebar, setShowSidebar] = useState(false); 
-
-  Modal.setAppElement("#root");
-  // const closeSignup = () => {
-  //   setSignup(false);
-  // };
-
-  // const closeLogin = () => {
-  //   if (signup) setSignup(false);
-  //   setLogin(false);
-  // };
 
   const handleSignup = () => {
     if (login) setLogin(false);
@@ -54,52 +42,7 @@ const Landing = () => {
   };
 
   return (
-    // <div className="container page-container">
     <div className="container page-container" style={{backgroundImage: `url(${baseball_grass})`}}>
-      {/* <Modal
-        isOpen={signup}
-        contentLabel="Sign up"
-        className="defaultInner"
-        overlayClassName="defaultOuter"
-        onRequestClose={closeSignup}
-        >
-        <div className="closeIcoOuterShell">
-          <button className="closeIcoShell" onClick={(e) => setSignup(false)}>
-            <i className="fas fa-times closeIco"></i>
-          </button>
-        </div>
-        <SignUpForm
-          // authenticated={authenticated}
-          // setAuthenticated={setAuthenticated}
-          signup={signup}
-          setSignup={setSignup}
-          login={login}
-          setLogin={setLogin}
-          />
-      </Modal>
-      <Modal
-        isOpen={login}
-        contentLabel="Login"
-        className="defaultInner"
-        overlayClassName="defaultOuter"
-        onRequestClose={closeLogin}
-        >
-          <div className="closeIcoOuterShell">
-            <button className="closeIcoShell" onClick={(e) => setLogin(false)}>
-              <i className="fas fa-times closeIco"></i>
-            </button>
-          </div>
-          <LoginForm
-          // authenticated={authenticated}
-          // setAuthenticated={setAuthenticated}
-          signup={signup}
-          setSignup={setSignup}
-          login={login}
-          setLogin={setLogin}
-          openLogin={openLogin}
-          // demoLogin={demoLogin}
-          />
-        </Modal> */}
         <LandingModal
           open={open}
           setOpen={setOpen}
