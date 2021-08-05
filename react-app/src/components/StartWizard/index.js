@@ -14,7 +14,6 @@ import Confirm from './Confirm';
 
 const StartWizard = () => {
   const user = useSelector(state => state.session.user);
-  const userID = useSelector(state => state.session.user.id);
   const [step, setStep] = useState("start");
   const [teamName, setTeamName] = useState('');
   const [colors, setColors] = useState({}); 
@@ -22,6 +21,8 @@ const StartWizard = () => {
   const [aboutMe, setAboutMe] = useState('');
   const [location, setLocation] = useState('');
   const [avatar, setAvatar] = useState(null);
+
+  const userID = user["id"];
 
   const userSelections = {
     userID,
@@ -33,14 +34,14 @@ const StartWizard = () => {
     avatar,
   };
 
-
   return (
 <>
         <Dialog
             open={true}
             // onClose={handleClose}
             aria-labelledby="form-dialog-title"
-            style={{ overflow: "hidden", backgroundImage: `url(${ballInGlove})`}}
+            // style={{ overflow: "hidden", background: `url(${ballInGlove}) no-repeat center center fixed`, objectFit: 'fill'}}
+            style={{ background: `url(${ballInGlove}) no-repeat center center fixed`, backgroundSize: "cover"}}
             className="page-container"
           >
             <div style={{ padding: 20 }}>

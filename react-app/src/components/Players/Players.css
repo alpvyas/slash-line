@@ -18,7 +18,7 @@
 }
 
 .score-carousel-container-players {
-  margin: 165px 0px 10px 0px;
+  margin: 200px 0px 10px 0px;
   position: relative;
   z-index: 0;
 }
@@ -37,17 +37,8 @@
   display: flex;
   flex-direction: column;
   width: 100%;
+  margin-bottom: 250px;
 }
-
-/* .footer-container {
-  position: relative;
-  width: 100%;
-  height: 150px;
-  border-top: 4px solid #EF3E42;
-  display: flex;
-  flex-direction: row;
-  background-color: whitesmoke;
-} */
 
 .spotlight-container {
   display: flex;
@@ -99,7 +90,7 @@
   justify-content: center;
   height: 500px;
   width: 75%;
-  margin-right: 30px;
+  margin-right: 90px;
 }
 
 .table-container {

@@ -1,13 +1,13 @@
 import React, { useState }from "react";
 import { useDispatch, useSelector} from "react-redux";
 import { joinOpenLeague } from "../../store/getStarted";
-import { selectedTeam, setCurrentLeague } from "../../store/leagues";
+import { setSelectedTeam, setCurrentLeague } from "../../store/leagues";
 
 import "./Table.css";
 
 const Table = ({ columns, rows, row_keys, teams, leagues, joinOpen }) => {
   const dispatch = useDispatch();
-  const stateLeagues = useSelector(state => state.leagues.leagues);
+  const userLeagues = useSelector(state => state.leagues.leagues);
   const currentLeague = useSelector(state => state.leagues.current);
 
   const generateKey = () => {
@@ -16,11 +16,11 @@ const Table = ({ columns, rows, row_keys, teams, leagues, joinOpen }) => {
 
   const selectRow = (row) => {
     if (teams) {
-      const selected = currentLeague.teams[row.id];
-      dispatch(selectedTeam(selected))
+      const selected = currentLeague.league.teams[row.id];
+      dispatch(setSelectedTeam(selected))
     }else if (leagues) {
-      console.log("LEAGUE:::: ", stateLeagues[row.id])
-      dispatch(setCurrentLeague(stateLeagues[row.id]))
+      console.log("LEAGUE:::: ", userLeagues[row.id])
+      dispatch(setCurrentLeague(userLeagues[row.id]))
     }else if (joinOpen) {
       dispatch(joinOpenLeague(row))
     }

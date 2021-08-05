@@ -124,7 +124,7 @@ const Players = () => {
           <NavBar />
         </div>
         <div className="score-carousel-container-players">
-          {games && <Carousel items={games} show={5} infiniteLoop={true}/>}
+          {games && <Carousel children={games} show={4} infiniteLoop={true}/>}
         </div>
         <div className="middle-container">
           <div className="table-container">
@@ -153,26 +153,6 @@ const Players = () => {
         <div className="footer-container">
           <Footer />
          </div>
-        {/* <Table 
-        columns={["Pitchers",  "Position", "Team", "Bats", "Throws", "Height", "Weight", "DOB"]}
-        rows={get_players_by_pos(players, ["P"])}
-        row_keys={["name_display_first_last", "position_txt", "team_name", "bats", "throws", "height_feet", "weight", "birth_date"]}
-        />
-        <Table 
-        columns={["Catchers",  "POS", "TEAM", "B/T", "HT", "WT", "DOB"]}
-        rows={get_players_by_pos(players, ["C"])}
-        row_keys={["name_display_first_last", "position_txt", "team_name", "bats", "throws", "height_feet", "weight", "birth_date"]}
-        />
-        <Table 
-        columns={["Infielders",  "POS", "TEAM", "B/T", "HT", "WT", "DOB"]}
-        rows={get_players_by_pos(players, ["1B", "2B", "3B", "SS"])}
-        row_keys={["name_display_first_last", "position_txt", "team_name", "bats", "throws", "height_feet", "weight", "birth_date"]}
-        />
-        <Table 
-        columns={["Outfielders",  "POS", "TEAM", "B/T", "HT", "WT", "DOB"]}
-        rows={get_players_by_pos(players, ["LF", "RF", "CF", "OF"])}
-      row_keys={["name_display_first_last", "position_txt", "team_name", "bats", "throws", "height_feet", "weight", "birth_date"]}
-        /> */}
       </div>
   )
 }

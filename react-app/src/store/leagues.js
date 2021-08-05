@@ -7,10 +7,11 @@ const CLOSE_MODAL = "leagues/CREATE_CLOSED";
 
 const ADD_LEAGUES = "leagues/ADD";
 const SET_LEAGUE = "leagues/SET";
-
+const SET_CURRENT_LEAGUE = "leagues/CURRENT_LEAGUE";
+const SET_CURRENT_USER_TEAM = "leagues/CURRENT_USER_TEAM"
 const CLEAR_STATE = "leagues/CLEAR_STATE";
 
-const SELECT_TEAM = "leagues/SELECT_TEAM"
+const SET_SELECTED_TEAM = "leagues/SELECT_TEAM";
 
 /* ----------------------------------------------------------------------------
                           ACTION CREATORS
@@ -45,14 +46,25 @@ const setLeague = (league) => (
     payload: league
   });
 
+const currentLeague = (league) => (
+  {
+    type: SET_CURRENT_LEAGUE,
+    payload: league
+  });
+
+const currentUserTeam = (team) => (
+  {
+    type: SET_CURRENT_USER_TEAM,
+    payload: team
+  });
 const clearState = () => (
   {
     type: CLEAR_STATE,
   });
 
-const setSelectedTeam = (team) => (
+const selectedTeam = (team) => (
   {
-    type: SELECT_TEAM,
+    type: SET_SELECTED_TEAM,
     payload: team,
   });
 /* ----------------------------------------------------------------------------
@@ -128,7 +140,12 @@ export const createLeague =
       const leagues = await response.json()
 
       if (response.ok && !leagues.errors) {
+        const current_league = leagues[Object.keys(leagues)[0]];
+        console.log("CURRENT:::::::",current_league)
+        const current_team = current_league.teams[Object.keys(current_league.teams)[0]];
         dispatch(addLeagues(leagues));
+        dispatch(currentLeague(current_league));
+        dispatch(selectedTeam(current_team));
       }
 
       return leagues;
@@ -143,17 +160,12 @@ export const createLeague =
 
   const check = await response.json();
 
-  // if (!check.ok) {
-  //   alert(check.errors)
-  // }
-
   return check;
 
   };
 
   export const setCurrentLeague = (league) => dispatch => {
     const teams = league.teams;
-    // console.log("TEAMS:::::", teams)
     dispatch(setLeague(league));
     dispatch(setSelectedTeam(league.teams[Object.keys(teams)[0]]));
   };
@@ -162,8 +174,8 @@ export const createLeague =
     dispatch(clearState());
   };
 
-  export const selectedTeam = (team) => dispatch => {
-    dispatch(setSelectedTeam(team));
+  export const setSelectedTeam = (team) => dispatch => {
+    dispatch(selectedTeam(team));
   };
 
   export const getOpenLeagues = () => async (dispatch) => {
@@ -181,7 +193,7 @@ export const createLeague =
                           LEAGUES REDUCER
 ------------------------------------------------------------------------------*/
 
-const initialState = {leagues: {}, status: false };
+const initialState = {current: {}, leagues: {}, status: false };
 const leaguesReducer = (state = initialState, action) => {
   let newState;
   switch (action.type) {
@@ -195,18 +207,22 @@ const leaguesReducer = (state = initialState, action) => {
       const leagues = action.payload
       newState = {...state};
       newState.leagues = leagues;
-      newState.current = leagues[Object.keys(leagues)[0]];
+      newState.current.league = leagues[Object.keys(leagues)[0]];
       return newState;
-    case SET_LEAGUE:
+    case SET_CURRENT_LEAGUE:
       newState = {...state};
-      newState.current = action.payload;
+      newState.current.league = action.payload;
+      return newState;
+    case SET_CURRENT_USER_TEAM:
+      newState = {...state};
+      newState.current.userTeam = action.payload;
       return newState;
     case CLEAR_STATE:
       newState = {...initialState};
       return newState;
-    case SELECT_TEAM:
+    case SET_SELECTED_TEAM:
       newState = {...state}
-      newState.selectedTeam = action.payload
+      newState.current.selectedTeam = action.payload
       return newState
     default:
       return state;

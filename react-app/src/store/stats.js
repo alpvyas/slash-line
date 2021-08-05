@@ -57,7 +57,7 @@ export const get_stats = () => async (dispatch) => {
 
   const statsData = await response.json()
 
-  console.log("STATS:", statsData)
+  // console.log("STATS:", statsData)
   dispatch(add(statsData))
 
 

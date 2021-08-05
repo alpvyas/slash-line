@@ -8,7 +8,7 @@ const Footer = () => {
   return (
     <div className="footer-container">
       <div className="developer-container">
-        <span>Developed by Alpesh Vyas</span>
+        <span style={{fontSize: '20px'}}>Developed by Alpesh Vyas</span>
       </div>
       <div className="link-container">
         <a href="https://github.com/alpvyas/slash-line">

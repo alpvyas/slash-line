@@ -3,19 +3,14 @@ import { useDispatch, useSelector } from "react-redux";
 import NavBar from "../NavBar";
 import ReactTable from "../ReactTable";
 import Footer from "../Footer";
-import dodgers_cap from "../../images/dodgers-cap-glove.png";
-import sunset_field from "../../images/sunset-field.png";
-import holding_balls from "../../images/player-holding-balls.png";
 import glove_ball from "../../images/close-up-baseball-held-glove.png";
 import "./UserTeams.css";
 import InjuredList from "../Containers/InjuredList";
 import { add_to_IL } from "../../store/userTeams";
-import { Table } from "@material-ui/core";
 import PlayerDetail from "../PlayerDetails";
 import { get_single_player_stats } from "../../store/stats";
 import Scorecard from "../Containers/Scorecard";
 import Carousel from "../Carousel";
-import mookie_betts from "../../images/mookie_betts.png";
 import { game_details } from "../../mock_game_data";
 
 
@@ -24,7 +19,7 @@ const MyTeam = () => {
   const user = useSelector((state) => state.session.user);
   const leagues = useSelector(state => state.leagues.leagues);
   const userTeams = useSelector(state => state.userTeams.teams);
-  const currentLeague = useSelector(state => state.leagues.current)
+  const currentLeague = useSelector(state => state.leagues.current.league)
   const [currentTeam, setCurrentTeam] = useState(undefined);
   // const [currentLeague, setCurrentLeague] = useState(undefined);
   const [spotlightPlayer, setSpotlightPlayer] = useState({});
@@ -40,7 +35,7 @@ const MyTeam = () => {
         console.log("LEAGUE ID ", leagueID)
         setCurrentTeam(userTeams[leagueID])
       }
-    }, [dispatch, currentLeague]);
+    }, [dispatch, currentLeague, userTeams]);
 
   const addToIL = (player) => {
     const response = dispatch(add_to_IL(player))
@@ -128,7 +123,7 @@ const MyTeam = () => {
           <NavBar />
         </div>
         <div className="score-carousel-container-players">
-          {games && <Carousel items={games} show={5} infiniteLoop={true}/>}
+          {games && <Carousel children={games} show={4} infiniteLoop={true}/>}
         </div>
         <div className="middle-container">
           <div className="table-container">
