@@ -81,7 +81,7 @@ export const get_league_teams = (leagueId) => async (dispatch) => {
   });
 
   const teams = await response.json();
-  console.log("TEAMS: ", teams)
+  // console.log("TEAMS: ", teams)
   if (response.ok && !teams.errors) {
     return teams.teams;
   };
@@ -141,7 +141,7 @@ export const createLeague =
 
       if (response.ok && !leagues.errors) {
         const current_league = leagues[Object.keys(leagues)[0]];
-        console.log("CURRENT:::::::",current_league)
+        // console.log("CURRENT:::::::",current_league)
         const current_team = current_league.teams[Object.keys(current_league.teams)[0]];
         dispatch(addLeagues(leagues));
         dispatch(currentLeague(current_league));
@@ -153,7 +153,7 @@ export const createLeague =
 
   export const joinUserLeague = (leagueId, passcode) => async(dispatch) => {
 
-  console.log("DATA: ", leagueId, passcode)
+  // console.log("DATA: ", leagueId, passcode)
   const response = await fetch(`/api/leagues/${leagueId}/join/${passcode}`, {
     method: "GET",
   });
@@ -185,7 +185,7 @@ export const createLeague =
 
     const leagues = await response.json();
 
-    console.log("OPEN LEAGUES: ", leagues)
+    // console.log("OPEN LEAGUES: ", leagues)
     return leagues
   };
 
