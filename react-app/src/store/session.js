@@ -50,7 +50,7 @@ export const login = (username, email, password) => async (dispatch) => {
   const data = await response.json();
 
   if (response.ok && !data.errors) {
-    console.log("DATA: ", data)
+    // console.log("DATA: ", data)
     dispatch(setUser(data))
     dispatch(getUserLeagues(data.id))
     dispatch(getUserTeams(data.id))
@@ -67,7 +67,7 @@ export const logout = () => async (dispatch) => {
     },
   });
 
-  console.log("RESPONSE LOGOUT: ", response)
+  // console.log("RESPONSE LOGOUT: ", response)
 
   dispatch(removeUser());
   
@@ -109,7 +109,7 @@ export const signup = (username, firstName, lastName, email, password) =>
         username,
       }),
     });
-     console.log("RESPONSE: ", response)
+    //  console.log("RESPONSE: ", response)
     const valid = await response.json();
     console.log("valid: ", valid)
     return valid;
