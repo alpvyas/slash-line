@@ -30,11 +30,11 @@ Slash Line is also integrated with the [MLB Data API](https://appac.github.io/ml
 
 ##### Slash Line stats data table
 
-![Slash Line stats data table](/readme-resources/rappa-mappa-demo-2.gif)
+![Slash Line stats data table](/readme_resources/stats_demo.gif)
 
 ##### Slash Line game carousel
 
-![Slash Line game carousel](/readme-resources/rappa-mappa-demo-2.gif)
+![Slash Line game carousel](/readme_resources/carousel_demo.gif)
 
 ## Application Architecture
 
@@ -42,7 +42,7 @@ As noted above, Slash Line uses React and Redux on the front end with Flask and 
 
 The backend serves the frontend, responds to frontend requests, acts as an intermediary to serve MLB data to the frontend, and fetches data from the PostgreSQL database.
 
-![Slash Line application architecture](https://github.com/alpvyas/slash-line/blob/main/db_images/slashline_architecture.png)
+![Slash Line application architecture](/readme_resources/slashline_architecture.png)
 
 ## Frontend Overview
 
@@ -72,13 +72,13 @@ Material is also great for mobilize optimizing custom components with its `makeS
 
 #### MLB Data API
 
-The [MLB Data API](https://developers.google.com/maps/documentation/javascript/tutorial) is absolutely essential to this project. All player information and player statistics were fetched from this API and due to the massive amount of data available through the API future features will be easy to implement. For example, in addition to player season stats MLB Data API can be used to include player career stats among other relevant data. 
+The [MLB Data API](https://appac.github.io/mlb-data-api-docs/) is absolutely essential to this project. All player information and player statistics were fetched from this API and due to the massive amount of data available through the API future features will be easy to implement. For example, in addition to player season stats MLB Data API can be used to include player career stats among other relevant data.
 
-The API features a truly robust amount of data, of which this application just scratched the surface. However, due to a lack of quality documentation available implementation of the data in this API was at times difficult to navigate. An example of this was getting player data for all active players in the league. The API does not have an endpoint for getting information for all active players at once and player ids were not published. In order to get player data and player stats, I first had to fetch each MLB team's 40 man roster and from that data extract each player's MLB Player ID. Once I had those ids I was then able to make fetch requests for each player's data and stats individually. Because of the the way the API endpoints are structured this made getting the player data and stats an expensive operation. 
+The API features a truly robust amount of data, of which this application just scratched the surface. However, due to a lack of quality documentation available implementation of the data in this API was at times difficult to navigate. An example of this was getting player data for all active players in the league. The API does not have an endpoint for getting information for all active players at once and player ids were not published. In order to get player data and player stats, I first had to fetch each MLB team's 40 man roster and from that data extract each player's MLB Player ID. Once I had those ids I was then able to make fetch requests for each player's data and stats individually. Because of the the way the API endpoints are structured this made getting the player data and stats an expensive operation.
 
 #### Sports Data API
 
-Sports Data API was used to retrieve real time game data.  
+[Sports Data IO](https://sportsdata.io/developers/api-documentation/mlb) was used to retrieve real time game data.
 
 ## Backend Overview
 
@@ -93,7 +93,6 @@ Slash Line uses a Flask server with PostgreSQL as the database. Compared to the 
 #### PostgreSQL
 
 [PostgreSQL](https://www.mongodb.com/) was perfect for this project because its collections of JSON-like records made it very easy to store the artist information, which is in JSON object form. The [SQLAlchemy ORM](https://mongoosejs.com/) was used to communicate between the database, hosted in [Heroku PostgreSQL](https://www.mongodb.com/cloud/atlas), and the server.
-
 
 ## Conclusion and Next Steps
 
