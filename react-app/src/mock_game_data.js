@@ -94,7 +94,7 @@ export const game_details = [
     },
     {
         "AwayTeam": "LAA",
-        "HomeTeam": "HOU *cheaters",
+        "HomeTeam": "HOU",
         "AwayTeamHits": "15",
         "HomeTeamHits": "0",
         "DateTime": "Today 7:10 PM",

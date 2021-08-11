@@ -121,9 +121,9 @@ return (
         <ProtectedRoute path="/myteam" authenticated={authenticated}>
           <UserTeams />
         </ProtectedRoute>
-        <Route exact path="/players">
+        <ProtectedRoute exact path="/players" authenticated={authenticated}>
           <Players />
-        </Route>
+        </ProtectedRoute>
         <ProtectedRoute exact path="/team" authenticated={authenticated}>
           <UserTeams />
         </ProtectedRoute>

@@ -49,8 +49,8 @@ export const login = (username, email, password) => async (dispatch) => {
 
   const data = await response.json();
 
-  if (response.ok && !data.errors) {
-    // console.log("DATA: ", data)
+  if (response.ok) {
+    console.log("DATA: ", data)
     dispatch(setUser(data))
     dispatch(getUserLeagues(data.id))
     dispatch(getUserTeams(data.id))
