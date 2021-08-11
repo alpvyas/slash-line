@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { login, signup, validateEmail, validateUsername } from '../../store/session';
+import React, { useState} from 'react';
+import { useDispatch} from 'react-redux';
+import { signup, validateEmail, validateUsername } from '../../store/session';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -8,10 +8,9 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
 import './index.css';
 
-const SignupForm = ({ setAuthenticated, setSignup, setLogin }) => {
+const SignupForm = ({ setSignup, setLogin }) => {
   const dispatch = useDispatch();
   const [errors, setErrors] = useState({});
   const [firstName, setFirstName] = useState('');
@@ -24,7 +23,7 @@ const SignupForm = ({ setAuthenticated, setSignup, setLogin }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!errorStatus){
-    const successfulSignUp = dispatch(signup(username, firstName, lastName, email, password))
+        dispatch(signup(username, firstName, lastName, email, password))
         .then(res => {
           if (res.errors){
             setErrors({...errors, signUpError: res.errors, signUpErrorStatus: true})

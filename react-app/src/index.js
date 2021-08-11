@@ -6,8 +6,8 @@ import { PersistGate } from "redux-persist/integration/react";
 import App from "./App";
 import configureStore, { persistor } from "./store";
 import "./index.css";
-import { ModalProvider } from "./context/Modal";
-import Footer from "./components/Footer";
+// import { ModalProvider } from "./context/Modal";
+// import Footer from "./components/Footer";
 
 export const store = configureStore();
 

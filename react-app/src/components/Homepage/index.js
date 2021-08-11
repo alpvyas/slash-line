@@ -50,7 +50,7 @@ const Homepage = () => {
     if (user) {
       dispatch(getUserTeams(user.id))
     }
-  }, []);
+  }, [dispatch, user]);
 
   useEffect(() => {
       if (currentLeague !== undefined) {
