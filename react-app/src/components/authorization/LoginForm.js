@@ -51,14 +51,14 @@ const LoginForm = ({ setLogin, setSignup }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  //   await dispatch(login(username, email, password))
-  //   .then((res) => {
-  //     // console.log("RES: ", res)
-  //     if (res.errors) {
-  //       // console.log("RES ERRORS: ", res.errors)
-  //       setErrors({...errors, message: res.errors});
-  //     };
-  //   });
+    await dispatch(login(username, email, password))
+    .then((res) => {
+      // console.log("RES: ", res)
+      if (res.errors) {
+        // console.log("RES ERRORS: ", res.errors)
+        setErrors({...errors, message: res.errors});
+      };
+    });
   };
 
 //   const useStyles = makeStyles({
