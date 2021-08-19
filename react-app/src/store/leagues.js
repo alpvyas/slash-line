@@ -204,7 +204,7 @@ export const createLeague =
                           LEAGUES REDUCER
 ------------------------------------------------------------------------------*/
 
-const initialState = {current: {}, leagues: {}, status: false };
+const initialState = {current: {}, leagues: {}, status: false, loaded: false};
 const leaguesReducer = (state = initialState, action) => {
   let newState;
   switch (action.type) {

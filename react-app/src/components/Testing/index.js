@@ -9,6 +9,7 @@ import LandingModal from "../LandingModal";
 import StartWizard from "../StartWizard";
 import TeamAvatar from "../TeamAvatar";
 import Grid from '@material-ui/core/Grid';
+import Loading from '../Loading';
 import { ARI, ATL, BAL, BOS, CHC, CIN, CLE, COL, CWS, DET, HOU, KC, LAA, LAD, MIA, MIL, MIN, NYM, NYY, OAK, PHI, PIT, SD, SEA, SF, STL, TB, TEX, TOR, WSH } from '../../images';
 
 import Dropzone from '../Dropzone';
@@ -70,7 +71,9 @@ const Testing = () => {
 
       {/* <MaterialHomepage /> */}
 
-      <CreateLeagueForm />
+      {/* <CreateLeagueForm /> */}
+
+      <Loading />
       
     </>
   )
