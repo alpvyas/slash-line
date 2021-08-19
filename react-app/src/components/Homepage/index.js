@@ -16,7 +16,7 @@ import { getUserTeams } from "../../store/userTeams";
 import { game_details } from "../../mock_game_data";
 import CreateLeagueModal from "../CreateLeagueModal";
 
-const Homepage = () => {
+const Homepage = ({ loaded }) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.session.user);
   const leagues = useSelector(state => state.leagues.leagues);
@@ -25,6 +25,9 @@ const Homepage = () => {
   const currentLeague = useSelector(state => state.leagues.current.league);
   const [currentTeam, setCurrentTeam] = useState(undefined);
   const [createLeague, setCreateLeague] = useState(false);
+
+  const authenticated = useSelector(state => state.session.authenticated);
+  const leaguesLoaded = useSelector(state => state.leagues.loaded);
 
   // const gameDetails = useSelector(state => state.gameDetails.gameDetails);
   const gameDetails = game_details;
@@ -148,8 +151,9 @@ const Homepage = () => {
     <>
       <div className="container page-container" style={{backgroundImage: `url(${sunset_field})`}}>
 
-          <NavBar />
-    
+        <NavBar />
+        {leaguesLoaded && authenticated &&
+        <> 
         <div className="score-carousel-container">
           {games && <Carousel children={games} show={4} infiniteLoop={true}/>}
         </div>
@@ -194,6 +198,8 @@ const Homepage = () => {
               }
            </div>
          </div>
+      </>
+        }
         <Footer />
  
       </div>

@@ -50,10 +50,10 @@ export const login = (username, email, password) => async (dispatch) => {
   const data = await response.json();
 
   if (response.ok) {
-    console.log("DATA: ", data)
-    dispatch(setUser(data))
-    dispatch(getUserLeagues(data.id))
-    dispatch(getUserTeams(data.id))
+    dispatch(setUser(data));
+    dispatch(getUserLeagues(data.id));
+    dispatch(getUserTeams(data.id));
+    dispatch(setAuthStatus(true));
   };
 
 
@@ -68,7 +68,6 @@ export const logout = () => async (dispatch) => {
   });
 
   //deleting cookies on client-side in case connection to server is lost
-  //but this isnt working for some reason. idk why
   const cookies = document.cookie.split(";");
   cookies.forEach((c) => {
     document.cookie = c
@@ -147,7 +146,7 @@ export const signup = (username, firstName, lastName, email, password) =>
     return response
   };
 
-  export const setAuthenticated = (authStatus) => async (dispatch) => {
+  export const setAuthenticated = (authStatus) => (dispatch) => {
     dispatch(setAuthStatus(authStatus));
   };
 

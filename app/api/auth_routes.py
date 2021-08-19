@@ -54,8 +54,6 @@ def login():
             return jsonify(user.to_dict())
             # Add the user to the session, we are logged in!
     else:
-        # return {'errors': validation_errors_to_error_messages(form.errors)}, 401
-        # return jsonify("hello")
         return {'errors': "The information you entered did not match. Please try logging in again."}, 401
 
 
