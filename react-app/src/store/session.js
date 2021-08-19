@@ -70,10 +70,10 @@ export const logout = () => async (dispatch) => {
   //deleting cookies on client-side in case connection to server is lost
   //but this isnt working for some reason. idk why
   const cookies = document.cookie.split(";");
-  cookies.forEach((cookie) => {
-    const eqPos = cookie.indexOf("=");
-    const name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
-    document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+  cookies.forEach((c) => {
+    document.cookie = c
+    .replace(/^ +/, "")
+    .replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
   })
 
   dispatch(removeUser());
