@@ -10,6 +10,7 @@ const SET_LEAGUE = "leagues/SET";
 const SET_CURRENT_LEAGUE = "leagues/CURRENT_LEAGUE";
 const SET_CURRENT_USER_TEAM = "leagues/CURRENT_USER_TEAM"
 const CLEAR_STATE = "leagues/CLEAR_STATE";
+const SET_STATUS = "leagues/SET_STATUS";
 
 const SET_SELECTED_TEAM = "leagues/SELECT_TEAM";
 
@@ -22,6 +23,11 @@ export const test = () => (
   }
 )
 
+export const setStatus = (status) => (
+  {
+    type: SET_STATUS,
+    payload: status,
+  });
 
 export const openCreateLeague = () => (
   {
@@ -146,6 +152,7 @@ export const createLeague =
         dispatch(addLeagues(leagues));
         dispatch(currentLeague(current_league));
         dispatch(selectedTeam(current_team));
+        dispatch(setLeagueStateSatus(true));
       }
 
       return leagues;
@@ -189,6 +196,10 @@ export const createLeague =
     return leagues
   };
 
+  export const setLeagueStateSatus = (status) => (dispatch) => {
+    dispatch(setStatus(status));
+  };
+
 /* ----------------------------------------------------------------------------
                           LEAGUES REDUCER
 ------------------------------------------------------------------------------*/
@@ -223,6 +234,10 @@ const leaguesReducer = (state = initialState, action) => {
     case SET_SELECTED_TEAM:
       newState = {...state}
       newState.current.selectedTeam = action.payload
+      return newState
+    case SET_STATUS:
+      newState = {...state}
+      newState.loaded = action.payload
       return newState
     default:
       return state;
