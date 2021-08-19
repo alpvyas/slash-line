@@ -150,7 +150,7 @@ export const signup = (username, firstName, lastName, email, password) =>
     dispatch(setAuthStatus(authStatus));
   };
 
-  const initialState = {};
+  const initialState = {authenticated: false};
   let newState;
 
   const sessionReducer = (state = initialState, action) => {

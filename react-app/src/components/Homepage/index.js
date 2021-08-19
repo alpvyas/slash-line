@@ -2,19 +2,21 @@ import React, { useState, useEffect, useMemo, memo }from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getUserLeagues, setCurrentLeague, setSelectedTeam } from "../../store/leagues";
 import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
 import Carousel from "../Carousel";
 import Scorecard from "../Containers/Scorecard";
-import LeagueFormModal from "../LeagueFormModal";
+import Standings from "../Containers/Standings";
+import CreateLeagueModal from "../CreateLeagueModal";
 import NavBar from "../NavBar/index";
 import Table from "../Table";
 import ReactTable from "../ReactTable";
-import sunset_field from "../../images/sunset-field.png";
-import "./Homepage.css";
-import Standings from "../Containers/Standings";
 import Footer from "../Footer";
+import Loading from "../Loading";
 import { getUserTeams } from "../../store/userTeams";
 import { game_details } from "../../mock_game_data";
-import CreateLeagueModal from "../CreateLeagueModal";
+import sunset_field from "../../images/sunset-field.png";
+import ballInGlove from '../../images/baseball-glove-dirt.png';
+import "./Homepage.css";
 
 const Homepage = ({ loaded }) => {
   const dispatch = useDispatch();
@@ -149,11 +151,12 @@ const Homepage = ({ loaded }) => {
 
   return (
     <>
-      <div className="container page-container" style={{backgroundImage: `url(${sunset_field})`}}>
-
-        <NavBar />
+        {!leaguesLoaded && <Loading />}
         {leaguesLoaded && authenticated &&
-        <> 
+        
+        <div className="container page-container" style={{ background: `url(${ballInGlove}) no-repeat center center fixed`, backgroundSize: "cover"}}>
+        <NavBar />
+
         <div className="score-carousel-container">
           {games && <Carousel children={games} show={4} infiniteLoop={true}/>}
         </div>
@@ -198,11 +201,10 @@ const Homepage = ({ loaded }) => {
               }
            </div>
          </div>
-      </>
-        }
+
         <Footer />
- 
       </div>
+        }
     </>
   )
 }
