@@ -1,10 +1,4 @@
 import React from 'react';
-// import { NavLink, Redirect } from 'react-router-dom';
-// import { useDispatch, useSelector } from 'react-redux';
-// import { login } from '../../store/session';
-import Dialog from '@material-ui/core/Dialog';
-import Grid from '@material-ui/core/Grid';
-import slashline_logo from "../../images/logo.png";
 import Typography from '@material-ui/core/Typography';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
@@ -16,25 +10,17 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
 
 
-const ComingSoon = ({ open, setOpen }) => {
-
-    // const handleOpen = () => {
-    //   setOpen(true);
-    // };
-
-    const handleClose = () => {
-      setOpen(false);
-    };
+const About = ({ open, setOpen }) => {
 
   return (
     <>
         <DialogContent>
           <DialogContentText>
-              <Typography variant="h6" align="center">We've got a lot planned at Slashline Baseball. Here's a preview of what's in the works.</Typography>
+              <Typography variant="h6" align="center">Slash Line Baseball is a data heavy fantasy baseball application where fans can create their own leagues and teams, drafting their favorite players to compete against friends. Follow the season and see if your team comes out on top. With real-time player data and player performance stats, users can build their best fantasy team to win it all. </Typography>
           </DialogContentText>
         </DialogContent>
     </>
   );
 };
 
-export default ComingSoon;
+export default About;

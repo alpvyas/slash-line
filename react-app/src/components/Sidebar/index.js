@@ -9,6 +9,7 @@ import {logout} from "../../store/session"
 import ReorderIcon from "@material-ui/icons/Reorder";
 import { NavLink, Redirect, useHistory} from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { sidebarItems } from "./sidebarItems.js"
 import "./Sidebar.css";
 
 const styles = {
@@ -30,20 +31,27 @@ const styles = {
   },
 };
 
-const SidebarItem = ({ expanded, item, depthStep = 25, depth =0, ...rest }) => {
+const SidebarItem = ({ setModal, handleModal, expanded, item, depthStep = 25, depth =0, ...rest }) => {
     const [collapsed, setCollapsed] = useState(true);
-    const { name, label, items, Icon, setModal, handleSidebarModal } = item;
+    const { name, label, items, Icon, auth, modal } = item;
 
     const toggle = () => {
         setCollapsed(value => !value)
     }
 
-    const onClick = () => {
+    const handleAdmin = () => {
+        <NavLink to="/admin" exact={true} className="inactive" activeClassName="active"/>
+        
+    };
+
+    const onClick = e => {
         if (Array.isArray(items)) {
             toggle();
-        }else{
+        }else if (modal === 1){
             setModal(name);
-            handleSidebarModal();
+            handleModal();
+        } else if (name === "admin") {
+            handleAdmin();
         }
     }
 
@@ -68,7 +76,7 @@ const SidebarItem = ({ expanded, item, depthStep = 25, depth =0, ...rest }) => {
             >
                 <div
                     style={{ paddingLeft: depth * depthStep }}
-                    className="item-content"
+                    className="item-content inactive"
                 >
                     {/* {Icon && <Icon className="item-icon" fontSize="small" />} */}
                     <div className="item-text">{label}</div>
@@ -98,7 +106,7 @@ const SidebarItem = ({ expanded, item, depthStep = 25, depth =0, ...rest }) => {
     )
 };
 
-const Sidebar = ({ modal, setModal, items, depthStep = 25, depth =0, expanded }) => {
+const Sidebar = ({ setModal, handleSidebarModal, depthStep = 25, depth =0, expanded }) => {
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   const dispatch = useDispatch();
@@ -140,42 +148,42 @@ const Sidebar = ({ modal, setModal, items, depthStep = 25, depth =0, expanded })
             >
                 <div className="sidebar-container" style={styles.container}>
                     <List disablePadding dense>
-                        {user && <NavLink to={`/profile/users/${user.id}`} >
-                            <ListItem
-                                button
-                                className="sidebar-item"
-                                dense
-                                // onClick={onLogout}
-                            >
-                                <div
-                                    style={{ paddingLeft: depth * depthStep }}
-                                    className="item-content"
-                                >
-                                    <div className="item-text">Profile</div>
-                                </div>
-                            </ListItem>
-                        </NavLink>}
-
-                        {items.map((sidebarItem, index) => (
+                        
+                        {!user && sidebarItems.map((sidebarItem, index) => (
                             <React.Fragment key={`${sidebarItem.name}${index}`}>
                                 {sidebarItem === "divider" ? (
                                     <Divider style={{ margin: "6px 0" }} />
-                                ) : (
+                                ) : !sidebarItem.auth && sidebarItem.splash ? (
                                     <SidebarItem
                                         depthStep={depthStep}
                                         depth={depth}
                                         expanded={expanded}
                                         item={sidebarItem}
+                                        setModal={setModal}
+                                        handleModal={handleSidebarModal}
                                     />
-                                )}
+                                ) : null}
                             </React.Fragment>
                         ))}
 
-                        {/* <ListItem to="/">
-                            <LogoutButton />
-                        </ListItem> */}
+                        {user && sidebarItems.map((sidebarItem, index) => (
+                            <React.Fragment key={`${sidebarItem.name}${index}`}>
+                                {sidebarItem === "divider" ? (
+                                    <Divider style={{ margin: "6px 0" }} />
+                                ) : sidebarItem.user ? (
+                                    <SidebarItem
+                                        depthStep={depthStep}
+                                        depth={depth}
+                                        expanded={expanded}
+                                        item={sidebarItem}
+                                        setModal={setModal}
+                                        handleModal={handleSidebarModal}
+                                    />
+                                ) : null}
+                            </React.Fragment>
+                        ))}
 
-                        {user && <NavLink to="/">
+                        {user && 
                             <ListItem
                                 button
                                 className="sidebar-item"
@@ -184,12 +192,11 @@ const Sidebar = ({ modal, setModal, items, depthStep = 25, depth =0, expanded })
                             >
                                 <div
                                     style={{ paddingLeft: depth * depthStep }}
-                                    className="item-content"
+                                    className="item-content inactive"
                                 >
                                     <div className="item-text">Logout</div>
                                 </div>
-                            </ListItem>
-                        </NavLink>}
+                            </ListItem>}
                     </List>
                 </div>
             </Drawer>

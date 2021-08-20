@@ -11,6 +11,7 @@ import Table from "../Table";
 import ReactTable from "../ReactTable";
 import Footer from "../Footer";
 import Loading from "../Loading";
+import SidebarModal from "../Sidebar/SidebarModal";
 import { getUserTeams } from "../../store/userTeams";
 import { game_details } from "../../mock_game_data";
 import sunset_field from "../../images/sunset-field.png";
@@ -30,11 +31,18 @@ const Homepage = ({ loaded }) => {
   const authenticated = useSelector(state => state.session.authenticated);
   const leaguesLoaded = useSelector(state => state.leagues.loaded);
 
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [modal, setModal] = useState("");
+
   // const gameDetails = useSelector(state => state.gameDetails.gameDetails);
   const gameDetails = game_details;
   const games = gameDetails&&gameDetails.map((gameDetail) => (
     <Scorecard game={gameDetail}/>
   ));
+
+  const handleSidebarModal = () => {
+    setSidebarOpen(true);
+  };
 
   //gets the leagues that the current user belongs to
   useEffect(() => {
@@ -154,7 +162,12 @@ const Homepage = ({ loaded }) => {
         {leaguesLoaded && authenticated &&
         
         <div className="container page-container" style={{ background: `url(${ballInGlove}) no-repeat center center fixed`, backgroundSize: "cover"}}>
-        <NavBar />
+        <NavBar setModal={setModal} handleSidebarModal={handleSidebarModal}/>
+        <SidebarModal 
+          open={sidebarOpen}
+          setOpen={setSidebarOpen}
+          modal={modal}
+        />
 
         <div className="score-carousel-container">
           {games && <Carousel children={games} show={4} infiniteLoop={true}/>}

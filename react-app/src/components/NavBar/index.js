@@ -7,7 +7,7 @@ import SettingsIcon from "@material-ui/icons/Settings";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import "./NavBar.css";
 
-const NavBar = () => {
+const NavBar = ({ setModal, handleSidebarModal}) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const user = useSelector(state => state.session.user);
@@ -112,7 +112,7 @@ const NavBar = () => {
               </div>
             </div>
             <div className="dropdown-container">
-              <Sidebar  user={user} items={items}/>
+              <Sidebar  user={user} items={items} setModal={setModal} handleSidebarModal={handleSidebarModal}/>
             </div>
           </div>
         </nav>
