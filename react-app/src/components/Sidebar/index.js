@@ -32,15 +32,18 @@ const styles = {
 
 const SidebarItem = ({ expanded, item, depthStep = 25, depth =0, ...rest }) => {
     const [collapsed, setCollapsed] = useState(true);
-    const { label, items, Icon, onClick: onClickProp } = item;
+    const { name, label, items, Icon, setModal, handleSidebarModal } = item;
 
     const toggle = () => {
         setCollapsed(value => !value)
     }
 
-    const onClick = e => {
-        if(Array.isArray(items)) {
+    const onClick = () => {
+        if (Array.isArray(items)) {
             toggle();
+        }else{
+            setModal(name);
+            handleSidebarModal();
         }
     }
 
@@ -60,7 +63,7 @@ const SidebarItem = ({ expanded, item, depthStep = 25, depth =0, ...rest }) => {
             button
             className="sidebar-item"
             dense
-            onClick={onClick}
+            onClick={() => onClick()}
             {...rest}
             >
                 <div
@@ -95,7 +98,7 @@ const SidebarItem = ({ expanded, item, depthStep = 25, depth =0, ...rest }) => {
     )
 };
 
-const Sidebar = ({ items, depthStep = 25, depth =0, expanded }) => {
+const Sidebar = ({ modal, setModal, items, depthStep = 25, depth =0, expanded }) => {
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   const dispatch = useDispatch();
