@@ -2,7 +2,6 @@ import React, { useState, useEffect, useMemo, memo }from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getUserLeagues, setCurrentLeague, setSelectedTeam } from "../../store/leagues";
 import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
 import Carousel from "../Carousel";
 import Scorecard from "../Containers/Scorecard";
 import Standings from "../Containers/Standings";

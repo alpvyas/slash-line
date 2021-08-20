@@ -8,7 +8,7 @@ import NotificationsIcon from "@material-ui/icons/Notifications";
 import slash_line from "../../images/slash-line.png";
 import "./splashNav.css"
 
-const SplashNav = ({showSidebar, setShowSidebar, handleSignup, handleLogin}) => {
+const SplashNav = ({modal, setModal, handleSignup, handleLogin, handleSidebarModal}) => {
 
   const onClick = (e, item) => {
   window.alert(JSON.stringify(item, null, 2));
@@ -18,19 +18,16 @@ const SplashNav = ({showSidebar, setShowSidebar, handleSignup, handleLogin}) => 
     {
       name: "about",
       label: "About",
-      items: [
-        {name: "what-is", label: "What is Slash Line?", onClick},
-        {name: "how-to", label: "How to play", onClick},
-        {name: "thanks", label: "Thanks", onClick},
-      ],
+      items: null,
+      handleSidebarModal,
+      setModal,
     },
     {
       name: "coming-soon", 
       label: "Coming Soon",
-      items: [
-        { name: "baseline", label: "Down the Baseline", onClick },
-        { name: "feedback", label: "Feedback", onClick },
-      ],
+      items: null,
+      handleSidebarModal,
+      setModal,
     },
     {
       name: "settings",
@@ -85,7 +82,7 @@ const SplashNav = ({showSidebar, setShowSidebar, handleSignup, handleLogin}) => 
               </div>
             </div>
             <div className="dropdown-container">
-              <Sidebar items={items}/>
+              <Sidebar items={items} modal={modal} setModal={setModal}/>
             </div>
           </div>
         </nav>
