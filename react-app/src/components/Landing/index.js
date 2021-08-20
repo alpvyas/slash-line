@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router";
 import SplashNav from "../SplashNav";
 import LandingModal from "../LandingModal";
-import SidebarModal from "../SidebarModal";
+import SidebarModal from "../Sidebar/SidebarModal";
 import Footer from "../Footer";
 import baseball_grass from "../../images/baseball-grass.png";
 import "./landing.css";
@@ -64,7 +64,7 @@ const Landing = () => {
           modal={modal}
         />
         <div id="splash-container">
-          <SplashNav handleLogin={handleLogin} handleSignup={handleSignup} modal={modal} setModal={setModal} handleSidebarModal={handleSidebarModal}/>
+          <SplashNav handleLogin={handleLogin} handleSignup={handleSignup} setModal={setModal} handleSidebarModal={handleSidebarModal}/>
         </div>
       <Footer />
     </div>

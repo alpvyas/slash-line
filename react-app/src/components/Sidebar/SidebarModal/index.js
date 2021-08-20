@@ -1,19 +1,18 @@
-import React, { useState } from 'react';
+import React  from 'react';
 // import { NavLink, Redirect } from 'react-router-dom';
 import Dialog from '@material-ui/core/Dialog';
 import Grid from '@material-ui/core/Grid';
-import slashline_logo from "../../images/logo.png";
+import slashline_logo from "../../../images/logo.png";
 import Typography from '@material-ui/core/Typography';
 // import DialogContent from '@material-ui/core/DialogContent';
 // import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import ComingSoon from '../ComingSoon';
+import ComingSoon from './ComingSoon.js';
+import About from './About.js'
+import Admin from './Admin';
+import Feedback from './Feedback';
 
 const SidebarModal = ({ modal, open, setOpen }) => {
-
-    // const handleOpen = () => {
-    //   setOpen(true);
-    // };
 
     const handleClose = () => {
       setOpen(false);
@@ -23,8 +22,12 @@ const SidebarModal = ({ modal, open, setOpen }) => {
 
    if (modal === "coming-soon"){
      title = "Coming Soon"
-   } else if (modal === 'about'){
+   } else if (modal === "about"){
      title = "About"
+   } else if (modal === "admin") {
+     title = "Admin Login"
+   } else if (modal === "feedback") {
+     title = "Feedback"
    }
 
 
@@ -53,6 +56,9 @@ const SidebarModal = ({ modal, open, setOpen }) => {
         </div>
        
         {modal === 'coming-soon' && <ComingSoon />}
+        {modal === 'about' && <About />}
+        {modal === 'admin' && <Admin />}
+        {modal === 'feedback' && <Feedback />}
       </Dialog>
     </>
   );

@@ -8,55 +8,15 @@ import NotificationsIcon from "@material-ui/icons/Notifications";
 import slash_line from "../../images/slash-line.png";
 import "./splashNav.css"
 
-const SplashNav = ({modal, setModal, handleSignup, handleLogin, handleSidebarModal}) => {
+const SplashNav = ({ setModal, handleSignup, handleLogin, handleSidebarModal}) => {
 
   const onClick = (e, item) => {
   window.alert(JSON.stringify(item, null, 2));
   };
 
-  const items = [
-    {
-      name: "about",
-      label: "About",
-      items: null,
-      handleSidebarModal,
-      setModal,
-    },
-    {
-      name: "coming-soon", 
-      label: "Coming Soon",
-      items: null,
-      handleSidebarModal,
-      setModal,
-    },
-    {
-      name: "settings",
-      label: "Settings",
-      Icon: SettingsIcon,
-      items: [
-        { 
-          name: "display",
-          label: "Display",
-          items: [
-            {name: "dark-mode", label: "Dark Mode", onClick}
-          ],
-        },
-        {
-          name: "notifications",
-          label: "Notifications",
-          Icon: NotificationsIcon,
-          items: [
-            {name: "email", label: "Email", onClick},
-            {name: "mobile", label: "Text message", onClick}
-          ],
-        },
-      ]
-    },
-  ]
-
   return (
     <>
-      {/* {(showSidebar)?<Sidebar setShowSidebar={setShowSidebar}/>:null} */}
+ 
           <nav className="nav-bar" id="splash-nav">
           <div className="container nav-container">
             <div className="container logo-container">
@@ -64,7 +24,6 @@ const SplashNav = ({modal, setModal, handleSignup, handleLogin, handleSidebarMod
             </div>
             <div className="name-container">
               <div id="title" alt="slash-line">Slash Line Baseball</div>
-              {/* <img id="logo-image" alt="logo" src={slash_line} /> */}
             </div>
             <div className="tab-container">
               <div className="nav-link-tab" id="stats-tab">
@@ -82,7 +41,7 @@ const SplashNav = ({modal, setModal, handleSignup, handleLogin, handleSidebarMod
               </div>
             </div>
             <div className="dropdown-container">
-              <Sidebar items={items} modal={modal} setModal={setModal}/>
+              <Sidebar setModal={setModal} handleSidebarModal={handleSidebarModal}/>
             </div>
           </div>
         </nav>
