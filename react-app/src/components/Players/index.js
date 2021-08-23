@@ -35,11 +35,13 @@ const Players = () => {
   };
 
   const getStats = async (player) => {
-    const response = await dispatch(get_single_player_stats(player))
+    const playerStats = await dispatch(get_single_player_stats(player))
+    const playerInfo = await dispatch(get_single_player_stats(player))
 
-    setSpotlightPlayer(response);
+    setSpotlightPlayer(playerStats);
     setSpotlightName(player.full_name);
     setPlayerID(player.mlb_player_id);
+    setModal(true);
   
   }
 
@@ -139,30 +141,14 @@ const Players = () => {
               <h3>Players</h3>
             </div>
             <ReactTable columns={columns} data={players} allPlayers={true}/>
-            <PlayerModal open={modal} playerID={playerID} player={spotlightPlayer}/>
+            <PlayerModal open={modal} setOpen={setModal} playerID={playerID} player={spotlightPlayer}/>
           </div>
         </div>
-        <div className="bottom-container">
-           <div className="spotlight-container">
-             <div className="header">
-               <h3>Player Spotlight</h3>
-             </div>
-             <div className="image-details-container">
-              <div className="player-image-container">
-                <img src={`https://img.mlbstatic.com/mlb-photos/image/upload/d_people:generic:headshot:67:current.png/w_426,q_auto:best/v1/people/${playerID}/headshot/67/current`} alt="player-img" className="player-image" />
-              </div>
-              <div className="player-details-container">
-                <PlayerDetail player={spotlightPlayer} name={spotlightName}/>
-              </div>
-             </div>
-           </div>
-           {/* <div className="misc-container"></div> */}
-         </div>
         <div className="footer-container">
           <Footer />
-         </div>
+        </div>
       </div>
   )
-}
+};
 
 export default Players;
