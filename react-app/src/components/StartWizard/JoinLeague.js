@@ -62,7 +62,11 @@ const JoinLeague = ({ setStep, leagueID, setLeagueID }) => {
     const regex = /^[0-9]{4,4}$/;
 
     if (!(regex.test(String(code)))) {
-      setErrors({...errors, passcodeError: 'Passcode must be exactly four digits.', passcodeErrorStatus: true});
+      setErrors({
+        ...errors,
+        passcodeError: 'Passcode must be exactly four digits.',
+        passcodeErrorStatus: true
+      });
     } else {
       setErrors({...errors, passcodeError: '', passcodeErrorStatus: false});
     }
@@ -72,7 +76,11 @@ const JoinLeague = ({ setStep, leagueID, setLeagueID }) => {
     const regex = /^[0-9]*$/;
 
     if (!(regex.test(String(id)))) {
-      setErrors({...errors, leagueIDError: 'League ID must only contain digits.', leagueIDErrorStatus: true});
+      setErrors({
+        ...errors,
+        leagueIDError: 'League ID must only contain digits.',
+        leagueIDErrorStatus: true
+      });
     } else {
       setErrors({...errors, leagueIDError: '', leagueIDErrorStatus: false});
     }
@@ -94,11 +102,19 @@ const JoinLeague = ({ setStep, leagueID, setLeagueID }) => {
     .then(
       (check) => {
         if (check.ok) {
-          setErrors({...errors, joinLeagueError: '', joinLeagueErrorStatus: false})
+          setErrors({
+            ...errors,
+            joinLeagueError: '',
+            joinLeagueErrorStatus: false
+          })
           setStep('createTeam');
         }
         else {
-          setErrors({...errors, joinLeagueError: check.errors, joinLeagueErrorStatus: true})
+          setErrors({
+            ...errors,
+            joinLeagueError: check.errors,
+            joinLeagueErrorStatus: true
+          })
         }
       }
     )
@@ -117,7 +133,8 @@ const JoinLeague = ({ setStep, leagueID, setLeagueID }) => {
       </DialogTitle>
         <DialogContent>
         <DialogContentText>
-          {leagueType === '' && <Typography variant="h6" align="center">Time to join a league! To join a private league you'll need a league ID and a passcode. If you don't have that info you can join one of the many open leagues that are available. </Typography>}
+          {leagueType === '' && 
+            <Typography variant="h6" align="center">Time to join a league! To join a private league you'll need a league ID and a passcode. If you don't have that info you can join one of the many open leagues that are available. </Typography>}
 
           {leagueType === 'private' && <Typography variant="h6" align="center">Please enter the league ID and passcode of the league you'd like to join.</Typography>}
           {errors.joinLeagueErrorStatus && <Typography style={{color: 'red'}} variant="h6" align="center">Something went wrong. Please try entering the league ID and passcode again.</Typography>}
