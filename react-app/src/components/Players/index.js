@@ -13,6 +13,7 @@ import mookie_betts from "../../images/mookie_betts.png";
 import { get_single_player_stats } from "../../store/stats";
 import { game_details } from "../../mock_game_data";
 import Button from '@material-ui/core/Button';
+import PlayerModal from "../PlayerModal";
 
 
 const Players = () => {
@@ -26,6 +27,12 @@ const Players = () => {
   const [spotlightName, setSpotlightName] = useState("");
   const [playerID, setPlayerID] =useState("");
 
+  const [modal, setModal] = useState(false);
+
+
+  const handleModal = () => {
+    setModal(!modal);
+  };
 
   const getStats = async (player) => {
     const response = await dispatch(get_single_player_stats(player))
@@ -132,6 +139,7 @@ const Players = () => {
               <h3>Players</h3>
             </div>
             <ReactTable columns={columns} data={players} allPlayers={true}/>
+            <PlayerModal open={modal} playerID={playerID} player={spotlightPlayer}/>
           </div>
         </div>
         <div className="bottom-container">
