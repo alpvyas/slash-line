@@ -8,8 +8,6 @@ import Footer from "../Footer";
 import "./Players.css";
 import houser_bunt from "../../images/houser-bunt.png";
 import { add_player } from "../../store/userTeams";
-import PlayerDetail from "../PlayerDetails";
-import mookie_betts from "../../images/mookie_betts.png";
 import { get_single_player_stats } from "../../store/stats";
 import { game_details } from "../../mock_game_data";
 import Button from '@material-ui/core/Button';
@@ -24,7 +22,6 @@ const Players = () => {
   const players = useSelector(state => state.players.players);
 
   const [spotlightPlayer, setSpotlightPlayer] = useState({});
-  const [spotlightName, setSpotlightName] = useState("");
   const [playerID, setPlayerID] =useState("");
 
   const [modal, setModal] = useState(false);
@@ -36,13 +33,10 @@ const Players = () => {
 
   const getStats = async (player) => {
     const playerStats = await dispatch(get_single_player_stats(player))
-    const playerInfo = await dispatch(get_single_player_stats(player))
 
     setSpotlightPlayer(playerStats);
-    setSpotlightName(player.full_name);
     setPlayerID(player.mlb_player_id);
     setModal(true);
-  
   }
 
  const addPlayer = (player) => {

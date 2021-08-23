@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import NavBar from "../NavBar";
 import Carousel from "../Carousel";
@@ -7,10 +7,19 @@ import ReactTable from "../ReactTable";
 import Footer from "../Footer";
 import "./Stats.css";
 import Scorecard from "../Containers/Scorecard";
+import PlayerModal from "../PlayerModal";
 import { game_details } from "../../mock_game_data";
+import { get_single_player_stats } from "../../store/stats";
+
 
 const Stats = () => {
+  const dispatch = useDispatch();
   const stats = useSelector(state => state.stats.stats.stats);
+
+  const [spotlightPlayer, setSpotlightPlayer] = useState({});
+  const [playerID, setPlayerID] =useState("");
+
+  const [modal, setModal] = useState(false);
 
   // const game_details = useSelector(state => state.gameDetails.gameDetails);
   const gameDetails = game_details;
@@ -19,10 +28,23 @@ const Stats = () => {
     <Scorecard game={game_detail}/>
   ));
 
+  const getStats = async (player) => {
+    const playerStats = await dispatch(get_single_player_stats(player))
+
+    setSpotlightPlayer(playerStats);
+    setPlayerID(player.mlb_player_id);
+    setModal(true);
+  }
+
   const columns = useMemo(() => [
     {
       Header: "Player",
       accessor: "full_name",
+      Cell: props => (
+        <button className="player-name-button" onClick={() => getStats(props.row.original)}>
+          {props.row.original.full_name}
+        </button>
+      ),
     },
     {
       Header: "Team",
@@ -109,6 +131,7 @@ const Stats = () => {
                 <h3>Stats</h3>
               </div>
               <ReactTable columns={columns} data={stats} allPlayers={true}/>
+              <PlayerModal open={modal} setOpen={setModal} playerID={playerID} player={spotlightPlayer}/>
             </div>
         </div>
         <Footer />
