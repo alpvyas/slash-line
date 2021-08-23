@@ -139,7 +139,9 @@ def get_season_stats(player_id):
 
     stats = Player_Stats.query.filter_by(mlb_player_id=player_id).first()
 
-    return jsonify(stats.to_dict())
+    player = Player.query.filter_by(mlb_player_id=player_id).first()
+
+    return jsonify({"stats": stats.to_dict(), "info": player.to_dict()})
 
 # ------------------------------------------------------------------------------
 #                    RESTful Routes -- Stats

@@ -24,6 +24,31 @@ const PlayerModal = ({ open, setOpen, playerID, player }) => {
       setOpen(false);
     };
 
+    const playerPosition = (position) => {
+      switch (Number(position)) {
+        case 1:
+          return "a Pitcher";
+        case 2:
+          return "a Catcher";
+        case 3:
+          return "a First Baseman";
+        case 4:
+          return "a Second Baseman";
+        case 5:
+          return "a Third Baseman";
+        case 6:
+          return "a Shortstop";
+        case 7:
+          return "an Outfielder";
+        case 8:
+          return "an Outfielder";
+        case 9:
+          return "an Outfielder";
+        default:
+          return "a Player";
+      }
+    };
+
   return (
     <>
       <Dialog
@@ -31,6 +56,8 @@ const PlayerModal = ({ open, setOpen, playerID, player }) => {
         onClose={handleClose}
         aria-labelledby="form-dialog-title"
         style={{ overflow: "hidden" }}
+        fullWidth
+        maxWidth={'lg'}
       >
         <div style={{ padding: 20 }}>
         <Grid
@@ -45,18 +72,22 @@ const PlayerModal = ({ open, setOpen, playerID, player }) => {
         </Grid>
         </div>
         <DialogTitle id="form-dialog-title">
-          <Typography variant="h4" align="center">Welcome!</Typography>
+          <Typography variant="h4" align="center">{player.full_name}</Typography>
         </DialogTitle>
           <DialogContent>
-          <DialogContentText>
-            <Typography variant="h6" align="center">Let's get you started here at Slash Line. When you're ready to start, click below.</Typography>
-          </DialogContentText>
-          <div className="player-image-container">
-                <img src={`https://img.mlbstatic.com/mlb-photos/image/upload/d_people:generic:headshot:67:current.png/w_426,q_auto:best/v1/people/${playerID}/headshot/67/current`} alt="player-img" className="player-image" />
+            <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'start', alignItems: 'center'}}>
+
+              <img src={`https://img.mlbstatic.com/mlb-photos/image/upload/d_people:generic:headshot:67:current.png/w_426,q_auto:best/v1/people/${playerID}/headshot/67/current`} alt="player-img" className="player-image"
+              style={{marginRight: '5vh'}} />
+
+              <div className="player-stats-container" style={{display: 'flex', flexDirection: 'column', width: '90vh'}}>
+                <DialogContentText>
+                  <Typography variant="h6" align="center">{player.info.full_name} is {playerPosition(player.info.primary_position)} for the {player.info.mlb_team_name}</Typography>
+                </DialogContentText>
+                {/* <Table columns={columnsA} rows={[player.info]} row_keys={row_keys_A}/> */}
+                <Table columns={columnsB} rows={[player.stats]} row_keys={row_keys_B}/>
               </div>
-            <div className="player-stats-container">
-            <Table columns={columnsB} rows={[player.player]} row_keys={row_keys_B}/>
-          </div>
+            </div>
           </DialogContent>
           <DialogActions style={{justifyContent: 'center'}}>
           </DialogActions>

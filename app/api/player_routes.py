@@ -12,7 +12,6 @@ player_routes = Blueprint("player_routes",
 
 def add_players():
     players = json.loads(request.data.decode("utf-8"))
-    print("PLAYERS FROM FRONT END: ", players)
 
     d = Player.query.all()
     for player in d:
@@ -64,6 +63,13 @@ def get_players():
     return jsonify({"players": [player.to_dict() for player in players],
                     "message": "Retrieved players successfully."})
 
+
+def get_single_player(player_id):
+
+    player = Player.query.filter_by(mlb_player_id=player_id).first()
+
+    return jsonify(player.to_dict())
+
 # ------------------------------------------------------------------------------
 #                    RESTful Routes -- Players
 # ------------------------------------------------------------------------------
@@ -72,6 +78,11 @@ def get_players():
 @player_routes.route("/", methods=['GET'])
 def get_players_from_db():
     return get_players()
+
+
+@player_routes.route("/<string:player_id>")
+def get_player(player_id):
+    return get_single_player(player_id)
 
 
 @player_routes.route("/", methods=['POST'])
