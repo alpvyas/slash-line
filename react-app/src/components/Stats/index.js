@@ -17,7 +17,7 @@ const Stats = () => {
   const stats = useSelector(state => state.stats.stats.stats);
 
   const [spotlightPlayer, setSpotlightPlayer] = useState({});
-  const [playerID, setPlayerID] =useState("");
+  const [playerID, setPlayerID] = useState("");
 
   const [modal, setModal] = useState(false);
 
@@ -131,7 +131,7 @@ const Stats = () => {
                 <h3>Stats</h3>
               </div>
               <ReactTable columns={columns} data={stats} allPlayers={true}/>
-              <PlayerModal open={modal} setOpen={setModal} playerID={playerID} player={spotlightPlayer}/>
+              {modal && <PlayerModal open={modal} setOpen={setModal} playerID={playerID} player={spotlightPlayer}/>}
             </div>
         </div>
         <Footer />
