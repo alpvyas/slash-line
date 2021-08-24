@@ -2,13 +2,15 @@ import React, { useState }from "react";
 import { useDispatch, useSelector} from "react-redux";
 import { joinOpenLeague } from "../../store/getStarted";
 import { setSelectedTeam, setCurrentLeague } from "../../store/leagues";
-
+import TeamModal from "../TeamModal";
 import "./Table.css";
 
 const Table = ({ columns, rows, row_keys, teams, leagues, joinOpen }) => {
   const dispatch = useDispatch();
   const userLeagues = useSelector(state => state.leagues.leagues);
   const currentLeague = useSelector(state => state.leagues.current);
+  const [team, setTeam] = useState("");
+  const [teamModal, setTeamModal] = useState(false);
 
   const generateKey = () => {
     return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
@@ -16,10 +18,12 @@ const Table = ({ columns, rows, row_keys, teams, leagues, joinOpen }) => {
 
   const selectRow = (row) => {
     if (teams) {
-      const selected = currentLeague.league.teams[row.id];
-      dispatch(setSelectedTeam(selected))
+      const selectedTeam = currentLeague.league.teams[row.id];
+      console.log("TEAM: ", selectedTeam)
+      setTeam(selectedTeam);
+      setTeamModal(true);
+      dispatch(setSelectedTeam(selectedTeam))
     }else if (leagues) {
-      console.log("LEAGUE:::: ", userLeagues[row.id])
       dispatch(setCurrentLeague(userLeagues[row.id]))
     }else if (joinOpen) {
       dispatch(joinOpenLeague(row))
@@ -29,6 +33,7 @@ const Table = ({ columns, rows, row_keys, teams, leagues, joinOpen }) => {
   return (
     <>
     {/* {console.log("INSIDE TABLE: ", rows[0])} */}
+      {teamModal && <TeamModal open={teamModal} setOpen={setTeamModal} team={team}/>}
       <table className="dodgers-table">
         <thead>
           <tr key={ generateKey() }>
@@ -41,7 +46,6 @@ const Table = ({ columns, rows, row_keys, teams, leagues, joinOpen }) => {
           {rows.map((row, index) => (
             <tr className="non-header-row" key={ generateKey() } onClick={() => selectRow(row)}>
               {row_keys.map((key) => (
-                // console.log("KEY: ", row.key)
                 <td key={ generateKey() }>{row[key]}</td>
               ))}
               
