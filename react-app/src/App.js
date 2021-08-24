@@ -16,14 +16,12 @@ import Testing from "./components/Testing/";
 import Stats from "./components/Stats";
 import NotFound from "./components/NotFound";
 import Dropzone from "./components/Dropzone";
-// import GettingStarted from "./components/GettingStarted";
 import StartWizard from "./components/StartWizard";
 import Admin from "./components/Admin";
 
 
 function App() {
   const dispatch = useDispatch();
-  // const [initialized, setInitialized] = useState(false);
   const authenticated = useSelector(state => state.session.authenticated);
   const [loaded, setLoaded] = useState(false);
   
@@ -115,7 +113,7 @@ return (
         <ProtectedRoute exact path="/home" authenticated={authenticated}>
           <Homepage />
         </ProtectedRoute>
-        <ProtectedRoute exact path="/profile/users/:profileId" authenticated={authenticated}>
+        <ProtectedRoute exact path="/profile" authenticated={authenticated}>
           <Profile />
         </ProtectedRoute>
         <ProtectedRoute path="/myteam" authenticated={authenticated}>

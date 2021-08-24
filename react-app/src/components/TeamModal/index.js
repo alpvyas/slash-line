@@ -113,19 +113,7 @@ const TeamModal = ({ open, setOpen, team }) => {
             variant="h4"
             align="center"
           >
-            Team: {team.info.name}
-          </Typography>
-          <Typography
-            variant="h5"
-            align="center"
-          >
-           {`Manager: ${team.user.first_name} ${team.user.last_name}`}
-          </Typography>
-          <Typography
-            variant="h5"
-            align="center"
-          >
-           {`Username: ${team.user.username}`}
+            {team.info.name}
           </Typography>
         </DialogTitle>
           <DialogContent>
@@ -139,9 +127,8 @@ const TeamModal = ({ open, setOpen, team }) => {
                     variant="h6"
                     align="center"
                   >
-                    {/* {`${player.info.full_name} is
-                    ${playerPosition(player.info.primary_position)} for the 
-                    ${player.info.mlb_team_name}`} */}
+                    {`${team.info.name} is managed by
+                    ${team.user.first_name} ${team.user.last_name}(${team.user.username})`}
                   </Typography>
                 </DialogContentText>
                 <ReactTable 

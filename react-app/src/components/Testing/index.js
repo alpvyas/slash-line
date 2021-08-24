@@ -73,8 +73,8 @@ const Testing = () => {
 
       {/* <CreateLeagueForm /> */}
 
-      <Loading />
-      
+      {/* <Loading /> */}
+
     </>
   )
 
