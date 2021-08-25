@@ -104,16 +104,13 @@ return (
         <Route exact path="/">
           <Landing authenticated={authenticated} setAuthenticated={setAuthenticated}/>
         </Route>
-        {/* <Route exact path="/home"> */}
-          {/* <Homepage /> */}
-        {/* </Route> */}
         <ProtectedRoute exact path="/getting-started" authenticated={authenticated}>
           <StartWizard />
         </ProtectedRoute>
         <ProtectedRoute exact path="/home" authenticated={authenticated}>
           <Homepage />
         </ProtectedRoute>
-        <ProtectedRoute exact path="/profile" authenticated={authenticated}>
+        <ProtectedRoute exact path="/profile/user/:id" authenticated={authenticated}>
           <Profile />
         </ProtectedRoute>
         <ProtectedRoute path="/myteam" authenticated={authenticated}>
