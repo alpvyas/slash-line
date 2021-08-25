@@ -15,12 +15,14 @@ import Confirm from './Confirm';
 const StartWizard = () => {
   const user = useSelector(state => state.session.user);
   const [step, setStep] = useState("start");
+  const [buildStep, setBuildStep] = useState('name');
   const [teamName, setTeamName] = useState('');
   const [colors, setColors] = useState({}); 
   const [leagueID, setLeagueID] = useState('');
   const [aboutMe, setAboutMe] = useState('');
   const [location, setLocation] = useState('');
   const [avatar, setAvatar] = useState(null);
+  const [modalWidth, setModalWidth] = useState('sm');
 
   const userID = user["id"];
 
@@ -38,11 +40,11 @@ const StartWizard = () => {
 <>
         <Dialog
             open={true}
-            // onClose={handleClose}
             aria-labelledby="form-dialog-title"
-            // style={{ overflow: "hidden", background: `url(${ballInGlove}) no-repeat center center fixed`, objectFit: 'fill'}}
             style={{ background: `url(${ballInGlove}) no-repeat center center fixed`, backgroundSize: "cover"}}
             className="page-container"
+            maxWidth={modalWidth}
+            fullScreen={buildStep === 'color'}
           >
             <div style={{ padding: 20 }}>
             <Grid
@@ -61,7 +63,7 @@ const StartWizard = () => {
 
             {step === 'joinLeague' && <JoinLeague setStep={setStep} leagueID={leagueID} setLeagueID={setLeagueID} />}
 
-            {step === 'createTeam' && <CreateTeam setStep={setStep} leagueID={leagueID} setTeamName={setTeamName} teamName={teamName} setColors={setColors} colors={colors}/>}
+            {step === 'createTeam' && <CreateTeam setStep={setStep} buildStep={buildStep} setBuildStep={setBuildStep} leagueID={leagueID} setTeamName={setTeamName} teamName={teamName} setColors={setColors} colors={colors}/>}
 
             {step === 'profile' && <ProfileBasics setStep={setStep} setAboutMe={setAboutMe} setLocation={setLocation} setAvatar={setAvatar} user={user}/>}
 

@@ -66,7 +66,6 @@ const Profile = () => {
   const leagues = useSelector(state => state.leagues.leagues);
   const profile = useSelector(state => state.session.profile);
   const [userProfile, setUserProfile] = useState("");
-  const [errors, setErrors] = useState("");
   const [checked, setChecked] = useState(true);
 
   const handleChange = () => {
@@ -74,13 +73,8 @@ const Profile = () => {
   };
 
   useEffect(() => {
-    const response = dispatch(getUser(id));
-  }, []);
-
-  useEffect(() => {
-    if (user) {
-      dispatch(getUserLeagues(id));
-      }
+    dispatch(getUser(id));
+    dispatch(getUserLeagues(id));
   }, []);
 
   const leaguesArray = []

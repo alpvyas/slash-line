@@ -34,8 +34,6 @@ const Feedback = () => {
                 type="text"
                 multiline
                 style={{ align: 'center'}}
-                // error={errors.teamNameErrorStatus}
-                // helperText={errors.teamNameError}
                 onChange={(e) => null}
               />
         </DialogContent>
