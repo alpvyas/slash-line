@@ -9,8 +9,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Avatar from '@material-ui/core/Avatar';
+import Zoom from '@material-ui/core/Zoom';
 import { Typography } from '@material-ui/core';
 import { getUserLeagues, setCurrentLeague, setSelectedTeam } from "../../store/leagues";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -57,9 +59,14 @@ const useStyles = makeStyles((theme) => ({
 const Profile = () => {
  
   const dispatch = useDispatch();
-  const { profileId } = useParams();
+  const [checked, setChecked] = useState(true);
+
   const user = useSelector(state => state.session.user)
   const leagues = useSelector(state => state.leagues.leagues);
+
+  const handleChange = () => {
+    setChecked((prev) => !prev);
+  };
 
   useEffect(() => {
     if (user) {
@@ -80,7 +87,9 @@ const Profile = () => {
         <NavBar />
         <div className={classes.mainContent}>
           <Paper className={classes.mainHeader}></Paper>
-          <Avatar className={classes.avatar}/>
+          <Zoom in={true} style={{ transitionDelay: checked ? '300ms' : '0ms' }}>
+            <Avatar className={classes.avatar}/>
+          </Zoom>
           <Paper className={classes.leagues}>
             <Typography>These are the leagues you've joined: </Typography>
             <Table columns={["League Name"]} rows={leaguesArray} row_keys={["name"]}/>

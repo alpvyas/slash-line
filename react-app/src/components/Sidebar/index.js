@@ -32,8 +32,11 @@ const styles = {
 };
 
 const SidebarItem = ({ setModal, handleModal, expanded, item, depthStep = 25, depth =0, ...rest }) => {
+    const history = useHistory();
     const [collapsed, setCollapsed] = useState(true);
     const { name, label, items, Icon, auth, modal } = item;
+
+    const user = useSelector(state => state.session.user);
 
     const toggle = () => {
         setCollapsed(value => !value)
@@ -41,17 +44,21 @@ const SidebarItem = ({ setModal, handleModal, expanded, item, depthStep = 25, de
 
     const handleAdmin = () => {
         <NavLink to="/admin" exact={true} className="inactive" activeClassName="active"/>
-        
+    };
+    const handleProfile = () => {
+        history.push(`/profile/user/${user.id}`);
     };
 
     const onClick = e => {
         if (Array.isArray(items)) {
             toggle();
-        }else if (modal === 1){
+        } else if (modal === 1){
             setModal(name);
             handleModal();
         } else if (name === "admin") {
             handleAdmin();
+        } else if (name === "profile") {
+            handleProfile()
         }
     }
 
@@ -71,7 +78,7 @@ const SidebarItem = ({ setModal, handleModal, expanded, item, depthStep = 25, de
             button
             className="sidebar-item"
             dense
-            onClick={() => onClick()}
+            onClick={(e) => onClick(e)}
             {...rest}
             >
                 <div
