@@ -12,6 +12,7 @@ import Avatar from '@material-ui/core/Avatar';
 import Zoom from '@material-ui/core/Zoom';
 import { Typography } from '@material-ui/core';
 import { getUserLeagues, setCurrentLeague, setSelectedTeam } from "../../store/leagues";
+import { getUser } from '../../store/session';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -59,18 +60,26 @@ const useStyles = makeStyles((theme) => ({
 const Profile = () => {
  
   const dispatch = useDispatch();
-  const [checked, setChecked] = useState(true);
-
+  
+  const { id } = useParams();
   const user = useSelector(state => state.session.user)
   const leagues = useSelector(state => state.leagues.leagues);
+  const profile = useSelector(state => state.session.profile);
+  const [userProfile, setUserProfile] = useState("");
+  const [errors, setErrors] = useState("");
+  const [checked, setChecked] = useState(true);
 
   const handleChange = () => {
     setChecked((prev) => !prev);
   };
 
   useEffect(() => {
+    const response = dispatch(getUser(id));
+  }, []);
+
+  useEffect(() => {
     if (user) {
-      dispatch(getUserLeagues(user.id))
+      dispatch(getUserLeagues(id));
       }
   }, []);
 
@@ -82,21 +91,23 @@ const Profile = () => {
   const classes = useStyles();
   return (
     <>
-    {console.log("LEAGUES::::", leagues)}
-      <div className={classes.root}>
-        <NavBar />
-        <div className={classes.mainContent}>
-          <Paper className={classes.mainHeader}></Paper>
-          <Zoom in={true} style={{ transitionDelay: checked ? '300ms' : '0ms' }}>
-            <Avatar className={classes.avatar}/>
-          </Zoom>
-          <Paper className={classes.leagues}>
-            <Typography>These are the leagues you've joined: </Typography>
-            <Table columns={["League Name"]} rows={leaguesArray} row_keys={["name"]}/>
-          </Paper>
+      {profile && 
+        <div className={classes.root}>
+          <NavBar />
+          <div className={classes.mainContent}>
+            <Paper className={classes.mainHeader}></Paper>
+            <Zoom in={true} style={{ transitionDelay: checked ? '300ms' : '0ms' }}>
+              <Avatar className={classes.avatar}>{profile.user.first_name[0] + profile.user.last_name[0]}</Avatar>
+            </Zoom>
+            <Paper className={classes.leagues}>
+              {Number(user.id) === Number(id) && <Typography>Your leagues: </Typography>}
+              {Number(user.id) !== Number(id) && <Typography>{`${profile.user.username}'s leagues:`} </Typography>}
+              <Table columns={["League Name"]} rows={leaguesArray} row_keys={["name"]}/>
+            </Paper>
+          </div>
+          <Footer />
         </div>
-        <Footer />
-      </div>
+      }
     </>
   )
 }

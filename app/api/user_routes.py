@@ -43,3 +43,16 @@ def validate_email():
         return jsonify(0)
     else:
         return jsonify(1)
+
+
+@user_routes.route('/profile/<int:user_id>', methods=['GET'])
+def get_user(user_id):
+    user = User.query.filter_by(id=user_id).first()
+
+    if user is not None:
+        return jsonify({"user": user.to_dict(), "errors": ""})
+
+    return jsonify(
+        {
+            "errors": "An unexpected error occurred. Please try again."
+        })

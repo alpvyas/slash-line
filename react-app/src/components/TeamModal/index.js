@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react';
+import { Link } from "react-router-dom";
 import Dialog from '@material-ui/core/Dialog';
 import Grid from '@material-ui/core/Grid';
 import slashline_logo from "../../images/logo.png";
@@ -128,7 +129,8 @@ const TeamModal = ({ open, setOpen, team }) => {
                     align="center"
                   >
                     {`${team.info.name} is managed by
-                    ${team.user.first_name} ${team.user.last_name}(${team.user.username})`}
+                    ${team.user.first_name} ${team.user.last_name}(`}
+                    <Link to={`/profile/user/${team.user.id}`}>{team.user.username}</Link>{`)`}
                   </Typography>
                 </DialogContentText>
                 <ReactTable 

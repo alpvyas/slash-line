@@ -5,6 +5,7 @@ const GET_USER = "session/GET_USER";
 const NEW_USER = "session/NEW_USER";
 const REMOVE_USER = "session/REMOVE_USER";
 const SET_AUTH = "session/SET_AUTH";
+const SET_PROFILE = "session/SET_PROFILE";
 
 
 const setUser = user => {
@@ -31,6 +32,13 @@ const setAuthStatus = authStatus => {
   return {
     type: SET_AUTH,
     payload: authStatus,
+  };
+};
+
+const setUserProfile = user => {
+  return {
+    type: SET_PROFILE,
+    payload: user
   };
 };
 
@@ -150,6 +158,16 @@ export const signup = (username, firstName, lastName, email, password) =>
     dispatch(setAuthStatus(authStatus));
   };
 
+  export const getUser = (userID) => async (dispatch) => {
+    const response = await fetch(`/api/users/profile/${userID}`);
+
+    const user = await response.json();
+    // console.log("BACKEND USER::: ", user)
+    if (response.ok && !user.errors) {
+      dispatch(setUserProfile(user))
+    }
+  };
+
   const initialState = {authenticated: false};
   let newState;
 
@@ -173,6 +191,10 @@ export const signup = (username, firstName, lastName, email, password) =>
       case SET_AUTH:
         newState = {...state};
         newState.authenticated = true;
+        return newState;
+      case SET_PROFILE:
+        newState = {...state};
+        newState.profile = action.payload;
         return newState;
       default:
         return state;
