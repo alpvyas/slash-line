@@ -42,9 +42,6 @@ const SidebarItem = ({ setModal, handleModal, expanded, item, depthStep = 25, de
         setCollapsed(value => !value)
     }
 
-    const handleAdmin = () => {
-        <NavLink to="/admin" exact={true} className="inactive" activeClassName="active"/>
-    };
     const handleProfile = () => {
         history.push(`/profile/user/${user.id}`);
     };
@@ -55,8 +52,6 @@ const SidebarItem = ({ setModal, handleModal, expanded, item, depthStep = 25, de
         } else if (modal === 1){
             setModal(name);
             handleModal();
-        } else if (name === "admin") {
-            handleAdmin();
         } else if (name === "profile") {
             handleProfile()
         }
