@@ -25,6 +25,7 @@ const Feedback = () => {
           {errors && <Typography variant="h6" align="center" style={{color: 'red'}}>{ errors.message }</Typography>}
         </DialogContentText>
           <TextField
+                fullWidth
                 autoFocus
                 variant="outlined"
                 margin="dense"
@@ -32,7 +33,7 @@ const Feedback = () => {
                 label="Feedback"
                 type="text"
                 multiline
-                style={{width: '25vh', align: 'center'}}
+                style={{ align: 'center'}}
                 // error={errors.teamNameErrorStatus}
                 // helperText={errors.teamNameError}
                 onChange={(e) => null}
