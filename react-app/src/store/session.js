@@ -123,9 +123,7 @@ export const signup = (username, firstName, lastName, email, password) =>
         username,
       }),
     });
-    //  console.log("RESPONSE: ", response)
     const valid = await response.json();
-    console.log("valid: ", valid)
     return valid;
   };
 

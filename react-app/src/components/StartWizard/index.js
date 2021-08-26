@@ -13,6 +13,7 @@ import './StartWizard.css';
 import Confirm from './Confirm';
 
 const StartWizard = () => {
+  const dispatch = useDispatch();
   const user = useSelector(state => state.session.user);
   const [step, setStep] = useState("start");
   const [buildStep, setBuildStep] = useState('name');
@@ -34,6 +35,10 @@ const StartWizard = () => {
     aboutMe,
     location,
     avatar,
+  };
+
+  const handleSubmit = () => {
+      dispatch()
   };
 
   return (
