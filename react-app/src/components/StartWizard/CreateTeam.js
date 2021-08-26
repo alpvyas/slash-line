@@ -20,13 +20,12 @@ import { teamColors } from '../../team_colors';
 
 
 
-const CreateTeam = ({ setStep, leagueID, setTeamName, teamName, setColors, colors }) => {
+const CreateTeam = ({ setStep, buildStep, setBuildStep, leagueID, setTeamName, teamName, setColors, colors }) => {
 
   const dispatch = useDispatch();
   const [errors, setErrors] = useState({});
   const [teams, setTeams] = useState('');
   const [colorKeys, setColorKeys] = useState([]);
-  const [buildStep, setBuildStep] = useState('name');
 
   useEffect(() => {
     dispatch(get_league_teams(leagueID))
@@ -115,7 +114,7 @@ const CreateTeam = ({ setStep, leagueID, setTeamName, teamName, setColors, color
               >
                 {Object.values(mlbTeams).map(team => {
                   return (
-                    <Grid item xs={1}>
+                    <Grid item xs={0}>
                       <TeamAvatar updateColors={updateColors} logo={team} mlbTeams={mlbTeams}/>
                     </Grid>
                   )

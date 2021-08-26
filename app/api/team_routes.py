@@ -72,7 +72,7 @@ def add_team():
     team_data = request.json
 
     team = Team(name=team_data["name"],
-                # colors=team_data["colors"],
+                colors=team_data["colors"],
                 user_id=team_data["userID"],
                 league_id=team_data["leagueID"])
 

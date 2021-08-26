@@ -46,28 +46,12 @@ const ProfileBasics = ({ setStep, setAboutMe, setLocation, setAvatar, user }) =>
             <Avatar style={{height: '150px', width: '150px'}}>{user.first_name[0] + user.last_name[0]}</Avatar>
             <TextField
                 autoFocus
-                // variant="outlined"
                 margin="dense"
                 id="image"
-                // label="Location"
                 type="file"
-                style={{width: '25vh', align: 'center'}}
-                // error={errors.teamNameErrorStatus}
-                // helperText={errors.teamNameError}
+                style={{width: '30vh', align: 'center'}}
                 onChange={(e) => updateAvatar(e.target.file)}
               />
-            {/* <TextField
-                autoFocus
-                variant="outlined"
-                margin="dense"
-                id="location"
-                label="Location"
-                type="s"
-                style={{width: '25vh', align: 'center'}}
-                // error={errors.teamNameErrorStatus}
-                // helperText={errors.teamNameError}
-                onChange={(e) => updateLocation(e.target.value)}
-              /> */}
               <Autocomplete
                 id="location"
                 options={cities}
@@ -78,8 +62,8 @@ const ProfileBasics = ({ setStep, setAboutMe, setLocation, setAvatar, user }) =>
                     return `${option.name}, ${option.country}`;
                   }
                 }}
-                style={{ width: '25vh' }}
-                renderInput={(params) => <TextField {...params} label="Location" variant="outlined" margin="dense" style={{width: '25vh', align: 'center'}} onChange={(e) => updateLocation(e.target.value)}/>}
+                style={{ width: '30vh', align: 'center' }}
+                renderInput={(params) => <TextField {...params} label="Location" variant="outlined" margin="dense" style={{width: '30vh', align: 'center'}} onChange={(e) => updateLocation(e.target.value)}/>}
               />
             <TextField
                 autoFocus
@@ -89,7 +73,8 @@ const ProfileBasics = ({ setStep, setAboutMe, setLocation, setAvatar, user }) =>
                 label="About Me"
                 type="text"
                 multiline
-                style={{width: '25vh', align: 'center'}}
+                fullWidth
+                style={{ align: 'center' }}
                 // error={errors.teamNameErrorStatus}
                 // helperText={errors.teamNameError}
                 onChange={(e) => updateAboutMe(e.target.value)}

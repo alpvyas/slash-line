@@ -34,24 +34,42 @@ const joinOpen = (league) => (
   // },
   // });
   // console.log("HELLO!!!!")
-
-
 // }
+
+export const userSetUp = (userSelections) => async (dispatch) => {
+    const response = await fetch("/api/users/setup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        userSelections,
+      }),
+    });
+
+    const success = await response.json();
+
+    if (response.ok && !success.errors) {
+      return 1;
+    }
+    else {
+      return success.errors;
+    }
+};
 
 export const joinOpenLeague = () => async (dispatch) => {
     
   };
 
-  export const getOpenLeagues = () => async (dispatch) => {
-    const response = await fetch(`/api/leagues/open`, {
-    method: "GET",
-    });
+export const getOpenLeagues = () => async (dispatch) => {
+  const response = await fetch(`/api/leagues/open`, {
+  method: "GET",
+  });
 
-    const leagues = await response.json();
+  const leagues = await response.json();
 
-    console.log("OPEN LEAGUES: ", leagues)
-    return leagues
-  };
+  return leagues
+};
 
 /* ----------------------------------------------------------------------------
                           LEAGUES REDUCER

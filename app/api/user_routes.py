@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required
-from app.models import User
+from app.models import db, User, Profile, Team
 
 user_routes = Blueprint('users', __name__)
 
@@ -56,3 +56,26 @@ def get_user(user_id):
         {
             "errors": "An unexpected error occurred. Please try again."
         })
+
+
+@user_routes.route('/setup', methods=['POST'])
+def user_setup():
+    data = request.json
+
+    profile = Profile(bio=data["bio"],
+                      loaction=data["location"],
+                      avatar=data["data"],
+                      user_id=data["user"])
+
+    db.session.add(profile)
+    db.session.commit()
+    
+    team = Team(name=data["teamName"],
+                colors=data["colors"],
+                user_id=data["userID"],
+                league_id=data["leagueID"])
+
+    db.session.add(team)
+    db.session.commit()
+
+    return jsonify(profile.to_dict())
