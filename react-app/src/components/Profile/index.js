@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useSelector,useDispatch } from 'react-redux';
 import { NavLink, Redirect, useLocation } from "react-router-dom";
 import { useHistory, useParams } from 'react-router';
-import NavBar from "../NavBar";
 import Footer from "../Footer";
 import Table from "../Table";
 import { makeStyles } from '@material-ui/core/styles';
@@ -13,6 +12,8 @@ import Zoom from '@material-ui/core/Zoom';
 import { Typography } from '@material-ui/core';
 import { getUserLeagues, setCurrentLeague, setSelectedTeam } from "../../store/leagues";
 import { getUser } from '../../store/session';
+import SplashNav from "../SplashNav";
+import SidebarModal from "../Sidebar/SidebarModal";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -67,6 +68,12 @@ const Profile = () => {
   const profile = useSelector(state => state.session.profile);
   const [userProfile, setUserProfile] = useState("");
   const [checked, setChecked] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [modal, setModal] = useState("");
+
+  const handleSidebarModal = () => {
+    setSidebarOpen(true);
+  };
 
   const handleChange = () => {
     setChecked((prev) => !prev);
@@ -85,9 +92,14 @@ const Profile = () => {
   const classes = useStyles();
   return (
     <>
+      <SplashNav setModal={setModal} handleSidebarModal={handleSidebarModal}/>
       {profile && 
         <div className={classes.root}>
-          <NavBar />
+          <SidebarModal 
+          open={sidebarOpen}
+          setOpen={setSidebarOpen}
+          modal={modal}
+        />
           <div className={classes.mainContent}>
             <Paper className={classes.mainHeader}></Paper>
             <Zoom in={true} style={{ transitionDelay: checked ? '300ms' : '0ms' }}>

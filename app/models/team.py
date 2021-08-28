@@ -8,7 +8,7 @@ class Team(db.Model):
     id = db.Column(db.Integer, primary_key=True)
 
     name = db.Column(db.String(30), nullable=False, unique=True)
-    colors = db.Column(db.String(255), nullable=True)
+    logo = db.Column(db.String(30), nullable=True)
     points = db.Column(db.Integer, nullable=False, default=0)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
     league_id = db.Column(db.Integer, db.ForeignKey("leagues.id"),
@@ -22,6 +22,7 @@ class Team(db.Model):
         return {
             "id": self.id,
             "name": self.name,
+            "logo": self.logo,
             "points": self.points,
             "user_id": self.user_id,
             "league_id": self.league_id,

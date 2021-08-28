@@ -11,6 +11,8 @@ import { NavLink, Redirect, useHistory} from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { sidebarItems } from "./sidebarItems.js"
 import "./Sidebar.css";
+import SidebarModal from "../Sidebar/SidebarModal";
+
 
 const styles = {
   sideNav: {
@@ -34,7 +36,7 @@ const styles = {
 const SidebarItem = ({ setModal, handleModal, expanded, item, depthStep = 25, depth =0, ...rest }) => {
     const history = useHistory();
     const [collapsed, setCollapsed] = useState(true);
-    const { name, label, items, Icon, auth, modal } = item;
+    const { name, label, items, Icon, auth, modal } = item;;
 
     const user = useSelector(state => state.session.user);
 

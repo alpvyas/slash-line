@@ -172,7 +172,7 @@ const JoinLeague = ({ setStep, leagueID, setLeagueID }) => {
           {leagueType === 'open' && 
             <>
               <div className="leagues-container">
-                <div className="header">
+                <div className="header" style={{display: "flex", flexDirection: "row", justifyContent: "center"}}>
                   <h3>Leagues</h3>
                 </div>
                 <Table columns={columns} rows={leagues} row_keys={row_keys} joinOpen={true}/>

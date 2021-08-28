@@ -71,7 +71,7 @@ def user_setup():
     db.session.commit()
     
     team = Team(name=data["teamName"],
-                colors=data["colors"],
+                logo=data["teamLogo"],
                 user_id=data["userID"],
                 league_id=data["leagueID"])
 

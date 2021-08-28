@@ -72,7 +72,7 @@ def add_team():
     team_data = request.json
 
     team = Team(name=team_data["name"],
-                colors=team_data["colors"],
+                logo=team_data["teamLogo"],
                 user_id=team_data["userID"],
                 league_id=team_data["leagueID"])
 
@@ -104,7 +104,7 @@ def add_player_to_team(league_id, user_id):
 
     league_teams = Team.query.filter_by(league_id=league_id).all()
 
-    print("LEAGUE TEAMS: ", league_teams)
+    # print("LEAGUE TEAMS: ", league_teams)
     league_players = []
 
     for league_team in league_teams:

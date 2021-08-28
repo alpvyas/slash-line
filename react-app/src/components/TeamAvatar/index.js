@@ -12,7 +12,7 @@ const TeamAvatar = ({ updateColors, logo, mlbTeams }) => {
   return (
     <>
       <button className="avatar-container" onClick={() => updateColors(getKeyByValue(mlbTeams, logo))}>
-        <Avatar className="team-avatar" alt='team-logo' src={logo} style={{height: '150px', width: '150px'}}/>
+        <Avatar className="team-avatar" alt='team-logo' src={logo} style={{height: '20vh', width: '20vh'}}/>
       </button>
     </>
   )

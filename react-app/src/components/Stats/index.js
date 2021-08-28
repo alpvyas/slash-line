@@ -8,19 +8,28 @@ import Footer from "../Footer";
 import "./Stats.css";
 import Scorecard from "../Containers/Scorecard";
 import PlayerModal from "../PlayerModal";
+import LandingModal from "../LandingModal";
+import SidebarModal from "../Sidebar/SidebarModal";
 import { game_details } from "../../mock_game_data";
 import { get_single_player_stats } from "../../store/stats";
+import SplashNav from "../SplashNav";
 
 
 const Stats = () => {
   const dispatch = useDispatch();
   const stats = useSelector(state => state.stats.stats.stats);
+  const user = useSelector(state => state.session.user);
+  const [open, setOpen] = useState(false);
+  const [login, setLogin] = useState(true);
+  const [signup, setSignup] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const [spotlightPlayer, setSpotlightPlayer] = useState({});
   const [playerID, setPlayerID] = useState("");
 
+  const [playerModal, setPlayerModal] = useState(false);
   const [modal, setModal] = useState(false);
-
+  
   // const game_details = useSelector(state => state.gameDetails.gameDetails);
   const gameDetails = game_details;
 
@@ -33,8 +42,30 @@ const Stats = () => {
 
     setSpotlightPlayer(playerStats);
     setPlayerID(player.mlb_player_id);
-    setModal(true);
+    setPlayerModal(true);
   }
+
+  const handleSignup = () => {
+    if (login) setLogin(false);
+    setSignup(true);
+    setOpen(true);
+  };
+
+  const handleLogin = () => {
+    if (signup) setSignup(false);
+    setLogin(true);
+    setOpen(true);
+  };
+
+  const handleSidebarModal = () => {
+    setSidebarOpen(true);
+  };
+
+  // if (user && authenticated && !newUser) {
+  //   return (
+  //     <Redirect to="/home" />
+  //   )
+  // };
 
   const columns = useMemo(() => [
     {
@@ -119,9 +150,20 @@ const Stats = () => {
   return (
     <>
       <div className="container page-container" style={{backgroundImage: `url(${houser_bunt})`}}>
-          <div className="nav-bar-container">
-            <NavBar />
-          </div>
+          <SplashNav handleLogin={handleLogin} handleSignup={handleSignup} setModal={setModal} handleSidebarModal={handleSidebarModal}/>
+          <LandingModal
+          open={open}
+          setOpen={setOpen}
+          signup={signup}
+          setSignup={setSignup}
+          login={login}
+          setLogin={setLogin}
+        />
+        <SidebarModal 
+          open={sidebarOpen}
+          setOpen={setSidebarOpen}
+          modal={modal}
+        />
           <div className="score-carousel-container-stats">
             <Carousel children={games} show={4} infiniteLoop={true}/>
           </div>
@@ -131,7 +173,7 @@ const Stats = () => {
                 <h3>Stats</h3>
               </div>
               <ReactTable columns={columns} data={stats} allPlayers={true}/>
-              {modal && <PlayerModal open={modal} setOpen={setModal} playerID={playerID} player={spotlightPlayer}/>}
+              {playerModal && <PlayerModal open={playerModal} setOpen={setPlayerModal} playerID={playerID} player={spotlightPlayer}/>}
             </div>
         </div>
         <Footer />

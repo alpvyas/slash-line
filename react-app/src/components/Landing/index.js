@@ -7,6 +7,8 @@ import LandingModal from "../LandingModal";
 import SidebarModal from "../Sidebar/SidebarModal";
 import Footer from "../Footer";
 import baseball_grass from "../../images/baseball-grass.png";
+import ballInGlove from '../../images/baseball-glove-dirt.png';
+
 import "./landing.css";
 
 const Landing = () => {
@@ -49,7 +51,8 @@ const Landing = () => {
   };
 
   return (
-    <div className="container page-container" style={{backgroundImage: `url(${baseball_grass})`}}>
+    <>
+    <div className="container page-container splash-container" style={{ background: `url(${baseball_grass}) no-repeat center center fixed`, backgroundSize: "cover"}}>
         <LandingModal
           open={open}
           setOpen={setOpen}
@@ -63,11 +66,11 @@ const Landing = () => {
           setOpen={setSidebarOpen}
           modal={modal}
         />
-        <div id="splash-container">
-          <SplashNav handleLogin={handleLogin} handleSignup={handleSignup} setModal={setModal} handleSidebarModal={handleSidebarModal}/>
-        </div>
-      <Footer />
+        <SplashNav handleLogin={handleLogin} handleSignup={handleSignup} setModal={setModal} handleSidebarModal={handleSidebarModal} landing={true}/>
+
+        <Footer />
     </div>
+    </>
   )
 }
 
