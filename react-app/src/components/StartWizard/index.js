@@ -18,7 +18,8 @@ const StartWizard = () => {
   const [step, setStep] = useState("start");
   const [buildStep, setBuildStep] = useState('name');
   const [teamName, setTeamName] = useState('');
-  const [colors, setColors] = useState({}); 
+  const [colors, setColors] = useState({});
+  const [teamLogo, setTeamLogo] = useState('');
   const [leagueID, setLeagueID] = useState('');
   const [aboutMe, setAboutMe] = useState('');
   const [location, setLocation] = useState('');
@@ -30,6 +31,7 @@ const StartWizard = () => {
   const userSelections = {
     userID,
     teamName,
+    teamLogo,
     colors,
     leagueID,
     aboutMe,
@@ -68,7 +70,7 @@ const StartWizard = () => {
 
             {step === 'joinLeague' && <JoinLeague setStep={setStep} leagueID={leagueID} setLeagueID={setLeagueID} />}
 
-            {step === 'createTeam' && <CreateTeam setStep={setStep} buildStep={buildStep} setBuildStep={setBuildStep} leagueID={leagueID} setTeamName={setTeamName} teamName={teamName} setColors={setColors} colors={colors}/>}
+            {step === 'createTeam' && <CreateTeam setStep={setStep} buildStep={buildStep} setBuildStep={setBuildStep} leagueID={leagueID} setTeamName={setTeamName} teamName={teamName} setColors={setColors} colors={colors} setTeamLogo={setTeamLogo}/>}
 
             {step === 'profile' && <ProfileBasics setStep={setStep} setAboutMe={setAboutMe} setLocation={setLocation} setAvatar={setAvatar} user={user}/>}
 

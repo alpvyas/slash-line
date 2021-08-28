@@ -20,7 +20,7 @@ import { teamColors } from '../../team_colors';
 
 
 
-const CreateTeam = ({ setStep, buildStep, setBuildStep, leagueID, setTeamName, teamName, setColors, colors }) => {
+const CreateTeam = ({ setStep, buildStep, setBuildStep, leagueID, setTeamName, teamName, setColors, colors, setTeamLogo }) => {
 
   const dispatch = useDispatch();
   const [errors, setErrors] = useState({});
@@ -52,6 +52,7 @@ const CreateTeam = ({ setStep, buildStep, setBuildStep, leagueID, setTeamName, t
   };
 
   const updateColors = (team) => {
+    setTeamLogo(team);
     const colors = teamColors[team];
     setColors(colors);
     const colorKeys = Object.keys(colors);

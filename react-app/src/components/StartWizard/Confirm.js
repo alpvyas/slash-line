@@ -20,14 +20,14 @@ const Confirm = ({ userSelections }) => {
   const {
     userID,
     teamName,
-    colors,
+    teamLogo,
     leagueID,
     aboutMe,
     location,
     avatar } = userSelections;
 
   const handleSubmit = () => {
-    dispatch(addNewTeam(teamName, colors, leagueID, userID))
+    dispatch(addNewTeam(teamName, teamLogo, leagueID, userID))
   };
   return (
     <>

@@ -1,178 +1,178 @@
 export const teamColors = {
-  LAD: {
+  "LAD": {
     "dodger blue": "#005A9C",
     "red": "#EF3E42",
     "silver": "#A5ACAF",
     "white": "#FFFFFF",
   },
-  ARI: {
+  "ARI": {
     "sedona red": "#A71930",
     "sonoran sand": "#E3D4AD",
     "black": "#000000",
     "teal": "#30CED8",
     "white": "#FFFFFF",
   },
-  ATL: {
+  "ATL": {
     "scarlet": "#CE1141",
     "navy": "#13274F",
     "gold": "#EAAA00",
     "white": "#FFFFFF",
   },
-  BAL: {
+  "BAL": {
     "orange": "#DF4601",
     "black": "#000000",
     "white": "#FFFFFF",
   },
-  BOS: {
+  "BOS": {
     "red": "#BD3039",
     "blue": "#0C2340",
     "white": "#FFFFFF",
   },
-  CHC: {
+  "CHC": {
     "red": "#0E3386",
     "blue": "#CC3433",
     "white": "#FFFFFF",
   },
-  CHW: {
+  "CHW": {
     "black": "#27251F",
     "red": "#C4CED4",
     "white": "#FFFFFF",
   },
-  CIN: {
+  "CIN": {
     "red": "#C6011F",
     "black": "#000000",
     "white": "#FFFFFF",
   },
-  CLE: {
+  "CLE": {
     "navy blue": "#0C2340",
     "red": "#E31937",
     "white": "#FFFFFF",
   },
-  COL: {
+  "COL": {
     "rockies purple": "#33006F",
     "silver": "#C4CED4",
     "black": "#000000",
     "white": "#FFFFFF",
   },
-  DET: {
+  "DET": {
     "navy": "#0C2340",
     "orange": "#FA4616",
     "white": "#FFFFFF",
   },
-  HOU: {
+  "HOU": {
     "navy": "#002D62",
     "orange": "#EB6E1F",
     "light orange": "#F4911E",
     "white": "#FFFFFF",
   },
-  KC: {
+  "KC": {
     "royal blue": "#004687",
     "gold": "#BD9B60",
     "white": "#FFFFFF",
   },
-  LAA: {
+  "LAA": {
     "midnight blue": "#003263",
     "red": "#BA0021",
     "maroon": "#862633",
     "silver": "#C4CED4",
     "white": "#FFFFFF",
   },
-  MIA: {
+  "MIA": {
     "miami blue": "#00A3E0",
     "caliente red": "#EF3340",
     "slate gray": "#41748D",
     "black": "#000000",
     "white": "#FFFFFF",
   },
-  MIL: {
+  "MIL": {
     "yellow": "#FFC52F",
     "blue": "#12284B",
     "white": "#FFFFFF",
   },
-  MIN: {
+  "MIN": {
     "twins navy": "#002B5C",
     "scarlet red": "#D311145",
     "kasota gold": "#B9975B",
     "white": "#FFFFFF",
   },
-  NYM: {
+  "NYM": {
     "blue": "#002D72",
     "orange": "#FF5910",
     "white": "#FFFFFF",
   },
-  NYY: {
+  "NYY": {
     "blue": "#003087",
     "red": "#E4002C",
     "uniform navy": "#0C2340",
     "white": "#FFFFFF",
   },
-  OAK: {
+  "OAK": {
     "green": "#003831",
     "gold": "#EFB21E",
     "gray": "#A2AAAD",
     "white": "#FFFFFF",
   },
-  PHI: {
+  "PHI": {
     "red": "#E81828",
     "blue": "#002D72",
     "white": "#FFFFFF",
   },
-  PIT: {
+  "PIT": {
     "black": "#27251F",
     "gold": "#FBD827",
     "white": "#FFFFFF",
   },
-  STL: {
+  "STL": {
     "cardinal red": "#C41E3A",
     "navy": "#0C2340",
     "yellow": "#FEDB00",
     "white": "#FFFFFF",
   },
-  SD: {
+  "SD": {
     "padres brown": "#2F241D",
     "padres gold": "#FFC425",
     "white": "#FFFFFF",
   },
-  SF: {
+  "SF": {
     "orange": "#FD5A1E",
     "black": "#27251F",
     "beige": "#EFD19F",
     "gold": "#AE8F6F",
     "white": "#FFFFFF",
   },
-  SEA: {
+  "SEA": {
     "navy blue": "#0C2C56",
     "northwest green": "#005C5C",
     "silver": "#C4CED4",
     "red": "#D50032",
     "white": "#FFFFFF",
   },
-  TB: {
+  "TB": {
     "navy blue": "#092C5C",
     "columbia blue": "#8FBCE6",
     "yellow": "#F5D130",
     "white": "#FFFFFF",
   },
-  TEX: {
+  "TEX": {
     "blue": "#003278",
     "red": "#C0111F",
     "white": "#FFFFFF",
   },
-  TOR: {
+  "TOR": {
     "blue": "#134A8E",
     "navy blue": "#1D2D5C",
     "red": "#E8291C",
     "white": "#FFFFFF",
   },
-  WSH: {
+  "WSH": {
     "red": "#AB0003",
     "navy blue": "#14225A",
     "white": "#FFFFFF",
   },
-  MLB: {
+  "MLB": {
     "blue": "#002D72",
     "red": "#D50032",
     "white": "#FFFFFF",
   },
-  DARK: {},
+  "DARK": {},
 }

@@ -12,6 +12,10 @@ import { get_single_player_stats } from "../../store/stats";
 import Scorecard from "../Containers/Scorecard";
 import Carousel from "../Carousel";
 import { game_details } from "../../mock_game_data";
+import SplashNav from "../SplashNav";
+import SidebarModal from "../Sidebar/SidebarModal";
+import PlayerModal from "../PlayerModal";
+
 
 
 const MyTeam = () => {
@@ -25,6 +29,13 @@ const MyTeam = () => {
   const [spotlightPlayer, setSpotlightPlayer] = useState({});
   const [spotlightName, setSpotlightName] = useState("");
   const [playerID, setPlayerID] = useState("");
+  const [playerModal, setPlayerModal] = useState(false);
+  const [modal, setModal] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  const handleSidebarModal = () => {
+    setSidebarOpen(true);
+  };
 
   // console.log("CL TEAM PAGE: ", currentLeague)
   // console.log("CT TEAM PAGE: ", currentTeam)
@@ -47,6 +58,7 @@ const MyTeam = () => {
     setSpotlightPlayer(response);
     setSpotlightName(player.full_name);
     setPlayerID(player.mlb_player_id);
+    setPlayerModal(true);
     
   }
 
@@ -119,9 +131,12 @@ const MyTeam = () => {
   return (
     <>
       <div className="page-container" style={{backgroundImage: `url(${glove_ball})`}}>
-        <div className="nav-bar-container">
-          <NavBar />
-        </div>
+        <SplashNav setModal={setModal} handleSidebarModal={handleSidebarModal}/>
+        <SidebarModal 
+          open={sidebarOpen}
+          setOpen={setSidebarOpen}
+          modal={modal}
+        />
         <div className="score-carousel-container-players">
           {games && <Carousel children={games} show={4} infiniteLoop={true}/>}
         </div>
@@ -131,6 +146,7 @@ const MyTeam = () => {
               <h3>Players</h3>
             </div>
             {currentTeam && <ReactTable columns={columns} data={currentTeam.players.active}/>}
+            {playerModal && <PlayerModal open={playerModal} setOpen={setPlayerModal} playerID={playerID} player={spotlightPlayer}/>}
           </div>
           <div className="table-container">
              <div className="section-header">
@@ -139,7 +155,7 @@ const MyTeam = () => {
              {currentTeam && <InjuredList players={currentTeam.players.injured}/>}
            </div>
          </div>
-        <div className="bottom-container">
+        {/* <div className="bottom-container">
             <div className="spotlight-container">
              <div className="header">
                <h3>Player Spotlight</h3>
@@ -152,7 +168,7 @@ const MyTeam = () => {
                 <PlayerDetail player={spotlightPlayer} name={spotlightName}/>
               </div>
              </div>
-           </div>
+           </div> */}
            {/* <div className="misc-container">
              <div className="section-header">
                <h3>Injured List</h3>
@@ -160,7 +176,7 @@ const MyTeam = () => {
              {injuredList && <InjuredList />}
            </div>
          </div> */}
-         </div>
+         {/* </div> */}
          <div className="footer-container">
           <Footer />
          </div>

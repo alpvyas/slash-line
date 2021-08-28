@@ -48,7 +48,7 @@ const clearState = () => ({
 ------------------------------------------------------------------------------*/
 
 //create a new team
-export const addNewTeam = (teamName, colors, leagueID, userID) => async (dispatch) => {
+export const addNewTeam = (teamName, teamLogo, leagueID, userID) => async (dispatch) => {
   const response = await fetch(`/api/teams`, {
     method: "POST",
     headers: {
@@ -56,7 +56,7 @@ export const addNewTeam = (teamName, colors, leagueID, userID) => async (dispatc
     },
     body: {
       teamName,
-      colors,
+      teamLogo,
       leagueID,
       userID,
     },

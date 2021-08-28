@@ -12,6 +12,8 @@ import { get_single_player_stats } from "../../store/stats";
 import { game_details } from "../../mock_game_data";
 import Button from '@material-ui/core/Button';
 import PlayerModal from "../PlayerModal";
+import SidebarModal from "../Sidebar/SidebarModal";
+import SplashNav from "../SplashNav";
 
 
 const Players = () => {
@@ -24,11 +26,17 @@ const Players = () => {
   const [spotlightPlayer, setSpotlightPlayer] = useState({});
   const [playerID, setPlayerID] = useState("");
 
+  const [playerModal, setPlayerModal] = useState(false);
   const [modal, setModal] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
 
   const handleModal = () => {
     setModal(!modal);
+  };
+
+  const handleSidebarModal = () => {
+    setSidebarOpen(true);
   };
 
   const getStats = async (player) => {
@@ -36,7 +44,7 @@ const Players = () => {
 
     setSpotlightPlayer(playerStats);
     setPlayerID(player.mlb_player_id);
-    setModal(true);
+    setPlayerModal(true);
   }
 
  const addPlayer = (player) => {
@@ -124,7 +132,12 @@ const Players = () => {
     
       <div className="page-container" style={{backgroundImage: `url(${houser_bunt})`}}>
         <div className="nav-bar-container">
-          <NavBar />
+          <SplashNav setModal={setModal} handleSidebarModal={handleSidebarModal}/>
+          <SidebarModal 
+          open={sidebarOpen}
+          setOpen={setSidebarOpen}
+          modal={modal}
+        />
         </div>
         <div className="score-carousel-container-players">
           {games && <Carousel children={games} show={4} infiniteLoop={true}/>}
@@ -135,7 +148,7 @@ const Players = () => {
               <h3>Players</h3>
             </div>
             <ReactTable columns={columns} data={players} allPlayers={true}/>
-            {modal && <PlayerModal open={modal} setOpen={setModal} playerID={playerID} player={spotlightPlayer}/>}
+            {playerModal && <PlayerModal open={playerModal} setOpen={setPlayerModal} playerID={playerID} player={spotlightPlayer}/>}
           </div>
         </div>
         <div className="footer-container">

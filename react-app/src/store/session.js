@@ -160,7 +160,6 @@ export const signup = (username, firstName, lastName, email, password) =>
     const response = await fetch(`/api/users/profile/${userID}`);
 
     const user = await response.json();
-    // console.log("BACKEND USER::: ", user)
     if (response.ok && !user.errors) {
       dispatch(setUserProfile(user))
     }

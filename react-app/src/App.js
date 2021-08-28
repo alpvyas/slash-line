@@ -113,9 +113,6 @@ return (
         <ProtectedRoute exact path="/profile/user/:id" authenticated={authenticated}>
           <Profile />
         </ProtectedRoute>
-        <ProtectedRoute path="/myteam" authenticated={authenticated}>
-          <UserTeams />
-        </ProtectedRoute>
         <ProtectedRoute exact path="/players" authenticated={authenticated}>
           <Players />
         </ProtectedRoute>

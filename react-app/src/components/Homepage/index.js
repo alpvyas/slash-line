@@ -12,11 +12,13 @@ import ReactTable from "../ReactTable";
 import Footer from "../Footer";
 import Loading from "../Loading";
 import SidebarModal from "../Sidebar/SidebarModal";
+import StandardModal from "../StandardModal";
+import JoinLeague from "../StartWizard/JoinLeague";
 import { getUserTeams } from "../../store/userTeams";
 import { game_details } from "../../mock_game_data";
-import sunset_field from "../../images/sunset-field.png";
 import ballInGlove from '../../images/baseball-glove-dirt.png';
 import "./Homepage.css";
+import SplashNav from "../SplashNav";
 
 const Homepage = ({ loaded }) => {
   const dispatch = useDispatch();
@@ -27,6 +29,7 @@ const Homepage = ({ loaded }) => {
   const currentLeague = useSelector(state => state.leagues.current.league);
   const [currentTeam, setCurrentTeam] = useState(undefined);
   const [createLeague, setCreateLeague] = useState(false);
+  const [joinLeague, setJoinLeague] = useState(false);
 
   const authenticated = useSelector(state => state.session.authenticated);
   const leaguesLoaded = useSelector(state => state.leagues.loaded);
@@ -48,14 +51,7 @@ const Homepage = ({ loaded }) => {
   useEffect(() => {
     if (user) {
       dispatch(getUserLeagues(user.id))
-      // .then(leagues => {
-      //   setCurrentLeague(leagues[Object.keys(leagues)[0]])
-      // })
-      // .then(() => {
-      //   const currentTeams = currentLeague.teams;
-      //   dispatch(setSelectedTeam(currentLeague.teams[Object.keys(currentTeams)[0]]))
-      // })
-      }
+    }
   }, []);
 
   useEffect(() => {
@@ -162,7 +158,7 @@ const Homepage = ({ loaded }) => {
         {leaguesLoaded && authenticated &&
         
         <div className="container page-container" style={{ background: `url(${ballInGlove}) no-repeat center center fixed`, backgroundSize: "cover"}}>
-        <NavBar setModal={setModal} handleSidebarModal={handleSidebarModal}/>
+        <SplashNav setModal={setModal} handleSidebarModal={handleSidebarModal} landing={true}/>
         <SidebarModal 
           open={sidebarOpen}
           setOpen={setSidebarOpen}
@@ -183,7 +179,9 @@ const Homepage = ({ loaded }) => {
               <h3>Leagues</h3>
               <Table columns={columns} rows={leaguesArray} row_keys={row_keys} leagues={true} button={true}/>
               <Button className="submit-button" style={{backgroundColor: "whitesmoke", marginTop: "20px"}} onClick={() => setCreateLeague(true)}>Create New League</Button>
+              <Button className="submit-button" style={{backgroundColor: "whitesmoke", marginTop: "20px"}} onClick={() => setJoinLeague(true)}>Join New League</Button>
               {createLeague && <CreateLeagueModal open={createLeague} setCreateLeague={setCreateLeague}/>}
+              {joinLeague && <StandardModal open={joinLeague} setOpen={setJoinLeague} initialStep={'joinLeague'}joinLeagueComponent={<JoinLeague />}/>}
           </div>
         </div>
 
