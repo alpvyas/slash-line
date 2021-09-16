@@ -18,10 +18,10 @@
   min-height: 100vh;
 }
 
-.score-carousel-container {
-  margin: 165px 50px 10px 50px;
+.score-carousel-container-home {
+  margin: 165px 0px 10px 0px;
   position: relative;
-  height: 30vh;
+  /* height: 30vh; */
   z-index: 0;
 }
 

@@ -41,7 +41,7 @@ const Landing = () => {
           <Button mode='outlined'>Submit</Button>
           <Button mode='outlined'>Demo User</Button>
         </Dialog.Actions>
-        <Divider />
+        <Divider style={{marginBottom: '10%'}}/>
         <Dialog.Content style={{display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
           <Text style={{textAlign: 'center'}}>Don't have an account?</Text>
           <Button mode='outlined'>Sign up here</Button>
