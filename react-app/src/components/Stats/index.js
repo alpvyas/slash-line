@@ -18,7 +18,6 @@ import SplashNav from "../SplashNav";
 const Stats = () => {
   const dispatch = useDispatch();
   const stats = useSelector(state => state.stats.stats.stats);
-  const user = useSelector(state => state.session.user);
   const [open, setOpen] = useState(false);
   const [login, setLogin] = useState(true);
   const [signup, setSignup] = useState(false);
@@ -165,7 +164,7 @@ const Stats = () => {
           modal={modal}
         />
           <div className="score-carousel-container-stats">
-            <Carousel children={games} show={4} infiniteLoop={true}/>
+            {games && <Carousel children={games} show={4} infiniteLoop={true}/>}
           </div>
           <div className="middle-container">
             <div className="table-container">

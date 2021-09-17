@@ -52,7 +52,7 @@ const Homepage = ({ loaded }) => {
     if (user) {
       dispatch(getUserLeagues(user.id))
     }
-  }, []);
+  }, [dispatch, user]);
 
   useEffect(() => {
     if (user) {
@@ -83,7 +83,8 @@ const Homepage = ({ loaded }) => {
     let day = dateArray[2];
 
     const hour_24_clock = parseInt(timeArray[0], 10);
-    const hour = hour_24_clock - 15;
+
+    const hour = hour_24_clock > 12 ? hour_24_clock - 12 : hour_24_clock;
     const minutes = parseInt(timeArray[1], 10);
     const formatted_minutes = minutes < 10 ? `0${minutes}` : minutes;
     const AMPM = hour_24_clock < 12 ? "AM" : "PM"
@@ -165,7 +166,7 @@ const Homepage = ({ loaded }) => {
           modal={modal}
         />
 
-        <div className="score-carousel-container">
+        <div className="score-carousel-container-home">
           {games && <Carousel children={games} show={4} infiniteLoop={true}/>}
         </div>
         <div className="home-middle-container" style={{marginBottom: '150px'}}>
@@ -187,7 +188,7 @@ const Homepage = ({ loaded }) => {
 
          <div className="home-bottom-container">
            
-          <div className="selected-team-container">
+          {/* <div className="selected-team-container">
                <h3>Selected Team</h3>
               {
                 currentLeague &&
@@ -197,7 +198,7 @@ const Homepage = ({ loaded }) => {
                   data={[...selectedTeam.players.active, ...selectedTeam.players.injured]}
                   allPlayers={false}/>
               }
-          </div>
+          </div> */}
 
            <div className="user-players-container">
                <h3>My Team</h3>

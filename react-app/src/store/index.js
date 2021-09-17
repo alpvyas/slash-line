@@ -1,6 +1,4 @@
 import { createStore, combineReducers, applyMiddleware, compose } from "redux";
-import { persistStore, persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage' // defaults to localStorage for web
 import thunk from "redux-thunk";
 import gameDetailsReducer from "./gameDetails";
 import userTeamsReducer from "./userTeams";
@@ -33,24 +31,8 @@ if (process.env.NODE_ENV === "production") {
   enhancer = composeEnhancers(applyMiddleware(thunk, logger));
 }
 
-const persistConfig = {
-  key: "root",
-  storage,
-}
-
-const persistedReducer = persistReducer(persistConfig, rootReducer)
-
 const configureStore = (preloadedState) => {
-  return createStore(persistedReducer, preloadedState, enhancer);
+  return createStore(rootReducer, preloadedState, enhancer);
 };
-
-const store = configureStore();
-
-export const persistor = persistStore(store)
-
-if (process.env.NODE_ENV !== 'production') {
-
-  window.store = store;
-}
 
 export default configureStore;
