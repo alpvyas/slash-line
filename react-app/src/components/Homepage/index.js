@@ -52,7 +52,7 @@ const Homepage = ({ loaded }) => {
     if (user) {
       dispatch(getUserLeagues(user.id))
     }
-  }, []);
+  }, [dispatch, user]);
 
   useEffect(() => {
     if (user) {
@@ -188,7 +188,7 @@ const Homepage = ({ loaded }) => {
 
          <div className="home-bottom-container">
            
-          <div className="selected-team-container">
+          {/* <div className="selected-team-container">
                <h3>Selected Team</h3>
               {
                 currentLeague &&
@@ -198,7 +198,7 @@ const Homepage = ({ loaded }) => {
                   data={[...selectedTeam.players.active, ...selectedTeam.players.injured]}
                   allPlayers={false}/>
               }
-          </div>
+          </div> */}
 
            <div className="user-players-container">
                <h3>My Team</h3>
