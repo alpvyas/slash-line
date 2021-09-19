@@ -1,12 +1,11 @@
 import React, { useState, useEffect, useMemo, memo }from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getUserLeagues, setCurrentLeague, setSelectedTeam } from "../../store/leagues";
+import { getUserLeagues } from "../../store/leagues";
 import Button from '@material-ui/core/Button';
 import Carousel from "../Carousel";
 import Scorecard from "../Containers/Scorecard";
 import Standings from "../Containers/Standings";
 import CreateLeagueModal from "../CreateLeagueModal";
-import NavBar from "../NavBar/index";
 import Table from "../Table";
 import ReactTable from "../ReactTable";
 import Footer from "../Footer";
@@ -61,7 +60,8 @@ const Homepage = ({ loaded }) => {
   }, [dispatch, user]);
 
   useEffect(() => {
-      if (currentLeague !== undefined) {
+      if (currentLeague !== undefined && userTeams !== undefined) {
+        // console.log("CURRENT LEAGUE FRONT:::::: ", currentLeague)
         const leagueID = currentLeague.info["id"]
         setCurrentTeam(userTeams[leagueID])
       }
@@ -202,12 +202,14 @@ const Homepage = ({ loaded }) => {
 
            <div className="user-players-container">
                <h3>My Team</h3>
+               {/* {console.log("CURERENT LEAGUE:::: ", userTeams[currentLeague.info.id].players.active)} */}
+               {/* {console.log("CURERENT TEAM:::: ", currentTeam)} */}
               {
                 currentLeague &&
                 currentTeam &&
                 <ReactTable
                   columns={userTeamColumns}
-                  data={currentTeam.players.active}
+                  data={userTeams[currentLeague.info.id].players.active}
                   allPlayers={false}/>
               }
            </div>

@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "immutable": "^4.0.0-rc.15"
+    "immutable": "^4.0.0-rc.15",
+    "material-table": "^1.63.0"
   }
 }
