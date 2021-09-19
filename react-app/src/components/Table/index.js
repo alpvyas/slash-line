@@ -19,7 +19,6 @@ const Table = ({ columns, rows, row_keys, teams, leagues, joinOpen }) => {
   const selectRow = (row) => {
     if (teams) {
       const selectedTeam = currentLeague.league.teams[row.id];
-      console.log("TEAM: ", selectedTeam)
       setTeam(selectedTeam);
       setTeamModal(true);
       dispatch(setSelectedTeam(selectedTeam))

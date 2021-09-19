@@ -1,6 +1,5 @@
 import React, { useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import NavBar from "../NavBar";
 import Carousel from "../Carousel";
 import houser_bunt from "../../images/houser-bunt.png";
 import ReactTable from "../ReactTable";
@@ -59,12 +58,6 @@ const Stats = () => {
   const handleSidebarModal = () => {
     setSidebarOpen(true);
   };
-
-  // if (user && authenticated && !newUser) {
-  //   return (
-  //     <Redirect to="/home" />
-  //   )
-  // };
 
   const columns = useMemo(() => [
     {
