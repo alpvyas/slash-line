@@ -16,12 +16,13 @@ def get_league_teams(id):
                                  teams]}, default=str)
 
 
-def get_user_players(user_id):
-    user_team = Team.query.filter_by(user_id=user_id).all()
+def get_user_players():
+    user_id_req = request.args.get('user_id', default=1)
+    user_team = Team.query.filter_by(user_id=user_id_req).all()
     roster = []
     teams = {}
 
-    print("USER TEAM: ", user_team)
+    # print("USER TEAM: ", user_team)
 
     for team in user_team:
         team_players = User_Team_Player.query.filter_by(team_id=team.id).all()
@@ -29,28 +30,28 @@ def get_user_players(user_id):
 
         players = {}
 
-        print("TEAM PLAYERS: ", team_players)
+        # print("TEAM PLAYERS: ", team_players)
 
         active_list = list(filter(
             lambda player: player.status == "active", team_players))
-        print("ACTIVE LIST: ", active_list)
+        # print("ACTIVE LIST: ", active_list)
         active = [Player.query.filter_by(
             mlb_player_id=player.mlb_player_id).first() for player in active_list]
         activeWithoutNone = list(
             filter(lambda player: player is not None, active))
         active = [player.to_dict() for player in activeWithoutNone]
-        print("ACTIVE: ", active)
+        # print("ACTIVE: ", active)
         players["active"] = active
 
         injured_list = list(filter(
             lambda player: player.status == "injured", team_players))
-        print("INJURED LIST: ", injured_list)
+        # print("INJURED LIST: ", injured_list)
         injured = [Player.query.filter_by(
             mlb_player_id=player.mlb_player_id).first() for player in injured_list]
         injuredWithoutNone = list(
             filter(lambda player: player is not None, injured))
         injured = [player.to_dict() for player in injuredWithoutNone]
-        print("INJURED: ", injured)
+        # print("INJURED: ", injured)
         players["injured"] = injured
 
         team_obj = {}
@@ -126,6 +127,8 @@ def add_player_to_team(league_id, user_id):
     db.session.commit()
     return jsonify({"ok": True, "message": "Player successfully added to roster."})
 
+
+# def get_user_team():
 # def edit_league(league_id):
 #     league_data = json.loads(request.data.decode("utf-8"))
 #     league = get_one_league(league_id)
@@ -156,10 +159,10 @@ def get_or_add_teams(league_id):
 
 @team_routes.route("/users/<int:user_id>", methods=['GET'])
 def get_all_user_players(user_id):
-    return get_user_players(user_id)
+    return get_user_players()
 
 
-@team_routes.route("leagues/<int:league_id>/users/<int:user_id>", methods=['GET', 'POST'])
+@team_routes.route("/leagues/<int:league_id>/users/<int:user_id>", methods=['GET', 'POST'])
 def get_or_add_user_team(league_id, user_id):
     if request.method == 'GET':
         return get_user_team(league_id, user_id)

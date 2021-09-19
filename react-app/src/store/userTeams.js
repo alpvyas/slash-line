@@ -9,6 +9,7 @@ const UPDATE_TEAMS = "team/UPDATE_TEAMS";
 const ADD_IL = "team/ADD_IL";
 const REMOVE_IL = "team/REMOVE_IL";
 const CLEAR_STATE = "team/CLEAR_STATE";
+const UPDATE_CURRENT = "team/UPDATE_CURRENT";
 
 /* ----------------------------------------------------------------------------
                           ACTION CREATORS
@@ -42,6 +43,11 @@ const removeIL = (player) => ({
 const clearState = () => ({
   type: CLEAR_STATE,
 });
+
+const currentTeam = (teamID) => ({
+  type: UPDATE_CURRENT,
+  data: teamID
+})
 
 /* ----------------------------------------------------------------------------
                           THUNK ACTION CREATORS
@@ -90,7 +96,6 @@ export const getUserTeams = (userId) => async dispatch => {
   const response = await fetch(`/api/teams/users/${userId}`, {
     method: "GET",
   });
-
   const data = await response.json();
 
   // console.log("TEAMS: ", data);
@@ -141,10 +146,9 @@ export const make_active = (player) => dispatch => {
   return player
 }
 
-export const checkTeamName = () => async (disaptch) => {
-
-
-}
+export const setCurrentTeam = (teamID) => dispatch => {
+  dispatch(currentTeam(teamID));
+};
 
 //clear userTeam state when user logs out
 export const clearUserTeamState = () => dispatch => {
@@ -182,9 +186,13 @@ const userTeamsReducer = (state = initialState, action) => {
       newState = {...state};
       newState.teams = action.data;
       return newState;
-      case CLEAR_STATE:
-        newState = {...initialState};
-        return newState; 
+    case UPDATE_CURRENT:
+      newState = {...state};
+      newState.currentTeam = action.data;
+      return newState;
+    case CLEAR_STATE:
+      newState = {...initialState};
+      return newState; 
     default:
       return state;
   }

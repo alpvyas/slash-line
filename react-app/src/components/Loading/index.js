@@ -15,7 +15,6 @@ const Loading = () => {
 
   return (
     <>
-    {console.log("LOADING:::::::::::::::::::::::::::")}
            <Dialog
             open={true}
             // onClose={handleClose}

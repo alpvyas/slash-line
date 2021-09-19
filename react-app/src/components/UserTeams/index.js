@@ -41,9 +41,9 @@ const MyTeam = () => {
   // console.log("CT TEAM PAGE: ", currentTeam)
   useEffect(() => {
       if (currentLeague !== undefined) {
-        console.log("CL: ", currentLeague)
+        // console.log("CL: ", currentLeague)
         const leagueID = currentLeague.info["id"]
-        console.log("LEAGUE ID ", leagueID)
+        // console.log("LEAGUE ID ", leagueID)
         setCurrentTeam(userTeams[leagueID])
       }
     }, [dispatch, currentLeague, userTeams]);

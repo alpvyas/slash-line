@@ -52,39 +52,47 @@ const Players = () => {
     // console.log("RESPONSE ", response)
   }
 
-  const columns = useMemo((height, date, bday, day, month, year) => [
-    {
-      Header: "Player",
-      accessor: "full_name",
-      Cell: props => (
+  const statsButton = props => (
         <button className="player-name-button" onClick={() => getStats(props.row.original)}>
           {props.row.original.full_name}
         </button>
-      ),
+      )
+
+  const columns = useMemo(( date, bday, day, month, year) => [
+    {
+      Header: "Player",
+      accessor: "full_name",
+      Cell: statsButton,
     },
     {
       Header: "Team",
       accessor: "mlb_team_name",
+      Cell: statsButton,
     },
     {
       Header: "Position",
       accessor: "primary_position_txt",
+      Cell: statsButton,
     },
     {
       Header: "Bats",
       accessor: "bats",
+      Cell: statsButton,
     },
     {
       Header: "Throws",
       accessor: "throws",
+      Cell: statsButton,
     },
     {
       Header: "Height",
       accessor: "height",
+      Cell: statsButton,
     },
     {
       Header: "Weight",
       accessor: "weight",
+      Cell: statsButton,
     },
     {
       Header: "DOB",
@@ -147,7 +155,7 @@ const Players = () => {
             <div className="header">
               <h3>Players</h3>
             </div>
-            <ReactTable columns={columns} data={players} allPlayers={true}/>
+            {players && <ReactTable columns={columns} data={players} allPlayers={true}/>}
             {playerModal && <PlayerModal open={playerModal} setOpen={setPlayerModal} playerID={playerID} player={spotlightPlayer}/>}
           </div>
         </div>

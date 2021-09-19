@@ -70,7 +70,7 @@ def get_user_leagues(user_id):
     league_ids = [team.league_id for team in teams]
     league_ids = [*league_ids, *user_league_ids]
 
-    print("LEAGUE IDS: ", league_ids)
+    # print("LEAGUE IDS: ", league_ids)
 
     leagues = {}
 
