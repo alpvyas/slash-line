@@ -171,10 +171,10 @@ const Stats = () => {
               <div className="header">
                 <h3>Stats</h3>
               </div>
-              <ReactTable columns={columns} data={stats} allPlayers={true}/>
+              {stats && <ReactTable columns={columns} data={stats} allPlayers={true}/>}
               {playerModal && <PlayerModal open={playerModal} setOpen={setPlayerModal} playerID={playerID} player={spotlightPlayer}/>}
             </div>
-        </div>
+          </div>
         <Footer />
       </div>
     </>
