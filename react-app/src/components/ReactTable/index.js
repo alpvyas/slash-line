@@ -19,7 +19,7 @@ const IndeterminateCheckbox = forwardRef(
 });
 
 
-const ReactTable = ({ columns, data, allPlayers }) => {
+const ReactTable = ({ columns, data, allPlayers, getStats }) => {
   const [filterInput, setFilterInput] = useState("");
   // const [globalFilter, setGlobalFilter] = useState("")
 
@@ -127,7 +127,7 @@ const ReactTable = ({ columns, data, allPlayers }) => {
             {page.map((row, index) => {
               prepareRow(row);
               return (
-                <tr className="non-header-row" {...row.getRowProps()}>
+                <tr className="non-header-row" {...row.getRowProps()} onClick={() => console.log(row.getRowProps)}>
                   {row.cells.map(cell => {
                     return <td {...cell.getCellProps()}>
                       {cell.render("Cell")}

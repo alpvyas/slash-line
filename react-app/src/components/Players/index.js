@@ -30,6 +30,8 @@ const Players = () => {
   const [modal, setModal] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
+  const [showStats, setShowStats] = useState(false);
+
 
   const handleModal = () => {
     setModal(!modal);
@@ -49,50 +51,43 @@ const Players = () => {
 
  const addPlayer = (player) => {
     const response = dispatch(add_player(player, user.id, league.id))
-    // console.log("RESPONSE ", response)
   }
 
-  const statsButton = props => (
-        <button className="player-name-button" onClick={() => getStats(props.row.original)}>
-          {props.row.original.full_name}
-        </button>
-      )
+  // const onClickStats = props => (
+  //       <button className="player-name-button" onClick={() => getStats(props.row.original)}>
+  //         {props.row.original.full_name}
+  //       </button>
+  //     )
 
   const columns = useMemo(( date, bday, day, month, year) => [
     {
       Header: "Player",
       accessor: "full_name",
-      Cell: statsButton,
+      // Cell: onClickStats,
     },
     {
       Header: "Team",
       accessor: "mlb_team_name",
-      Cell: statsButton,
     },
     {
       Header: "Position",
       accessor: "primary_position_txt",
-      Cell: statsButton,
     },
     {
       Header: "Bats",
       accessor: "bats",
-      Cell: statsButton,
     },
     {
       Header: "Throws",
       accessor: "throws",
-      Cell: statsButton,
     },
     {
       Header: "Height",
       accessor: "height",
-      Cell: statsButton,
     },
     {
       Header: "Weight",
       accessor: "weight",
-      Cell: statsButton,
     },
     {
       Header: "DOB",
@@ -155,7 +150,7 @@ const Players = () => {
             <div className="header">
               <h3>Players</h3>
             </div>
-            {players && <ReactTable columns={columns} data={players} allPlayers={true}/>}
+            {players && <ReactTable columns={columns} data={players} allPlayers={true} getStats={getStats}/>}
             {playerModal && <PlayerModal open={playerModal} setOpen={setPlayerModal} playerID={playerID} player={spotlightPlayer}/>}
           </div>
         </div>
