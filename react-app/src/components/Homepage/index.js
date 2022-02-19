@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo, memo }from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getUserLeagues } from "../../store/leagues";
 import Button from '@material-ui/core/Button';
+import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import Carousel from "../Carousel";
 import Scorecard from "../Containers/Scorecard";
 import Standings from "../Containers/Standings";
@@ -169,10 +170,14 @@ const Homepage = ({ loaded }) => {
         <div className="score-carousel-container-home">
           {games && <Carousel children={games} show={4} infiniteLoop={true}/>}
         </div>
-        <div className="home-middle-container" style={{marginBottom: '150px'}}>
+        <div className="home-middle-container">
 
           <div className="standings-list-container">
-              <h3>Standings</h3>
+              <h3>Standings <KeyboardArrowDownIcon style={{color: "red"}}/></h3>
+              <h5>
+                Stay up to date with your league standings. 
+                Click on a team to view more details.
+              </h5>
               {leagues && <Standings user={user}/>}
           </div>
 

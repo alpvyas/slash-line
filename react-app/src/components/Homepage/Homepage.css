@@ -25,11 +25,19 @@
   z-index: 0;
 }
 
-.standings-list-container,
 .create-league-container,
 .misc-container,
 .user-players-container,
 .selected-team-container {
+  display: flex;
+  flex-direction: column;
+  width: 650px;
+  height: 500px;
+  margin: 20px 20px 20px 55px;
+  background-color: transparent;
+}
+
+.standings-list-container {
   display: flex;
   flex-direction: column;
   width: 650px;
@@ -53,6 +61,7 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
+  margin-bottom: 150px;
   /* background-color: rgb(222, 151, 21); */
 }
 
@@ -79,22 +88,19 @@ h3 {
   sans-serif;
   font-size: 40px;
   color: whitesmoke;
-  /* text-shadow: -1px -1px 0 #EF3E42,
-  1px -1px 0 #EF3E42,
-  -1px 1px 0 #EF3E42,
-  1px 1px 0 #EF3E42; */
-  /* text-shadow: -1px -1px 0 #005A9C,
-  1px -1px 0 #005A9C,
-  -1px 1px 0 #005A9C,
-  1px 1px 0 #005A9C; */
-  text-shadow: -1px -1px 0 #A5ACAF,
+  /* text-shadow: -1px -1px 0 #A5ACAF,
   1px -1px 0 #A5ACAF,
   -1px 1px 0 #A5ACAF,
-  1px 1px 0 #A5ACAF;
-  /* -webkit-text-fill-color: whitesmoke; */
-  /* Will override color (regardless of order) */
-  /* -webkit-text-stroke-width: 1px; */
-  /* -webkit-text-stroke-color: #EF3E42; */
+  1px 1px 0 #A5ACAF; */
+  margin: 0;
+}
+
+h5 {
+  font-family: "Poppins",
+  sans-serif;
+  font-size: 20px;
+  color: whitesmoke;
+  margin-bottom: 5vh;
 }
 
 .submit-button {
