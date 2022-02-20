@@ -30,13 +30,6 @@ const Players = () => {
   const [modal, setModal] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
-  const [showStats, setShowStats] = useState(false);
-
-
-  const handleModal = () => {
-    setModal(!modal);
-  };
-
   const handleSidebarModal = () => {
     setSidebarOpen(true);
   };
@@ -53,17 +46,10 @@ const Players = () => {
     const response = dispatch(add_player(player, user.id, league.id))
   }
 
-  // const onClickStats = props => (
-  //       <button className="player-name-button" onClick={() => getStats(props.row.original)}>
-  //         {props.row.original.full_name}
-  //       </button>
-  //     )
-
   const columns = useMemo(( date, bday, day, month, year) => [
     {
       Header: "Player",
       accessor: "full_name",
-      // Cell: onClickStats,
     },
     {
       Header: "Team",
@@ -95,7 +81,6 @@ const Players = () => {
       Cell: props => {
         date = props.row.original.birth_date.split("T")
         bday = date[0].split("-")
-        // [year, month, day] = bday
         year = bday[0]
         month = bday[1]
         day = bday[2]
