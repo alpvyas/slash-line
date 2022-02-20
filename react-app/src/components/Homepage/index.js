@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo, memo }from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getUserLeagues } from "../../store/leagues";
 import Button from '@material-ui/core/Button';
-import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
+import Paper from '@material-ui/core/Paper';
 import Carousel from "../Carousel";
 import Scorecard from "../Containers/Scorecard";
 import Standings from "../Containers/Standings";
@@ -170,19 +170,27 @@ const Homepage = ({ loaded }) => {
         <div className="score-carousel-container-home">
           {games && <Carousel children={games} show={4} infiniteLoop={true}/>}
         </div>
-        <div className="home-middle-container">
 
+        <div className="home-middle-container">
           <div className="standings-list-container">
-              <h3>Standings <KeyboardArrowDownIcon style={{color: "red"}}/></h3>
-              <h5>
-                Stay up to date with your league standings. 
+            <Paper variant="outlined" style={{backgroundImage: "none", backgroundColor: "#d6d8d8", color: "black", height: "15vh", marginBottom: "5vh"}}>
+              <h3 style={{color: "black"}}>Standings</h3>
+              <h5 style={{color: "black"}}>
+                Stay up to date with league standings. 
                 Click on a team to view more details.
               </h5>
+            </Paper>
               {leagues && <Standings user={user}/>}
           </div>
 
           <div className="create-league-container">
+            <Paper variant="outlined" style={{backgroundImage: "none", backgroundColor: "#d6d8d8", color: "black", height: "15vh", marginBottom: "5vh"}}>
               <h3>Leagues</h3>
+              <h5>
+                Below you can get details about the leagues you've joined.
+                You can also start a new league or join an existing one.
+              </h5>
+              </Paper>
               <Table columns={columns} rows={leaguesArray} row_keys={row_keys} leagues={true} button={true}/>
               <Button className="submit-button" style={{backgroundColor: "whitesmoke", marginTop: "20px"}} onClick={() => setCreateLeague(true)}>Create New League</Button>
               <Button className="submit-button" style={{backgroundColor: "whitesmoke", marginTop: "20px"}} onClick={() => setJoinLeague(true)}>Join New League</Button>
@@ -192,23 +200,31 @@ const Homepage = ({ loaded }) => {
         </div>
 
          <div className="home-bottom-container">
-           
-          {/* <div className="selected-team-container">
-               <h3>Selected Team</h3>
+           <div className="user-players-container">
+             <Paper variant="outlined" style={{backgroundImage: "none", backgroundColor: "#d6d8d8", color: "black", height: "15vh", marginBottom: "5vh"}}>
+               <h3>Your Teams</h3>
+              <h5>
+                These are the past and current rosters for each of your teams.
+                Click on a player's name to get more information about that player.
+              </h5>
+              </Paper>
               {
                 currentLeague &&
-                selectedTeam && 
-                <ReactTable 
+                currentTeam &&
+                <ReactTable
                   columns={userTeamColumns}
-                  data={[...selectedTeam.players.active, ...selectedTeam.players.injured]}
+                  data={userTeams[currentLeague.info.id].players.active}
                   allPlayers={false}/>
               }
-          </div> */}
-
+           </div>
            <div className="user-players-container">
-               <h3>My Team</h3>
-               {/* {console.log("CURERENT LEAGUE:::: ", userTeams[currentLeague.info.id].players.active)} */}
-               {/* {console.log("CURERENT TEAM:::: ", currentTeam)} */}
+             <Paper variant="outlined" style={{backgroundImage: "none", backgroundColor: "#d6d8d8", color: "black", height: "15vh", marginBottom: "5vh"}}>
+               <h3>News From Around the Diamond</h3>
+              <h5>
+                The latest news to keep you up to date with
+                 what's happening around the league.
+              </h5>
+              </Paper>
               {
                 currentLeague &&
                 currentTeam &&
