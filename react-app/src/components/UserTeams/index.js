@@ -150,9 +150,14 @@ const MyTeam = () => {
           <div className="table-container">
             <div
               className="header-description"
-              style={{display: "flex", flexDirection: "row",
+              style={{display: "flex", flexDirection: "column",
               justifyContent: "center"}}>
-              <h3>Your Players</h3>
+              <h3>
+                Your Teams
+              </h3>
+              <h5>
+                Select a team to see its roster.
+              </h5>
             </div>
             {currentTeam &&
               <ReactTable 
@@ -170,10 +175,18 @@ const MyTeam = () => {
           <div className="table-container">
              <div
               className="header-description"
-              style={{display: "flex", flexDirection: "row", 
+              style={{display: "flex", flexDirection: "column", 
               justifyContent: "center"}}
             >
-               <h3>Injured List</h3>
+               <h3>
+                Injured List
+              </h3>
+              <h5>
+                You can place a player on the Injured List if you need more
+                room on the roster. The max you can have on the IL is 10
+                players. A player will be automatically placed on the IL if their
+                MLB status changes to IL.
+              </h5>
              </div>
              {currentTeam &&
               <InjuredList

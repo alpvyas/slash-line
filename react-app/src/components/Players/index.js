@@ -147,9 +147,19 @@ const Players = () => {
         </div>
         <div className="middle-container">
           <div className="table-container">
-            <div className="header">
-              <h3>Players</h3>
-            </div>
+             <div
+              className="header-description"
+              style={{display: "flex", flexDirection: "column", 
+              justifyContent: "center"}}
+            >
+               <h3>
+                Players
+              </h3>
+              <h5>
+                Player information is updated daily. Select on a player's name
+                to get more information about that player.
+              </h5>
+             </div>
             {players && <ReactTable columns={columns} data={players} allPlayers={true} getStats={getStats}/>}
             {playerModal && <PlayerModal open={playerModal} setOpen={setPlayerModal} playerID={playerID} player={spotlightPlayer}/>}
           </div>
