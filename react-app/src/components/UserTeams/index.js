@@ -130,8 +130,14 @@ const MyTeam = () => {
 
   return (
     <>
-      <div className="page-container" style={{backgroundImage: `url(${glove_ball})`}}>
-        <SplashNav setModal={setModal} handleSidebarModal={handleSidebarModal}/>
+      <div
+        className="page-container"
+        style={{backgroundImage: `url(${glove_ball})`}}
+      >
+        <SplashNav
+          setModal={setModal}
+          handleSidebarModal={handleSidebarModal}
+        />
         <SidebarModal 
           open={sidebarOpen}
           setOpen={setSidebarOpen}
@@ -142,41 +148,52 @@ const MyTeam = () => {
         </div>
         <div className="middle-container">
           <div className="table-container">
-            <div className="header">
-              <h3>Players</h3>
+            <div
+              className="header-description"
+              style={{display: "flex", flexDirection: "column",
+              justifyContent: "center"}}>
+              <h3>
+                Your Teams
+              </h3>
+              <h5>
+                Select a team to see its roster.
+              </h5>
             </div>
-            {currentTeam && <ReactTable columns={columns} data={currentTeam.players.active}/>}
-            {playerModal && <PlayerModal open={playerModal} setOpen={setPlayerModal} playerID={playerID} player={spotlightPlayer}/>}
+            {currentTeam &&
+              <ReactTable 
+                columns={columns}
+                data={currentTeam.players.active}
+              />}
+            {playerModal && 
+              <PlayerModal
+                open={playerModal}
+                setOpen={setPlayerModal}
+                playerID={playerID}
+                player={spotlightPlayer}
+              />}
           </div>
           <div className="table-container">
-             <div className="section-header">
-               <h3>Injured List</h3>
+             <div
+              className="header-description"
+              style={{display: "flex", flexDirection: "column", 
+              justifyContent: "center"}}
+            >
+               <h3>
+                Injured List
+              </h3>
+              <h5>
+                You can place a player on the Injured List if you need more
+                room on the roster. The max you can have on the IL is 10
+                players. A player will be automatically placed on the IL if their
+                MLB status changes to IL.
+              </h5>
              </div>
-             {currentTeam && <InjuredList players={currentTeam.players.injured}/>}
+             {currentTeam &&
+              <InjuredList
+                players={currentTeam.players.injured}
+              />}
            </div>
          </div>
-        {/* <div className="bottom-container">
-            <div className="spotlight-container">
-             <div className="header">
-               <h3>Player Spotlight</h3>
-             </div>
-             <div className="image-details-container">
-              <div className="player-image-container">
-                <img src={`https://img.mlbstatic.com/mlb-photos/image/upload/d_people:generic:headshot:67:current.png/w_426,q_auto:best/v1/people/${playerID}/headshot/67/current`} alt="player-img" className="player-image" />
-              </div>
-              <div className="player-details-container">
-                <PlayerDetail player={spotlightPlayer} name={spotlightName}/>
-              </div>
-             </div>
-           </div> */}
-           {/* <div className="misc-container">
-             <div className="section-header">
-               <h3>Injured List</h3>
-             </div>
-             {injuredList && <InjuredList />}
-           </div>
-         </div> */}
-         {/* </div> */}
          <div className="footer-container">
           <Footer />
          </div>

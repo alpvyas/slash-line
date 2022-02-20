@@ -98,8 +98,6 @@ export const getUserTeams = (userId) => async dispatch => {
   });
   const data = await response.json();
 
-  // console.log("TEAMS: ", data);
-
   if (data.ok) {
     dispatch(updateTeams(data["teams"]));
   }else{

@@ -24,7 +24,6 @@ const Homepage = ({ loaded }) => {
   const user = useSelector((state) => state.session.user);
   const leagues = useSelector(state => state.leagues.leagues);
   const userTeams = useSelector(state => state.userTeams.teams);
-  const selectedTeam = useSelector(state => state.leagues.current.selectedTeam);
   const currentLeague = useSelector(state => state.leagues.current.league);
   const [currentTeam, setCurrentTeam] = useState(undefined);
   const [createLeague, setCreateLeague] = useState(false);
@@ -36,6 +35,8 @@ const Homepage = ({ loaded }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [modal, setModal] = useState("");
 
+  /*the line below pulls live game data for the score carousel
+  currently using mock game data */
   // const gameDetails = useSelector(state => state.gameDetails.gameDetails);
   const gameDetails = game_details;
   const games = gameDetails&&gameDetails.map((gameDetail) => (
@@ -61,7 +62,6 @@ const Homepage = ({ loaded }) => {
 
   useEffect(() => {
       if (currentLeague !== undefined && userTeams !== undefined) {
-        // console.log("CURRENT LEAGUE FRONT:::::: ", currentLeague)
         const leagueID = currentLeague.info["id"]
         setCurrentTeam(userTeams[leagueID])
       }
@@ -158,7 +158,9 @@ const Homepage = ({ loaded }) => {
         {!leaguesLoaded && <Loading />}
         {leaguesLoaded && authenticated &&
         
-        <div className="container page-container" style={{ background: `url(${ballInGlove}) no-repeat center center fixed`, backgroundSize: "cover"}}>
+        <div className="container page-container" style={{
+            background: `url(${ballInGlove}) no-repeat center center fixed`,
+            backgroundSize: "cover"}}>
         <SplashNav setModal={setModal} handleSidebarModal={handleSidebarModal} landing={true}/>
         <SidebarModal 
           open={sidebarOpen}
@@ -169,15 +171,27 @@ const Homepage = ({ loaded }) => {
         <div className="score-carousel-container-home">
           {games && <Carousel children={games} show={4} infiniteLoop={true}/>}
         </div>
-        <div className="home-middle-container" style={{marginBottom: '150px'}}>
 
+        <div className="home-middle-container">
           <div className="standings-list-container">
+            <div className="header-description">
               <h3>Standings</h3>
+              <h5>
+                Stay up to date with league standings. 
+                Click on a team to view more details.
+              </h5>
+            </div>
               {leagues && <Standings user={user}/>}
           </div>
 
           <div className="create-league-container">
+            <div className="header-description">
               <h3>Leagues</h3>
+              <h5>
+                Below you can get details about the leagues you've joined.
+                You can also start a new league or join an existing one.
+              </h5>
+              </div>
               <Table columns={columns} rows={leaguesArray} row_keys={row_keys} leagues={true} button={true}/>
               <Button className="submit-button" style={{backgroundColor: "whitesmoke", marginTop: "20px"}} onClick={() => setCreateLeague(true)}>Create New League</Button>
               <Button className="submit-button" style={{backgroundColor: "whitesmoke", marginTop: "20px"}} onClick={() => setJoinLeague(true)}>Join New League</Button>
@@ -187,30 +201,38 @@ const Homepage = ({ loaded }) => {
         </div>
 
          <div className="home-bottom-container">
-           
-          {/* <div className="selected-team-container">
-               <h3>Selected Team</h3>
-              {
-                currentLeague &&
-                selectedTeam && 
-                <ReactTable 
-                  columns={userTeamColumns}
-                  data={[...selectedTeam.players.active, ...selectedTeam.players.injured]}
-                  allPlayers={false}/>
-              }
-          </div> */}
-
            <div className="user-players-container">
-               <h3>My Team</h3>
-               {/* {console.log("CURERENT LEAGUE:::: ", userTeams[currentLeague.info.id].players.active)} */}
-               {/* {console.log("CURERENT TEAM:::: ", currentTeam)} */}
+             <div className="header-description">
+               <h3>Your Teams</h3>
+              <h5>
+                These are the past and current rosters for each of your teams.
+                Click on a player's name to get more information about that player.
+              </h5>
+              </div>
               {
                 currentLeague &&
                 currentTeam &&
                 <ReactTable
-                  columns={userTeamColumns}
-                  data={userTeams[currentLeague.info.id].players.active}
-                  allPlayers={false}/>
+                columns={userTeamColumns}
+                data={userTeams[currentLeague.info.id].players.active}
+                allPlayers={false}/>
+              }
+           </div>
+           <div className="user-players-container">
+             <div className="header-description">
+               <h3>From Around the Diamond</h3>
+              <h5>
+                The latest news to keep you up to date with
+                 what's happening around the league.
+              </h5>
+              </div>
+              {
+                currentLeague &&
+                currentTeam &&
+                <ReactTable
+                columns={userTeamColumns}
+                data={userTeams[currentLeague.info.id].players.active}
+                allPlayers={false}/>
               }
            </div>
          </div>
